@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:http/http.dart' as http;
 
-Future<void> fetchData(List<NearbyPlacesModel> listOfPlaces) async {
+Future<List<NearbyPlacesModel>> fetchData(
+    List<NearbyPlacesModel> listOfPlaces) async {
   final url = Uri.parse(
       'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.6938017,44.8015167&radius=200&type=cafe&key=AIzaSyDFwz7Nk7baEraJxw-23Wc68rdeib0eTzQ');
 
@@ -17,9 +18,11 @@ Future<void> fetchData(List<NearbyPlacesModel> listOfPlaces) async {
       var place = NearbyPlacesModel.fromJason(placeData);
       listOfPlaces.add(place);
     }
+    return listOfPlaces;
     // Continue with JSON parsing.
   } else {
     // Handle the error if the request was not successful.
     print('Error: ${response.statusCode}');
+    throw Exception('Failed to fetch nearby places');
   }
 }

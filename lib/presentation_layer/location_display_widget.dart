@@ -28,28 +28,40 @@ class LocationDisplayWidget extends StatelessWidget {
         return Center(child: CircularProgressIndicator());
       } else if (state is LocationLoaded) {
         double latitude = state.position.latitude;
-
         double longtitude = state.position.longitude;
 
-        _displayLocationInfoInWords(latitude, longtitude);
+        return FutureBuilder<String>(
+            future: _displayLocationInfoInWords(latitude, longtitude),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                // Display a loading indicator while waiting for the location info
 
-        return Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Row(children: [
-            Image.asset('assets/images/LocationLogo.png'),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              locationInfo,
-              style: TextStyle(
-                  fontFamily: 'Telegraf',
-                  fontWeight: FontWeight.w800,
-                  fontSize: 16,
-                  color: Color(0xffF3F0E6)),
-            ),
-          ]),
-        );
+                return CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                // Handle errors if the future throws an exception
+                return Center(child: Text('Location Error: ${snapshot.error}'));
+              } else if (snapshot.hasData) {
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(children: [
+                    Image.asset('assets/images/LocationLogo.png'),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      locationInfo,
+                      style: TextStyle(
+                          fontFamily: 'Telegraf',
+                          fontWeight: FontWeight.w800,
+                          fontSize: 16,
+                          color: Color(0xffF3F0E6)),
+                    ),
+                  ]),
+                );
+              } else {
+                return Text('oops');
+              }
+            });
       } else if (state is LocationErorr) {
         // Handle location error
         return Center(
