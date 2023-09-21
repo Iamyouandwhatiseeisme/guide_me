@@ -7,10 +7,10 @@ class ForgotPasswordLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
+    return const Align(
       alignment: Alignment.topRight,
       child: Padding(
-        padding: const EdgeInsets.only(top: 16.0, right: 40),
+        padding: EdgeInsets.only(top: 16.0, right: 40),
         child: Text(
           'Forgot password?',
           style: TextStyle(

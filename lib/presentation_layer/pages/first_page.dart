@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_cubit_dart_state.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-
-import 'dart:convert';
-import 'package:http/http.dart';
 
 import '../../business_layer/cubit/recommended_places_cubit_dart_cubit.dart';
 
@@ -34,73 +30,22 @@ class _firstPageState extends State<firstPage> {
         final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();
         nearbyPlacesCubit.fetchNearbyPlaces();
         return Container(
-          padding: EdgeInsets.only(top: 40),
+          padding: const EdgeInsets.only(top: 40),
           child: BlocBuilder<NearbyPlacesCubit, NearbyPlacesState>(
             builder: (context, state) {
               if (state is NearbyPlacesLoading) {
-                return Scaffold(
+                return const Scaffold(
                     body: Center(child: CircularProgressIndicator()));
               }
               return FutureBuilder(
-                  future: Future.delayed(Duration(seconds: 3)),
+                  future: Future.delayed(const Duration(seconds: 3)),
                   builder: ((context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Scaffold(
+                      return const Scaffold(
                           body: Center(child: CircularProgressIndicator()));
                     } else {
-                      return Scaffold(
-                        backgroundColor: Color(0xffF3F0E6),
-                        appBar: PreferredSize(
-                          preferredSize: Size.fromHeight(48),
-                          child: AppBar(
-                            backgroundColor: Color(0xffF3F0E6),
-                            leadingWidth: 250,
-                            leading: Padding(
-                              padding: const EdgeInsets.only(left: 20.0),
-                              child: BlocProvider(
-                                create: (context) => GeolocatorCubit(),
-                                child: Container(
-                                  child: LocationDisplayWidget(),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(40),
-                                      color: Color(
-                                        0xffC75E6B,
-                                      ),
-                                      shape: BoxShape.rectangle),
-                                  width: 250,
-                                  height: 48,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        body: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 20, right: 20, top: 36),
-                                child: TextFormField(
-                                  textAlign: TextAlign.center,
-                                  decoration: InputDecoration(
-                                      prefixIcon: Image.asset(
-                                          'F:/Flutter Projects/Guideme/guide_me/assets/images/logos/search.png'),
-                                      filled: true,
-                                      fillColor: Color(0xffFFFFFF),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(32),
-                                        borderSide: BorderSide.none,
-                                      ),
-                                      hintText:
-                                          'Search for activity, location etc.'),
-                                ),
-                              ),
-                              recommended_places_card_builder(
-                                  listOfNearbyPlaces: listOfNearbyPlaces),
-                            ],
-                          ),
-                        ),
-                      );
+                      return FirstPageScaffoldIfLoadedCorrectly(
+                          listOfNearbyPlaces: listOfNearbyPlaces);
                     }
                   }));
             },

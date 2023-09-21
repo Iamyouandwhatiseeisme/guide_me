@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 Future<List<NearbyPlacesModel>> fetchData(
     List<NearbyPlacesModel> listOfPlaces) async {
   final url = Uri.parse(
-      'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.6938017,44.8015167&radius=200&type=cafe&key=AIzaSyDFwz7Nk7baEraJxw-23Wc68rdeib0eTzQ');
+      'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.6938017,44.8015167&radius=8000&type=restaurant&key=AIzaSyDFwz7Nk7baEraJxw-23Wc68rdeib0eTzQ');
 
   final response = await http.get(url);
 
@@ -18,6 +18,7 @@ Future<List<NearbyPlacesModel>> fetchData(
       var place = NearbyPlacesModel.fromJason(placeData);
       listOfPlaces.add(place);
     }
+
     return listOfPlaces;
     // Continue with JSON parsing.
   } else {

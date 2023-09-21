@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../business_layer/cubit/geolocator_cubit.dart';
-import '../data_layer/reverse_geodecoder_method.dart';
+import '../../business_layer/cubit/geolocator_cubit.dart';
+import '../../data_layer/reverse_geodecoder_method.dart';
 
 class LocationDisplayWidget extends StatelessWidget {
   const LocationDisplayWidget({super.key});
@@ -16,7 +16,7 @@ class LocationDisplayWidget extends StatelessWidget {
     return BlocBuilder<GeolocatorCubit, LocationState>(
         builder: (context, state) {
       final geoDecoder = GeocodingUtil();
-      Future<String> _displayLocationInfoInWords(latitude, longtitude) async {
+      Future<String> displayLocationInfoInWords(latitude, longtitude) async {
         final updatedLocationInfo =
             await GeocodingUtil.reverseGeocode(latitude, longtitude);
 
@@ -25,18 +25,18 @@ class LocationDisplayWidget extends StatelessWidget {
       }
 
       if (state is LocationLoading) {
-        return Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator());
       } else if (state is LocationLoaded) {
         double latitude = state.position.latitude;
         double longtitude = state.position.longitude;
 
         return FutureBuilder<String>(
-            future: _displayLocationInfoInWords(latitude, longtitude),
+            future: displayLocationInfoInWords(latitude, longtitude),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 // Display a loading indicator while waiting for the location info
 
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               } else if (snapshot.hasError) {
                 // Handle errors if the future throws an exception
                 return Center(child: Text('Location Error: ${snapshot.error}'));
@@ -45,12 +45,12 @@ class LocationDisplayWidget extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: Row(children: [
                     Image.asset('assets/images/LocationLogo.png'),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Text(
                       locationInfo,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontFamily: 'Telegraf',
                           fontWeight: FontWeight.w800,
                           fontSize: 16,
@@ -59,7 +59,7 @@ class LocationDisplayWidget extends StatelessWidget {
                   ]),
                 );
               } else {
-                return Text('oops');
+                return const Text('oops');
               }
             });
       } else if (state is LocationErorr) {
@@ -68,7 +68,7 @@ class LocationDisplayWidget extends StatelessWidget {
           child: Text('Location Error: ${state.message}'),
         );
       } else {
-        return Center(child: Text('Unexpected error'));
+        return const Center(child: Text('Unexpected error'));
       }
     });
   }

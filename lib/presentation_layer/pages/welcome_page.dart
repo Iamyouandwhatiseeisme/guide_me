@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/widgets/business_widgets.dart';
-import 'package:guide_me/presentation_layer/widgets/background_photo_and_title_widget.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 import 'package:guide_me/business_layer/cubit/radio_button_cubit_cubit.dart';

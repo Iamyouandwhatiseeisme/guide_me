@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 import '../../data_layer/models/nearby_places_model.dart';
@@ -13,22 +14,30 @@ class recommended_places_card_builder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
-      child: ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.only(left: 20, top: 22, right: 24),
-            child: AspectRatio(
-              aspectRatio: 16 / 9,
-              child: PlaceCard(
-                place: listOfNearbyPlaces[index],
-              ),
-            ),
-          );
-        },
-        itemCount: listOfNearbyPlaces.length,
+      color: Colors.white,
+      width: 430,
+      height: 150,
+      child: Align(
+        alignment: Alignment.center,
+        child: SizedBox(
+          height: 140,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: listOfNearbyPlaces.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.only(left: 20, top: 10, right: 24),
+                child: SizedBox(
+                  height: 140,
+                  width: 160,
+                  child: PlaceCard(
+                    place: listOfNearbyPlaces[index],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }
@@ -37,52 +46,51 @@ class recommended_places_card_builder extends StatelessWidget {
 class PlaceCard extends StatelessWidget {
   final NearbyPlacesModel place;
 
-  PlaceCard({required this.place});
+  const PlaceCard({super.key, required this.place});
 
   @override
   Widget build(BuildContext context) {
     String? photoReference = place.photos?[0]['photo_reference'];
-    if (photoReference != null) {
-      return Container(
-        width: 200, // Set the width of each card as needed
-        child: Card(
-          elevation: 4.0,
-          child: Column(
-            children: <Widget>[
-              if (photoReference != null)
-                Image.network(
-                  'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=AIzaSyDFwz7Nk7baEraJxw-23Wc68rdeib0eTzQ',
-                  width: 160,
-                  height: 106,
-                ), // Display the first photo (you may need to adjust this)
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(place.name),
-              ),
-            ],
+    if (photoReference != null && place.rating != null && place.rating! > 4.0) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          SizedBox(
+            height: 106,
+            width: 160,
+            child: Image.network(
+              'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=AIzaSyDFwz7Nk7baEraJxw-23Wc68rdeib0eTzQ',
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
+          Text(
+            place.name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
+          ),
+        ],
       );
     } else {
-      return Container(
-        width: 200, // Set the width of each card as needed
-        child: Card(
-          elevation: 4.0,
-          child: Column(
-            children: <Widget>[
-              if (photoReference != null)
-                Image.network(
-                  'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small/no-image-available-icon-vector.jpg',
-                  width: 160,
-                  height: 106,
-                ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(place.name),
-              ),
-            ],
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          SizedBox(
+            height: 106,
+            width: 160,
+            child: Image.network(
+              'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small/no-image-available-icon-vector.jpg',
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
+          Text(
+            place.name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
       );
     }
   }

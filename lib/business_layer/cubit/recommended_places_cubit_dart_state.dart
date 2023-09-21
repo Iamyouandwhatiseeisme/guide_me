@@ -15,7 +15,7 @@ class NearbyPlacesLoading extends NearbyPlacesState {}
 class NearbyPlacesLoaded extends NearbyPlacesState {
   final List<NearbyPlacesModel> listOfNearbyPlaces;
 
-  NearbyPlacesLoaded(this.listOfNearbyPlaces);
+  const NearbyPlacesLoaded(this.listOfNearbyPlaces);
 
   @override
   List<Object> get props => [listOfNearbyPlaces];
@@ -24,7 +24,7 @@ class NearbyPlacesLoaded extends NearbyPlacesState {
 class NearbyPlacesError extends NearbyPlacesState {
   final String errorMessage;
 
-  NearbyPlacesError(this.errorMessage);
+  const NearbyPlacesError(this.errorMessage);
 
   @override
   List<Object> get props => [errorMessage];

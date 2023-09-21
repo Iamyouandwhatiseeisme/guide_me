@@ -4,7 +4,7 @@ import 'dart:convert';
 class GeocodingUtil {
   static Future<String> reverseGeocode(
       double latitude, double longitude) async {
-    final apiKey = 'AIzaSyDFwz7Nk7baEraJxw-23Wc68rdeib0eTzQ';
+    const apiKey = 'AIzaSyDFwz7Nk7baEraJxw-23Wc68rdeib0eTzQ';
     final apiUrl =
         'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$apiKey';
     final response = await http.get(Uri.parse(apiUrl));

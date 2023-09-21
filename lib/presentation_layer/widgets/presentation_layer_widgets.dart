@@ -5,5 +5,9 @@ export 'package:guide_me/presentation_layer/widgets/buttons/login_button_widget.
 export 'package:guide_me/presentation_layer/widgets/buttons/dont_have_an_accout_sign_up_label_widget.dart';
 export 'divider_widget.dart';
 export 'package:guide_me/presentation_layer/widgets/buttons/sign_in_with_button_widget.dart';
-export 'package:guide_me/presentation_layer/location_display_widget.dart';
+export 'package:guide_me/presentation_layer/widgets/location_display_widget.dart';
 export 'recommended_places_card_builder.dart';
+export 'package:guide_me/presentation_layer/widgets/search_text_field_widget.dart';
+export 'package:guide_me/presentation_layer/widgets/first_page_scaffold_if_loaded_correctly.dart';
+export 'package:guide_me/presentation_layer/widgets/recommended_label_widget.dart';
+export 'first_page_app_bar_widget.dart';
