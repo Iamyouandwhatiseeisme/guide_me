@@ -7,17 +7,17 @@ class LoginButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 320,
       height: 60,
       child: FloatingActionButton(
-        backgroundColor: Color(0xffC75E6B),
-        foregroundColor: Color(0xffF3F0E6),
+        backgroundColor: const Color(0xffC75E6B),
+        foregroundColor: const Color(0xffF3F0E6),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
         onPressed: () {
           Navigator.pushNamed(context, 'firstPage');
         },
-        child: Text(
+        child: const Text(
           'Login',
           style: TextStyle(
               fontFamily: 'Parapraf',

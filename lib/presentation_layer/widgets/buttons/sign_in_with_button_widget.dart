@@ -14,14 +14,14 @@ class SignInWithButtonWIdget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 320,
       height: 60,
       child: FloatingActionButton(
         heroTag: heroTag,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-        backgroundColor: Color(0xffF3F0E6),
-        foregroundColor: Color(0xff292F32),
+        backgroundColor: const Color(0xffF3F0E6),
+        foregroundColor: const Color(0xff292F32),
         onPressed: () {},
         child: Row(
           children: [
@@ -31,7 +31,7 @@ class SignInWithButtonWIdget extends StatelessWidget {
             ),
             Text(
               'Continue with $label',
-              style: TextStyle(
+              style: const TextStyle(
                   fontFamily: 'Telegraf',
                   fontSize: 18,
                   fontWeight: FontWeight.w400),

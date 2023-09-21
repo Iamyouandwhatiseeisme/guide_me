@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../pages/pages.dart';
 
 class BackgroundPhotoAndTitleWidget extends StatelessWidget {
   final String pageTitle;

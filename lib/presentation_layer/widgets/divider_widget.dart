@@ -10,25 +10,25 @@ class DividerWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
+        SizedBox(
           width: 174,
           height: 1,
           child: Divider(
             indent: 20,
             endIndent: 13,
             thickness: 1,
-            color: Color(0xff292F32).withOpacity(0.75),
+            color: const Color(0xff292F32).withOpacity(0.75),
           ),
         ),
-        Text('Or'),
-        Container(
+        const Text('Or'),
+        SizedBox(
           width: 174,
           height: 1,
           child: Divider(
             indent: 13,
             endIndent: 20,
             thickness: 1,
-            color: Color(0xff292F32).withOpacity(0.75),
+            color: const Color(0xff292F32).withOpacity(0.75),
           ),
         ),
       ],

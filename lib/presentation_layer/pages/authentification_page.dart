@@ -52,15 +52,15 @@ class _AuthPageState extends State<AuthPage> {
                   height: 30,
                 ),
                 const DividerWidget(),
-                SignInWithButtonWIdget(
+                const SignInWithButtonWIdget(
                   heroTag: 'bas1',
                   logo: 'assets/images/logos/facebook logo.png',
                   label: 'Facebook',
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                SignInWithButtonWIdget(
+                const SignInWithButtonWIdget(
                   heroTag: 'bas2',
                   logo: 'assets/images/logos/google logo.png',
                   label: 'Google',

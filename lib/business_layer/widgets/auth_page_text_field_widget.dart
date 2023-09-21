@@ -1,6 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:async';
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
@@ -19,7 +17,7 @@ class MyTextField extends StatefulWidget {
 }
 
 class _MyTextFieldState extends State<MyTextField> {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   bool hideText = true;
 
@@ -38,7 +36,7 @@ class _MyTextFieldState extends State<MyTextField> {
   @override
   Widget build(BuildContext context) {
     if (widget.label == 'Password') {
-      return Container(
+      return SizedBox(
         height: 48,
         width: 320,
         child: TextField(
@@ -76,7 +74,7 @@ class _MyTextFieldState extends State<MyTextField> {
         ),
       );
     } else {
-      return Container(
+      return SizedBox(
         height: 48,
         width: 320,
         child: TextField(
