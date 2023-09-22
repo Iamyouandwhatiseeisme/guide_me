@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const WelcomePage(
             backGroundPhoto: 'assets/images/Navigation-amico (1) 2.png'),
         'authPage': (context) => const AuthPage(),
-        'firstPage': (context) => const firstPage()
+        'firstPage': (context) => const FirstPage()
       },
     );
   }

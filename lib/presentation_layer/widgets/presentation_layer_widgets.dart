@@ -11,3 +11,5 @@ export 'package:guide_me/presentation_layer/widgets/search_text_field_widget.dar
 export 'package:guide_me/presentation_layer/widgets/first_page_scaffold_if_loaded_correctly.dart';
 export 'package:guide_me/presentation_layer/widgets/recommended_label_widget.dart';
 export 'first_page_app_bar_widget.dart';
+export 'what_to_visit_label_widget.dart';
+export 'recommended_sightseeing_card_builder.dart';

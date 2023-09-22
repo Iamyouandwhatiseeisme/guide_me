@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_cubit_dart_state.dart';
 
@@ -15,8 +14,6 @@ class NearbyPlacesCubit extends Cubit<NearbyPlacesState> {
     } catch (error) {
       // Handle the error here
       emit(NearbyPlacesError('Failed to fetch nearby places: $error'));
-
-      print('Failed to fetch nearby places: $error');
     }
   }
 }

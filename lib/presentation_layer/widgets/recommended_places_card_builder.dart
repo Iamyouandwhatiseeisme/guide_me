@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
 
 import '../../data_layer/models/nearby_places_model.dart';
 
-class recommended_places_card_builder extends StatelessWidget {
-  const recommended_places_card_builder({
+class RecommenPlacesCardBuilder extends StatelessWidget {
+  const RecommenPlacesCardBuilder({
     super.key,
     required this.listOfNearbyPlaces,
   });
