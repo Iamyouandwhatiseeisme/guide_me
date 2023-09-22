@@ -1,6 +1,5 @@
 part of 'geolocator_cubit.dart';
 
-@immutable
 abstract class LocationState {}
 
 class LocationLoading extends LocationState {}

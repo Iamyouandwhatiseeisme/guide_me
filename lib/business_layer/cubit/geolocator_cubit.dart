@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -26,8 +26,6 @@ class GeolocatorCubit extends Cubit<LocationState> {
       } catch (e) {
         emit(LocationErorr("Error getting location: $e"));
       }
-    } else {
-      print('NoPermission');
-    }
+    } else {}
   }
 }
