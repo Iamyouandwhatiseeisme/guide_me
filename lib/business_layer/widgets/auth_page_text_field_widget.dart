@@ -41,7 +41,7 @@ class _MyTextFieldState extends State<MyTextField> {
         width: 320,
         child: TextField(
           obscureText: hideText,
-          onChanged: (Text) {
+          onChanged: (text) {
             setState(() {});
           },
           keyboardType: TextInputType.visiblePassword,

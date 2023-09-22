@@ -1,25 +1,33 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_cubit.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_state.dart';
-
+import 'package:guide_me/data_layer/distance_calculator.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
+import '../../business_layer/cubit/geolocator_cubit.dart';
 import '../../business_layer/cubit/what_to_visit_toggle_button_dart_cubit.dart';
 
 class RecommendedSightseeingCardBuilder extends StatelessWidget {
   final List<NearbyPlacesModel> listOfSightseeingPlaces;
   final NearbySightSeeingCubit nearbySightSeeingCubit;
-  final WhatToVisitToggleButtonCubitInitial state;
+  final WhatToVisitToggleButtonCubitInitial whatTovisitstate;
+  final double userLat;
+  final double userLon;
 
   const RecommendedSightseeingCardBuilder({
     Key? key,
     required this.listOfSightseeingPlaces,
     required this.nearbySightSeeingCubit,
-    required this.state,
+    required this.whatTovisitstate,
+    required this.userLat,
+    required this.userLon,
   }) : super(key: key);
 
   @override
@@ -30,7 +38,7 @@ class RecommendedSightseeingCardBuilder extends StatelessWidget {
 
       List<NearbyPlacesModel> sortedList = List.from(listOfSightseeingPlaces);
 
-      switch (state.value) {
+      switch (whatTovisitstate.value) {
         case 0:
           sortedList.sort((a, b) {
             // Implement your custom sorting logic for budget-friendly
@@ -50,8 +58,25 @@ class RecommendedSightseeingCardBuilder extends StatelessWidget {
           });
           break;
         case 2:
+
           // Implement your custom sorting logic for closest to you
           // Compare a and b and return -1, 0, or 1 based on your logic.
+          sortedList.sort((a, b) {
+            final aDistance = calculateDistance(
+              a.lat,
+              a.lng,
+              userLat,
+              userLon,
+            );
+            final bDistance = calculateDistance(
+              b.lat,
+              b.lng,
+              userLat,
+              userLon,
+            );
+
+            return aDistance!.compareTo(bDistance!);
+          });
           break;
       }
 
@@ -91,7 +116,6 @@ class RecommendedSightseeingCardBuilder extends StatelessWidget {
         color: Colors.black,
       );
     } else {
-      print('error');
       return const CircularProgressIndicator(
         color: Colors.black38,
       );

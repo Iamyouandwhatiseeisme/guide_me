@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
 
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_cubit.dart';
 
@@ -35,8 +37,15 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
           child: FirstPageAppBar(),
         ),
         body: SingleChildScrollView(
-            child: BlocProvider(
+            child: MultiBlocProvider(
+                providers: [
+              BlocProvider(
                 create: (context) => WhatToVisitToggleButtonCubit(),
+              ),
+              BlocProvider(
+                create: (context) => GeolocatorCubit(),
+              ),
+            ],
                 child: Builder(
                   builder: (context) {
                     return Column(
@@ -72,12 +81,28 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                         ),
                         BlocBuilder<WhatToVisitToggleButtonCubit,
                             WhatToVisitToggleButtonCubitInitial>(
-                          builder: (context, state) {
-                            return RecommendedSightseeingCardBuilder(
-                              listOfSightseeingPlaces:
-                                  widget.listOfSightseeings,
-                              state: state,
-                              nearbySightSeeingCubit: NearbySightSeeingCubit(),
+                          builder: (context, whatTovisitstate) {
+                            return BlocBuilder<GeolocatorCubit, LocationState>(
+                              builder: (context, locationState) {
+                                final geoLocatorCubit =
+                                    BlocProvider.of<GeolocatorCubit>(context);
+                                geoLocatorCubit.getLocation();
+                                if (locationState is LocationLoaded) {
+                                  double lat = locationState.position.latitude;
+                                  double lon = locationState.position.longitude;
+                                  return RecommendedSightseeingCardBuilder(
+                                    listOfSightseeingPlaces:
+                                        widget.listOfSightseeings,
+                                    whatTovisitstate: whatTovisitstate,
+                                    userLat: lat,
+                                    userLon: lon,
+                                    nearbySightSeeingCubit:
+                                        NearbySightSeeingCubit(),
+                                  );
+                                } else {
+                                  return CircularProgressIndicator();
+                                }
+                              },
                             );
                           },
                         ),

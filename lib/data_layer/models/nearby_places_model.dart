@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-
 class NearbyPlacesModel {
   final String name;
   final OpeningHours? openingHours;
@@ -11,6 +10,8 @@ class NearbyPlacesModel {
   final bool? openNow;
   final int? userRatingsTotal;
   final String vicinity;
+  final double? lat;
+  final double? lng;
   NearbyPlacesModel({
     required this.name,
     required this.openingHours,
@@ -21,10 +22,14 @@ class NearbyPlacesModel {
     required this.openNow,
     required this.userRatingsTotal,
     required this.vicinity,
+    required this.lat,
+    required this.lng,
   });
 
   factory NearbyPlacesModel.fromJason(Map<String, dynamic> json) {
     final openingHoursJson = json['opening_hours'];
+    final geometryJson = json['geometry'];
+    final locationJson = geometryJson != null ? geometryJson['location'] : null;
     return NearbyPlacesModel(
         name: json['name'],
         openingHours: openingHoursJson != null
@@ -36,7 +41,9 @@ class NearbyPlacesModel {
         openNow: openingHoursJson != null ? openingHoursJson['open_now'] : null,
         userRatingsTotal: json['user_ratings_total'],
         types: json['types'],
-        vicinity: json['vicinity']);
+        vicinity: json['vicinity'],
+        lat: locationJson != null ? locationJson['lat'] : 0.0,
+        lng: locationJson != null ? locationJson['lng'] : 0.0);
   }
 }
 

@@ -13,3 +13,4 @@ export 'package:guide_me/presentation_layer/widgets/recommended_label_widget.dar
 export 'first_page_app_bar_widget.dart';
 export 'what_to_visit_label_widget.dart';
 export 'recommended_sightseeing_card_builder.dart';
+export 'place_card_widget.dart';
