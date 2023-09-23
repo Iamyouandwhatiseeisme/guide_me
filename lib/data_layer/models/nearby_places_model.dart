@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:guide_me/data_layer/distance_calculator.dart';
+
 class NearbyPlacesModel {
   final String name;
   final OpeningHours? openingHours;
@@ -12,6 +14,7 @@ class NearbyPlacesModel {
   final String vicinity;
   final double? lat;
   final double? lng;
+
   NearbyPlacesModel({
     required this.name,
     required this.openingHours,
@@ -31,19 +34,20 @@ class NearbyPlacesModel {
     final geometryJson = json['geometry'];
     final locationJson = geometryJson != null ? geometryJson['location'] : null;
     return NearbyPlacesModel(
-        name: json['name'],
-        openingHours: openingHoursJson != null
-            ? OpeningHours.fromJson(openingHoursJson)
-            : null,
-        rating: json['rating'],
-        priceLevel: json['price_level'],
-        photos: json['photos'],
-        openNow: openingHoursJson != null ? openingHoursJson['open_now'] : null,
-        userRatingsTotal: json['user_ratings_total'],
-        types: json['types'],
-        vicinity: json['vicinity'],
-        lat: locationJson != null ? locationJson['lat'] : 0.0,
-        lng: locationJson != null ? locationJson['lng'] : 0.0);
+      name: json['name'],
+      openingHours: openingHoursJson != null
+          ? OpeningHours.fromJson(openingHoursJson)
+          : null,
+      rating: json['rating'],
+      priceLevel: json['price_level'],
+      photos: json['photos'],
+      openNow: openingHoursJson != null ? openingHoursJson['open_now'] : null,
+      userRatingsTotal: json['user_ratings_total'],
+      types: json['types'],
+      vicinity: json['vicinity'],
+      lat: locationJson != null ? locationJson['lat'] : 0.0,
+      lng: locationJson != null ? locationJson['lng'] : 0.0,
+    );
   }
 }
 

@@ -57,7 +57,7 @@ class _FirstPageState extends State<FirstPage> {
                         body: Center(child: CircularProgressIndicator()));
                   }
                   return FutureBuilder(
-                      future: Future.delayed(const Duration(seconds: 4)),
+                      future: Future.delayed(const Duration(seconds: 2)),
                       builder: ((context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -65,6 +65,7 @@ class _FirstPageState extends State<FirstPage> {
                               body: Center(child: CircularProgressIndicator()));
                         } else {
                           return FirstPageScaffoldIfLoadedCorrectly(
+                            nearbySightSeeingCubit: nearbySightSeeingCubit,
                             listOfNearbyPlaces: listOfNearbyPlaces,
                             listOfSightseeings: listOfSightseeingPlaces,
                           );
