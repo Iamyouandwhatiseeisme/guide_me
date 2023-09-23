@@ -1,22 +1,22 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geolocator/geolocator.dart';
+
 import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
-
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_cubit.dart';
-
 import 'package:guide_me/business_layer/cubit/what_to_visit_toggle_button_dart_cubit.dart';
 import 'package:guide_me/business_layer/widgets/business_widgets.dart';
-
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class FirstPageScaffoldIfLoadedCorrectly extends StatefulWidget {
+  final NearbySightSeeingCubit nearbySightSeeingCubit;
   const FirstPageScaffoldIfLoadedCorrectly({
-    super.key,
+    Key? key,
+    required this.nearbySightSeeingCubit,
     required this.listOfNearbyPlaces,
     required this.listOfSightseeings,
-  });
+  }) : super(key: key);
 
   final List<NearbyPlacesModel> listOfNearbyPlaces;
   final List<NearbyPlacesModel> listOfSightseeings;
@@ -64,7 +64,7 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                         const SizedBox(
                           height: 48,
                         ),
-                        WhatToVisitLabelWidget(),
+                        const WhatToVisitLabelWidget(),
                         const SizedBox(
                           height: 12,
                         ),
@@ -76,7 +76,7 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                             );
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 12,
                         ),
                         BlocBuilder<WhatToVisitToggleButtonCubit,
@@ -90,6 +90,7 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                                 if (locationState is LocationLoaded) {
                                   double lat = locationState.position.latitude;
                                   double lon = locationState.position.longitude;
+
                                   return RecommendedSightseeingCardBuilder(
                                     listOfSightseeingPlaces:
                                         widget.listOfSightseeings,
@@ -97,10 +98,11 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                                     userLat: lat,
                                     userLon: lon,
                                     nearbySightSeeingCubit:
-                                        NearbySightSeeingCubit(),
+                                        widget.nearbySightSeeingCubit,
                                   );
                                 } else {
-                                  return CircularProgressIndicator();
+                                  return const Center(
+                                      child: CircularProgressIndicator());
                                 }
                               },
                             );
