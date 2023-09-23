@@ -6,28 +6,88 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubit/what_to_visit_toggle_button_dart_cubit.dart';
 
+import '../../data_layer/models/nearby_places_model.dart';
+import '../cubit/sightseeing_sorting_cubit.dart';
+
 class WhatToVisitRadioButtonWidget extends StatelessWidget {
+  final double userLat;
+  final double userLon;
+  final List<NearbyPlacesModel> listOfSightseeings;
   WhatToVisitToggleButtonCubitInitial state;
 
   WhatToVisitRadioButtonWidget({
     Key? key,
+    required this.userLat,
+    required this.userLon,
+    required this.listOfSightseeings,
     required this.state,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (state.value == 0) {
-      return SizedBox(
-          height: 32,
-          width: 390,
-          child: Row(
-            children: [
+    List<NearbyPlacesModel> unSortedList = List.from(listOfSightseeings);
+    return BlocBuilder<WhatToVisitToggleButtonCubit,
+        WhatToVisitToggleButtonCubitInitial>(builder: (context, state) {
+      final sightseeingSortingCubit =
+          BlocProvider.of<SightseeingSortingCubit>(context);
+
+      if (state.value == 0) {
+        return SizedBox(
+            height: 32,
+            width: 390,
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 20.0, left: 20),
+                  child: GestureDetector(
+                      onTap: () {
+                        BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
+                            .selectRadioButton(0);
+                      },
+                      child: Container(
+                          width: 110,
+                          height: 28,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(32)),
+                          child: const Center(child: Text('Budget Friendly')))),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: GestureDetector(
+                      onTap: () {
+                        BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
+                            .selectRadioButton(1);
+                      },
+                      child: const Text('Highest Rated')),
+                ),
+                GestureDetector(
+                    onTap: () {
+                      BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
+                          .selectRadioButton(2);
+                    },
+                    child: const Text('Closest To You'))
+              ],
+            ));
+      } else if (state.value == 1) {
+        return SizedBox(
+            height: 32,
+            width: 390,
+            child: Row(children: [
               Padding(
-                padding: const EdgeInsets.only(right: 20.0, left: 20),
+                  padding: const EdgeInsets.only(right: 25.0, left: 20),
+                  child: GestureDetector(
+                      onTap: () {
+                        BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
+                            .selectRadioButton(0);
+                      },
+                      child: const Text('Budget Friendly'))),
+              Padding(
+                padding: const EdgeInsets.only(right: 25.0),
                 child: GestureDetector(
                     onTap: () {
                       BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
-                          .selectRadioButton(0);
+                          .selectRadioButton(1);
                     },
                     child: Container(
                         width: 110,
@@ -35,10 +95,30 @@ class WhatToVisitRadioButtonWidget extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(32)),
-                        child: const Center(child: Text('Budget Friendly')))),
+                        child: const Center(child: Text('Highest Rated')))),
               ),
+              GestureDetector(
+                  onTap: () {
+                    BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
+                        .selectRadioButton(2);
+                  },
+                  child: const Text('Closest To You'))
+            ]));
+      } else if (state.value == 2) {
+        return SizedBox(
+            height: 32,
+            width: 390,
+            child: Row(children: [
               Padding(
-                padding: const EdgeInsets.only(right: 20.0),
+                  padding: const EdgeInsets.only(right: 25.0, left: 20),
+                  child: GestureDetector(
+                      onTap: () {
+                        BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
+                            .selectRadioButton(0);
+                      },
+                      child: const Text('Budget Friendly'))),
+              Padding(
+                padding: const EdgeInsets.only(right: 25.0),
                 child: GestureDetector(
                     onTap: () {
                       BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
@@ -51,76 +131,17 @@ class WhatToVisitRadioButtonWidget extends StatelessWidget {
                     BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
                         .selectRadioButton(2);
                   },
-                  child: const Text('Closest To You'))
-            ],
-          ));
-    } else if (state.value == 1) {
-      return SizedBox(
-          height: 32,
-          width: 390,
-          child: Row(children: [
-            Padding(
-                padding: const EdgeInsets.only(right: 25.0, left: 20),
-                child: GestureDetector(
-                    onTap: () =>
-                        BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
-                            .selectRadioButton(0),
-                    child: const Text('Budget Friendly'))),
-            Padding(
-              padding: const EdgeInsets.only(right: 25.0),
-              child: GestureDetector(
-                  onTap: () =>
-                      BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
-                          .selectRadioButton(1),
                   child: Container(
                       width: 110,
                       height: 28,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(32)),
-                      child: const Center(child: Text('Highest Rated')))),
-            ),
-            GestureDetector(
-                onTap: () =>
-                    BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
-                        .selectRadioButton(2),
-                child: const Text('Closest To You'))
-          ]));
-    } else {
-      return SizedBox(
-          height: 32,
-          width: 390,
-          child: Row(children: [
-            Padding(
-                padding: const EdgeInsets.only(right: 25.0, left: 20),
-                child: GestureDetector(
-                    onTap: () {
-                      BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
-                          .selectRadioButton(0);
-                    },
-                    child: const Text('Budget Friendly'))),
-            Padding(
-              padding: const EdgeInsets.only(right: 25.0),
-              child: GestureDetector(
-                  onTap: () {
-                    BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
-                        .selectRadioButton(1);
-                  },
-                  child: const Text('Highest Rated')),
-            ),
-            GestureDetector(
-                onTap: () {
-                  BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
-                      .selectRadioButton(2);
-                },
-                child: Container(
-                    width: 110,
-                    height: 28,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(32)),
-                    child: const Center(child: Text('Closest To You'))))
-          ]));
-    }
+                      child: const Center(child: Text('Closest To You'))))
+            ]));
+      } else {
+        return const SizedBox();
+      }
+    });
   }
 }
