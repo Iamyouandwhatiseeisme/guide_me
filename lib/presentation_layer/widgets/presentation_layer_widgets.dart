@@ -18,3 +18,4 @@ export 'sightseeings_place_card.wiget.dart';
 export 'card_ui_widget.dart';
 export 'user_rating_and_total_rating_widiget.dart';
 export 'package:guide_me/presentation_layer/widgets/sightseeing_photo_and_name_widget.dart';
+export 'photos_list_view_builder.dart';
