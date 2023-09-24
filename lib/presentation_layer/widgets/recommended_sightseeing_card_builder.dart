@@ -6,8 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_cubit.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_state.dart';
 import 'package:guide_me/business_layer/cubit/sightseeing_sorting_cubit.dart';
-import 'package:guide_me/data_layer/data.dart';
-import 'package:guide_me/data_layer/distance_calculator.dart';
+
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
@@ -68,9 +67,14 @@ class RecommendedSightseeingCardBuilder extends StatelessWidget {
                             child: SizedBox(
                               height: 280,
                               width: 250,
-                              child: SightseeingsPlaceCard(
-                                distance: distanceMap[sortedList[index]],
-                                place: sortedList[index],
+                              child: GestureDetector(
+                                onTap: () => Navigator.pushNamed(
+                                    context, 'placePage',
+                                    arguments: sortedList[index]),
+                                child: SightseeingsPlaceCard(
+                                  distance: distanceMap[sortedList[index]],
+                                  place: sortedList[index],
+                                ),
                               ),
                             ),
                           );

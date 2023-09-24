@@ -10,6 +10,7 @@ class NearbySightSeeingCubit extends Cubit<NearbySightseeingsState> {
     try {
       emit(NearbySightseeingsLoading());
       final listOfSightseeings = await fetchSightseeingData([]);
+
       if (isClosed) {
         return;
       }
