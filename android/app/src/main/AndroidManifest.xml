@@ -36,4 +36,12 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <queries>
+        <!-- Declare package visibility for Google Maps -->
+        <package android:name="com.google.android.apps.maps" />
+
+        <!-- Declare package visibility for Google Chrome -->
+        <package android:name="com.android.chrome" />
+        <package android:name="com.brave.browser" />
+    </queries>
 </manifest>
