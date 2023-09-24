@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/photos_by_place_id_fetcher_cubit.dart';
 
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class PlacePage extends StatefulWidget {
   final NearbyPlacesModel? placeToDisplay;
@@ -36,45 +37,30 @@ class _PlacepageState extends State<PlacePage> {
         if (photosState is PhotosByPlaceIdFetcherLoaded) {
           return Scaffold(
             appBar: AppBar(
-              actions: [
+              actions: const [
                 Icon(Icons.share_outlined),
                 SizedBox(width: 24),
                 Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
+                  padding: EdgeInsets.only(right: 8.0),
                   child: Icon(Icons.favorite_border),
                 )
               ],
               backgroundColor: const Color(0xffF3F0E6),
             ),
             backgroundColor: const Color(0xffF3F0E6),
-            body: Column(
+            body: const Column(
               children: [
-                SizedBox(
-                  width: 430,
-                  height: 260,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: photosState.photosByPlaceId.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          width: 430,
-                          height: 260,
-                          child: Image.network(
-                            photosState.photosByPlaceId[index],
-                            fit: BoxFit.cover,
-                          ),
-                        );
-                      }),
-                ),
+                PhotoListViewBuilder(),
               ],
             ),
           );
         } else if (photosState is PhotosByPlaceIdFetcherLoading) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (photosState is PhotosByPlaceIdFetcherInitial) {
-          return Scaffold(body: Center(child: CircularProgressIndicator()));
+          return const Scaffold(
+              body: Center(child: CircularProgressIndicator()));
         } else {
-          return Container(child: Text('NO PHOTOS'));
+          return const Text('NO PHOTOS');
         }
       }),
     );
