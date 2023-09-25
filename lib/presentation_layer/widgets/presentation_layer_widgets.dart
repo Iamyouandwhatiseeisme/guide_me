@@ -22,3 +22,6 @@ export 'photos_list_view_builder.dart';
 export 'name_of__place_page_place_widget.dart';
 export 'text_with_underline_grey_widget.dart';
 export 'transformed_user_rating_widget.dart';
+export 'buttons/write_a_review_button_widget.dart';
+export 'rating_and_review_row_widget.dart';
+export 'place_page_app_bar_widget.dart';

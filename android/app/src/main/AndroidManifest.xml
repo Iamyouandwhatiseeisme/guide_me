@@ -33,9 +33,10 @@
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDFwz7Nk7baEraJxw-23Wc68rdeib0eTzQ" />
     </application>
-
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <queries>
         <!-- Declare package visibility for Google Maps -->
         <package android:name="com.google.android.apps.maps" />
@@ -43,5 +44,19 @@
         <!-- Declare package visibility for Google Chrome -->
         <package android:name="com.android.chrome" />
         <package android:name="com.brave.browser" />
+
+        <package android:name="com.android.phone" />
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+            <data android:scheme="tel" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="*/*" />
+        </intent>
     </queries>
 </manifest>
