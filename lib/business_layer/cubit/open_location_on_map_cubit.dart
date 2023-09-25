@@ -1,13 +1,19 @@
+import 'dart:ffi';
+
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+part 'open_location_on_map_state.dart';
 
-class MakeACallCubit extends Cubit<bool> {
-  MakeACallCubit() : super(false);
+class OpenLocationOnMapCubit extends Cubit<bool> {
+  OpenLocationOnMapCubit() : super(false);
 
-  Future<void> makePhoneCall(String phoneNumber) async {
-    final phoneCallUrl = 'tel:$phoneNumber';
-    final uri = Uri.parse(phoneCallUrl);
+  Future<void> openInMap(String? name, String? adress) async {
+    final String googleMapsUrl =
+        'https://www.google.com/maps/search/?api=1&query=$name,$adress';
+    final uri = Uri.parse(googleMapsUrl);
+    print(uri);
     try {
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri);

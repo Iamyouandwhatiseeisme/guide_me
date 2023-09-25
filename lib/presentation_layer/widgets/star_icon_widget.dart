@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class StarIcon extends StatelessWidget {
   final bool isFilled;
 
-  StarIcon({required this.isFilled});
+  const StarIcon({super.key, required this.isFilled});
 
   @override
   Widget build(BuildContext context) {

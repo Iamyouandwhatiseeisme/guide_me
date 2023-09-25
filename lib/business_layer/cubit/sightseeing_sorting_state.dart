@@ -11,5 +11,5 @@ final class SightseeingSortingInitial extends SightseeingSortingState {}
 
 class SightseeingsortingLoaded extends SightseeingSortingState {
   final List<NearbyPlacesModel> sortedList;
-  SightseeingsortingLoaded(this.sortedList);
+  const SightseeingsortingLoaded(this.sortedList);
 }
