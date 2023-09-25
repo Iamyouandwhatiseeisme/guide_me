@@ -16,7 +16,6 @@ class FetchPhoneNumberAndAdressCubit
         final fetchedNumberAndAdressByPlaceId = await fetchPhoneNumber(placeId);
         emit(FetchPhoneNumberAndAdressLoaded(fetchedNumberAndAdressByPlaceId));
         numberAndAdressFetched = true;
-        print(fetchedNumberAndAdressByPlaceId);
       }
     } catch (error) {
       emit(FetchPhonenumberAndAdressError(

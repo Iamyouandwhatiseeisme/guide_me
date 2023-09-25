@@ -48,7 +48,7 @@ class RecommendedSightseeingCardBuilder extends StatelessWidget {
                     sortedList, state.value, userLat, userLon, distanceMap);
 
                 // Now, build the UI using the sorted list
-                return Container(
+                return SizedBox(
                   width: 430,
                   height: 300,
                   child: Align(

@@ -19,17 +19,12 @@ Future<Map<String?, String?>> fetchPhoneNumber(String placeId) async {
 
         return {'phone': phoneNumber, 'adress': formattedAdress};
       } else {
-        print('Failed to fetch place details');
+        throw ('Data status != ok');
       }
     } else {
-      print('Failed to fetch place details');
+      throw ('Failed to fetch');
     }
   } catch (error) {
-    print('Error: $error');
+    rethrow;
   }
-
-  return {
-    'phone': 'No Number',
-    'adress': 'No adress'
-  }; // Return null if fetching the phone number fails
 }

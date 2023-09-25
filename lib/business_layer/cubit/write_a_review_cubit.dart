@@ -3,7 +3,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:url_launcher/url_launcher_string.dart';
 
 class WriteAReviewCubit extends Cubit<bool> {
   WriteAReviewCubit() : super(false);

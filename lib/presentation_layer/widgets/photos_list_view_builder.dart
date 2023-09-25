@@ -21,7 +21,7 @@ class PhotoListViewBuilder extends StatelessWidget {
               itemCount: photosState.photosByPlaceId.length,
               itemBuilder: (context, index) {
                 return Stack(alignment: Alignment.bottomLeft, children: [
-                  Container(
+                  SizedBox(
                     width: 430,
                     height: 260,
                     child: Image.network(
@@ -33,7 +33,7 @@ class PhotoListViewBuilder extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 41, bottom: 12.0),
                     child: Container(
                       decoration: BoxDecoration(
-                          color: const Color(0xff292F32BF).withOpacity(0.2),
+                          color: const Color(0xff292f32).withOpacity(0.2),
                           borderRadius: BorderRadius.circular(32)),
                       width: 54,
                       height: 18,
@@ -56,7 +56,7 @@ class PhotoListViewBuilder extends StatelessWidget {
       } else if (photosState is PhotosByPlaceIdFetcherInitial) {
         return const Scaffold(body: Center(child: CircularProgressIndicator()));
       } else {
-        return Container(child: const Text('NO PHOTOS'));
+        return const Text('NO PHOTOS');
       }
     });
   }

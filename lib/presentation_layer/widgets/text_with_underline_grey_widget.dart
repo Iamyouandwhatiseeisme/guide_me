@@ -15,7 +15,7 @@ class TextWithUnderLine extends StatelessWidget {
           decoration: TextDecoration.underline,
           fontWeight: FontWeight.w400,
           fontSize: 16,
-          color: Color(0xff292F32).withOpacity(0.75)),
+          color: const Color(0xff292F32).withOpacity(0.75)),
     );
   }
 }

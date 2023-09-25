@@ -18,7 +18,7 @@ Future<List<String>> fetChPhotosHelper(
       List<String> photoUrls = [];
       for (var photo in photos) {
         final photoReference = photo['photo_reference'];
-        final maxWidth = 1000;
+        const maxWidth = 1000;
         final photoUrl = Uri.parse(
             'https://maps.googleapis.com/maps/api/place/photo?maxwidth=$maxWidth&photoreference=$photoReference&key=AIzaSyDFwz7Nk7baEraJxw-23Wc68rdeib0eTzQ');
         photoUrls.add(photoUrl.toString());

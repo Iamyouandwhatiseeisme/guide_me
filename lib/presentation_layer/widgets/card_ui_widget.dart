@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-import 'package:guide_me/presentation_layer/widgets/star_rating_widget.dart';
 
 class CardUi extends StatelessWidget {
   final double? distance;
@@ -75,7 +74,7 @@ class CardUi extends StatelessWidget {
             ),
           Wrap(children: [
             Image.asset("assets/images/Distance.png"),
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
             Text(
@@ -83,7 +82,7 @@ class CardUi extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: Color(0xff292F32BF)),
+                  color: Color(0xff292f32bf)),
             ),
           ])
         ],

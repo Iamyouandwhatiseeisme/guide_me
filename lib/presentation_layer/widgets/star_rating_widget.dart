@@ -4,7 +4,7 @@ import 'package:guide_me/presentation_layer/widgets/star_icon_widget.dart';
 class StarRating extends StatelessWidget {
   final num rating;
 
-  StarRating({required this.rating});
+  const StarRating({super.key, required this.rating});
 
   @override
   Widget build(BuildContext context) {
@@ -14,15 +14,15 @@ class StarRating extends StatelessWidget {
     return Row(
       children: List.generate(5, (index) {
         if (index < filledStars) {
-          return StarIcon(isFilled: true);
+          return const StarIcon(isFilled: true);
         } else if (index == filledStars && hasHalfStar) {
-          return Icon(
+          return const Icon(
             Icons.star_half_outlined,
             color: Colors.red,
             size: 12,
           ); // Add a half star
         } else {
-          return StarIcon(isFilled: false);
+          return const StarIcon(isFilled: false);
         }
       }),
     );

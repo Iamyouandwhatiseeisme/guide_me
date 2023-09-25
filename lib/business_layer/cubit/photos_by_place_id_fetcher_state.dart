@@ -15,14 +15,14 @@ class PhotosByPlaceIdFetcherLoading extends PhotosByPlaceIdFetcherState {}
 class PhotosByPlaceIdFetcherLoaded extends PhotosByPlaceIdFetcherState {
   final List<String> photosByPlaceId;
 
-  PhotosByPlaceIdFetcherLoaded(this.photosByPlaceId);
+  const PhotosByPlaceIdFetcherLoaded(this.photosByPlaceId);
   @override
   List<Object> get props => [photosByPlaceId];
 }
 
 class PhotosByPlaceIdFetcherError extends PhotosByPlaceIdFetcherState {
   final String errorMessage;
-  PhotosByPlaceIdFetcherError({
+  const PhotosByPlaceIdFetcherError({
     required this.errorMessage,
   });
   @override

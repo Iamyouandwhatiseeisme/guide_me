@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/what_to_visit_toggle_button_dart_cubit.dart';
 
 import '../../data_layer/models/nearby_places_model.dart';
-import '../cubit/sightseeing_sorting_cubit.dart';
 
 class WhatToVisitRadioButtonWidget extends StatelessWidget {
   final double userLat;
@@ -25,12 +23,8 @@ class WhatToVisitRadioButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<NearbyPlacesModel> unSortedList = List.from(listOfSightseeings);
     return BlocBuilder<WhatToVisitToggleButtonCubit,
         WhatToVisitToggleButtonCubitInitial>(builder: (context, state) {
-      final sightseeingSortingCubit =
-          BlocProvider.of<SightseeingSortingCubit>(context);
-
       if (state.value == 0) {
         return SizedBox(
             height: 32,

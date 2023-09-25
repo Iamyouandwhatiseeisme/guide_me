@@ -19,17 +19,17 @@ class UserRatingAndTotalRatingWidget extends StatelessWidget {
     return Row(
       children: [
         StarRating(rating: place.rating!),
-        SizedBox(
+        const SizedBox(
           width: 3,
         ),
         SizedBox(
           height: 8,
           width: 1,
           child: Container(
-            color: Color(0xff292F3280),
+            color: const Color(0xff292f32),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 3,
         ),
         if (userRatingTotal.length >= 4)
