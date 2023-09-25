@@ -12,7 +12,7 @@ class WriteAReviewCubit extends Cubit<bool> {
     final googleMapsReviewUrl =
         'https://search.google.com/local/writereview?placeid=$placeId';
     final writeReviewUrl = Uri.parse(googleMapsReviewUrl);
-    print(writeReviewUrl);
+
     try {
       if (await canLaunchUrl(writeReviewUrl)) {
         await launchUrl(writeReviewUrl);
