@@ -20,7 +20,7 @@ class PhoneCallerWidget extends StatelessWidget {
       builder: (context, numberAndAdressState) {
         final numberAndAdressFetcherCubit =
             context.read<FetchPhoneNumberAndAdressCubit>();
-        numberAndAdressFetcherCubit.fetchNumberAndAdress(passedPlace.placeId);
+        numberAndAdressFetcherCubit.fetchMoreDetails(passedPlace.placeId);
 
         return BlocBuilder<MakeACallCubit, bool>(
           builder: (context, callReview) {

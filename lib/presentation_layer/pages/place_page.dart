@@ -7,6 +7,7 @@ import 'package:guide_me/business_layer/cubit/open_location_on_map_cubit.dart';
 
 import 'package:guide_me/business_layer/cubit/photos_by_place_id_fetcher_cubit.dart';
 import 'package:guide_me/business_layer/cubit/write_a_review_cubit.dart';
+import 'package:guide_me/business_layer/cubits.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
@@ -23,9 +24,11 @@ class PlacePage extends StatefulWidget {
 }
 
 class _PlacepageState extends State<PlacePage> {
+  bool placeStatusFetched = false;
   bool photosFetched = false;
   String? adress = '';
   String? number = '';
+  Map<String, String> openningHours = {};
   @override
   Widget build(BuildContext context) {
     final passedPlace =
@@ -39,15 +42,12 @@ class _PlacepageState extends State<PlacePage> {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => PhotosByPlaceIdFetcherCubit(),
-        ),
-        BlocProvider(
-          create: (context) => WriteAReviewCubit(),
-        ),
+        BlocProvider(create: (context) => PhotosByPlaceIdFetcherCubit()),
+        BlocProvider(create: (context) => WriteAReviewCubit()),
         BlocProvider(create: (context) => FetchPhoneNumberAndAdressCubit()),
         BlocProvider(create: (context) => MakeACallCubit()),
-        BlocProvider(create: (context) => OpenLocationOnMapCubit())
+        BlocProvider(create: (context) => OpenLocationOnMapCubit()),
+        BlocProvider(create: (context) => PlaceOpenStatuslabelCubit())
       ],
       child:
           BlocBuilder<PhotosByPlaceIdFetcherCubit, PhotosByPlaceIdFetcherState>(
@@ -58,46 +58,52 @@ class _PlacepageState extends State<PlacePage> {
           photosByPlaceIdFetchedCubit.fetchPhotos(passedPlace.placeId);
         }
         if (photosState is PhotosByPlaceIdFetcherLoaded) {
-          return Scaffold(
-            appBar: const PreferredSize(
-                preferredSize: Size.fromHeight(48), child: PlacePageAppbar()),
-            backgroundColor: const Color(0xffF3F0E6),
-            body: BlocBuilder<FetchPhoneNumberAndAdressCubit,
-                FetchPhoneNumberAndAdressState>(
+          return BlocBuilder<FetchPhoneNumberAndAdressCubit,
+                  FetchPhoneNumberAndAdressState>(
               builder: (context, numberAndAdressState) {
-                final numberAndAdressFetcherCubit =
-                    context.read<FetchPhoneNumberAndAdressCubit>();
-                numberAndAdressFetcherCubit
-                    .fetchNumberAndAdress(passedPlace.placeId);
+            final numberAndAdressFetcherCubit =
+                context.read<FetchPhoneNumberAndAdressCubit>();
+            numberAndAdressFetcherCubit.fetchMoreDetails(passedPlace.placeId);
 
-                if (numberAndAdressState is FetchPhoneNumberAndAdressLoaded) {
-                  final adressAndNumber =
-                      numberAndAdressState.numberAndAdressByPlaceId;
-                  number = adressAndNumber['phone'];
-                  adress = correctFormattedAdress(adressAndNumber['adress']);
+            if (numberAndAdressState is FetchPhoneNumberAndAdressLoaded) {
+              final detailsOfPlace =
+                  numberAndAdressState.numberAndAdressByPlaceId;
+              number = detailsOfPlace['phone'];
+              adress = correctFormattedAdress(detailsOfPlace['adress']);
+              openningHours = {
+                'open_hour': detailsOfPlace['open_hour']!,
+                'close_hour': detailsOfPlace['close_hour']!
+              };
+            }
+            return BlocBuilder<PlaceOpenStatuslabelCubit,
+                PlaceOpenStatusLabelState>(
+              builder: (context, placeOpenStatusstate) {
+                if (placeOpenStatusstate is PlaceOpenStatusInitial &&
+                    !placeStatusFetched) {
+                  final placeOpenStatusCubit =
+                      context.read<PlaceOpenStatuslabelCubit>();
+
+                  placeOpenStatusCubit.updateOpenStatus(passedPlace.openNow);
+
+                  placeStatusFetched = true;
                 }
 
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const PhotoListViewBuilder(),
-                    NameOfThePlaceLabel(passedPlace: passedPlace),
-                    const SizedBox(
-                      height: 18,
-                    ),
-                    RatingAndReviewRowWidget(
+                return Scaffold(
+                    appBar: const PreferredSize(
+                        preferredSize: Size.fromHeight(48),
+                        child: PlacePageAppbar()),
+                    backgroundColor: const Color(0xffF3F0E6),
+                    body: PlacePageContet(
+                        openningHours: openningHours,
                         passedPlace: passedPlace,
                         userRatingTotal: userRatingTotal,
-                        transformedUserRatingTotal: transformedUserRatingTotal),
-                    TypesLabelAndMakeACallButtonWidgetRow(
-                        typesInString: typesInString, number: number),
-                    AdressLabelAndOpenInMapButtonRowWIdget(
-                        adress: adress, passedPlace: passedPlace)
-                  ],
-                );
+                        transformedUserRatingTotal: transformedUserRatingTotal,
+                        typesInString: typesInString,
+                        number: number,
+                        adress: adress));
               },
-            ),
-          );
+            );
+          });
         } else if (photosState is PhotosByPlaceIdFetcherLoading) {
           return const CircularProgressIndicator();
         } else if (photosState is PhotosByPlaceIdFetcherInitial) {

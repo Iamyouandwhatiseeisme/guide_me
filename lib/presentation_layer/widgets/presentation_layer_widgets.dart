@@ -28,3 +28,4 @@ export 'place_page_app_bar_widget.dart';
 
 export 'types_label_and_make_a_call_button_widget.dart';
 export 'adress_label_and_open_in_map_button_row_widget.dart';
+export 'place_page_conent_widget.dart';

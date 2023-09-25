@@ -30,8 +30,14 @@ class RecommenPlacesCardBuilder extends StatelessWidget {
                 child: SizedBox(
                   height: 140,
                   width: 160,
-                  child: PlaceCard(
-                    place: listOfNearbyPlaces[index],
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, 'placePage',
+                          arguments: listOfNearbyPlaces[index]);
+                    },
+                    child: PlaceCard(
+                      place: listOfNearbyPlaces[index],
+                    ),
                   ),
                 ),
               );

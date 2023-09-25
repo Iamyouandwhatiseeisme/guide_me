@@ -9,12 +9,14 @@ class FetchPhoneNumberAndAdressCubit
   FetchPhoneNumberAndAdressCubit() : super(FetchPhoneNumberAndAdressInitial());
   bool numberAndAdressFetched = false;
 
-  void fetchNumberAndAdress(String placeId) async {
+  void fetchMoreDetails(String placeId) async {
     try {
       if (!numberAndAdressFetched) {
         emit(FetchPhoneNumberAndAdressLoading());
-        final fetchedNumberAndAdressByPlaceId = await fetchPhoneNumber(placeId);
+
+        final fetchedNumberAndAdressByPlaceId = await fetchDetails(placeId);
         emit(FetchPhoneNumberAndAdressLoaded(fetchedNumberAndAdressByPlaceId));
+
         numberAndAdressFetched = true;
       }
     } catch (error) {
