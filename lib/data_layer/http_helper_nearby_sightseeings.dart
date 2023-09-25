@@ -16,7 +16,9 @@ Future<List<NearbyPlacesModel>> fetchSightseeingData(
     final places = jsonData['results'];
     for (var placeData in places) {
       var place = NearbyPlacesModel.fromJason(placeData);
-      listOfSightseeingPlaces.add(place);
+      if (place.vicinity != 'Tbilisi') {
+        listOfSightseeingPlaces.add(place);
+      }
     }
 
     return listOfSightseeingPlaces;
