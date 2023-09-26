@@ -26,7 +26,12 @@ class SightseeingSortingCubit extends Cubit<SightseeingSortingState> {
         unsortedList.sort((a, b) {
           final aRating = a.rating ?? 0;
           final bRating = b.rating ?? 0;
-          return bRating.compareTo(aRating); // Sort in descending order
+          final aTotalRating = a.userRatingsTotal ?? 0;
+          final bTotalRating = b.userRatingsTotal ?? 0;
+
+          final aScore = aRating * aTotalRating;
+          final bScore = bRating * bTotalRating;
+          return bScore.compareTo(aScore); // Sort in descending order
         });
         break;
       case 2:

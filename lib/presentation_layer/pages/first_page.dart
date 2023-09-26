@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_cubit_dart_state.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_cubit.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_state.dart';
-import 'package:guide_me/data_layer/http_helper_nearby_sightseeings.dart';
+import 'package:guide_me/data_layer/http_helper_places_for_food.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
-import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 import '../../business_layer/cubit/recommended_places_cubit_dart_cubit.dart';
@@ -23,11 +22,14 @@ class _FirstPageState extends State<FirstPage> {
 
   List<NearbyPlacesModel> listOfNearbyPlaces = [];
   List<NearbyPlacesModel> listOfSightseeingPlaces = [];
+  List<NearbyPlacesModel> listPlacesForFood = [];
   @override
   void initState() {
     super.initState();
-    fetchData(listOfNearbyPlaces);
-    fetchSightseeingData(listOfSightseeingPlaces);
+    // fetchData(listOfNearbyPlaces);
+    // fetchSightseeingData(listOfSightseeingPlaces);
+
+    fetchPlacesForFoodData(listPlacesForFood);
   }
 
   @override
@@ -43,9 +45,14 @@ class _FirstPageState extends State<FirstPage> {
       ],
       child: Builder(builder: (context) {
         final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();
-        nearbyPlacesCubit.fetchNearbyPlaces();
+        if (listOfNearbyPlaces.isEmpty) {
+          nearbyPlacesCubit.fetchNearbyPlaces(listOfNearbyPlaces);
+        }
         final nearbySightSeeingCubit = context.read<NearbySightSeeingCubit>();
-        nearbySightSeeingCubit.fetchNearbySightseeings();
+        if (listOfSightseeingPlaces.isEmpty) {
+          nearbySightSeeingCubit
+              .fetchNearbySightseeings(listOfSightseeingPlaces);
+        }
         return BlocBuilder<NearbySightSeeingCubit, NearbySightseeingsState>(
           builder: (context, state) {
             return Container(
@@ -65,9 +72,9 @@ class _FirstPageState extends State<FirstPage> {
                               body: Center(child: CircularProgressIndicator()));
                         } else {
                           return FirstPageScaffoldIfLoadedCorrectly(
-                            nearbySightSeeingCubit: nearbySightSeeingCubit,
                             listOfNearbyPlaces: listOfNearbyPlaces,
                             listOfSightseeings: listOfSightseeingPlaces,
+                            listOfPlacesForFood: listPlacesForFood,
                           );
                         }
                       }));
