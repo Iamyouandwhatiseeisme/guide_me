@@ -28,7 +28,7 @@ class _PlacepageState extends State<PlacePage> {
   bool photosFetched = false;
   String? adress = '';
   String? number = '';
-  Map<String, String> openningHours = {};
+  Map<String, String?> openningHours = {};
   @override
   Widget build(BuildContext context) {
     final passedPlace =
@@ -71,8 +71,8 @@ class _PlacepageState extends State<PlacePage> {
               number = detailsOfPlace['phone'];
               adress = correctFormattedAdress(detailsOfPlace['adress']);
               openningHours = {
-                'open_hour': detailsOfPlace['open_hour']!,
-                'close_hour': detailsOfPlace['close_hour']!
+                'open_hour': detailsOfPlace['open_hour'],
+                'close_hour': detailsOfPlace['close_hour']
               };
             }
             return BlocBuilder<PlaceOpenStatuslabelCubit,

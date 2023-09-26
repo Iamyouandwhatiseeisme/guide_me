@@ -31,6 +31,7 @@ class PlacePageContet extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PlaceOpenStatuslabelCubit, PlaceOpenStatusLabelState>(
       builder: (context, openStatusstate) {
+        String openStatus = openStatusstate.props[0].toString();
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -47,25 +48,8 @@ class PlacePageContet extends StatelessWidget {
                 typesInString: typesInString, number: number),
             AdressLabelAndOpenInMapButtonRowWIdget(
                 adress: adress, passedPlace: passedPlace),
-            Builder(builder: (context) {
-              return Padding(
-                  padding: const EdgeInsets.only(left: 25.0),
-                  child: Text(openStatusstate.props[0].toString()));
-            }),
-            Builder(builder: (context) {
-              if (openningHours['open_hour'] != null) {
-                return Text(openningHours['open_hour']!.substring(0, 2) +
-                    ':' +
-                    openningHours['open_hour']!.substring(2, 4) +
-                    'AM -' +
-                    openningHours['close_hour']!.substring(0, 2) +
-                    ':' +
-                    openningHours['close_hour']!.substring(2, 4) +
-                    'PM');
-              } else {
-                return Text('No Information Available');
-              }
-            })
+            OpenStatusLabelWidget(openStatus: openStatus),
+            OpenHoursInfoWidget(openningHours: openningHours)
           ],
         );
       },
