@@ -24,8 +24,8 @@ Future<Map<String?, String?>> fetchDetails(String placeId) async {
           openTime = periods[0]["open"]["time"] ?? "No Information";
           closeTime = periods[0]["close"]["time"] ?? "No Information";
         } else {
-          openTime = "No Information";
-          closeTime = "No information";
+          openTime = "N/a N/a";
+          closeTime = "N/a N/a";
         }
 
         return {

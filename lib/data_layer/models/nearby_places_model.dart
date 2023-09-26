@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-
 class NearbyPlacesModel {
   final String name;
   final OpeningHours? openingHours;
@@ -10,7 +9,7 @@ class NearbyPlacesModel {
   final List<dynamic> types;
   final bool? openNow;
   final int? userRatingsTotal;
-  final String vicinity;
+  final String? vicinity;
   final double? lat;
   final double? lng;
   final String placeId;
@@ -48,7 +47,7 @@ class NearbyPlacesModel {
         vicinity: json['vicinity'],
         lat: locationJson != null ? locationJson['lat'] : 0.0,
         lng: locationJson != null ? locationJson['lng'] : 0.0,
-        placeId: json['place_id']);
+        placeId: json['place_id'] ?? 'No PlaceId Available');
   }
 }
 

@@ -17,8 +17,9 @@ class TypesLabelAndMakeACallButtonWidgetRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String formattedType = typesInString.replaceAll('_', ' ');
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      TypeLabelWidget(typesInString: typesInString),
+      TypeLabelWidget(typesInString: formattedType),
       BlocBuilder<MakeACallCubit, bool>(
         builder: (context, callReview) {
           return Padding(

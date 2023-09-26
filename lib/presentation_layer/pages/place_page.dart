@@ -1,12 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:guide_me/business_layer/cubit/fetch_phone_number_and_adress_cubit.dart';
-import 'package:guide_me/business_layer/cubit/make_a_call_cubit.dart';
-import 'package:guide_me/business_layer/cubit/open_location_on_map_cubit.dart';
 
-import 'package:guide_me/business_layer/cubit/photos_by_place_id_fetcher_cubit.dart';
-import 'package:guide_me/business_layer/cubit/write_a_review_cubit.dart';
 import 'package:guide_me/business_layer/cubits.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
@@ -28,7 +23,7 @@ class _PlacepageState extends State<PlacePage> {
   bool photosFetched = false;
   String? adress = '';
   String? number = '';
-  Map<String, String?> openningHours = {};
+  Map<String, String> openningHours = {};
   @override
   Widget build(BuildContext context) {
     final passedPlace =
@@ -71,8 +66,8 @@ class _PlacepageState extends State<PlacePage> {
               number = detailsOfPlace['phone'];
               adress = correctFormattedAdress(detailsOfPlace['adress']);
               openningHours = {
-                'open_hour': detailsOfPlace['open_hour'],
-                'close_hour': detailsOfPlace['close_hour']
+                'open_hour': detailsOfPlace['open_hour']!,
+                'close_hour': detailsOfPlace['close_hour']!
               };
             }
             return BlocBuilder<PlaceOpenStatuslabelCubit,
