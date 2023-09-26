@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -12,7 +11,7 @@ class OpenLocationOnMapCubit extends Cubit<bool> {
     final String googleMapsUrl =
         'https://www.google.com/maps/search/?api=1&query=$name,$adress';
     final uri = Uri.parse(googleMapsUrl);
-    print(uri);
+
     try {
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri);

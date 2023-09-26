@@ -4,7 +4,7 @@ import 'package:guide_me/business_layer/cubit/recommended_places_cubit_dart_stat
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_cubit.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_state.dart';
 import 'package:guide_me/business_layer/cubit/what_to_eat_cubit.dart';
-import 'package:guide_me/data_layer/http_helper_places_for_food.dart';
+
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
@@ -61,7 +61,6 @@ class _FirstPageState extends State<FirstPage> {
         if (listPlacesForFood.isEmpty) {
           whatToEatCubit.fetchPlacesForWhatToEat(listPlacesForFood);
         }
-        print('test');
 
         return BlocBuilder<NearbySightSeeingCubit, NearbySightseeingsState>(
           builder: (context, state) {

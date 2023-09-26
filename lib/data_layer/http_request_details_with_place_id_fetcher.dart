@@ -35,7 +35,6 @@ Future<Map<String?, String?>> fetchDetails(String placeId) async {
           'close_hour': closeTime
         };
       } else {
-        print('data status problem');
         throw ('Data status != ok');
       }
     } else {

@@ -7,6 +7,7 @@ import 'package:guide_me/business_layer/cubit/what_to_visit_toggle_button_dart_c
 
 import '../../data_layer/models/nearby_places_model.dart';
 
+// ignore: must_be_immutable
 class WhatToVisitRadioButtonWidget extends StatelessWidget {
   final double userLat;
   final double userLon;

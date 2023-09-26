@@ -11,7 +11,6 @@ Future<List<NearbyPlacesModel>> fetchPlacesForFoodData(
   final response = await http.get(url);
 
   if (response.statusCode == 200) {
-    print('fetched successfully');
     // Successful request, parse the JSON.
     final jsonData = json.decode(response.body);
     final places = jsonData['results'];
