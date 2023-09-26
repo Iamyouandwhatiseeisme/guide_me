@@ -62,6 +62,7 @@ class _FirstPageState extends State<FirstPage> {
           whatToEatCubit.fetchPlacesForWhatToEat(listPlacesForFood);
         }
         print('test');
+
         return BlocBuilder<NearbySightSeeingCubit, NearbySightseeingsState>(
           builder: (context, state) {
             return Container(
