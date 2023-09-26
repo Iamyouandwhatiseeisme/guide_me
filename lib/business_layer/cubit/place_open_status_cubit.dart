@@ -8,11 +8,11 @@ class PlaceOpenStatuslabelCubit extends Cubit<PlaceOpenStatusLabelState> {
 
   void updateOpenStatus(bool? isOpenNow) {
     if (isOpenNow == true) {
-      emit(OpenNowState('Open Now'));
+      emit(const OpenNowState('Open Now'));
     } else if (isOpenNow == false) {
-      emit(ClosedState('Closed'));
+      emit(const ClosedState('Closed'));
     } else {
-      emit(ErrorState('No Information Available'));
+      emit(const ErrorState('No Information'));
     }
   }
 }

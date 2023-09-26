@@ -26,7 +26,7 @@ class AdressLabelAndOpenInMapButtonRowWIdget extends StatelessWidget {
         children: [
           Text(
             adress!,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
           ),
           BlocBuilder<OpenLocationOnMapCubit, bool>(
             builder: (context, state) {
@@ -36,8 +36,8 @@ class AdressLabelAndOpenInMapButtonRowWIdget extends StatelessWidget {
                       context.read<OpenLocationOnMapCubit>();
                   openLocationCubit.openInMap(passedPlace.name, adress);
                 },
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 20.0),
+                child: const Padding(
+                  padding: EdgeInsets.only(right: 20.0),
                   child: TextWithUnderLine(textToDisplay: 'See on Map'),
                 ),
               );
