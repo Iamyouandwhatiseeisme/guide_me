@@ -9,6 +9,7 @@ import 'package:guide_me/business_layer/cubit/what_to_visit_toggle_button_dart_c
 import 'package:guide_me/business_layer/widgets/business_widgets.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:guide_me/presentation_layer/widgets/recommended_sightseeing_section_widget.dart';
 
 class FirstPageScaffoldIfLoadedCorrectly extends StatefulWidget {
   const FirstPageScaffoldIfLoadedCorrectly({
