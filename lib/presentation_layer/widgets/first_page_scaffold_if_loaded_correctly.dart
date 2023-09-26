@@ -1,11 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
-import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_cubit.dart';
 import 'package:guide_me/business_layer/cubit/sightseeing_sorting_cubit.dart';
 import 'package:guide_me/business_layer/cubit/what_to_visit_toggle_button_dart_cubit.dart';
 import 'package:guide_me/business_layer/widgets/business_widgets.dart';
@@ -13,14 +11,13 @@ import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class FirstPageScaffoldIfLoadedCorrectly extends StatefulWidget {
-  final NearbySightSeeingCubit nearbySightSeeingCubit;
   const FirstPageScaffoldIfLoadedCorrectly({
     Key? key,
-    required this.nearbySightSeeingCubit,
+    required this.listOfPlacesForFood,
     required this.listOfNearbyPlaces,
     required this.listOfSightseeings,
   }) : super(key: key);
-
+  final List<NearbyPlacesModel> listOfPlacesForFood;
   final List<NearbyPlacesModel> listOfNearbyPlaces;
   final List<NearbyPlacesModel> listOfSightseeings;
 
@@ -101,25 +98,45 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                             const SizedBox(
                               height: 12,
                             ),
-                            BlocBuilder<WhatToVisitToggleButtonCubit,
-                                WhatToVisitToggleButtonCubitInitial>(
-                              builder: (context, whatTovisitstate) {
-                                return BlocBuilder<GeolocatorCubit,
-                                    LocationState>(
-                                  builder: (context, locationState) {
-                                    return RecommendedSightseeingCardBuilder(
-                                      listOfSightseeingPlaces:
-                                          widget.listOfSightseeings,
-                                      whatTovisitstate: whatTovisitstate,
-                                      userLat: lat,
-                                      userLon: lon,
-                                      nearbySightSeeingCubit:
-                                          widget.nearbySightSeeingCubit,
+                            RecommendedSightseeingWidget(
+                                widget: widget, lat: lat, lon: lon),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            MultiBlocProvider(
+                              providers: [
+                                BlocProvider(
+                                  create: (context) =>
+                                      SightseeingSortingCubit(),
+                                ),
+                                BlocProvider(
+                                  create: (context) =>
+                                      WhatToVisitToggleButtonCubit(),
+                                ),
+                              ],
+                              child: Builder(builder: (context) {
+                                return BlocBuilder<WhatToVisitToggleButtonCubit,
+                                    WhatToVisitToggleButtonCubitInitial>(
+                                  builder: (context, state) {
+                                    return Column(
+                                      children: [
+                                        WhatToVisitRadioButtonWidget(
+                                            userLat: lat,
+                                            userLon: lon,
+                                            listOfSightseeings:
+                                                widget.listOfPlacesForFood,
+                                            state: state),
+                                        SortableListViewCardBuilder(
+                                            userLat: lat,
+                                            userLon: lon,
+                                            listOfPassedPlaces:
+                                                widget.listOfPlacesForFood),
+                                      ],
                                     );
                                   },
                                 );
-                              },
-                            ),
+                              }),
+                            )
                           ],
                         );
                       },

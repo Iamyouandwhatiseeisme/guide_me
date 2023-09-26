@@ -3,13 +3,17 @@ import 'package:bloc/bloc.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_state.dart';
 
 import 'package:guide_me/data_layer/http_helper_nearby_sightseeings.dart';
+import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 
 class NearbySightSeeingCubit extends Cubit<NearbySightseeingsState> {
   NearbySightSeeingCubit() : super(NearbySightseeingsInitial());
-  void fetchNearbySightseeings() async {
+  void fetchNearbySightseeings(
+      List<NearbyPlacesModel> listOfNearbySightseeings) async {
     try {
       emit(NearbySightseeingsLoading());
-      final listOfSightseeings = await fetchSightseeingData([]);
+      final listOfSightseeings =
+          await fetchSightseeingData(listOfNearbySightseeings);
+
       if (isClosed) {
         return;
       }

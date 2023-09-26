@@ -16,21 +16,34 @@ class UserRatingAndTotalRatingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        StarRating(rating: place.rating!),
-        SizedBox(
-          height: 8,
-          width: 1,
-          child: Container(
-            color: Color(0xff292F3280),
+    if (place.rating != null) {
+      return Row(
+        children: [
+          StarRating(rating: place.rating!),
+          const SizedBox(
+            width: 3,
           ),
-        ),
-        if (userRatingTotal.length >= 4)
-          Text(transformedUserRatingTotal)
-        else
-          Text(userRatingTotal)
-      ],
-    );
+          SizedBox(
+            height: 8,
+            width: 1,
+            child: Container(
+              color: const Color(0xff292f32),
+            ),
+          ),
+          const SizedBox(
+            width: 3,
+          ),
+          if (userRatingTotal.length >= 4)
+            Text(transformedUserRatingTotal)
+          else
+            Text(userRatingTotal)
+        ],
+      );
+    } else {
+      return const Padding(
+        padding: EdgeInsets.only(left: 8.0),
+        child: Text('No Rating Available'),
+      );
+    }
   }
 }

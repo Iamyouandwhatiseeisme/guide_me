@@ -15,7 +15,6 @@ class LocationDisplayWidget extends StatelessWidget {
 
     return BlocBuilder<GeolocatorCubit, LocationState>(
         builder: (context, state) {
-      final geoDecoder = GeocodingUtil();
       Future<String> displayLocationInfoInWords(latitude, longtitude) async {
         final updatedLocationInfo =
             await GeocodingUtil.reverseGeocode(latitude, longtitude);
