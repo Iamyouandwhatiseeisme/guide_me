@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_cubit_dart_state.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_cubit.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_state.dart';
+import 'package:guide_me/business_layer/cubit/what_to_eat_cubit.dart';
 import 'package:guide_me/data_layer/http_helper_places_for_food.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
@@ -29,7 +30,7 @@ class _FirstPageState extends State<FirstPage> {
     // fetchData(listOfNearbyPlaces);
     // fetchSightseeingData(listOfSightseeingPlaces);
 
-    fetchPlacesForFoodData(listPlacesForFood);
+    // fetchPlacesForFoodData(listPlacesForFood);
   }
 
   @override
@@ -42,6 +43,9 @@ class _FirstPageState extends State<FirstPage> {
         BlocProvider(
           create: (context) => NearbySightSeeingCubit(),
         ),
+        BlocProvider(
+          create: (context) => WhatToEatCubit(),
+        ),
       ],
       child: Builder(builder: (context) {
         final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();
@@ -52,6 +56,10 @@ class _FirstPageState extends State<FirstPage> {
         if (listOfSightseeingPlaces.isEmpty) {
           nearbySightSeeingCubit
               .fetchNearbySightseeings(listOfSightseeingPlaces);
+        }
+        final whatToEatCubit = context.read<WhatToEatCubit>();
+        if (listPlacesForFood.isEmpty) {
+          whatToEatCubit.fetchPlacesForWhatToEat(listPlacesForFood);
         }
         return BlocBuilder<NearbySightSeeingCubit, NearbySightseeingsState>(
           builder: (context, state) {

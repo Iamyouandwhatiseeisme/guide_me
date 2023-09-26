@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
 import 'package:guide_me/business_layer/cubit/sightseeing_sorting_cubit.dart';
+import 'package:guide_me/business_layer/cubit/what_to_eat_cubit.dart';
+import 'package:guide_me/business_layer/cubit/what_to_eat_state.dart';
 import 'package:guide_me/business_layer/cubit/what_to_visit_toggle_button_dart_cubit.dart';
 import 'package:guide_me/business_layer/widgets/business_widgets.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
@@ -126,11 +128,16 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                                             listOfSightseeings:
                                                 widget.listOfPlacesForFood,
                                             state: state),
-                                        SortableListViewCardBuilder(
-                                            userLat: lat,
-                                            userLon: lon,
-                                            listOfPassedPlaces:
-                                                widget.listOfPlacesForFood),
+                                        BlocBuilder<WhatToEatCubit,
+                                            WhatToEatState>(
+                                          builder: (context, state) {
+                                            return SortableListViewCardBuilder(
+                                                userLat: lat,
+                                                userLon: lon,
+                                                listOfPassedPlaces:
+                                                    widget.listOfPlacesForFood);
+                                          },
+                                        ),
                                       ],
                                     );
                                   },
