@@ -5,7 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubits.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/presentation_layer/widgets/place_page_app_bar_widget.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+
+import '../widgets/place_page_conent_widget.dart';
 
 class PlacePage extends StatefulWidget {
   final NearbyPlacesModel? placeToDisplay;
