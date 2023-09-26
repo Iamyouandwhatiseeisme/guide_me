@@ -25,13 +25,13 @@ class _FirstPageState extends State<FirstPage> {
   List<NearbyPlacesModel> listOfSightseeingPlaces = [];
   List<NearbyPlacesModel> listPlacesForFood = [];
   @override
-  void initState() {
-    super.initState();
-    // fetchData(listOfNearbyPlaces);
-    // fetchSightseeingData(listOfSightseeingPlaces);
+  // void initState() {
+  //   super.initState();
+  //   // fetchData(listOfNearbyPlaces);
+  //   // fetchSightseeingData(listOfSightseeingPlaces);
 
-    // fetchPlacesForFoodData(listPlacesForFood);
-  }
+  //   // fetchPlacesForFoodData(listPlacesForFood);
+  // }
 
   @override
   Widget build(BuildContext context) {

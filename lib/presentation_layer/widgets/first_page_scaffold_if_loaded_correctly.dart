@@ -36,7 +36,7 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => WhatToVisitToggleButtonCubit(),
+            create: (context) => SorterToggleButtonCubit(),
           ),
           BlocProvider(
             create: (context) => GeolocatorCubit(),
@@ -82,20 +82,11 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                             const SizedBox(
                               height: 48,
                             ),
-                            const WhatToVisitLabelWidget(),
+                            const LabelWIthCaregoryTypeNameAndSeeAllRow(
+                              textToDisplay: 'What to visit',
+                            ),
                             const SizedBox(
                               height: 12,
-                            ),
-                            BlocBuilder<WhatToVisitToggleButtonCubit,
-                                WhatToVisitToggleButtonCubitInitial>(
-                              builder: (context, state) {
-                                return WhatToVisitRadioButtonWidget(
-                                  userLat: lat,
-                                  userLon: lon,
-                                  listOfSightseeings: widget.listOfSightseeings,
-                                  state: state,
-                                );
-                              },
                             ),
                             const SizedBox(
                               height: 12,
@@ -105,45 +96,7 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                             const SizedBox(
                               height: 25,
                             ),
-                            MultiBlocProvider(
-                              providers: [
-                                BlocProvider(
-                                  create: (context) =>
-                                      SightseeingSortingCubit(),
-                                ),
-                                BlocProvider(
-                                  create: (context) =>
-                                      WhatToVisitToggleButtonCubit(),
-                                ),
-                              ],
-                              child: Builder(builder: (context) {
-                                return BlocBuilder<WhatToVisitToggleButtonCubit,
-                                    WhatToVisitToggleButtonCubitInitial>(
-                                  builder: (context, state) {
-                                    return Column(
-                                      children: [
-                                        WhatToVisitRadioButtonWidget(
-                                            userLat: lat,
-                                            userLon: lon,
-                                            listOfSightseeings:
-                                                widget.listOfPlacesForFood,
-                                            state: state),
-                                        BlocBuilder<WhatToEatCubit,
-                                            WhatToEatState>(
-                                          builder: (context, state) {
-                                            return SortableListViewCardBuilder(
-                                                userLat: lat,
-                                                userLon: lon,
-                                                listOfPassedPlaces:
-                                                    widget.listOfPlacesForFood);
-                                          },
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              }),
-                            )
+                            WhatToEatWidget(lat: lat, lon: lon, widget: widget)
                           ],
                         );
                       },

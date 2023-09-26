@@ -11,7 +11,7 @@ export 'package:guide_me/presentation_layer/widgets/search_text_field_widget.dar
 export 'package:guide_me/presentation_layer/widgets/first_page_scaffold_if_loaded_correctly.dart';
 export 'package:guide_me/presentation_layer/widgets/recommended_label_widget.dart';
 export 'first_page_app_bar_widget.dart';
-export 'what_to_visit_label_widget.dart';
+export 'label_for_builder_types_widget.dart';
 export 'sortable_list_view_card_builder.dart';
 export 'place_card_widget.dart';
 export 'sightseeings_place_card.wiget.dart';
@@ -25,10 +25,11 @@ export 'transformed_user_rating_widget.dart';
 export 'buttons/write_a_review_button_widget.dart';
 export 'rating_and_review_row_widget.dart';
 export 'place_page_app_bar_widget.dart';
-
+export 'what_to_eat_widget.dart';
 export 'types_label_and_make_a_call_button_widget.dart';
 export 'adress_label_and_open_in_map_button_row_widget.dart';
 export 'place_page_conent_widget.dart';
 export 'open_hours_info_widget.dart';
 export 'open_status_label_widget.dart';
 export 'recommended_sightseeing_section_widget.dart';
+export 'label_with_caregory_type_name_and_see_all_label_row.dart';

@@ -3,18 +3,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:guide_me/business_layer/cubit/what_to_visit_toggle_button_dart_cubit.dart';
+import 'package:guide_me/business_layer/cubit/sorter_toggle_button_cubit.dart';
 
 import '../../data_layer/models/nearby_places_model.dart';
 
 // ignore: must_be_immutable
-class WhatToVisitRadioButtonWidget extends StatelessWidget {
+class SorterRadioButtonWidget extends StatelessWidget {
   final double userLat;
   final double userLon;
   final List<NearbyPlacesModel> listOfSightseeings;
-  WhatToVisitToggleButtonCubitInitial state;
+  SorterToggleButtonInitial state;
 
-  WhatToVisitRadioButtonWidget({
+  SorterRadioButtonWidget({
     Key? key,
     required this.userLat,
     required this.userLon,
@@ -24,8 +24,8 @@ class WhatToVisitRadioButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WhatToVisitToggleButtonCubit,
-        WhatToVisitToggleButtonCubitInitial>(builder: (context, state) {
+    return BlocBuilder<SorterToggleButtonCubit, SorterToggleButtonInitial>(
+        builder: (context, state) {
       if (state.value == 0) {
         return SizedBox(
             height: 32,
@@ -36,7 +36,7 @@ class WhatToVisitRadioButtonWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 20.0, left: 20),
                   child: GestureDetector(
                       onTap: () {
-                        BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
+                        BlocProvider.of<SorterToggleButtonCubit>(context)
                             .selectRadioButton(0);
                       },
                       child: Container(
@@ -51,14 +51,14 @@ class WhatToVisitRadioButtonWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 20.0),
                   child: GestureDetector(
                       onTap: () {
-                        BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
+                        BlocProvider.of<SorterToggleButtonCubit>(context)
                             .selectRadioButton(1);
                       },
                       child: const Text('Highest Rated')),
                 ),
                 GestureDetector(
                     onTap: () {
-                      BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
+                      BlocProvider.of<SorterToggleButtonCubit>(context)
                           .selectRadioButton(2);
                     },
                     child: const Text('Closest To You'))
@@ -73,7 +73,7 @@ class WhatToVisitRadioButtonWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 25.0, left: 20),
                   child: GestureDetector(
                       onTap: () {
-                        BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
+                        BlocProvider.of<SorterToggleButtonCubit>(context)
                             .selectRadioButton(0);
                       },
                       child: const Text('Budget Friendly'))),
@@ -81,7 +81,7 @@ class WhatToVisitRadioButtonWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 25.0),
                 child: GestureDetector(
                     onTap: () {
-                      BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
+                      BlocProvider.of<SorterToggleButtonCubit>(context)
                           .selectRadioButton(1);
                     },
                     child: Container(
@@ -94,7 +94,7 @@ class WhatToVisitRadioButtonWidget extends StatelessWidget {
               ),
               GestureDetector(
                   onTap: () {
-                    BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
+                    BlocProvider.of<SorterToggleButtonCubit>(context)
                         .selectRadioButton(2);
                   },
                   child: const Text('Closest To You'))
@@ -108,7 +108,7 @@ class WhatToVisitRadioButtonWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 25.0, left: 20),
                   child: GestureDetector(
                       onTap: () {
-                        BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
+                        BlocProvider.of<SorterToggleButtonCubit>(context)
                             .selectRadioButton(0);
                       },
                       child: const Text('Budget Friendly'))),
@@ -116,14 +116,14 @@ class WhatToVisitRadioButtonWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 25.0),
                 child: GestureDetector(
                     onTap: () {
-                      BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
+                      BlocProvider.of<SorterToggleButtonCubit>(context)
                           .selectRadioButton(1);
                     },
                     child: const Text('Highest Rated')),
               ),
               GestureDetector(
                   onTap: () {
-                    BlocProvider.of<WhatToVisitToggleButtonCubit>(context)
+                    BlocProvider.of<SorterToggleButtonCubit>(context)
                         .selectRadioButton(2);
                   },
                   child: Container(

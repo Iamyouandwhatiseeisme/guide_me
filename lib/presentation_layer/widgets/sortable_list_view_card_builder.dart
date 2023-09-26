@@ -31,8 +31,8 @@ class SortableListViewCardBuilder extends StatelessWidget {
     return BlocBuilder<SightseeingSortingCubit, SightseeingSortingState>(
       builder: (context, sightseeingSortingState) {
         return Builder(builder: (context) {
-          return BlocBuilder<WhatToVisitToggleButtonCubit,
-              WhatToVisitToggleButtonCubitInitial>(builder: (context, state) {
+          return BlocBuilder<SorterToggleButtonCubit,
+              SorterToggleButtonInitial>(builder: (context, state) {
             final sightseeingSortingCubit =
                 BlocProvider.of<SightseeingSortingCubit>(context);
             sightseeingSortingCubit.sortList(
