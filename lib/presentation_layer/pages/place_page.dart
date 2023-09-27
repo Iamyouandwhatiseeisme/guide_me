@@ -5,13 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubits.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
-
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class PlacePage extends StatefulWidget {
+  final String? apiKey;
   final NearbyPlacesModel? placeToDisplay;
   const PlacePage({
     Key? key,
+    this.apiKey,
     this.placeToDisplay,
   }) : super(key: key);
 
@@ -29,6 +30,8 @@ class _PlacepageState extends State<PlacePage> {
   Widget build(BuildContext context) {
     final passedPlace =
         ModalRoute.of(context)!.settings.arguments as NearbyPlacesModel;
+    final String apiKeyTransformed =
+        ModalRoute.of(context)!.settings.arguments as String;
     String userRatingTotal = passedPlace.userRatingsTotal.toString();
     String transformedUserRatingTotal =
         '${userRatingTotal.substring(0, 1)},${userRatingTotal.substring(1)}';
@@ -51,7 +54,8 @@ class _PlacepageState extends State<PlacePage> {
         if (!photosFetched) {
           final photosByPlaceIdFetchedCubit =
               context.read<PhotosByPlaceIdFetcherCubit>();
-          photosByPlaceIdFetchedCubit.fetchPhotos(passedPlace.placeId);
+          photosByPlaceIdFetchedCubit.fetchPhotos(
+              passedPlace.placeId, apiKeyTransformed);
         }
         if (photosState is PhotosByPlaceIdFetcherLoaded) {
           return BlocBuilder<FetchPhoneNumberAndAdressCubit,
@@ -59,7 +63,8 @@ class _PlacepageState extends State<PlacePage> {
               builder: (context, numberAndAdressState) {
             final numberAndAdressFetcherCubit =
                 context.read<FetchPhoneNumberAndAdressCubit>();
-            numberAndAdressFetcherCubit.fetchMoreDetails(passedPlace.placeId);
+            numberAndAdressFetcherCubit.fetchMoreDetails(
+                passedPlace.placeId, apiKeyTransformed);
 
             if (numberAndAdressState is FetchPhoneNumberAndAdressLoaded) {
               final detailsOfPlace =

@@ -1,11 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import '../../data_layer/models/nearby_places_model.dart';
 
 class PlaceCard extends StatelessWidget {
+  final String apiKey;
   final NearbyPlacesModel place;
 
-  const PlaceCard({super.key, required this.place});
+  const PlaceCard({
+    Key? key,
+    required this.apiKey,
+    required this.place,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +25,7 @@ class PlaceCard extends StatelessWidget {
             height: 106,
             width: 160,
             child: Image.network(
-              'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=AIzaSyDFwz7Nk7baEraJxw-23Wc68rdeib0eTzQ',
+              'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=$apiKey',
               fit: BoxFit.cover,
             ),
           ),

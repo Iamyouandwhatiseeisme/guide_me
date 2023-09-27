@@ -1,13 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class FirstPageAppBar extends StatelessWidget {
+  final String apiKey;
   const FirstPageAppBar({
-    super.key,
-  });
+    Key? key,
+    required this.apiKey,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,9 @@ class FirstPageAppBar extends StatelessWidget {
                 shape: BoxShape.rectangle),
             width: 250,
             height: 48,
-            child: const LocationDisplayWidget(),
+            child: LocationDisplayWidget(
+              apiKey: apiKey,
+            ),
           ),
         ),
       ),

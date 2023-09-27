@@ -16,6 +16,7 @@ class GeolocatorCubit extends Cubit<LocationState> {
     PermissionStatus status = await Permission.location.request();
 
     if (status.isGranted) {
+      print('PermissonGranted');
       // Permission granted, proceed to get location
 
       try {
@@ -23,6 +24,8 @@ class GeolocatorCubit extends Cubit<LocationState> {
             desiredAccuracy: LocationAccuracy.high);
 
         emit(LocationLoaded(position));
+        print(position.latitude);
+        print(position.longitude);
       } catch (e) {
         emit(LocationErorr("Error getting location: $e"));
       }

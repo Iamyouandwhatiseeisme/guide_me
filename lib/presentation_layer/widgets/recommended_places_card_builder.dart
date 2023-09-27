@@ -1,13 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 import '../../data_layer/models/nearby_places_model.dart';
 
 class RecommenPlacesCardBuilder extends StatelessWidget {
+  final String apiKey;
   const RecommenPlacesCardBuilder({
-    super.key,
+    Key? key,
+    required this.apiKey,
     required this.listOfNearbyPlaces,
-  });
+  }) : super(key: key);
 
   final List<NearbyPlacesModel> listOfNearbyPlaces;
 
@@ -36,6 +40,7 @@ class RecommenPlacesCardBuilder extends StatelessWidget {
                           arguments: listOfNearbyPlaces[index]);
                     },
                     child: PlaceCard(
+                      apiKey: apiKey,
                       place: listOfNearbyPlaces[index],
                     ),
                   ),

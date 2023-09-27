@@ -7,11 +7,12 @@ part 'photos_by_place_id_fetcher_state.dart';
 class PhotosByPlaceIdFetcherCubit extends Cubit<PhotosByPlaceIdFetcherState> {
   PhotosByPlaceIdFetcherCubit() : super(PhotosByPlaceIdFetcherInitial());
   bool photosFetched = false;
-  void fetchPhotos(String placeId) async {
+  void fetchPhotos(String placeId, String apiKey) async {
     try {
       if (!photosFetched) {
         emit(PhotosByPlaceIdFetcherLoading());
-        final fetchedPhotosByPlaceId = await fetChPhotosHelper([], placeId);
+        final fetchedPhotosByPlaceId =
+            await fetChPhotosHelper([], placeId, apiKey);
 
         if (isClosed) {
           return;

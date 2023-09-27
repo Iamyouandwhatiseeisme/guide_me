@@ -4,9 +4,9 @@ import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:http/http.dart' as http;
 
 Future<List<NearbyPlacesModel>> fetchData(
-    List<NearbyPlacesModel> listOfPlaces) async {
+    List<NearbyPlacesModel> listOfPlaces, String apiKey) async {
   final url = Uri.parse(
-      'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.6938017,44.8015167&radius=8000&type=park|museum&key=AIzaSyDFwz7Nk7baEraJxw-23Wc68rdeib0eTzQ');
+      'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.6938017,44.8015167&radius=8000&type=park|museum&key=$apiKey');
 
   final response = await http.get(url);
 

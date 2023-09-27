@@ -9,11 +9,11 @@ import '../../data_layer/http_helper_places_for_food.dart';
 class WhatToEatCubit extends Cubit<WhatToEatState> {
   WhatToEatCubit() : super(WhatToEatInitial());
   void fetchPlacesForWhatToEat(
-      List<NearbyPlacesModel> listOfpLacesForWhatToEat) async {
+      List<NearbyPlacesModel> listOfpLacesForWhatToEat, String apiKey) async {
     try {
       emit(WhatToEatLoading());
       final listOfSightseeings =
-          await fetchPlacesForFoodData(listOfpLacesForWhatToEat);
+          await fetchPlacesForFoodData(listOfpLacesForWhatToEat, apiKey);
 
       if (isClosed) {
         return;

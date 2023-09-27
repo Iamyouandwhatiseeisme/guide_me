@@ -17,7 +17,7 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
         textToDisplay: textToDisplay,
       ),
       const Padding(
-        padding: const EdgeInsets.only(right: 20.0),
+        padding: EdgeInsets.only(right: 20.0),
         child: Text('See all',
             style: TextStyle(
                 decorationColor: Color.fromARGB(75, 41, 47, 50),

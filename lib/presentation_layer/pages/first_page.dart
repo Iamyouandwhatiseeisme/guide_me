@@ -24,6 +24,7 @@ class _FirstPageState extends State<FirstPage> {
   List<NearbyPlacesModel> listOfNearbyPlaces = [];
   List<NearbyPlacesModel> listOfSightseeingPlaces = [];
   List<NearbyPlacesModel> listPlacesForFood = [];
+  final String apiKey = 'AIzaSyDzW8mtXzGKSfoNPDrdPFbDomkmpBRGK9c';
   @override
   // void initState() {
   //   super.initState();
@@ -50,16 +51,16 @@ class _FirstPageState extends State<FirstPage> {
       child: Builder(builder: (context) {
         final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();
         if (listOfNearbyPlaces.isEmpty) {
-          nearbyPlacesCubit.fetchNearbyPlaces(listOfNearbyPlaces);
+          nearbyPlacesCubit.fetchNearbyPlaces(listOfNearbyPlaces, apiKey);
         }
         final nearbySightSeeingCubit = context.read<NearbySightSeeingCubit>();
         if (listOfSightseeingPlaces.isEmpty) {
-          nearbySightSeeingCubit
-              .fetchNearbySightseeings(listOfSightseeingPlaces);
+          nearbySightSeeingCubit.fetchNearbySightseeings(
+              listOfSightseeingPlaces, apiKey);
         }
         final whatToEatCubit = context.read<WhatToEatCubit>();
         if (listPlacesForFood.isEmpty) {
-          whatToEatCubit.fetchPlacesForWhatToEat(listPlacesForFood);
+          whatToEatCubit.fetchPlacesForWhatToEat(listPlacesForFood, apiKey);
         }
 
         return BlocBuilder<NearbySightSeeingCubit, NearbySightseeingsState>(
@@ -84,6 +85,7 @@ class _FirstPageState extends State<FirstPage> {
                             listOfNearbyPlaces: listOfNearbyPlaces,
                             listOfSightseeings: listOfSightseeingPlaces,
                             listOfPlacesForFood: listPlacesForFood,
+                            apiKey: apiKey,
                           );
                         }
                       }));

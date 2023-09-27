@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-Future<Map<String?, String?>> fetchDetails(String placeId) async {
+Future<Map<String?, String?>> fetchDetails(
+    String placeId, String apiKey) async {
   final apiUrl =
-      'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=AIzaSyDFwz7Nk7baEraJxw-23Wc68rdeib0eTzQ';
+      'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=$apiKey';
 
   try {
     final response = await http.get(Uri.parse(apiUrl));

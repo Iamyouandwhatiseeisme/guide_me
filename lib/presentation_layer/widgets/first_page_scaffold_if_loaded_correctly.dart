@@ -5,16 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
 import 'package:guide_me/business_layer/cubit/sightseeing_sorting_cubit.dart';
-import 'package:guide_me/business_layer/cubit/what_to_eat_cubit.dart';
-import 'package:guide_me/business_layer/cubit/what_to_eat_state.dart';
-import 'package:guide_me/business_layer/cubit/what_to_visit_toggle_button_dart_cubit.dart';
-import 'package:guide_me/business_layer/widgets/business_widgets.dart';
+import 'package:guide_me/business_layer/cubit/sorter_toggle_button_cubit.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class FirstPageScaffoldIfLoadedCorrectly extends StatefulWidget {
+  final String apiKey;
   const FirstPageScaffoldIfLoadedCorrectly({
     Key? key,
+    required this.apiKey,
     required this.listOfPlacesForFood,
     required this.listOfNearbyPlaces,
     required this.listOfSightseeings,
@@ -31,6 +30,7 @@ class FirstPageScaffoldIfLoadedCorrectly extends StatefulWidget {
 class _FirstPageScaffoldIfLoadedCorrectlyState
     extends State<FirstPageScaffoldIfLoadedCorrectly> {
   bool _locationLoaded = false;
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -53,9 +53,11 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
             }
             return Scaffold(
                 backgroundColor: const Color(0xffF3F0E6),
-                appBar: const PreferredSize(
-                  preferredSize: Size.fromHeight(48),
-                  child: FirstPageAppBar(),
+                appBar: PreferredSize(
+                  preferredSize: const Size.fromHeight(48),
+                  child: FirstPageAppBar(
+                    apiKey: widget.apiKey,
+                  ),
                 ),
                 body: SingleChildScrollView(child:
                     BlocBuilder<GeolocatorCubit, LocationState>(
@@ -78,6 +80,7 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                               height: 12,
                             ),
                             RecommenPlacesCardBuilder(
+                                apiKey: widget.apiKey,
                                 listOfNearbyPlaces: widget.listOfNearbyPlaces),
                             const SizedBox(
                               height: 48,
@@ -88,15 +91,19 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                             const SizedBox(
                               height: 12,
                             ),
-                            const SizedBox(
-                              height: 12,
-                            ),
                             RecommendedSightseeingWidget(
-                                widget: widget, lat: lat, lon: lon),
+                                apiKey: widget.apiKey,
+                                widget: widget,
+                                lat: lat,
+                                lon: lon),
                             const SizedBox(
                               height: 25,
                             ),
-                            WhatToEatWidget(lat: lat, lon: lon, widget: widget)
+                            WhatToEatWidget(
+                                apiKey: widget.apiKey,
+                                lat: lat,
+                                lon: lon,
+                                widget: widget)
                           ],
                         );
                       },

@@ -8,11 +8,13 @@ import '../../data_layer/models/nearby_places_model.dart';
 class SightseeingsPlaceCard extends StatelessWidget {
   final NearbyPlacesModel place;
   final double? distance;
+  final String apiKey;
 
   const SightseeingsPlaceCard({
     Key? key,
     required this.place,
     required this.distance,
+    required this.apiKey,
   }) : super(key: key);
 
   @override
@@ -22,7 +24,7 @@ class SightseeingsPlaceCard extends StatelessWidget {
     String? photoReference = place.photos?[0]['photo_reference'];
     if (photoReference != null && place.rating != null && place.rating! > 4.0) {
       final imageIfImageIsAvailable =
-          'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=AIzaSyDFwz7Nk7baEraJxw-23Wc68rdeib0eTzQ';
+          'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=$apiKey';
       return CardUi(
         distance: distance,
         place: place,

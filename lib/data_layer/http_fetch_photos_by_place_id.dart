@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<List<String>> fetChPhotosHelper(
-    List<String> listOfPhotos, String placeId) async {
+    List<String> listOfPhotos, String placeId, String apiKey) async {
   final url = Uri.parse(
-      'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&fields=photos&key=AIzaSyDFwz7Nk7baEraJxw-23Wc68rdeib0eTzQ');
+      'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&fields=photos&key=$apiKey');
   final response = await http.get(url);
 
   if (response.statusCode == 200) {
@@ -20,7 +20,7 @@ Future<List<String>> fetChPhotosHelper(
         final photoReference = photo['photo_reference'];
         const maxWidth = 1000;
         final photoUrl = Uri.parse(
-            'https://maps.googleapis.com/maps/api/place/photo?maxwidth=$maxWidth&photoreference=$photoReference&key=AIzaSyDFwz7Nk7baEraJxw-23Wc68rdeib0eTzQ');
+            'https://maps.googleapis.com/maps/api/place/photo?maxwidth=$maxWidth&photoreference=$photoReference&key=$apiKey');
         photoUrls.add(photoUrl.toString());
       }
       return photoUrls;

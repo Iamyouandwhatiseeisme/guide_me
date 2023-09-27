@@ -3,15 +3,18 @@ import 'dart:convert';
 
 class GeocodingUtil {
   static Future<String> reverseGeocode(
-      double latitude, double longitude) async {
-    const apiKey = 'AIzaSyDFwz7Nk7baEraJxw-23Wc68rdeib0eTzQ';
+      double latitude, double longitude, String apiKey) async {
+    print(longitude);
+    print(latitude);
+
     final apiUrl =
         'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$apiKey';
     final response = await http.get(Uri.parse(apiUrl));
     if (response.statusCode == 200) {
+      print(response.body);
       final jsonBody = json.decode(response.body);
       final results = jsonBody['results'] as List<dynamic>;
-
+      print(results);
       if (results.isNotEmpty) {
         final addressComponents =
             results[0]['address_components'] as List<dynamic>;
@@ -31,6 +34,7 @@ class GeocodingUtil {
         return '$city, $country';
       }
     }
+
     return 'Location not found';
   }
 }

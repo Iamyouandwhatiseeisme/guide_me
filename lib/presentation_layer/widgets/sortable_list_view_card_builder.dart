@@ -4,21 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubit/sightseeing_sorting_cubit.dart';
-
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
-import '../../business_layer/cubit/what_to_visit_toggle_button_dart_cubit.dart';
+import '../../business_layer/cubit/sorter_toggle_button_cubit.dart';
 
 class SortableListViewCardBuilder extends StatelessWidget {
   final List<NearbyPlacesModel> listOfPassedPlaces;
-
+  final String apiKey;
   final double userLat;
   final double userLon;
 
   const SortableListViewCardBuilder({
     Key? key,
     required this.listOfPassedPlaces,
+    required this.apiKey,
     required this.userLat,
     required this.userLon,
   }) : super(key: key);
@@ -60,9 +60,12 @@ class SortableListViewCardBuilder extends StatelessWidget {
                           width: 250,
                           child: GestureDetector(
                             onTap: () => Navigator.pushNamed(
-                                context, 'placePage',
-                                arguments: sortedList[index]),
+                              context,
+                              'placePage',
+                              arguments: [apiKey, sortedList[index]],
+                            ),
                             child: SightseeingsPlaceCard(
+                              apiKey: apiKey,
                               distance: distanceMap[sortedList[index]],
                               place: sortedList[index],
                             ),

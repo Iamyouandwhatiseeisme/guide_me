@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -5,7 +6,11 @@ import '../../business_layer/cubit/geolocator_cubit.dart';
 import '../../data_layer/reverse_geodecoder_method.dart';
 
 class LocationDisplayWidget extends StatelessWidget {
-  const LocationDisplayWidget({super.key});
+  final String apiKey;
+  const LocationDisplayWidget({
+    Key? key,
+    required this.apiKey,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +22,10 @@ class LocationDisplayWidget extends StatelessWidget {
         builder: (context, state) {
       Future<String> displayLocationInfoInWords(latitude, longtitude) async {
         final updatedLocationInfo =
-            await GeocodingUtil.reverseGeocode(latitude, longtitude);
+            await GeocodingUtil.reverseGeocode(latitude, longtitude, apiKey);
 
         locationInfo = updatedLocationInfo;
+
         return locationInfo;
       }
 
