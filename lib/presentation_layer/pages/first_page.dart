@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_cubit_dart_state.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_cubit.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_state.dart';
@@ -47,54 +48,76 @@ class _FirstPageState extends State<FirstPage> {
         BlocProvider(
           create: (context) => WhatToEatCubit(),
         ),
+        BlocProvider(create: (context) => GeolocatorCubit())
       ],
-      child: Builder(builder: (context) {
-        final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();
-        if (listOfNearbyPlaces.isEmpty) {
-          nearbyPlacesCubit.fetchNearbyPlaces(listOfNearbyPlaces, apiKey);
-        }
-        final nearbySightSeeingCubit = context.read<NearbySightSeeingCubit>();
-        if (listOfSightseeingPlaces.isEmpty) {
-          nearbySightSeeingCubit.fetchNearbySightseeings(
-              listOfSightseeingPlaces, apiKey);
-        }
-        final whatToEatCubit = context.read<WhatToEatCubit>();
-        if (listPlacesForFood.isEmpty) {
-          whatToEatCubit.fetchPlacesForWhatToEat(listPlacesForFood, apiKey);
-        }
+      child: BlocBuilder<GeolocatorCubit, LocationState>(
+        builder: (context, locationState) {
+          return Builder(builder: (context) {
+            final geoLocatorCubit = context.read<GeolocatorCubit>();
+            geoLocatorCubit.getLocation();
+            if (locationState is LocationLoaded) {
+              latitude = locationState.position.latitude;
+              longtitude = locationState.position.longitude;
+            } else {
+              return Scaffold(
+                body: CircularProgressIndicator(),
+              );
+            }
+            final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();
+            if (listOfNearbyPlaces.isEmpty) {
+              nearbyPlacesCubit.fetchNearbyPlaces(
+                  listOfNearbyPlaces, apiKey, latitude, longtitude);
+            }
 
-        return BlocBuilder<NearbySightSeeingCubit, NearbySightseeingsState>(
-          builder: (context, state) {
-            return Container(
-              padding: const EdgeInsets.only(top: 40),
-              child: BlocBuilder<NearbyPlacesCubit, NearbyPlacesState>(
-                builder: (context, state) {
-                  if (state is NearbyPlacesLoading) {
-                    return const Scaffold(
-                        body: Center(child: CircularProgressIndicator()));
-                  }
-                  return FutureBuilder(
-                      future: Future.delayed(const Duration(seconds: 2)),
-                      builder: ((context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Scaffold(
-                              body: Center(child: CircularProgressIndicator()));
-                        } else {
-                          return FirstPageScaffoldIfLoadedCorrectly(
-                            listOfNearbyPlaces: listOfNearbyPlaces,
-                            listOfSightseeings: listOfSightseeingPlaces,
-                            listOfPlacesForFood: listPlacesForFood,
-                            apiKey: apiKey,
-                          );
-                        }
-                      }));
-                },
-              ),
+            final nearbySightSeeingCubit =
+                context.read<NearbySightSeeingCubit>();
+            if (listOfSightseeingPlaces.isEmpty) {
+              nearbySightSeeingCubit.fetchNearbySightseeings(
+                  listOfSightseeingPlaces, apiKey, latitude, longtitude);
+            }
+            final whatToEatCubit = context.read<WhatToEatCubit>();
+            if (listPlacesForFood.isEmpty) {
+              whatToEatCubit.fetchPlacesForWhatToEat(
+                  listPlacesForFood, apiKey, latitude, longtitude);
+            }
+
+            return BlocBuilder<NearbySightSeeingCubit, NearbySightseeingsState>(
+              builder: (context, state) {
+                return Container(
+                  padding: const EdgeInsets.only(top: 40),
+                  child: BlocBuilder<NearbyPlacesCubit, NearbyPlacesState>(
+                    builder: (context, state) {
+                      if (state is NearbyPlacesLoading) {
+                        return const Scaffold(
+                            body: Center(child: CircularProgressIndicator()));
+                      }
+                      return FutureBuilder(
+                          future: Future.delayed(const Duration(seconds: 2)),
+                          builder: ((context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Scaffold(
+                                  body: Center(
+                                      child: CircularProgressIndicator()));
+                            } else {
+                              return FirstPageScaffoldIfLoadedCorrectly(
+                                lat: latitude,
+                                lon: longtitude,
+                                listOfNearbyPlaces: listOfNearbyPlaces,
+                                listOfSightseeings: listOfSightseeingPlaces,
+                                listOfPlacesForFood: listPlacesForFood,
+                                apiKey: apiKey,
+                              );
+                            }
+                          }));
+                    },
+                  ),
+                );
+              },
             );
-          },
-        );
-      }),
+          });
+        },
+      ),
     );
   }
 }

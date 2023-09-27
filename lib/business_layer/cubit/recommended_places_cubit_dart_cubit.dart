@@ -7,11 +7,12 @@ import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 class NearbyPlacesCubit extends Cubit<NearbyPlacesState> {
   NearbyPlacesCubit() : super(NearbyPlacesInitial());
   bool nearbyPlacesFetched = false;
-  void fetchNearbyPlaces(
-      List<NearbyPlacesModel> listOfNearbyPlaces, String apiKey) async {
+  void fetchNearbyPlaces(List<NearbyPlacesModel> listOfNearbyPlaces,
+      String apiKey, double userLat, double userLon) async {
     try {
       emit(NearbyPlacesLoading());
-      final listOfPlaces = await fetchData(listOfNearbyPlaces, apiKey);
+      final listOfPlaces =
+          await fetchData(listOfNearbyPlaces, apiKey, userLat, userLon);
 
       emit(NearbyPlacesLoaded(listOfPlaces));
       nearbyPlacesFetched = true;

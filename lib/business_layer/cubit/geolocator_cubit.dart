@@ -12,20 +12,22 @@ class GetLocation extends LocationEvent {}
 class GeolocatorCubit extends Cubit<LocationState> {
   GeolocatorCubit() : super(LocationLoading());
 
+  bool locationLoaded = false;
+
   void getLocation() async {
     PermissionStatus status = await Permission.location.request();
 
     if (status.isGranted) {
-      print('PermissonGranted');
       // Permission granted, proceed to get location
 
       try {
-        Position position = await Geolocator.getCurrentPosition(
-            desiredAccuracy: LocationAccuracy.high);
+        if (!locationLoaded) {
+          Position position = await Geolocator.getCurrentPosition(
+              desiredAccuracy: LocationAccuracy.high);
 
-        emit(LocationLoaded(position));
-        print(position.latitude);
-        print(position.longitude);
+          emit(LocationLoaded(position));
+          locationLoaded = true;
+        }
       } catch (e) {
         emit(LocationErorr("Error getting location: $e"));
       }

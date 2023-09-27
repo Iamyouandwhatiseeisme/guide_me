@@ -30,8 +30,9 @@ class _PlacepageState extends State<PlacePage> {
   Widget build(BuildContext context) {
     final listOfArguments =
         ModalRoute.of(context)!.settings.arguments as List<dynamic>;
-    final passedPlace = listOfArguments[1];
-    final String apiKeyTransformed = listOfArguments[0];
+    final passedPlace = listOfArguments[1] as NearbyPlacesModel;
+
+    final String apiKeyTransformed = listOfArguments[0] as String;
     String userRatingTotal = passedPlace.userRatingsTotal.toString();
     String transformedUserRatingTotal =
         '${userRatingTotal.substring(0, 1)},${userRatingTotal.substring(1)}';

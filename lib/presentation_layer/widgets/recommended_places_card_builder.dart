@@ -37,7 +37,7 @@ class RecommenPlacesCardBuilder extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(context, 'placePage',
-                          arguments: listOfNearbyPlaces[index]);
+                          arguments: [apiKey, listOfNearbyPlaces[index]]);
                     },
                     child: PlaceCard(
                       apiKey: apiKey,
