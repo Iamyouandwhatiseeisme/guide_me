@@ -28,10 +28,10 @@ class _PlacepageState extends State<PlacePage> {
   Map<String, String?> openningHours = {};
   @override
   Widget build(BuildContext context) {
-    final passedPlace =
-        ModalRoute.of(context)!.settings.arguments as NearbyPlacesModel;
-    final String apiKeyTransformed =
-        ModalRoute.of(context)!.settings.arguments as String;
+    final listOfArguments =
+        ModalRoute.of(context)!.settings.arguments as List<dynamic>;
+    final passedPlace = listOfArguments[1];
+    final String apiKeyTransformed = listOfArguments[0];
     String userRatingTotal = passedPlace.userRatingsTotal.toString();
     String transformedUserRatingTotal =
         '${userRatingTotal.substring(0, 1)},${userRatingTotal.substring(1)}';
