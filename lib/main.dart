@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         'authPage': (context) => const AuthPage(),
         'firstPage': (context) => const FirstPage(),
         'placePage': (context) => const PlacePage(),
+        'seeAllPage': (context) => SeeAllPage()
       },
     );
   }

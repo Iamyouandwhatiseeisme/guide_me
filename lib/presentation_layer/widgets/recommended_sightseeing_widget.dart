@@ -3,14 +3,14 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubits.dart';
-import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 import '../../business_layer/widgets/sorter_radio_button_widget.dart';
+import '../../data_layer/models/nearby_places_model.dart';
 
-class WhatToEatWidget extends StatelessWidget {
+class RecommendedSightseeingsWidget extends StatelessWidget {
   final String apiKey;
-  const WhatToEatWidget({
+  const RecommendedSightseeingsWidget({
     Key? key,
     required this.apiKey,
     required this.lat,
@@ -39,6 +39,7 @@ class WhatToEatWidget extends StatelessWidget {
         final sortingCubit = BlocProvider.of<SightseeingSortingCubit>(context);
         final sorterToggleButtonCubit =
             BlocProvider.of<SorterToggleButtonCubit>(context);
+
         return BlocBuilder<SorterToggleButtonCubit, SortertoggleButtonState>(
           builder: (context, state) {
             return Column(
@@ -50,7 +51,7 @@ class WhatToEatWidget extends StatelessWidget {
                     apiKey: widget.apiKey,
                     userLat: widget.lat,
                     userLon: widget.lon,
-                    textToDisplay: 'What to eat'),
+                    textToDisplay: 'What to Visit'),
                 const SizedBox(
                   height: 12,
                 ),
@@ -59,15 +60,11 @@ class WhatToEatWidget extends StatelessWidget {
                 const SizedBox(
                   height: 12,
                 ),
-                BlocBuilder<WhatToEatCubit, WhatToEatState>(
-                  builder: (context, state) {
-                    return SortableListViewCardBuilder(
-                        apiKey: apiKey,
-                        userLat: lat,
-                        userLon: lon,
-                        listOfPassedPlaces: widget.listOfPlacesForFood);
-                  },
-                ),
+                SortableListViewCardBuilder(
+                    apiKey: apiKey,
+                    userLat: lat,
+                    userLon: lon,
+                    listOfPassedPlaces: widget.listOfSightseeings),
               ],
             );
           },
@@ -76,3 +73,44 @@ class WhatToEatWidget extends StatelessWidget {
     );
   }
 }
+
+// import 'package:flutter/widgets.dart';
+// import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+
+// class RecommendedSightseeingsWidget extends StatelessWidget {
+//   const RecommendedSightseeingsWidget({
+//     super.key,
+//     required this.widget,
+//   });
+
+//   final FirstPageScaffoldIfLoadedCorrectly widget;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         GestureDetector(
+//           onTap: () {
+//             Navigator.pushNamed(context, 'seeAllPage', arguments: [
+//               widget.listOfSightseeings,
+//               widget.lat,
+//               widget.lon,
+//               widget.apiKey,
+//             ]);
+//           },
+//           child: const LabelWIthCaregoryTypeNameAndSeeAllRow(
+//             textToDisplay: 'What to visit',
+//           ),
+//         ),
+//         const SizedBox(
+//           height: 12,
+//         ),
+//         RecommendedSightseeingsSectiogWidget(
+//             apiKey: widget.apiKey,
+//             widget: widget,
+//             lat: widget.lat,
+//             lon: widget.lon),
+//       ],
+//     );
+//   }
+// }

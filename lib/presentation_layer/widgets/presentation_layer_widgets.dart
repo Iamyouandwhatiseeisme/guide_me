@@ -33,3 +33,4 @@ export 'open_hours_info_widget.dart';
 export 'open_status_label_widget.dart';
 export 'recommended_sightseeing_section_widget.dart';
 export 'label_with_caregory_type_name_and_see_all_label_row.dart';
+export 'recommended_sightseeing_widget.dart';

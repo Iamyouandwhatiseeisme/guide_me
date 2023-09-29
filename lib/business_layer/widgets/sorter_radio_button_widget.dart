@@ -11,20 +11,19 @@ import '../../data_layer/models/nearby_places_model.dart';
 class SorterRadioButtonWidget extends StatelessWidget {
   final double userLat;
   final double userLon;
-  final List<NearbyPlacesModel> listOfSightseeings;
-  SorterToggleButtonInitial state;
+
+  SortertoggleButtonState state;
 
   SorterRadioButtonWidget({
     Key? key,
     required this.userLat,
     required this.userLon,
-    required this.listOfSightseeings,
     required this.state,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SorterToggleButtonCubit, SorterToggleButtonInitial>(
+    return BlocBuilder<SorterToggleButtonCubit, SortertoggleButtonState>(
         builder: (context, state) {
       if (state.value == 0) {
         return SizedBox(
@@ -45,7 +44,7 @@ class SorterRadioButtonWidget extends StatelessWidget {
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(32)),
-                          child: const Center(child: Text('Budget Friendly')))),
+                          child: const Center(child: Text('Highest Rated')))),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 20.0),
@@ -54,14 +53,8 @@ class SorterRadioButtonWidget extends StatelessWidget {
                         BlocProvider.of<SorterToggleButtonCubit>(context)
                             .selectRadioButton(1);
                       },
-                      child: const Text('Highest Rated')),
+                      child: const Text('Closest to you')),
                 ),
-                GestureDetector(
-                    onTap: () {
-                      BlocProvider.of<SorterToggleButtonCubit>(context)
-                          .selectRadioButton(2);
-                    },
-                    child: const Text('Closest To You'))
               ],
             ));
       } else if (state.value == 1) {
@@ -76,7 +69,7 @@ class SorterRadioButtonWidget extends StatelessWidget {
                         BlocProvider.of<SorterToggleButtonCubit>(context)
                             .selectRadioButton(0);
                       },
-                      child: const Text('Budget Friendly'))),
+                      child: const Text('Highest Rated'))),
               Padding(
                 padding: const EdgeInsets.only(right: 25.0),
                 child: GestureDetector(
@@ -90,49 +83,8 @@ class SorterRadioButtonWidget extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(32)),
-                        child: const Center(child: Text('Highest Rated')))),
+                        child: const Center(child: Text('Closest to you')))),
               ),
-              GestureDetector(
-                  onTap: () {
-                    BlocProvider.of<SorterToggleButtonCubit>(context)
-                        .selectRadioButton(2);
-                  },
-                  child: const Text('Closest To You'))
-            ]));
-      } else if (state.value == 2) {
-        return SizedBox(
-            height: 32,
-            width: 390,
-            child: Row(children: [
-              Padding(
-                  padding: const EdgeInsets.only(right: 25.0, left: 20),
-                  child: GestureDetector(
-                      onTap: () {
-                        BlocProvider.of<SorterToggleButtonCubit>(context)
-                            .selectRadioButton(0);
-                      },
-                      child: const Text('Budget Friendly'))),
-              Padding(
-                padding: const EdgeInsets.only(right: 25.0),
-                child: GestureDetector(
-                    onTap: () {
-                      BlocProvider.of<SorterToggleButtonCubit>(context)
-                          .selectRadioButton(1);
-                    },
-                    child: const Text('Highest Rated')),
-              ),
-              GestureDetector(
-                  onTap: () {
-                    BlocProvider.of<SorterToggleButtonCubit>(context)
-                        .selectRadioButton(2);
-                  },
-                  child: Container(
-                      width: 110,
-                      height: 28,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(32)),
-                      child: const Center(child: Text('Closest To You'))))
             ]));
       } else {
         return const SizedBox();

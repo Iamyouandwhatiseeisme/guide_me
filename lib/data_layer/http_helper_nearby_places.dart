@@ -9,7 +9,6 @@ Future<List<NearbyPlacesModel>> fetchData(List<NearbyPlacesModel> listOfPlaces,
       'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$userLat,$userLon&radius=8000&type=park|museum&key=$apiKey');
 
   final response = await http.get(url);
-  print('request sent');
 
   if (response.statusCode == 200) {
     // Successful request, parse the JSON.

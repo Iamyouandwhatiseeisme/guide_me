@@ -13,7 +13,6 @@ Future<List<NearbyPlacesModel>> fetchSightseeingData(
 
   final response = await http.get(url);
 
-  print('request sent');
   if (response.statusCode == 200) {
     // Successful request, parse the JSON.
     final jsonData = json.decode(response.body);

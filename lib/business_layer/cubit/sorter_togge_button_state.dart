@@ -1,8 +1,8 @@
 part of 'sorter_toggle_button_cubit.dart';
 
-class SorterToggleButtonInitial {
+class SortertoggleButtonState {
   int value;
-  SorterToggleButtonInitial({
+  SortertoggleButtonState({
     required this.value,
   });
 }

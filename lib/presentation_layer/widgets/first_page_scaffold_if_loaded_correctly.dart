@@ -35,62 +35,52 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
     extends State<FirstPageScaffoldIfLoadedCorrectly> {
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => SorterToggleButtonCubit(),
+    return Scaffold(
+        backgroundColor: const Color(0xffF3F0E6),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(48),
+          child: FirstPageAppBar(
+            apiKey: widget.apiKey,
           ),
-          BlocProvider(create: (context) => SightseeingSortingCubit())
-        ],
-        child: Scaffold(
-            backgroundColor: const Color(0xffF3F0E6),
-            appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(48),
-              child: FirstPageAppBar(
-                apiKey: widget.apiKey,
-              ),
-            ),
-            body: SingleChildScrollView(child: Builder(
-              builder: (context) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SearchTextFieldWIdget(),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    const RecommendedWidget(),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    RecommenPlacesCardBuilder(
-                        apiKey: widget.apiKey,
-                        listOfNearbyPlaces: widget.listOfNearbyPlaces),
-                    const SizedBox(
-                      height: 48,
-                    ),
-                    const LabelWIthCaregoryTypeNameAndSeeAllRow(
-                      textToDisplay: 'What to visit',
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    RecommendedSightseeingWidget(
-                        apiKey: widget.apiKey,
-                        widget: widget,
-                        lat: widget.lat,
-                        lon: widget.lon),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    WhatToEatWidget(
-                        apiKey: widget.apiKey,
-                        lat: widget.lat,
-                        lon: widget.lon,
-                        widget: widget)
-                  ],
-                );
-              },
-            ))));
+        ),
+        body: SingleChildScrollView(child: Builder(
+          builder: (context) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SearchTextFieldWIdget(),
+                const SizedBox(
+                  height: 24,
+                ),
+                const RecommendedWidget(),
+                const SizedBox(
+                  height: 12,
+                ),
+                RecommenPlacesCardBuilder(
+                    apiKey: widget.apiKey,
+                    listOfNearbyPlaces: widget.listOfNearbyPlaces),
+                const SizedBox(
+                  height: 48,
+                ),
+                RecommendedSightseeingsWidget(
+                  listToBuild: widget.listOfSightseeings,
+                  widget: widget,
+                  apiKey: widget.apiKey,
+                  lat: widget.lat,
+                  lon: widget.lon,
+                ),
+                const SizedBox(
+                  height: 25,
+                ),
+                WhatToEatWidget(
+                    listToBuild: widget.listOfPlacesForFood,
+                    apiKey: widget.apiKey,
+                    lat: widget.lat,
+                    lon: widget.lon,
+                    widget: widget)
+              ],
+            );
+          },
+        )));
   }
 }

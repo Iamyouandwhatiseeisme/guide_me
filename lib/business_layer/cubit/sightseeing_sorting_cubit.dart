@@ -14,15 +14,9 @@ class SightseeingSortingCubit extends Cubit<SightseeingSortingState> {
       double userLat,
       double userLon,
       Map<NearbyPlacesModel, double?> distanceMap) {
+    List<NearbyPlacesModel> sortedList = [];
     switch (sortingOption) {
       case 0:
-        unsortedList.sort((a, b) {
-          final aPriceLevel = a.priceLevel ?? 0;
-          final bPriceLevel = b.priceLevel ?? 0;
-          return aPriceLevel.compareTo(bPriceLevel);
-        });
-        break;
-      case 1:
         unsortedList.sort((a, b) {
           final aRating = a.rating ?? 0;
           final bRating = b.rating ?? 0;
@@ -33,8 +27,9 @@ class SightseeingSortingCubit extends Cubit<SightseeingSortingState> {
           final bScore = bRating * bTotalRating;
           return bScore.compareTo(aScore); // Sort in descending order
         });
+        sortedList = unsortedList;
         break;
-      case 2:
+      case 1:
         unsortedList.sort((a, b) {
           final aDistance = calculateDistance(
             a.lat,
@@ -51,11 +46,13 @@ class SightseeingSortingCubit extends Cubit<SightseeingSortingState> {
 
           return aDistance!.compareTo(bDistance!);
         });
+        sortedList = unsortedList;
 
         break;
     }
-    createDistanceMap(distanceMap, unsortedList, userLat, userLon);
-    emit(SightseeingsortingLoaded(unsortedList));
+
+    createDistanceMap(distanceMap, sortedList, userLat, userLon);
+    emit(SightseeingsortingLoaded(sortedList));
   }
 
   void createDistanceMap(
