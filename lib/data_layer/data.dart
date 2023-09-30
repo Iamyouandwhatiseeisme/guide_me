@@ -6,3 +6,4 @@ export 'create_distance_map_method.dart';
 export 'http_fetch_photos_by_place_id.dart';
 export 'http_request_details_with_place_id_fetcher.dart';
 export 'correct_format_adress_method.dart';
+export 'display_location_info_in_words_method.dart';

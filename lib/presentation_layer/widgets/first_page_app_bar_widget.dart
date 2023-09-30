@@ -21,18 +21,8 @@ class FirstPageAppBar extends StatelessWidget {
         padding: const EdgeInsets.only(left: 20.0),
         child: BlocProvider(
           create: (context) => GeolocatorCubit(),
-          child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(40),
-                color: const Color(
-                  0xffC75E6B,
-                ),
-                shape: BoxShape.rectangle),
-            width: 250,
-            height: 48,
-            child: LocationDisplayWidget(
-              apiKey: apiKey,
-            ),
+          child: LocationDisplayWidget(
+            apiKey: apiKey,
           ),
         ),
       ),

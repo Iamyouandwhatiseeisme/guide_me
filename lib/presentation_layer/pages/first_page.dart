@@ -1,18 +1,26 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_cubit_dart_state.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_cubit.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_state.dart';
 import 'package:guide_me/business_layer/cubit/what_to_eat_cubit.dart';
-
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/presentation_layer/widgets/custom_bottom_navigatio_bar_widget.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 import '../../business_layer/cubit/recommended_places_cubit_dart_cubit.dart';
 
 class FirstPage extends StatefulWidget {
-  const FirstPage({super.key});
+  final String apiKey;
+  final CustomBottomNavigationBar bottomNavigationBar;
+  const FirstPage({
+    Key? key,
+    required this.apiKey,
+    required this.bottomNavigationBar,
+  }) : super(key: key);
 
   @override
   State<FirstPage> createState() => _FirstPageState();
@@ -25,18 +33,10 @@ class _FirstPageState extends State<FirstPage> {
   List<NearbyPlacesModel> listOfNearbyPlaces = [];
   List<NearbyPlacesModel> listOfSightseeingPlaces = [];
   List<NearbyPlacesModel> listPlacesForFood = [];
-  final String apiKey = 'AIzaSyDzW8mtXzGKSfoNPDrdPFbDomkmpBRGK9c';
-  @override
-  // void initState() {
-  //   super.initState();
-  //   // fetchData(listOfNearbyPlaces);
-  //   // fetchSightseeingData(listOfSightseeingPlaces);
-
-  //   // fetchPlacesForFoodData(listPlacesForFood);
-  // }
 
   @override
   Widget build(BuildContext context) {
+    final String apiKey = widget.apiKey;
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -59,7 +59,7 @@ class _FirstPageState extends State<FirstPage> {
               latitude = locationState.position.latitude;
               longtitude = locationState.position.longitude;
             } else {
-              return Scaffold(
+              return const Scaffold(
                 body: CircularProgressIndicator(),
               );
             }
@@ -101,6 +101,7 @@ class _FirstPageState extends State<FirstPage> {
                                       child: CircularProgressIndicator()));
                             } else {
                               return FirstPageScaffoldIfLoadedCorrectly(
+                                bottomNavigationBar: widget.bottomNavigationBar,
                                 lat: latitude,
                                 lon: longtitude,
                                 listOfNearbyPlaces: listOfNearbyPlaces,

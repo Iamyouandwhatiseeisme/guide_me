@@ -65,15 +65,12 @@ class _SeeAllPageState extends State<SeeAllPage> {
           builder: (context, sortedListState) {
             return BlocBuilder<SorterToggleButtonCubit,
                 SortertoggleButtonState>(builder: (context, sorterState) {
-              print(sorterState.value);
-
               widget.sightseeingSortingCubit!.sortList(
                   widget.listTobuild!,
                   sorterState.value,
                   widget.userLat!,
                   widget.userLon!,
                   distanceMap);
-              print(widget.listTobuild![1].name);
 
               return Scaffold(
                   backgroundColor: const Color(0xffF3F0E6),
@@ -87,18 +84,29 @@ class _SeeAllPageState extends State<SeeAllPage> {
                             userLon: widget.userLon!,
                             state: sorterState),
                         Container(
-                          height: 800,
+                          height: 1000,
                           width: 460,
                           child: GridView.builder(
+                            shrinkWrap: true,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2, childAspectRatio: 0.75),
+                                    crossAxisCount: 2, childAspectRatio: 0.70),
                             itemBuilder: (BuildContext context, int index) {
-                              return SightseeingsPlaceCard(
-                                  place: widget.listTobuild![index],
-                                  distance:
-                                      distanceMap[widget.listTobuild![index]],
-                                  apiKey: widget.apiKey!);
+                              return GestureDetector(
+                                onTap: () => Navigator.pushNamed(
+                                  context,
+                                  'placePage',
+                                  arguments: [
+                                    widget.apiKey,
+                                    widget.listTobuild![index]
+                                  ],
+                                ),
+                                child: SightseeingsPlaceCard(
+                                    place: widget.listTobuild![index],
+                                    distance:
+                                        distanceMap[widget.listTobuild![index]],
+                                    apiKey: widget.apiKey!),
+                              );
                             },
                             itemCount: widget.listTobuild!.length,
                           ),
