@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/data_layer/data.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../business_layer/cubit/geolocator_cubit.dart';
-import '../../data_layer/reverse_geodecoder_method.dart';
 
 class LocationDisplayWidget extends StatelessWidget {
   final String apiKey;
@@ -31,7 +31,9 @@ class LocationDisplayWidget extends StatelessWidget {
       child: BlocBuilder<GeolocatorCubit, LocationState>(
           builder: (context, state) {
         if (state is LocationLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+              child: LoadingAnimationWidget.inkDrop(
+                  color: const Color(0xffC75E6B), size: 20));
         } else if (state is LocationLoaded) {
           double latitude = state.position.latitude;
           double longtitude = state.position.longitude;
@@ -44,7 +46,8 @@ class LocationDisplayWidget extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   // Display a loading indicator while waiting for the location info
 
-                  return const CircularProgressIndicator();
+                  return LoadingAnimationWidget.inkDrop(
+                      color: Color.fromARGB(255, 210, 203, 204), size: 20);
                 } else if (snapshot.hasError) {
                   // Handle errors if the future throws an exception
                   return Center(

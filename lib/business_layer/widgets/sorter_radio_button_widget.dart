@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubit/sorter_toggle_button_cubit.dart';
 
-import '../../data_layer/models/nearby_places_model.dart';
 
 // ignore: must_be_immutable
 class SorterRadioButtonWidget extends StatelessWidget {

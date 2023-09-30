@@ -2,7 +2,6 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:guide_me/business_layer/cubits.dart';
-import 'package:guide_me/business_layer/widgets/business_widgets.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 import '../../data_layer/models/nearby_places_model.dart';
@@ -35,7 +34,7 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
         textToDisplay: textToDisplay,
       ),
       Padding(
-        padding: EdgeInsets.only(right: 20.0),
+        padding: const EdgeInsets.only(right: 20.0),
         child: GestureDetector(
           onTap: () {
             Navigator.pushNamed(context, 'seeAllPage', arguments: [
@@ -47,7 +46,7 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
               sorterToggleButtonCubit,
             ]);
           },
-          child: Text('See all',
+          child: const Text('See all',
               style: TextStyle(
                   decorationColor: Color.fromARGB(75, 41, 47, 50),
                   decoration: TextDecoration.underline,

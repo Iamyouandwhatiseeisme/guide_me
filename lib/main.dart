@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
-      final String apiKey = 'AIzaSyDzW8mtXzGKSfoNPDrdPFbDomkmpBRGK9c';
-      final bottomAppBar = CustomBottomNavigationBar(
+      const String apiKey = 'AIzaSyDzW8mtXzGKSfoNPDrdPFbDomkmpBRGK9c';
+      const bottomAppBar = CustomBottomNavigationBar(
         apiKey: apiKey,
       );
       return BlocProvider(
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
             '/': (context) => const WelcomePage(
                 backGroundPhoto: 'assets/images/Navigation-amico (1) 2.png'),
             'authPage': (context) => const AuthPage(),
-            'firstPage': (context) => FirstPage(
+            'firstPage': (context) => const FirstPage(
                   bottomNavigationBar: bottomAppBar,
                   apiKey: apiKey,
                 ),

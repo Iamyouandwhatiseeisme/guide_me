@@ -48,7 +48,9 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SearchTextFieldWIdget(),
+                const SearchTextFieldWIdget(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
                 const SizedBox(
                   height: 24,
                 ),

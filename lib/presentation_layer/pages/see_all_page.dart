@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:guide_me/business_layer/cubit/recommended_places_cubit_dart_cubit.dart';
 import 'package:guide_me/business_layer/cubit/sightseeing_sorting_cubit.dart';
 import 'package:guide_me/business_layer/cubit/sorter_toggle_button_cubit.dart';
 import 'package:guide_me/business_layer/widgets/business_widgets.dart';
@@ -83,13 +82,13 @@ class _SeeAllPageState extends State<SeeAllPage> {
                             userLat: widget.userLat!,
                             userLon: widget.userLon!,
                             state: sorterState),
-                        Container(
+                        SizedBox(
                           height: 1000,
                           width: 460,
                           child: GridView.builder(
                             shrinkWrap: true,
                             gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
+                                const SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2, childAspectRatio: 0.70),
                             itemBuilder: (BuildContext context, int index) {
                               return GestureDetector(

@@ -6,6 +6,7 @@ import 'package:guide_me/business_layer/cubits.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class PlacePage extends StatefulWidget {
   final String? apiKey;
@@ -107,10 +108,13 @@ class _PlacepageState extends State<PlacePage> {
             );
           });
         } else if (photosState is PhotosByPlaceIdFetcherLoading) {
-          return const CircularProgressIndicator();
+          return LoadingAnimationWidget.inkDrop(
+              color: const Color(0xffC75E6B), size: 20);
         } else if (photosState is PhotosByPlaceIdFetcherInitial) {
-          return const Scaffold(
-              body: Center(child: CircularProgressIndicator()));
+          return Scaffold(
+              body: Center(
+                  child: LoadingAnimationWidget.inkDrop(
+                      color: const Color(0xffC75E6B), size: 20)));
         } else {
           return const Text('NO PHOTOS');
         }

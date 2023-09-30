@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
@@ -26,6 +25,11 @@ class MapsPageAppBarWidget extends StatelessWidget {
         Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: Container(
+              width: 108,
+              height: 36,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  color: const Color(0xff292F32).withOpacity(0.75)),
               child: Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -37,18 +41,13 @@ class MapsPageAppBarWidget extends StatelessWidget {
                           child: Image.asset('assets/images/Weather.png'),
                         )),
                     Text('$temperature°C',
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Color(0xffF3F0E6),
                             fontWeight: FontWeight.w800,
                             fontSize: 16))
                   ],
                 ),
               ),
-              width: 108,
-              height: 36,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(32),
-                  color: Color(0xff292F32).withOpacity(0.75)),
             ))
       ],
       leading: Padding(

@@ -10,6 +10,7 @@ import 'package:guide_me/business_layer/cubit/what_to_eat_cubit.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/custom_bottom_navigatio_bar_widget.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../business_layer/cubit/recommended_places_cubit_dart_cubit.dart';
 
@@ -59,8 +60,9 @@ class _FirstPageState extends State<FirstPage> {
               latitude = locationState.position.latitude;
               longtitude = locationState.position.longitude;
             } else {
-              return const Scaffold(
-                body: CircularProgressIndicator(),
+              return Scaffold(
+                body: LoadingAnimationWidget.inkDrop(
+                    color: const Color(0xffC75E6B), size: 20),
               );
             }
             final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();
@@ -88,17 +90,21 @@ class _FirstPageState extends State<FirstPage> {
                   child: BlocBuilder<NearbyPlacesCubit, NearbyPlacesState>(
                     builder: (context, state) {
                       if (state is NearbyPlacesLoading) {
-                        return const Scaffold(
-                            body: Center(child: CircularProgressIndicator()));
+                        return Scaffold(
+                            body: Center(
+                                child: LoadingAnimationWidget.inkDrop(
+                                    color: const Color(0xffC75E6B), size: 20)));
                       }
                       return FutureBuilder(
                           future: Future.delayed(const Duration(seconds: 2)),
                           builder: ((context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return const Scaffold(
+                              return Scaffold(
                                   body: Center(
-                                      child: CircularProgressIndicator()));
+                                      child: LoadingAnimationWidget.inkDrop(
+                                          color: const Color(0xffC75E6B),
+                                          size: 20)));
                             } else {
                               return FirstPageScaffoldIfLoadedCorrectly(
                                 bottomNavigationBar: widget.bottomNavigationBar,
