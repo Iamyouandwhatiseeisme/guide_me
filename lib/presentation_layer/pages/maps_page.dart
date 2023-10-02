@@ -2,19 +2,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
-import 'package:guide_me/business_layer/cubit/weather_cubit_cubit.dart';
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
+import 'package:guide_me/business_layer/cubit/go_to_my_location_cubit_cubit.dart';
+import 'package:guide_me/business_layer/cubit/weather_cubit_cubit.dart';
+import 'package:guide_me/presentation_layer/widgets/custom_bottom_navigatio_bar_widget.dart';
+import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+
 class MapsPage extends StatefulWidget {
+  CustomBottomNavigationBar customBottomAppBar;
   late LocationDisplayWidget? locationDisplayWidget;
   late String? apiKey;
   MapsPage({
     Key? key,
     this.locationDisplayWidget,
     this.apiKey,
+    required this.customBottomAppBar,
   }) : super(key: key);
 
   @override
@@ -26,11 +30,13 @@ class _MapsPageState extends State<MapsPage> {
   bool weatherFetched = false;
   double lat = 0.0;
   double lon = 0.0;
-  late GoogleMapController _controller;
+  late GoogleMapController? _controller;
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    print('$screenHeight is screenheight');
     final listOfArguments =
         ModalRoute.of(context)!.settings.arguments as List<dynamic>;
     widget.apiKey = listOfArguments[0] as String;
@@ -41,6 +47,9 @@ class _MapsPageState extends State<MapsPage> {
         ),
         BlocProvider(
           create: (context) => WeatherCubit(),
+        ),
+        BlocProvider(
+          create: (context) => LocationCubit(),
         ),
       ],
       child: BlocBuilder<WeatherCubit, WeatherState>(
@@ -58,7 +67,7 @@ class _MapsPageState extends State<MapsPage> {
               weatherCubit.fetchWeather(lat, lon);
 
               return FutureBuilder(
-                  future: Future.delayed(Duration(seconds: 2)),
+                  future: Future.delayed(const Duration(seconds: 2)),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Scaffold(
@@ -67,6 +76,7 @@ class _MapsPageState extends State<MapsPage> {
                                   color: const Color(0xffC75E6B), size: 20)));
                     } else {
                       return Scaffold(
+                        bottomNavigationBar: widget.customBottomAppBar,
                         appBar: PreferredSize(
                           preferredSize: const Size.fromHeight(48),
                           child: MapsPageAppBarWidget(
@@ -75,40 +85,27 @@ class _MapsPageState extends State<MapsPage> {
                           ),
                         ),
                         body: Stack(children: [
-                          GoogleMap(
-                              zoomControlsEnabled: false,
-                              onMapCreated: (GoogleMapController controller) {
-                                _controller = controller;
-                              },
-                              myLocationButtonEnabled: false,
-                              myLocationEnabled: true,
-                              mapType: MapType.terrain,
-                              initialCameraPosition: CameraPosition(
-                                  zoom: 18, target: LatLng(lat, lon))),
-                          Positioned(
-                              bottom: 250,
-                              left: 16,
-                              right: 16,
-                              child: Column(
-                                children: [
-                                  MapsToolbarWIthDirectionsLocationAndThreeDotsWidget(),
-                                  Container(
-                                    // decoration: BoxDecoration(
-                                    //     borderRadius:
-                                    //         BorderRadius.circular(16),
-                                    //     color: Color(0xff292F32)
-                                    //         .withOpacity(0.75)),
-                                    width: screenWidth - 32,
-                                    height: 48,
-                                    child: CustomTextFormField(
-                                      textColor: Color(0xffF3F0E6),
-                                      radiusSize: 16,
-                                      color:
-                                          Color(0xff292F32).withOpacity(0.75),
-                                    ),
-                                  )
-                                ],
-                              ))
+                          BlocBuilder<LocationCubit, LatLng>(
+                            builder: (context, userLocation) {
+                              return GoogleMap(
+                                  zoomControlsEnabled: false,
+                                  onMapCreated:
+                                      (GoogleMapController controller) {
+                                    _controller = controller;
+                                  },
+                                  myLocationButtonEnabled: false,
+                                  myLocationEnabled: true,
+                                  mapType: MapType.terrain,
+                                  initialCameraPosition: CameraPosition(
+                                      zoom: 18, target: LatLng(lat, lon)));
+                            },
+                          ),
+                          MapsPageContent(
+                              screenHeight: screenHeight,
+                              controller: _controller,
+                              lat: lat,
+                              lon: lon,
+                              screenWidth: screenWidth)
                         ]),
                       );
                     }

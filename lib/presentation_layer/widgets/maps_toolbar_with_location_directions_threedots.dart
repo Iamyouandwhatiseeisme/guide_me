@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../../business_layer/cubits.dart';
 
 class MapsToolbarWIthDirectionsLocationAndThreeDotsWidget
     extends StatelessWidget {
-  const MapsToolbarWIthDirectionsLocationAndThreeDotsWidget({
+  GoogleMapController? controller;
+  final LatLng userLocation;
+  MapsToolbarWIthDirectionsLocationAndThreeDotsWidget({
     super.key,
+    this.controller,
+    required this.userLocation,
   });
 
   @override
   Widget build(BuildContext context) {
+    final locationCubit = context.read<LocationCubit>();
+
     double screenWidth = MediaQuery.of(context).size.width;
     return Row(
       children: [
@@ -27,7 +37,10 @@ class MapsToolbarWIthDirectionsLocationAndThreeDotsWidget
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image.asset('assets/images/Arrow.png'),
+                  GestureDetector(
+                      onTap: () => locationCubit.goToMyLocation(
+                          controller, userLocation),
+                      child: Image.asset('assets/images/Arrow.png')),
                   Icon(
                     Icons.directions_outlined,
                     color: Color(0xffF3F0E6),

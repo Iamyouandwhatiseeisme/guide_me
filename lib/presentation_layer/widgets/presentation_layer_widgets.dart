@@ -37,3 +37,7 @@ export 'recommended_sightseeing_widget.dart';
 export 'maps_page_app_bar.widget.dart';
 export 'maps_toolbar_with_location_directions_threedots.dart';
 export 'custom_text_form_field_widget.dart';
+export 'custom_maps_text_field_widget.dart';
+export 'container_for_maps_type_widget.dart';
+export 'map_types_row_widget.dart';
+export 'maps_page_content_widget.dart';
