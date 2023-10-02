@@ -1,7 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:guide_me/business_layer/cubit/is_exapnded_cubit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
@@ -36,7 +39,7 @@ class _MapsPageState extends State<MapsPage> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    print('$screenHeight is screenheight');
+
     final listOfArguments =
         ModalRoute.of(context)!.settings.arguments as List<dynamic>;
     widget.apiKey = listOfArguments[0] as String;
@@ -51,6 +54,7 @@ class _MapsPageState extends State<MapsPage> {
         BlocProvider(
           create: (context) => LocationCubit(),
         ),
+        BlocProvider(create: (context) => IsExapndedCubit())
       ],
       child: BlocBuilder<WeatherCubit, WeatherState>(
         builder: (context, weatherState) {
@@ -67,7 +71,7 @@ class _MapsPageState extends State<MapsPage> {
               weatherCubit.fetchWeather(lat, lon);
 
               return FutureBuilder(
-                  future: Future.delayed(const Duration(seconds: 2)),
+                  future: Future.delayed(Duration(seconds: 2)),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Scaffold(
@@ -100,12 +104,16 @@ class _MapsPageState extends State<MapsPage> {
                                       zoom: 18, target: LatLng(lat, lon)));
                             },
                           ),
-                          MapsPageContent(
-                              screenHeight: screenHeight,
-                              controller: _controller,
-                              lat: lat,
-                              lon: lon,
-                              screenWidth: screenWidth)
+                          FutureBuilder(
+                              future: Future.delayed(Duration(seconds: 2)),
+                              builder: (context, snapshot) {
+                                return MapsPageContent(
+                                    screenHeight: screenHeight,
+                                    controller: _controller,
+                                    lat: lat,
+                                    lon: lon,
+                                    screenWidth: screenWidth);
+                              })
                         ]),
                       );
                     }

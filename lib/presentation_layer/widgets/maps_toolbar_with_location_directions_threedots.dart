@@ -2,57 +2,85 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:guide_me/business_layer/cubit/is_exapnded_cubit.dart';
 
 import '../../business_layer/cubits.dart';
 
 class MapsToolbarWIthDirectionsLocationAndThreeDotsWidget
-    extends StatelessWidget {
+    extends StatefulWidget {
   GoogleMapController? controller;
+  bool isExpanded;
   final LatLng userLocation;
   MapsToolbarWIthDirectionsLocationAndThreeDotsWidget({
     super.key,
     this.controller,
     required this.userLocation,
+    required this.isExpanded,
   });
 
+  @override
+  State<MapsToolbarWIthDirectionsLocationAndThreeDotsWidget> createState() =>
+      _MapsToolbarWIthDirectionsLocationAndThreeDotsWidgetState();
+}
+
+class _MapsToolbarWIthDirectionsLocationAndThreeDotsWidgetState
+    extends State<MapsToolbarWIthDirectionsLocationAndThreeDotsWidget> {
+  @override
   @override
   Widget build(BuildContext context) {
     final locationCubit = context.read<LocationCubit>();
 
     double screenWidth = MediaQuery.of(context).size.width;
-    return Row(
-      children: [
-        SizedBox(
-          width: screenWidth - 32 - 127,
-          height: 48,
-        ),
-        Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: Color(0xff292F32).withOpacity(0.75)),
-            width: 127,
-            height: 48,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 12.0, right: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                      onTap: () => locationCubit.goToMyLocation(
-                          controller, userLocation),
-                      child: Image.asset('assets/images/Arrow.png')),
-                  Icon(
-                    Icons.directions_outlined,
-                    color: Color(0xffF3F0E6),
-                  ),
-                  Icon(
-                    Icons.more_horiz,
-                    color: Color(0xffF3F0E6),
-                  )
-                ],
-              ),
-            )),
-      ],
+    return BlocBuilder<IsExapndedCubit, bool>(
+      builder: (context, state) {
+        return Row(
+          children: [
+            SizedBox(
+              width: state == true
+                  ? screenWidth - 32 - 180
+                  : screenWidth - 32 - 127,
+              height: 48,
+            ),
+            Column(
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: Color(0xff292F32).withOpacity(0.75)),
+                    width: state == true ? 180 : 127,
+                    height: state == true ? 180 : 48,
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 12.0, right: 12, top: 15),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                              onTap: () => locationCubit.goToMyLocation(
+                                  widget.controller, widget.userLocation),
+                              child: Image.asset('assets/images/Arrow.png')),
+                          Icon(
+                            Icons.directions_outlined,
+                            color: Color(0xffF3F0E6),
+                          ),
+                          GestureDetector(
+                            onTap: () =>
+                                BlocProvider.of<IsExapndedCubit>(context)
+                                    .toggleExpansion(),
+                            child: Icon(
+                              Icons.more_horiz,
+                              color: Color(0xffF3F0E6),
+                            ),
+                          )
+                        ],
+                      ),
+                    )),
+              ],
+            ),
+          ],
+        );
+      },
     );
   }
 }

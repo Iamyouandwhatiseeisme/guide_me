@@ -1,12 +1,18 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class MapsTypesRowWidget extends StatelessWidget {
-  final int numOfItems;
+  final double screenHeight;
+  final List<MapItem> mapItemList;
+
   const MapsTypesRowWidget({
     Key? key,
-    required this.numOfItems,
+    required this.screenHeight,
+    required this.mapItemList,
     required this.screenWidth,
   }) : super(key: key);
 
@@ -14,41 +20,24 @@ class MapsTypesRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        ContainerForTypesOfPlacesOnMapWidget(
-            numOfItems: numOfItems,
-            textLabel: 'Sights',
-            iconToDisplay: const Icon(
-              Icons.fort_outlined,
-              color: Color(0xffF4C871),
-            ),
-            screenWidth: screenWidth),
-        const SizedBox(
-          width: 15,
-        ),
-        ContainerForTypesOfPlacesOnMapWidget(
-            numOfItems: numOfItems,
-            textLabel: 'Hotels',
-            iconToDisplay: const Icon(
-              Icons.hotel,
-              color: Color(
-                0xffA3C3DB,
-              ),
-            ),
-            screenWidth: screenWidth),
-        const SizedBox(
-          width: 15,
-        ),
-        ContainerForTypesOfPlacesOnMapWidget(
-            numOfItems: numOfItems,
-            iconToDisplay: const Icon(
-              Icons.nightlife,
-              color: Color(0xffC75E6B),
-            ),
-            textLabel: 'Night life',
-            screenWidth: screenWidth),
-      ],
+    return Container(
+      height: (186 - 26) / 2,
+      child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (BuildContext context, int index) {
+            return ContainerForTypesOfPlacesOnMapWidget(
+              screenHeight: screenHeight,
+              color: mapItemList[index].color,
+              numOfItems: mapItemList.length,
+              textLabel: mapItemList[index].textLabel,
+              screenWidth: screenWidth,
+              iconToDisplay: mapItemList[index].icon,
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return Container(width: 15);
+          },
+          itemCount: mapItemList.length),
     );
   }
 }
