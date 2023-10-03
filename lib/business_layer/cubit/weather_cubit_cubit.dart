@@ -7,7 +7,7 @@ part 'weather_cubit_state.dart';
 class WeatherCubit extends Cubit<WeatherState> {
   WeatherCubit() : super(WeatherState());
 
-  void fetchWeather(double latitude, double longitude) async {
+  Future fetchWeather(double latitude, double longitude) async {
     if (state.temperature == null) {
       print('attempting fetch');
       try {

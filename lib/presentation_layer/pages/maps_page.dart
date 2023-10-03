@@ -34,8 +34,17 @@ class _MapsPageState extends State<MapsPage> {
   double lat = 0.0;
   double lon = 0.0;
   late GoogleMapController? _controller;
+  late Completer<GoogleMapController> _googleMapControllerCompleter;
+  late Completer<String> _googleMapLocationCompleter;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _googleMapControllerCompleter = Completer<GoogleMapController>();
+    _googleMapLocationCompleter = Completer<String>();
+  }
+
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -62,6 +71,7 @@ class _MapsPageState extends State<MapsPage> {
               builder: (context, state) {
             final geoLocatorCubit = BlocProvider.of<GeolocatorCubit>(context);
             geoLocatorCubit.getLocation();
+            // loadData(context, state, lat, lon);
 
             if (state is LocationLoaded) {
               final weatherCubit = BlocProvider.of<WeatherCubit>(context);
@@ -96,6 +106,8 @@ class _MapsPageState extends State<MapsPage> {
                                   onMapCreated:
                                       (GoogleMapController controller) {
                                     _controller = controller;
+                                    _googleMapControllerCompleter
+                                        .complete(_controller);
                                   },
                                   myLocationButtonEnabled: false,
                                   myLocationEnabled: true,
@@ -105,14 +117,29 @@ class _MapsPageState extends State<MapsPage> {
                             },
                           ),
                           FutureBuilder(
-                              future: Future.delayed(Duration(seconds: 2)),
+                              future: _googleMapControllerCompleter.future,
                               builder: (context, snapshot) {
-                                return MapsPageContent(
-                                    screenHeight: screenHeight,
-                                    controller: _controller,
-                                    lat: lat,
-                                    lon: lon,
-                                    screenWidth: screenWidth);
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  if (snapshot.hasData) {
+                                    return MapsPageContent(
+                                        screenHeight: screenHeight,
+                                        controller: _controller,
+                                        lat: lat,
+                                        lon: lon,
+                                        screenWidth: screenWidth);
+                                  } else {
+                                    return Text('No data');
+                                  }
+                                } else if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return Center(
+                                      child: LoadingAnimationWidget.inkDrop(
+                                          color: const Color(0xffC75E6B),
+                                          size: 20));
+                                } else {
+                                  return Text('Erro');
+                                }
                               })
                         ]),
                       );
@@ -130,3 +157,25 @@ class _MapsPageState extends State<MapsPage> {
     );
   }
 }
+
+// Future<void> loadData(
+//     BuildContext context, LocationState state, double lat, double lon) async {
+//   final geoLocatorCubit = BlocProvider.of<GeolocatorCubit>(context);
+//   final weatherCubit = BlocProvider.of<WeatherCubit>(context);
+
+//   // Fetch location data
+//   await geoLocatorCubit.getLocation();
+
+//   if (state is LocationLoaded) {
+//     lat = state.position.latitude;
+//     lon = state.position.longitude;
+
+//     // Fetch weather data using lat and lon
+//     await weatherCubit.fetchWeather(lat, lon);
+
+//     // Continue building widgets or performing other actions here
+//   } else {
+//     // Handle the case when location data is not loaded
+//   }
+  
+// }

@@ -14,7 +14,7 @@ class GeolocatorCubit extends Cubit<LocationState> {
 
   bool locationLoaded = false;
 
-  void getLocation() async {
+  Future getLocation() async {
     PermissionStatus status = await Permission.location.request();
 
     if (status.isGranted) {
