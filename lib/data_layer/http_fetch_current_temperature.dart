@@ -6,17 +6,20 @@ import 'package:http/http.dart' as http;
 Future<WeatherModel> fetchTemperature(double lat, double lon) async {
   final url = Uri.parse(
       "https://api.open-meteo.com/v1/forecast?latitude=$lat&longitude=$lon&current_weather=true&hourly=temperature_2m,relativehumidity_2m,windspeed_10m");
-  final response = await http.get(url);
+  try {
+    final response = await http.get(url);
 
-  if (response.statusCode == 200) {
-    final jsonData = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
 
-    final currentWeatherData = jsonData['current_weather'];
-    final temperature = currentWeatherData['temperature'].toString();
-    final windSpeed = currentWeatherData['windspeed'].toString();
+      final currentWeatherData = jsonData['current_weather'];
+      final temperature = currentWeatherData['temperature'].toString();
+      final windSpeed = currentWeatherData['windspeed'].toString();
 
-    return WeatherModel(temperature: temperature, windSpeed: windSpeed);
+      return WeatherModel(temperature: temperature, windSpeed: windSpeed);
+    }
+  } catch (e) {
+    return WeatherModel(temperature: 'N/A', windSpeed: 'N/A');
   }
-
-  return throw Exception('Failed to fetch temperature information');
+  throw Exception('Not able to fetch data');
 }

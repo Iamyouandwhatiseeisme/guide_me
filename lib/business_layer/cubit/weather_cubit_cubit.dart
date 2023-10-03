@@ -7,9 +7,8 @@ part 'weather_cubit_state.dart';
 class WeatherCubit extends Cubit<WeatherState> {
   WeatherCubit() : super(WeatherState());
 
-  Future fetchWeather(double latitude, double longitude) async {
+  Future<void> fetchWeather(double latitude, double longitude) async {
     if (state.temperature == null) {
-      print('attempting fetch');
       try {
         final weather = await fetchTemperature(latitude, longitude);
         emit(WeatherState(
@@ -17,10 +16,9 @@ class WeatherCubit extends Cubit<WeatherState> {
           windSpeed: weather.windSpeed,
         ));
       } catch (e) {
-        // Handle error here
+        // Handle error here, if needed
         emit(WeatherState(temperature: null, windSpeed: null));
       }
     }
-    throw Exception('Not able to fetch data');
   }
 }

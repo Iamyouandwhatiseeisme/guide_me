@@ -39,7 +39,6 @@ class _MapsPageState extends State<MapsPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _googleMapControllerCompleter = Completer<GoogleMapController>();
     _googleMapLocationCompleter = Completer<String>();
@@ -71,17 +70,15 @@ class _MapsPageState extends State<MapsPage> {
               builder: (context, state) {
             final geoLocatorCubit = BlocProvider.of<GeolocatorCubit>(context);
             geoLocatorCubit.getLocation();
-            // loadData(context, state, lat, lon);
 
             if (state is LocationLoaded) {
-              final weatherCubit = BlocProvider.of<WeatherCubit>(context);
-
               lat = state.position.latitude;
               lon = state.position.longitude;
-              weatherCubit.fetchWeather(lat, lon);
+
+              loadData(context, lat, lon, _googleMapLocationCompleter);
 
               return FutureBuilder(
-                  future: Future.delayed(Duration(seconds: 2)),
+                  future: _googleMapLocationCompleter.future,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Scaffold(
@@ -89,60 +86,64 @@ class _MapsPageState extends State<MapsPage> {
                               child: LoadingAnimationWidget.inkDrop(
                                   color: const Color(0xffC75E6B), size: 20)));
                     } else {
-                      return Scaffold(
-                        bottomNavigationBar: widget.customBottomAppBar,
-                        appBar: PreferredSize(
-                          preferredSize: const Size.fromHeight(48),
-                          child: MapsPageAppBarWidget(
-                            widget: widget,
-                            temperature: weatherState.temperature!,
+                      if (snapshot.hasData) {
+                        return Scaffold(
+                          bottomNavigationBar: widget.customBottomAppBar,
+                          appBar: PreferredSize(
+                            preferredSize: const Size.fromHeight(48),
+                            child: MapsPageAppBarWidget(
+                              widget: widget,
+                              temperature: weatherState.temperature!,
+                            ),
                           ),
-                        ),
-                        body: Stack(children: [
-                          BlocBuilder<LocationCubit, LatLng>(
-                            builder: (context, userLocation) {
-                              return GoogleMap(
-                                  zoomControlsEnabled: false,
-                                  onMapCreated:
-                                      (GoogleMapController controller) {
-                                    _controller = controller;
-                                    _googleMapControllerCompleter
-                                        .complete(_controller);
-                                  },
-                                  myLocationButtonEnabled: false,
-                                  myLocationEnabled: true,
-                                  mapType: MapType.terrain,
-                                  initialCameraPosition: CameraPosition(
-                                      zoom: 18, target: LatLng(lat, lon)));
-                            },
-                          ),
-                          FutureBuilder(
-                              future: _googleMapControllerCompleter.future,
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.done) {
-                                  if (snapshot.hasData) {
-                                    return MapsPageContent(
-                                        screenHeight: screenHeight,
-                                        controller: _controller,
-                                        lat: lat,
-                                        lon: lon,
-                                        screenWidth: screenWidth);
+                          body: Stack(children: [
+                            BlocBuilder<LocationCubit, LatLng>(
+                              builder: (context, userLocation) {
+                                return GoogleMap(
+                                    zoomControlsEnabled: false,
+                                    onMapCreated:
+                                        (GoogleMapController controller) {
+                                      _controller = controller;
+                                      _googleMapControllerCompleter
+                                          .complete(_controller);
+                                    },
+                                    myLocationButtonEnabled: false,
+                                    myLocationEnabled: true,
+                                    mapType: MapType.terrain,
+                                    initialCameraPosition: CameraPosition(
+                                        zoom: 18, target: LatLng(lat, lon)));
+                              },
+                            ),
+                            FutureBuilder(
+                                future: _googleMapControllerCompleter.future,
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    if (snapshot.hasData) {
+                                      return MapsPageContent(
+                                          screenHeight: screenHeight,
+                                          controller: _controller,
+                                          lat: lat,
+                                          lon: lon,
+                                          screenWidth: screenWidth);
+                                    } else {
+                                      return Text('No data');
+                                    }
+                                  } else if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return Center(
+                                        child: LoadingAnimationWidget.inkDrop(
+                                            color: const Color(0xffC75E6B),
+                                            size: 20));
                                   } else {
-                                    return Text('No data');
+                                    return Text('Erro');
                                   }
-                                } else if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return Center(
-                                      child: LoadingAnimationWidget.inkDrop(
-                                          color: const Color(0xffC75E6B),
-                                          size: 20));
-                                } else {
-                                  return Text('Erro');
-                                }
-                              })
-                        ]),
-                      );
+                                })
+                          ]),
+                        );
+                      } else {
+                        return Text('No data');
+                      }
                     }
                   });
             } else if (state is LocationLoading) {
@@ -158,24 +159,12 @@ class _MapsPageState extends State<MapsPage> {
   }
 }
 
-// Future<void> loadData(
-//     BuildContext context, LocationState state, double lat, double lon) async {
-//   final geoLocatorCubit = BlocProvider.of<GeolocatorCubit>(context);
-//   final weatherCubit = BlocProvider.of<WeatherCubit>(context);
+Future<void> loadData(BuildContext context, double lat, double lon,
+    Completer<String> googleMapLocationCompleter) async {
+  final weatherCubit = BlocProvider.of<WeatherCubit>(context);
 
-//   // Fetch location data
-//   await geoLocatorCubit.getLocation();
+  // Fetch weather data using lat and lon
+  await weatherCubit.fetchWeather(lat, lon);
 
-//   if (state is LocationLoaded) {
-//     lat = state.position.latitude;
-//     lon = state.position.longitude;
-
-//     // Fetch weather data using lat and lon
-//     await weatherCubit.fetchWeather(lat, lon);
-
-//     // Continue building widgets or performing other actions here
-//   } else {
-//     // Handle the case when location data is not loaded
-//   }
-  
-// }
+  googleMapLocationCompleter.complete('Completed');
+}
