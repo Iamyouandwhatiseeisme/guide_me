@@ -14,7 +14,7 @@ class SearchTextFieldWIdget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 36),
       child: CustomTextFormField(
-        textColor: Color(0xff292F32).withOpacity(0.75),
+        textColor: const Color(0xff292F32).withOpacity(0.75),
         color: color,
         radiusSize: 32,
       ),

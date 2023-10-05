@@ -41,3 +41,6 @@ export 'custom_maps_text_field_widget.dart';
 export 'container_for_maps_type_widget.dart';
 export 'map_types_row_widget.dart';
 export 'maps_page_content_widget.dart';
+export 'build_a_dialog_interface_widget.dart';
+export 'a_dialog_interface_implementation_with_cactegory_types_widget.dart';
+export 'other_category_types_row_widget.dart';

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:guide_me/business_layer/cubit/is_exapnded_cubit.dart';
+import 'package:guide_me/data_layer/data.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
@@ -44,6 +45,7 @@ class _MapsPageState extends State<MapsPage> {
     _googleMapLocationCompleter = Completer<String>();
   }
 
+  @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -127,7 +129,7 @@ class _MapsPageState extends State<MapsPage> {
                                           lon: lon,
                                           screenWidth: screenWidth);
                                     } else {
-                                      return Text('No data');
+                                      return const Text('No data');
                                     }
                                   } else if (snapshot.connectionState ==
                                       ConnectionState.waiting) {
@@ -136,13 +138,13 @@ class _MapsPageState extends State<MapsPage> {
                                             color: const Color(0xffC75E6B),
                                             size: 20));
                                   } else {
-                                    return Text('Erro');
+                                    return const Text('Erro');
                                   }
                                 })
                           ]),
                         );
                       } else {
-                        return Text('No data');
+                        return const Text('No data');
                       }
                     }
                   });
@@ -157,14 +159,4 @@ class _MapsPageState extends State<MapsPage> {
       ),
     );
   }
-}
-
-Future<void> loadData(BuildContext context, double lat, double lon,
-    Completer<String> googleMapLocationCompleter) async {
-  final weatherCubit = BlocProvider.of<WeatherCubit>(context);
-
-  // Fetch weather data using lat and lon
-  await weatherCubit.fetchWeather(lat, lon);
-
-  googleMapLocationCompleter.complete('Completed');
 }

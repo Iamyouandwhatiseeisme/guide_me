@@ -8,11 +8,13 @@ import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.d
 class MapsTypesRowWidget extends StatelessWidget {
   final double screenHeight;
   final List<MapItem> mapItemList;
+  final List<String>? listOfCategories;
 
   const MapsTypesRowWidget({
     Key? key,
     required this.screenHeight,
     required this.mapItemList,
+    this.listOfCategories,
     required this.screenWidth,
   }) : super(key: key);
 
@@ -20,12 +22,13 @@ class MapsTypesRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: (186 - 26) / 2,
       child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
             return ContainerForTypesOfPlacesOnMapWidget(
+              listOfCategories: listOfCategories,
               screenHeight: screenHeight,
               color: mapItemList[index].color,
               numOfItems: mapItemList.length,

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/data_layer/data.dart';
 
-void createLists(List<MapItem> firstList, List<MapItem> secondList) {
-  print('creating list');
+void createLists(List<MapItem> firstList, List<MapItem> secondList,
+    List<String> categoryList) {
+  categoryList.add('Grocery');
+  categoryList.add('Mall');
+  categoryList.add('Hospital');
+  categoryList.add('Park');
   firstList.add(MapItem(
       icon: const Icon(
         Icons.fort_outlined,

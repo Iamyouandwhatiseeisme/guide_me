@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:guide_me/business_layer/cubit/is_exapnded_cubit.dart';
@@ -46,7 +45,7 @@ class _MapsToolbarWIthDirectionsLocationAndThreeDotsWidgetState
                 Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        color: Color(0xff292F32).withOpacity(0.75)),
+                        color: const Color(0xff292F32).withOpacity(0.75)),
                     width: state == true ? 180 : 127,
                     height: state == true ? 180 : 48,
                     child: Padding(
@@ -60,7 +59,7 @@ class _MapsToolbarWIthDirectionsLocationAndThreeDotsWidgetState
                               onTap: () => locationCubit.goToMyLocation(
                                   widget.controller, widget.userLocation),
                               child: Image.asset('assets/images/Arrow.png')),
-                          Icon(
+                          const Icon(
                             Icons.directions_outlined,
                             color: Color(0xffF3F0E6),
                           ),
@@ -68,7 +67,7 @@ class _MapsToolbarWIthDirectionsLocationAndThreeDotsWidgetState
                             onTap: () =>
                                 BlocProvider.of<IsExapndedCubit>(context)
                                     .toggleExpansion(),
-                            child: Icon(
+                            child: const Icon(
                               Icons.more_horiz,
                               color: Color(0xffF3F0E6),
                             ),

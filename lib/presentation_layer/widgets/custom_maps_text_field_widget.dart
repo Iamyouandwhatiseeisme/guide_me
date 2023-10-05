@@ -11,13 +11,13 @@ class CustomMapsTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: screenWidth - 32,
       height: 48,
       child: CustomTextFormField(
-        textColor: Color(0xffF3F0E6),
+        textColor: const Color(0xffF3F0E6),
         radiusSize: 16,
-        color: Color(0xff292F32).withOpacity(0.75),
+        color: const Color(0xff292F32).withOpacity(0.75),
       ),
     );
   }

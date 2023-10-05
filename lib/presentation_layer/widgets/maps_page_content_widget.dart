@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:guide_me/business_layer/cubit/is_exapnded_cubit.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
@@ -25,11 +24,13 @@ class MapsPageContent extends StatelessWidget {
   final double lon;
   final double screenWidth;
 
+  @override
   Widget build(BuildContext context) {
     bool isExpanded = true;
     List<MapItem> mapItemListForRowOne = [];
     List<MapItem> mapItemListForRowTwo = [];
-    createLists(mapItemListForRowOne, mapItemListForRowTwo);
+    List<String> listOfCategories = [];
+    createLists(mapItemListForRowOne, mapItemListForRowTwo, listOfCategories);
 
     return Builder(builder: (context) {
       return BlocBuilder<IsExapndedCubit, bool>(
@@ -59,10 +60,11 @@ class MapsPageContent extends StatelessWidget {
                       screenHeight: screenHeight,
                       mapItemList: mapItemListForRowOne,
                       screenWidth: screenWidth),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   MapsTypesRowWidget(
+                    listOfCategories: listOfCategories,
                     screenHeight: screenHeight,
                     screenWidth: screenWidth,
                     mapItemList: mapItemListForRowTwo,

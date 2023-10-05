@@ -47,7 +47,7 @@ class LocationDisplayWidget extends StatelessWidget {
                   // Display a loading indicator while waiting for the location info
 
                   return LoadingAnimationWidget.inkDrop(
-                      color: Color.fromARGB(255, 210, 203, 204), size: 20);
+                      color: const Color.fromARGB(255, 210, 203, 204), size: 20);
                 } else if (snapshot.hasError) {
                   // Handle errors if the future throws an exception
                   return Center(
