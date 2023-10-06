@@ -10,3 +10,4 @@ export 'display_location_info_in_words_method.dart';
 export 'models/map_item.dart';
 export 'create_lists_helper_function.dart';
 export 'load_data_helper_function_for_maps_page.dart';
+export 'create_map_for_other_categories_method.dart';

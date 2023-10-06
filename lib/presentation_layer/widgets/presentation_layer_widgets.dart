@@ -48,3 +48,5 @@ export 'maps_page_widgets.dart/other_category_list_view_separated_widget.dart';
 export 'maps_page_widgets.dart/category_type_container_widget.dart';
 export 'maps_page_widgets.dart/a_dialog_interface_implementation_for_containers_that_dont_contain_list_type_widget.dart';
 export 'maps_page_widgets.dart/show_dialog_method.dart';
+export 'maps_page_widgets.dart/future_builder_for_other_category_list_view.dart';
+export 'maps_page_widgets.dart/future_builder_for_maps_page_content.dart';

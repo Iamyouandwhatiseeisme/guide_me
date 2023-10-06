@@ -22,7 +22,6 @@ Future<List<NearbyPlacesModel>> fetchDataForOtherCategories(
       if (place.vicinity != 'Tbilisi') {
         listOfPlaces.add(place);
       }
-      print(place.name);
     }
 
     return listOfPlaces;

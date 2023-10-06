@@ -1,13 +1,19 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubits.dart';
+import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import '../../../data_layer/http_helper_grocery_places.dart';
 
 class ADialogWithInterfaceListCategories
     extends BuildADialogOnMapsWindowWidget {
   List<String> listOfCategories;
+
   ADialogWithInterfaceListCategories(
       {super.key,
       required super.textLabel,
@@ -21,8 +27,9 @@ class ADialogWithInterfaceListCategories
 
   @override
   Widget build(BuildContext context) {
-    List<NearbyPlacesModel> listOfPlaces = [];
-
+    late Completer<String> _mapLoadedController;
+    final Map<String, List<NearbyPlacesModel>> cachedData = {};
+    _mapLoadedController = Completer<String>();
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -76,27 +83,27 @@ class ADialogWithInterfaceListCategories
               OtherCategoryTypesRowWidget(listOfCategories: listOfCategories),
               BlocBuilder<CategoryTypesFetcherCubit, CategoryTypesFetcherState>(
                 builder: (context, state) {
+                  List<NearbyPlacesModel> listOfPlaces = [];
                   return BlocBuilder<CategoryCubit, CategoryCubitState>(
                     builder: (context, state) {
                       return Builder(builder: (BuildContext context) {
                         String category = state.selectedCategory;
-
                         final categoryTypesFetcherCubit =
                             BlocProvider.of<CategoryTypesFetcherCubit>(context);
-                        categoryTypesFetcherCubit.fetchDataForCategories(
-                            listOfPlaces, apiKey, lat, lon, category);
-                        return SizedBox(
-                          height: 500,
-                          child: ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              itemCount: listOfPlaces.length,
-                              itemBuilder: (context, index) {
-                                return SizedBox(
-                                  height: 266,
-                                  child: Text(listOfPlaces[index].name),
-                                );
-                              }),
-                        );
+                        createMap(
+                            apiKey,
+                            lat,
+                            lon,
+                            cachedData,
+                            category,
+                            categoryTypesFetcherCubit,
+                            listOfPlaces,
+                            _mapLoadedController);
+
+                        return FutureBuilderForOtherCategoryListView(
+                            mapLoadedController: _mapLoadedController,
+                            cachedData: cachedData,
+                            category: category);
                       });
                     },
                   );
@@ -107,5 +114,49 @@ class ADialogWithInterfaceListCategories
         ),
       ),
     );
+  }
+}
+
+class FutureBuilderForOtherCategoryListView extends StatelessWidget {
+  const FutureBuilderForOtherCategoryListView({
+    super.key,
+    required Completer<String> mapLoadedController,
+    required this.cachedData,
+    required this.category,
+  }) : _mapLoadedController = mapLoadedController;
+
+  final Completer<String> _mapLoadedController;
+  final Map<String, List<NearbyPlacesModel>> cachedData;
+  final String category;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: _mapLoadedController.future,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Container(
+              height: 500,
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: cachedData[category]!.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      height: 266,
+                      child: Text(
+                        cachedData[category]![index].name,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    );
+                  }),
+            );
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+                child: LoadingAnimationWidget.inkDrop(
+                    color: Colors.red, size: 24));
+          } else {
+            return Text('Error: ${snapshot.error}');
+          }
+        });
   }
 }

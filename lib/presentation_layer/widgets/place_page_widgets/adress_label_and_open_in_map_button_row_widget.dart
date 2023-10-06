@@ -2,8 +2,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 
-import '../../business_layer/cubit/open_location_on_map_cubit.dart';
-import 'text_with_underline_grey_widget.dart';
+import '../../../business_layer/cubit/open_location_on_map_cubit.dart';
+import '../text_with_underline_grey_widget.dart';
 
 class AdressLabelAndOpenInMapButtonRowWIdget extends StatelessWidget {
   const AdressLabelAndOpenInMapButtonRowWIdget({

@@ -58,6 +58,9 @@ class MapsPageContent extends StatelessWidget {
                     height: 12,
                   ),
                   MapsTypesRowWidget(
+                      listOfCategories: listOfCategories,
+                      lon: lon,
+                      lat: lat,
                       apiKey: apiKey,
                       screenHeight: screenHeight,
                       mapItemList: mapItemListForRowOne,
