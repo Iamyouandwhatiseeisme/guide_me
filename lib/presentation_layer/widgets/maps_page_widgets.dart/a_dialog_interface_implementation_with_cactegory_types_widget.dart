@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubits.dart';
+import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+
 
 class ADialogWithInterfaceListCategories
     extends BuildADialogOnMapsWindowWidget {
   List<String> listOfCategories;
   ADialogWithInterfaceListCategories(
-      {super.key, required super.textLabel,
+      {super.key,
+      required super.textLabel,
       required this.listOfCategories,
       required super.iconToDisplay,
       required super.screenHeight,
-      required super.screenWidth});
+      required super.screenWidth,
+      required super.apiKey,
+      required super.lat,
+      required super.lon});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CategoryCubit(),
+    List<NearbyPlacesModel> listOfPlaces = [];
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => CategoryCubit(),
+        ),
+        BlocProvider(
+          create: (context) => CategoryTypesFetcherCubit(),
+        ),
+      ],
       child: Dialog(
         insetPadding: const EdgeInsets.all(0),
         child: Container(
@@ -58,7 +73,35 @@ class ADialogWithInterfaceListCategories
                 ),
               ),
               const SizedBox(height: 36),
-              OtherCategoryTypesRowWidget(listOfCategories: listOfCategories)
+              OtherCategoryTypesRowWidget(listOfCategories: listOfCategories),
+              BlocBuilder<CategoryTypesFetcherCubit, CategoryTypesFetcherState>(
+                builder: (context, state) {
+                  return BlocBuilder<CategoryCubit, CategoryCubitState>(
+                    builder: (context, state) {
+                      return Builder(builder: (BuildContext context) {
+                        String category = state.selectedCategory;
+
+                        final categoryTypesFetcherCubit =
+                            BlocProvider.of<CategoryTypesFetcherCubit>(context);
+                        categoryTypesFetcherCubit.fetchDataForCategories(
+                            listOfPlaces, apiKey, lat, lon, category);
+                        return SizedBox(
+                          height: 500,
+                          child: ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              itemCount: listOfPlaces.length,
+                              itemBuilder: (context, index) {
+                                return SizedBox(
+                                  height: 266,
+                                  child: Text(listOfPlaces[index].name),
+                                );
+                              }),
+                        );
+                      });
+                    },
+                  );
+                },
+              )
             ],
           ),
         ),

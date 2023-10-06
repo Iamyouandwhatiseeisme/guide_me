@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 abstract class BuildADialogOnMapsWindowWidget extends StatelessWidget {
@@ -5,12 +6,18 @@ abstract class BuildADialogOnMapsWindowWidget extends StatelessWidget {
   final dynamic iconToDisplay;
   final double screenHeight;
   final double screenWidth;
+  final String apiKey;
+  final double lat;
+  final double lon;
   const BuildADialogOnMapsWindowWidget({
     Key? key,
     required this.textLabel,
     required this.iconToDisplay,
     required this.screenHeight,
     required this.screenWidth,
+    required this.apiKey,
+    required this.lat,
+    required this.lon,
   }) : super(key: key);
 
   @override

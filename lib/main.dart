@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
             'placePage': (context) => const PlacePage(),
             'seeAllPage': (context) => SeeAllPage(),
             'mapsPage': (context) => MapsPage(
+                  apiKey: apiKey,
                   customBottomAppBar: bottomAppBar,
                 )
           },

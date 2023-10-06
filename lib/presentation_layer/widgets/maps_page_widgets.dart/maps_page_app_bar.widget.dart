@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
-import '../pages/maps_page.dart';
+import '../../pages/maps_page.dart';
 
 class MapsPageAppBarWidget extends StatelessWidget {
   final String temperature;

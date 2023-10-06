@@ -123,6 +123,7 @@ class _MapsPageState extends State<MapsPage> {
                                       ConnectionState.done) {
                                     if (snapshot.hasData) {
                                       return MapsPageContent(
+                                          apiKey: widget.apiKey!,
                                           screenHeight: screenHeight,
                                           controller: _controller,
                                           lat: lat,
