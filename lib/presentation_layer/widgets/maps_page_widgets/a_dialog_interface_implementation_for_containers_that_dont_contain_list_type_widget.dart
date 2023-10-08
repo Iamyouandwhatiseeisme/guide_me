@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/category_types_fetcher_cubit.dart';
 import 'package:guide_me/data_layer/create_list_for_maps_types_content.dart';
+import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -25,6 +26,7 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
 
     _dataFetchController = Completer<String>();
     List<NearbyPlacesModel> listOfPlaces = [];
+    Map<NearbyPlacesModel, double?> distanceMap = {};
     return BlocProvider(
         create: (context) => CategoryTypesFetcherCubit(),
         child: Dialog(
@@ -77,6 +79,7 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
                   final categoryTypesFetcherCubit =
                       BlocProvider.of<CategoryTypesFetcherCubit>(context);
                   createList(
+                      distanceMap,
                       apiKey,
                       lat,
                       lon,
@@ -86,6 +89,8 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
                       _dataFetchController);
 
                   return FutureBuilderForAlistInMapsPageTypeView(
+                      distanceMap: distanceMap,
+                      apiKey: apiKey,
                       dataFetchController: _dataFetchController,
                       listOfPlaces: listOfPlaces);
                 })

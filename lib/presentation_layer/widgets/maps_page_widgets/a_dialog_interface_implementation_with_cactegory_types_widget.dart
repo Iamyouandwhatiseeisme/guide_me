@@ -26,6 +26,7 @@ class ADialogWithInterfaceListCategories
   Widget build(BuildContext context) {
     late Completer<String> _mapLoadedController;
     final Map<String, List<NearbyPlacesModel>> cachedData = {};
+    Map<NearbyPlacesModel, double?> distanceMap = {};
     _mapLoadedController = Completer<String>();
     return MultiBlocProvider(
       providers: [
@@ -96,8 +97,12 @@ class ADialogWithInterfaceListCategories
                             categoryTypesFetcherCubit,
                             listOfPlaces,
                             _mapLoadedController);
+                        createDistanceMap(
+                            distanceMap, cachedData[category]!, lat, lon);
 
                         return FutureBuilderForAlistInMapsPageTypeView(
+                            distanceMap: distanceMap,
+                            apiKey: apiKey,
                             dataFetchController: _mapLoadedController,
                             listOfPlaces: cachedData[category]!);
 
