@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class FutureBuilderForOtherCategoryListView extends StatelessWidget {
@@ -22,21 +23,8 @@ class FutureBuilderForOtherCategoryListView extends StatelessWidget {
         future: _mapLoadedController.future,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return Container(
-              height: 500,
-              child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: cachedData[category]!.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      height: 266,
-                      child: Text(
-                        cachedData[category]![index].name,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    );
-                  }),
-            );
+            return ListBuilderForMapsWidgets(
+                cachedData: cachedData, category: category);
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
                 child: LoadingAnimationWidget.inkDrop(

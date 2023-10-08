@@ -1,4 +1,12 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_me/business_layer/cubit/category_types_fetcher_cubit.dart';
+import 'package:guide_me/data_layer/create_list_for_maps_types_content.dart';
+import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
   const ADialogWithoutListOfCategories(
@@ -10,4 +18,79 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
       required super.apiKey,
       required super.lat,
       required super.lon});
+
+  @override
+  Widget build(BuildContext context) {
+    late Completer<String> _dataFetchController;
+
+    _dataFetchController = Completer<String>();
+    List<NearbyPlacesModel> listOfPlaces = [];
+    return BlocProvider(
+        create: (context) => CategoryTypesFetcherCubit(),
+        child: Dialog(
+          insetPadding: const EdgeInsets.all(0),
+          child: Container(
+            decoration: BoxDecoration(
+                color: const Color(0xff292F32),
+                borderRadius: BorderRadius.circular(16)),
+            height: screenHeight - 136,
+            width: screenWidth,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 20.0, right: 20, top: 25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      iconToDisplay,
+                      Text(
+                        textLabel,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 24,
+                            color: Color(0xffF3F0E6)),
+                      ),
+                      GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: const Color(0xffF3F0E6).withOpacity(0.25),
+                          ),
+                          child: const Icon(
+                            Icons.close_rounded,
+                            color: Color(0xffF3F0E6),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 36,
+                ),
+                BlocBuilder<CategoryTypesFetcherCubit,
+                    CategoryTypesFetcherState>(builder: (context, state) {
+                  String category = textLabel;
+                  final categoryTypesFetcherCubit =
+                      BlocProvider.of<CategoryTypesFetcherCubit>(context);
+                  createList(
+                      apiKey,
+                      lat,
+                      lon,
+                      category,
+                      categoryTypesFetcherCubit,
+                      listOfPlaces,
+                      _dataFetchController);
+                  return FutureBuilderForAlistInMapsPageTypeView(
+                      dataFetchController: _dataFetchController,
+                      listOfPlaces: listOfPlaces);
+                })
+              ],
+            ),
+          ),
+        ));
+  }
 }

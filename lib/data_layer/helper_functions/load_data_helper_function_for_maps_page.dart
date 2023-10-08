@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../business_layer/cubit/weather_cubit_cubit.dart';
+import '../../business_layer/cubit/weather_cubit_cubit.dart';
 
 Future<void> loadData(BuildContext context, double lat, double lon,
     Completer<String> googleMapLocationCompleter) async {

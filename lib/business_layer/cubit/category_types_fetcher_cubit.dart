@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:guide_me/data_layer/http_helper_grocery_places.dart';
+import 'package:guide_me/data_layer/helper_functions/http_helper_grocery_places.dart';
 
 import '../../data_layer/models/nearby_places_model.dart';
 

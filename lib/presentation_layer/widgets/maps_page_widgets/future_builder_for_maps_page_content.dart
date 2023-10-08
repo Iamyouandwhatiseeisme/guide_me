@@ -5,7 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import 'pages/maps_page.dart';
+import '../../pages/maps_page.dart';
 
 class FutureBuilderForMapsPageContent extends StatelessWidget {
   const FutureBuilderForMapsPageContent({
@@ -30,6 +30,9 @@ class FutureBuilderForMapsPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!_googleMapControllerCompleter.isCompleted) {
+      print('completed');
+    }
     return FutureBuilder(
         future: _googleMapControllerCompleter.future,
         builder: (context, snapshot) {

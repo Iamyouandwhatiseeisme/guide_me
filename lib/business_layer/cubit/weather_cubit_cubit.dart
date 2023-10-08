@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 
-import 'package:guide_me/data_layer/http_fetch_current_temperature.dart';
+import 'package:guide_me/data_layer/helper_functions/http_fetch_current_temperature.dart';
 
 part 'weather_cubit_state.dart';
 

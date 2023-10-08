@@ -116,32 +116,15 @@ class _MapsPageState extends State<MapsPage> {
                                         zoom: 18, target: LatLng(lat, lon)));
                               },
                             ),
-                            FutureBuilder(
-                                future: _googleMapControllerCompleter.future,
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.done) {
-                                    if (snapshot.hasData) {
-                                      return MapsPageContent(
-                                          apiKey: widget.apiKey!,
-                                          screenHeight: screenHeight,
-                                          controller: _controller,
-                                          lat: lat,
-                                          lon: lon,
-                                          screenWidth: screenWidth);
-                                    } else {
-                                      return const Text('No data');
-                                    }
-                                  } else if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return Center(
-                                        child: LoadingAnimationWidget.inkDrop(
-                                            color: const Color(0xffC75E6B),
-                                            size: 20));
-                                  } else {
-                                    return const Text('Erro');
-                                  }
-                                })
+                            FutureBuilderForMapsPageContent(
+                                googleMapControllerCompleter:
+                                    _googleMapControllerCompleter,
+                                widget: widget,
+                                screenHeight: screenHeight,
+                                controller: _controller,
+                                lat: lat,
+                                lon: lon,
+                                screenWidth: screenWidth)
                           ]),
                         );
                       } else {
