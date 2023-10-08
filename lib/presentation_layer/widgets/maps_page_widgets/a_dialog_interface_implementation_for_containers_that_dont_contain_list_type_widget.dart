@@ -84,6 +84,7 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
                       categoryTypesFetcherCubit,
                       listOfPlaces,
                       _dataFetchController);
+
                   return FutureBuilderForAlistInMapsPageTypeView(
                       dataFetchController: _dataFetchController,
                       listOfPlaces: listOfPlaces);

@@ -96,10 +96,10 @@ class ADialogWithInterfaceListCategories
                             categoryTypesFetcherCubit,
                             listOfPlaces,
                             _mapLoadedController);
-                        listOfPlaces = cachedData[category]!;
+
                         return FutureBuilderForAlistInMapsPageTypeView(
                             dataFetchController: _mapLoadedController,
-                            listOfPlaces: listOfPlaces);
+                            listOfPlaces: cachedData[category]!);
 
                         // return FutureBuilderForOtherCategoryListView(
                         //     mapLoadedController: _mapLoadedController,

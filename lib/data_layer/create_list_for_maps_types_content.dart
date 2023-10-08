@@ -14,8 +14,9 @@ Future<void> createList(
   if (listOfPlaces.isEmpty) {
     categoryTypesFetcherCubit.fetchDataForCategories(
         listOfPlaces, apiKey, lat, lon, category);
+    listLoaderController.complete('Completed');
   }
   if (listOfPlaces.isNotEmpty) {
-    // listLoaderController.complete('Completed');
+    listLoaderController.complete('Completed');
   }
 }

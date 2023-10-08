@@ -21,6 +21,7 @@ class FutureBuilderForAlistInMapsPageTypeView extends StatelessWidget {
       future: _dataFetchController.future,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
+          print('good connection state');
           return Container(
             height: 500,
             child: ListView.builder(

@@ -8,7 +8,7 @@ part 'category_types_fetcher_state.dart';
 
 class CategoryTypesFetcherCubit extends Cubit<CategoryTypesFetcherState> {
   CategoryTypesFetcherCubit() : super(CategoryTypesFetcherInitial());
-  void fetchDataForCategories(List<NearbyPlacesModel> listOfPlaces,
+  Future<void> fetchDataForCategories(List<NearbyPlacesModel> listOfPlaces,
       String apiKey, double userLat, double userLon, String category) async {
     if (listOfPlaces.isEmpty) {
       try {
