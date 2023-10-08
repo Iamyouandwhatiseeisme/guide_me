@@ -29,7 +29,7 @@ export 'first_page_widgets/what_to_eat_widget.dart';
 export 'place_page_widgets/types_label_and_make_a_call_button_widget.dart';
 export 'place_page_widgets/adress_label_and_open_in_map_button_row_widget.dart';
 export 'place_page_conent_widget.dart';
-export 'place_page_widgets/open_hours_info_widget.dart';
+export 'open_hours_info_widget.dart';
 export 'open_status_label_widget.dart';
 export 'first_page_widgets/recommended_sightseeing_section_widget.dart';
 export 'label_with_caregory_type_name_and_see_all_label_row.dart';
