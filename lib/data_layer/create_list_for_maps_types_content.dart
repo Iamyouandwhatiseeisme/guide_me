@@ -16,6 +16,6 @@ Future<void> createList(
         listOfPlaces, apiKey, lat, lon, category);
   }
   if (listOfPlaces.isNotEmpty) {
-    listLoaderController.complete('Completed');
+    // listLoaderController.complete('Completed');
   }
 }
