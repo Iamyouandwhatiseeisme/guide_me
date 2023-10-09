@@ -63,8 +63,6 @@ class RecommendedSightseeingsSectiogWidget extends StatelessWidget {
                           userLon: lon,
                         );
                       } else if (state is NearbySightseeingsLoading) {
-                        // Handle other states or loading state here
-
                         return const CircularProgressIndicator(
                           color: Colors.black,
                         );

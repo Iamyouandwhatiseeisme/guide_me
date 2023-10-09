@@ -72,19 +72,11 @@ class CardUi extends StatelessWidget {
                 }),
               ],
             ),
-          Wrap(children: [
-            Image.asset("assets/images/Distance.png"),
-            const SizedBox(
-              width: 5,
-            ),
-            Text(
-              "${distance.toString()} Km. away from you",
-              style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xff292f32)),
-            ),
-          ])
+          DistanceLabelWidget(
+            fontSize: 12,
+            distance: distance,
+            color: const Color(0xff292f32),
+          )
         ],
       ),
     );

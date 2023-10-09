@@ -1,9 +1,11 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class FutureBuilderForAlistInMapsPageTypeView extends StatelessWidget {
   const FutureBuilderForAlistInMapsPageTypeView(
@@ -29,12 +31,16 @@ class FutureBuilderForAlistInMapsPageTypeView extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           return Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, top: 36),
-            child: Container(
+            child: SizedBox(
               height: 500,
               child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   itemCount: listOfPlaces.length,
                   itemBuilder: (context, index) {
+                    final distance = distanceMap[listOfPlaces[index]];
+                    final placeToDisplay = listOfPlaces[index];
+                    final placeName = listOfPlaces[index].name;
+
                     String? photoReference =
                         listOfPlaces[index].photos?[0]['photo_reference'];
                     if (photoReference != null) {
@@ -43,22 +49,32 @@ class FutureBuilderForAlistInMapsPageTypeView extends StatelessWidget {
                     } else {
                       image = imageIfNoImageIsAvailable;
                     }
-                    return Container(
+                    return SizedBox(
                       width: 390,
                       height: 282,
                       child: Stack(children: [
-                        Column(
-                          children: [
-                            Image.network(image),
-                            Text(
-                              listOfPlaces[index].name,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                            Row(children: [
-                              Text(distanceMap[listOfPlaces[index]].toString())
-                            ]),
-                          ],
-                        ),
+                        PlaceCardForMapsTypeListWidget(
+                            apiKey: apiKey,
+                            placeToDisplay: placeToDisplay,
+                            image: image,
+                            listOfPlaces: listOfPlaces,
+                            distance: distance,
+                            placeName: placeName),
+                        Positioned(
+                            top: 10,
+                            right: 10,
+                            child: Container(
+                                width: 36,
+                                height: 36,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(32),
+                                  color: Color(0xffF3F0E6).withAlpha(40),
+                                ),
+                                child: const Center(
+                                    child: Icon(
+                                  Icons.favorite_outline,
+                                  color: Color(0xffF3F0E6),
+                                ))))
                       ]),
                     );
                   }),

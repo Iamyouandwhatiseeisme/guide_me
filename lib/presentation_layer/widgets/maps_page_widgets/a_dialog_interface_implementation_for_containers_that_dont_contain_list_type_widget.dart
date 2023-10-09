@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/category_types_fetcher_cubit.dart';
 import 'package:guide_me/data_layer/create_list_for_maps_types_content.dart';
-import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
   const ADialogWithoutListOfCategories(
@@ -22,9 +20,9 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
 
   @override
   Widget build(BuildContext context) {
-    late Completer<String> _dataFetchController;
+    late Completer<String> dataFetchController;
 
-    _dataFetchController = Completer<String>();
+    dataFetchController = Completer<String>();
     List<NearbyPlacesModel> listOfPlaces = [];
     Map<NearbyPlacesModel, double?> distanceMap = {};
     return BlocProvider(
@@ -70,7 +68,7 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 36,
                 ),
                 BlocBuilder<CategoryTypesFetcherCubit,
@@ -86,12 +84,12 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
                       category,
                       categoryTypesFetcherCubit,
                       listOfPlaces,
-                      _dataFetchController);
+                      dataFetchController);
 
                   return FutureBuilderForAlistInMapsPageTypeView(
                       distanceMap: distanceMap,
                       apiKey: apiKey,
-                      dataFetchController: _dataFetchController,
+                      dataFetchController: dataFetchController,
                       listOfPlaces: listOfPlaces);
                 })
               ],

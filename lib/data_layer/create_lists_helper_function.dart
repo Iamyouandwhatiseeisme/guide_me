@@ -31,7 +31,7 @@ void createLists(List<MapItem> firstList, List<MapItem> secondList,
         color: Color(0xffC75E6B),
       ),
       color: const Color(0xffC75E6B),
-      textLabel: 'Hotels'));
+      textLabel: 'Night Life'));
   secondList.add(MapItem(
       icon: const Icon(
         Icons.restaurant,
