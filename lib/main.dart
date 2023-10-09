@@ -48,7 +48,9 @@ class MyApp extends StatelessWidget {
             'mapsPage': (context) => MapsPage(
                   apiKey: apiKey,
                   customBottomAppBar: bottomAppBar,
-                )
+                ),
+            'bookmarksPage': (context) =>
+                const BookmarksPage(customBottomAppBar: bottomAppBar)
           },
         ),
       );

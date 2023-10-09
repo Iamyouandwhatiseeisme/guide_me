@@ -54,3 +54,5 @@ export 'maps_page_widgets/list_builder_for_maps_widget.dart';
 export 'maps_page_widgets/future_builder_for_list_view_on_maps_page_category.dart';
 export 'distance_label_widget.dart';
 export 'maps_page_widgets/place_card_for_maps_type_list_widget.dart';
+export 'bookmarks_page_widgets.dart/tab_option_widget.dart';
+export 'bookmarks_page_widgets.dart/bookmarks_tab_options_button_widget.dart';

@@ -4,7 +4,7 @@ export 'cubit/geolocator_cubit.dart';
 export 'cubit/make_a_call_cubit.dart';
 
 export 'cubit/open_location_on_map_cubit.dart';
-
+export 'cubit/bookmarks_tab_cubit.dart';
 export 'cubit/photos_by_place_id_fetcher_cubit.dart';
 export 'cubit/category_button_cubit.dart';
 export 'cubit/category_button_state.dart';
