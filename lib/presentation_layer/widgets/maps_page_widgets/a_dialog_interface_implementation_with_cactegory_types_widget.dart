@@ -2,31 +2,35 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_me/business_layer/cubit/favorites_button_cubit.dart';
 import 'package:guide_me/business_layer/cubits.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:provider/provider.dart';
 
 class ADialogWithInterfaceListCategories
     extends BuildADialogOnMapsWindowWidget {
   List<String> listOfCategories;
 
-  ADialogWithInterfaceListCategories(
-      {super.key,
-      required super.textLabel,
-      required this.listOfCategories,
-      required super.iconToDisplay,
-      required super.screenHeight,
-      required super.screenWidth,
-      required super.apiKey,
-      required super.lat,
-      required super.lon});
+  ADialogWithInterfaceListCategories({
+    super.key,
+    required super.textLabel,
+    required this.listOfCategories,
+    required super.iconToDisplay,
+    required super.screenHeight,
+    required super.screenWidth,
+    required super.apiKey,
+    required super.lat,
+    required super.lon,
+  });
 
   @override
   Widget build(BuildContext context) {
     late Completer<String> mapLoadedController;
     final Map<String, List<NearbyPlacesModel>> cachedData = {};
     Map<NearbyPlacesModel, double?> distanceMap = {};
+
     mapLoadedController = Completer<String>();
     return MultiBlocProvider(
       providers: [

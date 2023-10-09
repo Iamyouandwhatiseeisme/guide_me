@@ -2,6 +2,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_me/business_layer/cubit/favorites_button_cubit.dart';
+
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
@@ -16,12 +19,15 @@ class FutureBuilderForAlistInMapsPageTypeView extends StatelessWidget {
       required this.distanceMap})
       : _dataFetchController = dataFetchController;
   final String apiKey;
+
   final Completer<String> _dataFetchController;
   final List<NearbyPlacesModel> listOfPlaces;
   final Map<NearbyPlacesModel, double?> distanceMap;
 
   @override
   Widget build(BuildContext context) {
+    final favoritesCubit = BlocProvider.of<FavoritesCubit>(context);
+
     const imageIfNoImageIsAvailable =
         'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small/no-image-available-icon-vector.jpg';
     String image = '';
@@ -70,11 +76,32 @@ class FutureBuilderForAlistInMapsPageTypeView extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(32),
                                   color: Color(0xffF3F0E6).withAlpha(40),
                                 ),
-                                child: const Center(
-                                    child: Icon(
-                                  Icons.favorite_outline,
-                                  color: Color(0xffF3F0E6),
-                                ))))
+                                child: GestureDetector(
+                                  onTap: () {
+                                    if (favoritesCubit
+                                        .isFavorite(placeToDisplay)) {
+                                      favoritesCubit.removeFromFavorites(
+                                        placeToDisplay,
+                                      );
+                                    } else {
+                                      favoritesCubit.addToFavorites(
+                                          placeToDisplay, distance);
+                                    }
+                                  },
+                                  child: BlocBuilder<FavoritesCubit,
+                                      List<FavoriteItem>>(
+                                    builder: (context, state) {
+                                      return Center(
+                                          child: Icon(
+                                        favoritesCubit
+                                                .isFavorite(placeToDisplay)
+                                            ? Icons.favorite
+                                            : Icons.favorite_outline,
+                                        color: Color(0xffF3F0E6),
+                                      ));
+                                    },
+                                  ),
+                                )))
                       ]),
                     );
                   }),

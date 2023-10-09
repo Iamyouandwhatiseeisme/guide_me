@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
+import 'package:guide_me/business_layer/cubit/favorites_button_cubit.dart';
 import 'package:guide_me/presentation_layer/pages/first_page.dart';
 import 'package:guide_me/presentation_layer/pages/maps_page.dart';
 import 'package:guide_me/presentation_layer/pages/place_page.dart';
@@ -21,8 +22,15 @@ class MyApp extends StatelessWidget {
       const bottomAppBar = CustomBottomNavigationBar(
         apiKey: apiKey,
       );
-      return BlocProvider(
-        create: (context) => BottomNavigationBarCubit(),
+      return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => BottomNavigationBarCubit(),
+          ),
+          BlocProvider(
+            create: (context) => FavoritesCubit(),
+          ),
+        ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           initialRoute: '/',
