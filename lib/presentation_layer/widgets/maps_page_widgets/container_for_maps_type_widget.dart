@@ -1,9 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:guide_me/business_layer/cubit/favorites_button_cubit.dart';
-import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:hive/hive.dart';
 
+import 'package:guide_me/business_layer/cubit/favorites_cubit.dart';
+import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
@@ -35,8 +36,8 @@ class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final favoritesCubit = BlocProvider.of<FavoritesCubit>(context);
-    return BlocBuilder<FavoritesCubit, List<FavoriteItem>>(
+    final favoritesCubit = BlocProvider.of<FavoritesButtonCubit>(context);
+    return BlocBuilder<FavoritesButtonCubit, Box<NearbyPlacesModel>>(
       builder: (context, state) {
         return GestureDetector(
           onTap: () {

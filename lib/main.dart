@@ -1,19 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
-import 'package:guide_me/business_layer/cubit/favorites_button_cubit.dart';
+import 'package:guide_me/business_layer/cubit/favorites_cubit.dart';
+import 'package:guide_me/data_layer/models/opening_hours.dart';
 import 'package:guide_me/presentation_layer/pages/first_page.dart';
 import 'package:guide_me/presentation_layer/pages/maps_page.dart';
 import 'package:guide_me/presentation_layer/pages/place_page.dart';
 import 'package:guide_me/presentation_layer/widgets/custom_bottom_navigatio_bar_widget.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'data_layer/models/nearby_places_model.dart';
 import 'presentation_layer/pages/pages.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(NearbyPlacesModelAdapter());
+  Hive.registerAdapter(OpeningHoursAdapter());
+  print('print: box open');
+  await Hive.openBox<NearbyPlacesModel>('FavoritedPlaces');
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+  void dispose() {
+    Hive.close();
+    print('print: box closed');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +42,12 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => BottomNavigationBarCubit(),
           ),
+          // BlocProvider(
+          //   create: (context) => FavoritesCubit(),
+          // ),
           BlocProvider(
-            create: (context) => FavoritesCubit(),
-          ),
+            create: (context) => FavoritesButtonCubit(),
+          )
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

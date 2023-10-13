@@ -2,21 +2,23 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:guide_me/business_layer/cubit/favorites_button_cubit.dart';
+import 'package:guide_me/data_layer/toggle_favorites_function.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-class FutureBuilderForAlistInMapsPageTypeView extends StatelessWidget {
+class FutureBuilderForAlistInMapsPageTypeView extends StatefulWidget {
   const FutureBuilderForAlistInMapsPageTypeView(
       {super.key,
       required this.apiKey,
       required Completer<String> dataFetchController,
       required this.listOfPlaces,
-      required this.distanceMap})
+      required this.distanceMap,
+      r})
       : _dataFetchController = dataFetchController;
   final String apiKey;
 
@@ -25,85 +27,89 @@ class FutureBuilderForAlistInMapsPageTypeView extends StatelessWidget {
   final Map<NearbyPlacesModel, double?> distanceMap;
 
   @override
-  Widget build(BuildContext context) {
-    final favoritesCubit = BlocProvider.of<FavoritesCubit>(context);
+  State<FutureBuilderForAlistInMapsPageTypeView> createState() =>
+      _FutureBuilderForAlistInMapsPageTypeViewState();
+}
 
+class _FutureBuilderForAlistInMapsPageTypeViewState
+    extends State<FutureBuilderForAlistInMapsPageTypeView> {
+  @override
+  Widget build(BuildContext context) {
     const imageIfNoImageIsAvailable =
         'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small/no-image-available-icon-vector.jpg';
     String image = '';
     return FutureBuilder(
-      future: _dataFetchController.future,
+      future: widget._dataFetchController.future,
       builder: (context, snapshot) {
+        final box = Hive.box<NearbyPlacesModel>("FavoritedPlaces");
         if (snapshot.connectionState == ConnectionState.done) {
           return Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, top: 36),
             child: SizedBox(
               height: 500,
-              child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: listOfPlaces.length,
-                  itemBuilder: (context, index) {
-                    final distance = distanceMap[listOfPlaces[index]];
-                    final placeToDisplay = listOfPlaces[index];
-                    final placeName = listOfPlaces[index].name;
+              child: ValueListenableBuilder(
+                  valueListenable: box.listenable(),
+                  builder: (context, value, child) {
+                    return ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: widget.listOfPlaces.length,
+                        itemBuilder: (context, index) {
+                          final distance =
+                              widget.distanceMap[widget.listOfPlaces[index]];
+                          final placeToDisplay = widget.listOfPlaces[index];
+                          final placeName = widget.listOfPlaces[index].name;
+                          print('print: ${placeToDisplay.isInBox}1');
 
-                    String? photoReference =
-                        listOfPlaces[index].photos?[0]['photo_reference'];
-                    if (photoReference != null) {
-                      image =
-                          'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=$apiKey';
-                    } else {
-                      image = imageIfNoImageIsAvailable;
-                    }
-                    return SizedBox(
-                      width: 390,
-                      height: 282,
-                      child: Stack(children: [
-                        PlaceCardForMapsTypeListWidget(
-                            apiKey: apiKey,
-                            placeToDisplay: placeToDisplay,
-                            image: image,
-                            listOfPlaces: listOfPlaces,
-                            distance: distance,
-                            placeName: placeName),
-                        Positioned(
-                            top: 10,
-                            right: 10,
-                            child: Container(
-                                width: 36,
-                                height: 36,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(32),
-                                  color: Color(0xffF3F0E6).withAlpha(40),
-                                ),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    if (favoritesCubit
-                                        .isFavorite(placeToDisplay)) {
-                                      favoritesCubit.removeFromFavorites(
-                                        placeToDisplay,
-                                      );
-                                    } else {
-                                      favoritesCubit.addToFavorites(
-                                          placeToDisplay, distance);
-                                    }
-                                  },
-                                  child: BlocBuilder<FavoritesCubit,
-                                      List<FavoriteItem>>(
-                                    builder: (context, state) {
-                                      return Center(
-                                          child: Icon(
-                                        favoritesCubit
-                                                .isFavorite(placeToDisplay)
-                                            ? Icons.favorite
-                                            : Icons.favorite_outline,
-                                        color: Color(0xffF3F0E6),
-                                      ));
-                                    },
-                                  ),
-                                )))
-                      ]),
-                    );
+                          String? photoReference = widget.listOfPlaces[index]
+                              .photos?[0]['photo_reference'];
+                          if (photoReference != null) {
+                            image =
+                                'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=${widget.apiKey}';
+                          } else {
+                            image = imageIfNoImageIsAvailable;
+                          }
+                          return SizedBox(
+                            width: 390,
+                            height: 282,
+                            child: Stack(children: [
+                              PlaceCardForMapsTypeListWidget(
+                                  apiKey: widget.apiKey,
+                                  placeToDisplay: placeToDisplay,
+                                  image: image,
+                                  listOfPlaces: widget.listOfPlaces,
+                                  distance: distance,
+                                  placeName: placeName),
+                              Positioned(
+                                  top: 10,
+                                  right: 10,
+                                  child: Container(
+                                      width: 36,
+                                      height: 36,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(32),
+                                        color: const Color(0xffF3F0E6).withAlpha(40),
+                                      ),
+                                      child: GestureDetector(
+                                        onTap: () async {
+                                          await requestWritePermission();
+                                          print(
+                                              'print: ${placeToDisplay.hashCode}');
+                                          print(
+                                              'print: ${placeToDisplay.placeId}');
+                                          toggleFavorites(placeToDisplay, box);
+                                        },
+                                        child: Center(
+                                            child: Icon(
+                                          box.containsKey(
+                                                  placeToDisplay.hashCode)
+                                              ? Icons.favorite
+                                              : Icons.favorite_outline,
+                                          color: const Color(0xffF3F0E6),
+                                        )),
+                                      )))
+                            ]),
+                          );
+                        });
                   }),
             ),
           );
@@ -116,5 +122,18 @@ class FutureBuilderForAlistInMapsPageTypeView extends StatelessWidget {
         }
       },
     );
+  }
+
+  Future<void> requestWritePermission() async {
+    final PermissionStatus status = await Permission.storage.request();
+
+    if (status.isGranted) {
+      // Permission granted, you can write to the database.
+    } else if (status.isDenied) {
+      // Permission denied by the user. You may want to show a message or request again.
+    } else if (status.isPermanentlyDenied) {
+      // Permission permanently denied by the user. You can open app settings to allow permission.
+      openAppSettings();
+    }
   }
 }

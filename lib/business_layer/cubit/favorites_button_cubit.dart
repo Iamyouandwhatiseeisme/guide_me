@@ -1,33 +1,14 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+// import 'dart:ffi';
 
-class FavoritesCubit extends Cubit<List<FavoriteItem>> {
-  FavoritesCubit() : super([]);
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 
-  // Method to add an item to favorites
-  void addToFavorites(NearbyPlacesModel item, double? distance) {
-    final updatedFavorites = [...state];
-    updatedFavorites.add(FavoriteItem(item, distance));
-    emit(updatedFavorites);
-  }
+// class FavoritesCubit extends Cubit<bool> {
+//   FavoritesCubit() : super(false);
 
-  // Method to remove an item from favorites
-  void removeFromFavorites(NearbyPlacesModel item) {
-    final updatedFavorites = [...state];
-    updatedFavorites.removeWhere((favItem) => favItem.item == item);
-    emit(updatedFavorites);
-  }
+//   void toggleFavorites() {
+//     emit(!state);
+//   }
 
-  // Method to check if an item is in favorites
-  bool isFavorite(NearbyPlacesModel item) {
-    return state.any((favItem) => favItem.item == item);
-  }
-}
-
-// Class to represent a favorite item with an associated distance
-class FavoriteItem {
-  final NearbyPlacesModel item;
-  final double? distance;
-
-  FavoriteItem(this.item, this.distance);
-}
+//   // Method to add an item to favorites
+// }

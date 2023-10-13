@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
+
 class MapsTypesRowWidget extends StatelessWidget {
   final double? lat;
   final double? lon;
