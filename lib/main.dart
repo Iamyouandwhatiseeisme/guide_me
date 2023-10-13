@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
                   customBottomAppBar: bottomAppBar,
                 ),
             'bookmarksPage': (context) =>
-                const BookmarksPage(customBottomAppBar: bottomAppBar)
+                BookmarksPage(customBottomAppBar: bottomAppBar)
           },
         ),
       );

@@ -58,7 +58,6 @@ class _FutureBuilderForAlistInMapsPageTypeViewState
                               widget.distanceMap[widget.listOfPlaces[index]];
                           final placeToDisplay = widget.listOfPlaces[index];
                           final placeName = widget.listOfPlaces[index].name;
-                          print('print: ${placeToDisplay.isInBox}1');
 
                           String? photoReference = widget.listOfPlaces[index]
                               .photos?[0]['photo_reference'];
@@ -87,15 +86,13 @@ class _FutureBuilderForAlistInMapsPageTypeViewState
                                       height: 36,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(32),
-                                        color: const Color(0xffF3F0E6).withAlpha(40),
+                                        color: const Color(0xffF3F0E6)
+                                            .withAlpha(40),
                                       ),
                                       child: GestureDetector(
                                         onTap: () async {
                                           await requestWritePermission();
-                                          print(
-                                              'print: ${placeToDisplay.hashCode}');
-                                          print(
-                                              'print: ${placeToDisplay.placeId}');
+
                                           toggleFavorites(placeToDisplay, box);
                                         },
                                         child: Center(

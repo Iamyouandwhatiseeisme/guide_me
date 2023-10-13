@@ -107,11 +107,6 @@ class ADialogWithInterfaceListCategories
                             apiKey: apiKey,
                             dataFetchController: mapLoadedController,
                             listOfPlaces: cachedData[category]!);
-
-                        // return FutureBuilderForOtherCategoryListView(
-                        //     mapLoadedController: _mapLoadedController,
-                        //     cachedData: cachedData,
-                        //     category: category);
                       });
                     },
                   );
