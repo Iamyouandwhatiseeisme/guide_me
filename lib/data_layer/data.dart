@@ -13,3 +13,4 @@ export 'helper_functions/load_data_helper_function_for_maps_page.dart';
 export 'create_map_for_other_categories_method.dart';
 export 'box_class.dart';
 export 'add_place_to_favorites_fucntion.dart';
+export 'requiest_write_permission_function.dart';

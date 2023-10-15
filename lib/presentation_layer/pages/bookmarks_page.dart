@@ -37,18 +37,6 @@ class _BookmarksPageState extends State<BookmarksPage> {
   @override
   void initState() {
     super.initState();
-
-    refreshList();
-  }
-
-  Future refreshList() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    setState(() {
-      isLoading = false;
-    });
   }
 
   @override
@@ -57,6 +45,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
     final listOfArguments =
         ModalRoute.of(context)!.settings.arguments as List<dynamic>;
     widget.apiKey = listOfArguments[0] as String;
+    final box = Hive.box<NearbyPlacesModel>("FavoritedPlaces");
 
     return MultiBlocProvider(
       providers: [
@@ -91,11 +80,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
                 builder: (context, state) {
                   return Builder(
                     builder: (BuildContext context) {
-                      final listOfFavorites =
-                          Hive.box<NearbyPlacesModel>('FavoritedPlaces')
-                              .toMap()
-                              .values
-                              .toList();
+                      final listOfFavorites = box.toMap().values.toList();
 
                       if (state is LocationLoaded) {
                         userLat = state.position.latitude;
@@ -128,12 +113,24 @@ class _BookmarksPageState extends State<BookmarksPage> {
                                       listOfFavorites[index]
                                     ],
                                   ),
-                                  child: BookmarksPageCardWidget(
-                                    apiKey: widget.apiKey!,
-                                    distance:
-                                        distanceMap[listOfFavorites[index]],
-                                    place: listOfFavorites[index],
-                                  ),
+                                  child: ValueListenableBuilder(
+                                      valueListenable: box.listenable(),
+                                      builder: (context, box, child) {
+                                        return BookmarksPageCardWidget(
+                                          onDelete: () {
+                                            deleteItemAndRefresh(
+                                                listOfFavorites[index],
+                                                listOfFavorites,
+                                                Hive.box<NearbyPlacesModel>(
+                                                    "FavoritedPlaces"));
+                                          },
+                                          list: listOfFavorites,
+                                          apiKey: widget.apiKey!,
+                                          distance: distanceMap[
+                                              listOfFavorites[index]],
+                                          place: listOfFavorites[index],
+                                        );
+                                      }),
                                 ),
                               ),
                             );
@@ -157,5 +154,18 @@ class _BookmarksPageState extends State<BookmarksPage> {
         }),
       ),
     );
+  }
+
+  void deleteItemAndRefresh(NearbyPlacesModel place,
+      List<NearbyPlacesModel> listOfFavorites, Box<NearbyPlacesModel> box) {
+    Hive.box<NearbyPlacesModel>('FavoritedPlaces').delete(place.hashCode);
+    refreshList(listOfFavorites, box);
+  }
+
+  void refreshList(
+      List<NearbyPlacesModel> listOfFavorites, Box<NearbyPlacesModel> box) {
+    listOfFavorites.clear();
+    listOfFavorites = box.toMap().values.toList();
+    setState(() {});
   }
 }

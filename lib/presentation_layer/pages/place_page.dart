@@ -92,9 +92,11 @@ class _PlacepageState extends State<PlacePage> {
                 }
 
                 return Scaffold(
-                    appBar: const PreferredSize(
-                        preferredSize: Size.fromHeight(48),
-                        child: PlacePageAppbar()),
+                    appBar: PreferredSize(
+                        preferredSize: const Size.fromHeight(48),
+                        child: PlacePageAppbar(
+                          placeToDisplay: passedPlace,
+                        )),
                     backgroundColor: const Color(0xffF3F0E6),
                     body: PlacePageContet(
                         openningHours: openningHours,

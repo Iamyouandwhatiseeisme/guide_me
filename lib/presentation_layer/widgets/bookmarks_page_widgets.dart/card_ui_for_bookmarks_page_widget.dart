@@ -2,12 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:flutter/rendering.dart';
+import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:hive/hive.dart';
 import '../presentation_layer_widgets.dart';
 
 class CardUiForBookmarksPage extends CardUi {
   final String apiKey;
-  const CardUiForBookmarksPage(
+  final Function onDelete;
+
+  late List<NearbyPlacesModel> list;
+  CardUiForBookmarksPage(
       {super.key,
+      required this.onDelete,
+      required this.list,
       required this.apiKey,
       required super.distance,
       required super.image,
@@ -45,7 +52,7 @@ class CardUiForBookmarksPage extends CardUi {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Container(
@@ -53,12 +60,29 @@ class CardUiForBookmarksPage extends CardUi {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    place.name,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w800, fontSize: 12),
+                  Row(
+                    children: [
+                      Container(
+                        width: 150,
+                        child: Text(
+                          place.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w800, fontSize: 12),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          onDelete();
+                        },
+                        child: Container(
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.grey.withOpacity(0.25)),
+                            child: const Icon(Icons.close_outlined)),
+                      )
+                    ],
                   ),
                   if (place.rating != null && place.userRatingsTotal != null)
                     UserRatingAndTotalRatingWidget(
@@ -71,7 +95,7 @@ class CardUiForBookmarksPage extends CardUi {
                     ),
                   if (place.types.isNotEmpty)
                     Container(
-                      height: 42,
+                      height: 35,
                       width: 180,
                       child: Wrap(
                         clipBehavior: Clip.antiAlias,

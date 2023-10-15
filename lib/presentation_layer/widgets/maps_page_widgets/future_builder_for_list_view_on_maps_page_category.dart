@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/toggle_favorites_function.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -34,6 +35,10 @@ class FutureBuilderForAlistInMapsPageTypeView extends StatefulWidget {
 class _FutureBuilderForAlistInMapsPageTypeViewState
     extends State<FutureBuilderForAlistInMapsPageTypeView> {
   @override
+  void initState() {
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     const imageIfNoImageIsAvailable =
         'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small/no-image-available-icon-vector.jpg';
@@ -89,21 +94,10 @@ class _FutureBuilderForAlistInMapsPageTypeViewState
                                         color: const Color(0xffF3F0E6)
                                             .withAlpha(40),
                                       ),
-                                      child: GestureDetector(
-                                        onTap: () async {
-                                          await requestWritePermission();
-
-                                          toggleFavorites(placeToDisplay, box);
-                                        },
-                                        child: Center(
-                                            child: Icon(
-                                          box.containsKey(
-                                                  placeToDisplay.hashCode)
-                                              ? Icons.favorite
-                                              : Icons.favorite_outline,
-                                          color: const Color(0xffF3F0E6),
-                                        )),
-                                      )))
+                                      child: FavoriteButton(
+                                          color: Color(0xffF3F0E6),
+                                          placeToDisplay: placeToDisplay,
+                                          box: box)))
                             ]),
                           );
                         });
@@ -119,18 +113,5 @@ class _FutureBuilderForAlistInMapsPageTypeViewState
         }
       },
     );
-  }
-
-  Future<void> requestWritePermission() async {
-    final PermissionStatus status = await Permission.storage.request();
-
-    if (status.isGranted) {
-      // Permission granted, you can write to the database.
-    } else if (status.isDenied) {
-      // Permission denied by the user. You may want to show a message or request again.
-    } else if (status.isPermanentlyDenied) {
-      // Permission permanently denied by the user. You can open app settings to allow permission.
-      openAppSettings();
-    }
   }
 }

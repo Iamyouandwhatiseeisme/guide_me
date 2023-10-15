@@ -58,3 +58,4 @@ export 'bookmarks_page_widgets.dart/tab_option_widget.dart';
 export 'bookmarks_page_widgets.dart/bookmarks_tab_options_button_widget.dart';
 export 'bookmarks_page_widgets.dart/bookmarks_page_card_widget.dart';
 export 'bookmarks_page_widgets.dart/card_ui_for_bookmarks_page_widget.dart';
+export 'buttons/favorite_button_widget.dart';
