@@ -15,14 +15,14 @@ import 'package:guide_me/presentation_layer/widgets/custom_bottom_navigatio_bar_
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class MapsPage extends StatefulWidget {
-  CustomBottomNavigationBar customBottomAppBar;
-  late LocationDisplayWidget? locationDisplayWidget;
-  late String? apiKey;
-  MapsPage({
+  final CustomBottomNavigationBar customBottomAppBar;
+  final LocationDisplayWidget? locationDisplayWidget;
+  final String apiKey;
+  const MapsPage({
     Key? key,
     required this.customBottomAppBar,
     this.locationDisplayWidget,
-    this.apiKey,
+    required this.apiKey,
   }) : super(key: key);
 
   @override
@@ -50,9 +50,6 @@ class _MapsPageState extends State<MapsPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    final listOfArguments =
-        ModalRoute.of(context)!.settings.arguments as List<dynamic>;
-    widget.apiKey = listOfArguments[0] as String;
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -123,9 +120,9 @@ class _MapsPageState extends State<MapsPage> {
                                       ConnectionState.done) {
                                     if (snapshot.hasData) {
                                       return MapsPageContent(
-                                          apiKey: widget.apiKey!,
+                                          apiKey: widget.apiKey,
                                           screenHeight: screenHeight,
-                                          controller: _controller,
+                                          controller: _controller!,
                                           lat: lat,
                                           lon: lon,
                                           screenWidth: screenWidth);

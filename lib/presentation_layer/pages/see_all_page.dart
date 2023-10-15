@@ -47,8 +47,6 @@ class _SeeAllPageState extends State<SeeAllPage> {
         listOfArguments[4] as SightseeingSortingCubit;
     widget.sorterToggleButtonCubit =
         listOfArguments[5] as SorterToggleButtonCubit;
-    // widget.sorterRadioButtonWidget =
-    //     listOfArguments[6] as SorterRadioButtonWidget;
 
     return MultiBlocProvider(
       providers: [

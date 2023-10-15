@@ -52,7 +52,7 @@ class MapsPageAppBarWidget extends StatelessWidget {
       ],
       leading: Padding(
         padding: const EdgeInsets.only(left: 20.0),
-        child: LocationDisplayWidget(apiKey: widget.apiKey!),
+        child: LocationDisplayWidget(apiKey: widget.apiKey),
       ),
     );
   }

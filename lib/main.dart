@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
-import 'package:guide_me/business_layer/cubit/favorites_cubit.dart';
+
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/opening_hours.dart';
 import 'package:guide_me/presentation_layer/pages/first_page.dart';
@@ -17,7 +17,7 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(NearbyPlacesModelAdapter());
   Hive.registerAdapter(OpeningHoursAdapter());
-  print('print: box open');
+
   await Hive.openBox<NearbyPlacesModel>('FavoritedPlaces');
   await requestWritePermission();
   runApp(const MyApp());
@@ -43,11 +43,8 @@ class MyApp extends StatelessWidget {
             create: (context) => BottomNavigationBarCubit(),
           ),
           // BlocProvider(
-          //   create: (context) => FavoritesCubit(),
-          // ),
-          BlocProvider(
-            create: (context) => FavoritesButtonCubit(),
-          )
+          //   create: (context) => FavoritesButtonCubit(),
+          // )
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -71,12 +68,14 @@ class MyApp extends StatelessWidget {
                 ),
             'placePage': (context) => const PlacePage(),
             'seeAllPage': (context) => SeeAllPage(),
-            'mapsPage': (context) => MapsPage(
+            'mapsPage': (context) => const MapsPage(
                   apiKey: apiKey,
                   customBottomAppBar: bottomAppBar,
                 ),
-            'bookmarksPage': (context) =>
-                BookmarksPage(customBottomAppBar: bottomAppBar)
+            'bookmarksPage': (context) => const BookmarksPage(
+                  customBottomAppBar: bottomAppBar,
+                  apiKey: apiKey,
+                )
           },
         ),
       );

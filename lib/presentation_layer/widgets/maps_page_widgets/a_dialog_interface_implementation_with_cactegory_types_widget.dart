@@ -9,9 +9,9 @@ import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.d
 
 class ADialogWithInterfaceListCategories
     extends BuildADialogOnMapsWindowWidget {
-  List<String> listOfCategories;
+  final List<String> listOfCategories;
 
-  ADialogWithInterfaceListCategories({
+  const ADialogWithInterfaceListCategories({
     super.key,
     required super.textLabel,
     required this.listOfCategories,
@@ -92,15 +92,15 @@ class ADialogWithInterfaceListCategories
                             BlocProvider.of<CategoryTypesFetcherCubit>(context);
                         createMap(
                             apiKey,
-                            lat,
-                            lon,
+                            lat!,
+                            lon!,
                             cachedData,
                             category,
                             categoryTypesFetcherCubit,
                             listOfPlaces,
                             mapLoadedController);
                         createDistanceMap(
-                            distanceMap, cachedData[category]!, lat, lon);
+                            distanceMap, cachedData[category]!, lat!, lon!);
 
                         return FutureBuilderForAlistInMapsPageTypeView(
                             distanceMap: distanceMap,

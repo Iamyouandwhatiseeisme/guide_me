@@ -13,7 +13,7 @@ class LocationCubit extends Cubit<LatLng> {
       }
     } catch (e) {
       // Handle any errors that may occur while getting the user's location.
-      print('Error getting user location: $e');
+      throw ('Error getting user location: $e');
     }
   }
 }

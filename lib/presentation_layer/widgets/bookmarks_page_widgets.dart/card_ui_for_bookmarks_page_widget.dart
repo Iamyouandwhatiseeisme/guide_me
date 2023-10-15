@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:guide_me/data_layer/data.dart';
-import 'package:flutter/rendering.dart';
-import 'package:guide_me/data_layer/models/nearby_places_model.dart';
-import 'package:hive/hive.dart';
+
 import '../presentation_layer_widgets.dart';
 
 class CardUiForBookmarksPage extends CardUi {
   final String apiKey;
   final Function onDelete;
 
-  late List<NearbyPlacesModel> list;
-  CardUiForBookmarksPage(
+  const CardUiForBookmarksPage(
       {super.key,
       required this.onDelete,
-      required this.list,
       required this.apiKey,
       required super.distance,
       required super.image,
@@ -27,8 +22,21 @@ class CardUiForBookmarksPage extends CardUi {
         '${userRatingTotal.substring(0, 1)},${userRatingTotal.substring(1)}';
 
     String type = '';
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
 
     return GestureDetector(
+      onLongPress: () => showDIalogWindow(
+          context,
+          screenHeight,
+          screenWidth,
+          const Icon(Icons.collections),
+          'Add to collections',
+          null,
+          null,
+          null,
+          apiKey,
+          place),
       onTap: () =>
           Navigator.pushNamed(context, 'placePage', arguments: [apiKey, place]),
       child: Container(
@@ -41,7 +49,7 @@ class CardUiForBookmarksPage extends CardUi {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Container(
+            SizedBox(
               height: 96,
               width: 160,
               child: ClipRRect(
@@ -55,14 +63,14 @@ class CardUiForBookmarksPage extends CardUi {
             const SizedBox(
               width: 10,
             ),
-            Container(
+            SizedBox(
               width: 180,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      Container(
+                      SizedBox(
                         width: 150,
                         child: Text(
                           place.name,
@@ -94,7 +102,7 @@ class CardUiForBookmarksPage extends CardUi {
                       children: [Text('No Rating Available')],
                     ),
                   if (place.types.isNotEmpty)
-                    Container(
+                    SizedBox(
                       height: 35,
                       width: 180,
                       child: Wrap(

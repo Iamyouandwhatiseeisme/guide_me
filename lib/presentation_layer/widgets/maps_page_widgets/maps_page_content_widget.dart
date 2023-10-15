@@ -21,7 +21,7 @@ class MapsPageContent extends StatelessWidget {
 
   final String apiKey;
   final double screenHeight;
-  final GoogleMapController? controller;
+  final GoogleMapController controller;
   final double lat;
   final double lon;
   final double screenWidth;

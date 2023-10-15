@@ -22,7 +22,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           data: ThemeData(canvasColor: const Color(0xffC75E6B)),
           child: BottomNavigationBar(
               showSelectedLabels: false,
-              unselectedItemColor: const Color(0xfff3f0e680).withOpacity(0.5),
+              unselectedItemColor: const Color(0xfff3f0e6).withOpacity(0.5),
               selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
               currentIndex: currentIndex.currentIndex,
               onTap: (index) {

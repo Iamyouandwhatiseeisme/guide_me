@@ -81,8 +81,8 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
                   createList(
                       distanceMap,
                       apiKey,
-                      lat,
-                      lon,
+                      lat!,
+                      lon!,
                       category,
                       categoryTypesFetcherCubit,
                       listOfPlaces,

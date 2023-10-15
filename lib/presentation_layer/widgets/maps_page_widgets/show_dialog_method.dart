@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:guide_me/presentation_layer/widgets/bookmarks_page_widgets.dart/build_dialog_for_collections_page.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
+import '../../../data_layer/models/nearby_places_model.dart';
 
 void showDIalogWindow(
   BuildContext context,
@@ -9,33 +11,37 @@ void showDIalogWindow(
   dynamic iconToDisplay,
   String textLabel,
   List<String>? listOfCategories,
-  final double lat,
-  final double lon,
+  final double? lat,
+  final double? lon,
   final String apiKey,
+  final NearbyPlacesModel? plateToAdd,
 ) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return listOfCategories == null
-          ? buildDialogWithoutListOfCategories(
-              lat,
-              lon,
-              apiKey,
-              textLabel,
-              screenHeight,
-              screenWidth,
-              iconToDisplay,
-            )
-          : buildDialogWithListOfCategories(
-              lat,
-              lon,
-              apiKey,
-              listOfCategories,
-              textLabel,
-              iconToDisplay,
-              screenHeight,
-              screenWidth,
-            );
+      return lat == null && lon == null
+          ? buildADialogWindowForCollectionsPage(apiKey, textLabel,
+              screenHeight, screenWidth, iconToDisplay, plateToAdd!)
+          : listOfCategories == null
+              ? buildDialogWithoutListOfCategories(
+                  lat!,
+                  lon!,
+                  apiKey,
+                  textLabel,
+                  screenHeight,
+                  screenWidth,
+                  iconToDisplay,
+                )
+              : buildDialogWithListOfCategories(
+                  lat!,
+                  lon!,
+                  apiKey,
+                  listOfCategories,
+                  textLabel,
+                  iconToDisplay,
+                  screenHeight,
+                  screenWidth,
+                );
     },
   );
 }
@@ -57,6 +63,24 @@ Widget buildDialogWithoutListOfCategories(
     screenHeight: screenHeight,
     screenWidth: screenWidth,
     iconToDisplay: iconToDisplay,
+  );
+}
+
+Widget buildADialogWindowForCollectionsPage(
+  String apiKey,
+  String textLabel,
+  double screenHeight,
+  double screenWidth,
+  dynamic iconToDisplay,
+  final NearbyPlacesModel plateToAdd,
+) {
+  return BuildDialogForCollectionsPage(
+    apiKey: apiKey,
+    textLabel: textLabel,
+    screenHeight: screenHeight,
+    screenWidth: screenWidth,
+    iconToDisplay: iconToDisplay,
+    placeToAdd: plateToAdd,
   );
 }
 

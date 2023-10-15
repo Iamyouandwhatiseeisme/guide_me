@@ -2,15 +2,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:guide_me/data_layer/data.dart';
-import 'package:guide_me/data_layer/toggle_favorites_function.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class FutureBuilderForAlistInMapsPageTypeView extends StatefulWidget {
   const FutureBuilderForAlistInMapsPageTypeView(
@@ -39,6 +36,7 @@ class _FutureBuilderForAlistInMapsPageTypeViewState
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     const imageIfNoImageIsAvailable =
         'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small/no-image-available-icon-vector.jpg';
@@ -95,7 +93,7 @@ class _FutureBuilderForAlistInMapsPageTypeViewState
                                             .withAlpha(40),
                                       ),
                                       child: FavoriteButton(
-                                          color: Color(0xffF3F0E6),
+                                          color: const Color(0xffF3F0E6),
                                           placeToDisplay: placeToDisplay,
                                           box: box)))
                             ]),

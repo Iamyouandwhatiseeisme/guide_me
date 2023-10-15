@@ -56,6 +56,7 @@ class _FirstPageState extends State<FirstPage> {
           return Builder(builder: (context) {
             final geoLocatorCubit = context.read<GeolocatorCubit>();
             geoLocatorCubit.getLocation();
+
             if (locationState is LocationLoaded) {
               latitude = locationState.position.latitude;
               longtitude = locationState.position.longitude;

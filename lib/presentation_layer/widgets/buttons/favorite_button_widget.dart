@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';

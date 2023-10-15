@@ -7,8 +7,8 @@ abstract class BuildADialogOnMapsWindowWidget extends StatelessWidget {
   final double screenHeight;
   final double screenWidth;
   final String apiKey;
-  final double lat;
-  final double lon;
+  final double? lat;
+  final double? lon;
   const BuildADialogOnMapsWindowWidget({
     Key? key,
     required this.textLabel,
@@ -16,8 +16,8 @@ abstract class BuildADialogOnMapsWindowWidget extends StatelessWidget {
     required this.screenHeight,
     required this.screenWidth,
     required this.apiKey,
-    required this.lat,
-    required this.lon,
+    this.lat,
+    this.lon,
   }) : super(key: key);
 
   @override

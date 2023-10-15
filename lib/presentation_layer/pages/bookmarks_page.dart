@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:guide_me/business_layer/cubits.dart';
@@ -13,12 +12,12 @@ import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.d
 import '../widgets/custom_bottom_navigatio_bar_widget.dart';
 
 class BookmarksPage extends StatefulWidget {
-  late String? apiKey;
+  final String? apiKey;
   final CustomBottomNavigationBar customBottomAppBar;
 
-  BookmarksPage({
+  const BookmarksPage({
     Key? key,
-    this.apiKey,
+    required this.apiKey,
     required this.customBottomAppBar,
   }) : super(key: key);
 
@@ -41,10 +40,6 @@ class _BookmarksPageState extends State<BookmarksPage> {
 
   @override
   Widget build(BuildContext context) {
-    final double height = MediaQuery.of(context).size.height;
-    final listOfArguments =
-        ModalRoute.of(context)!.settings.arguments as List<dynamic>;
-    widget.apiKey = listOfArguments[0] as String;
     final box = Hive.box<NearbyPlacesModel>("FavoritedPlaces");
 
     return MultiBlocProvider(
@@ -90,8 +85,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
                             distanceMap, listOfFavorites, userLat, userLon);
                       }
 
-                      return SizedBox(
-                        height: 600,
+                      return Expanded(
                         child: ListView.builder(
                           scrollDirection: Axis.vertical,
                           itemCount: listOfFavorites.length,
@@ -124,7 +118,6 @@ class _BookmarksPageState extends State<BookmarksPage> {
                                                 Hive.box<NearbyPlacesModel>(
                                                     "FavoritedPlaces"));
                                           },
-                                          list: listOfFavorites,
                                           apiKey: widget.apiKey!,
                                           distance: distanceMap[
                                               listOfFavorites[index]],
@@ -141,14 +134,14 @@ class _BookmarksPageState extends State<BookmarksPage> {
                   );
                 },
               ),
-              // ElevatedButton(
-              //   child: const Text('delete'),
-              //   onPressed: () {
-              //     final listOfFavorites =
-              //         Hive.box<NearbyPlacesModel>('FavoritedPlaces');
-              //     listOfFavorites.clear();
-              //   },
-              // )
+              const Center(
+                  child: Text(
+                'Press and hold item to add to collection',
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xff292F32)),
+              ))
             ],
           );
         }),

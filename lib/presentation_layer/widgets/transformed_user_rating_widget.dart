@@ -18,7 +18,7 @@ class TransformedUserRatingWIdget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 45),
-      child: Container(
+      child: SizedBox(
         child: Transform.scale(
           scale: 1.5,
           child: UserRatingAndTotalRatingWidget(
