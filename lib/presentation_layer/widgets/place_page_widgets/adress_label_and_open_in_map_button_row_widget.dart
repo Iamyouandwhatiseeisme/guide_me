@@ -36,9 +36,12 @@ class AdressLabelAndOpenInMapButtonRowWIdget extends StatelessWidget {
                       context.read<OpenLocationOnMapCubit>();
                   openLocationCubit.openInMap(passedPlace.name, adress);
                 },
-                child: const Padding(
-                  padding: EdgeInsets.only(right: 20.0),
-                  child: TextWithUnderLine(textToDisplay: 'See on Map'),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: TextWithUnderLine(
+                    textToDisplay: 'See on Map',
+                    color: const Color(0xff292F32).withOpacity(0.75),
+                  ),
                 ),
               );
             },

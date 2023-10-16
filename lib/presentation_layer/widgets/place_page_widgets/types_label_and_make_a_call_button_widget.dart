@@ -29,7 +29,10 @@ class TypesLabelAndMakeACallButtonWidgetRow extends StatelessWidget {
                 onTap: () {
                   context.read<MakeACallCubit>().makePhoneCall(number!);
                 },
-                child: const TextWithUnderLine(textToDisplay: 'Call')),
+                child: TextWithUnderLine(
+                  textToDisplay: 'Call',
+                  color: const Color(0xff292F32).withOpacity(0.75),
+                )),
           );
         },
       )

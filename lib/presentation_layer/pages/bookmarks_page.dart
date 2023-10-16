@@ -134,14 +134,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
                   );
                 },
               ),
-              const Center(
-                  child: Text(
-                'Press and hold item to add to collection',
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff292F32)),
-              ))
+              const TextLabelInstructionsToAddItemToCollections()
             ],
           );
         }),

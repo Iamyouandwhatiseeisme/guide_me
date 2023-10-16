@@ -24,9 +24,10 @@ class WriteAReviewButtonWidget extends StatelessWidget {
                 .read<WriteAReviewCubit>()
                 .openGoogleMapsReview(passedPlace.placeId);
           },
-          child: const Padding(
-            padding: EdgeInsets.only(right: 20.0),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 20.0),
             child: TextWithUnderLine(
+              color: const Color(0xff292F32).withOpacity(0.75),
               textToDisplay: 'Write a review',
             ),
           ),

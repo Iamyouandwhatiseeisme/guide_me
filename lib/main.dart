@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
 
 import 'package:guide_me/data_layer/data.dart';
+import 'package:guide_me/data_layer/models/collection_model.dart';
 import 'package:guide_me/data_layer/models/opening_hours.dart';
 import 'package:guide_me/presentation_layer/pages/first_page.dart';
 import 'package:guide_me/presentation_layer/pages/maps_page.dart';
@@ -17,7 +18,8 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(NearbyPlacesModelAdapter());
   Hive.registerAdapter(OpeningHoursAdapter());
-
+  Hive.registerAdapter(CollectionModelAdapter());
+  await Hive.openBox<CollectionModel>('CollectionLists');
   await Hive.openBox<NearbyPlacesModel>('FavoritedPlaces');
   await requestWritePermission();
   runApp(const MyApp());

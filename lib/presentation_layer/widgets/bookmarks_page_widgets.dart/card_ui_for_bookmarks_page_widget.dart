@@ -30,7 +30,10 @@ class CardUiForBookmarksPage extends CardUi {
           context,
           screenHeight,
           screenWidth,
-          const Icon(Icons.collections),
+          const Icon(
+            Icons.collections_rounded,
+            color: Colors.white,
+          ),
           'Add to collections',
           null,
           null,

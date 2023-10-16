@@ -1,9 +1,11 @@
 import 'package:flutter/widgets.dart';
 
 class TextWithUnderLine extends StatelessWidget {
+  final Color color;
   final String textToDisplay;
   const TextWithUnderLine({
     Key? key,
+    required this.color,
     required this.textToDisplay,
   }) : super(key: key);
 
@@ -12,10 +14,11 @@ class TextWithUnderLine extends StatelessWidget {
     return Text(
       textToDisplay,
       style: TextStyle(
+          decorationColor: color,
           decoration: TextDecoration.underline,
           fontWeight: FontWeight.w400,
           fontSize: 16,
-          color: const Color(0xff292F32).withOpacity(0.75)),
+          color: color),
     );
   }
 }
