@@ -44,6 +44,7 @@ class CardUi extends StatelessWidget {
           ),
           if (place.rating != null && place.userRatingsTotal != null)
             UserRatingAndTotalRatingWidget(
+                color: Colors.black,
                 place: place,
                 userRatingTotal: userRatingTotal,
                 transformedUserRatingTotal: transformedUserRatingTotal)

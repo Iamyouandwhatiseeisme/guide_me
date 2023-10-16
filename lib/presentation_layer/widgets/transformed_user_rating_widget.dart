@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
@@ -22,6 +22,7 @@ class TransformedUserRatingWIdget extends StatelessWidget {
         child: Transform.scale(
           scale: 1.5,
           child: UserRatingAndTotalRatingWidget(
+              color: Colors.black,
               place: passedPlace,
               userRatingTotal: userRatingTotal,
               transformedUserRatingTotal: transformedUserRatingTotal),

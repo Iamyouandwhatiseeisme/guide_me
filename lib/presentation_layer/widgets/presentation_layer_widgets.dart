@@ -67,3 +67,9 @@ export 'bookmarks_page_widgets.dart/collection_dialog_user_input_reader_text_fie
 export 'buttons/create_new_collection_button.dart';
 export 'buttons/exit_dialog_button.dart';
 export 'bookmarks_page_widgets.dart/add_to_collecitons_dialog_top_bar_with_label_icon_and_exit_button.dart';
+export 'bookmarks_page_widgets.dart/list_view_builder_for_collections_list.dart';
+export 'bookmarks_page_widgets.dart/collections_dialog_content.dart';
+export 'bookmarks_page_widgets.dart/image_for_card_on_dialog_page.dart';
+export 'bookmarks_page_widgets.dart/name_label_for_cards_on_favorite_page.dart';
+export 'bookmarks_page_widgets.dart/dialog_place_type_to_add_type_label.dart';
+export 'bookmarks_page_widgets.dart/place_to_add_to_collections_card_widget.dart';

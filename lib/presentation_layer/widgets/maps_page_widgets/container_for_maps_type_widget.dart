@@ -35,10 +35,12 @@ class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (textLabel != 'Other') {
-          showDIalogWindow(context, screenHeight, screenWidth, iconToDisplay,
-              textLabel, null, lat!, lon!, apiKey, null);
+          showDIalogWindow(null, null, context, screenHeight, screenWidth,
+              iconToDisplay, textLabel, null, lat!, lon!, apiKey, null);
         } else {
           showDIalogWindow(
+            null,
+            null,
             context,
             screenHeight,
             screenWidth,

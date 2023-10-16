@@ -27,6 +27,8 @@ class CardUiForBookmarksPage extends CardUi {
 
     return GestureDetector(
       onLongPress: () => showDIalogWindow(
+          distance,
+          image,
           context,
           screenHeight,
           screenWidth,
@@ -75,12 +77,9 @@ class CardUiForBookmarksPage extends CardUi {
                     children: [
                       SizedBox(
                         width: 150,
-                        child: Text(
-                          place.name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w800, fontSize: 12),
+                        child: NameLabelForCardsOnFavoritesPage(
+                          place: place,
+                          color: const Color(0xff292F32),
                         ),
                       ),
                       GestureDetector(
@@ -97,6 +96,7 @@ class CardUiForBookmarksPage extends CardUi {
                   ),
                   if (place.rating != null && place.userRatingsTotal != null)
                     UserRatingAndTotalRatingWidget(
+                        color: Colors.black,
                         place: place,
                         userRatingTotal: userRatingTotal,
                         transformedUserRatingTotal: transformedUserRatingTotal)

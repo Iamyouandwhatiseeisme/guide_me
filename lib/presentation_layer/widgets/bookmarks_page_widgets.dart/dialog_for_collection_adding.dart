@@ -17,12 +17,12 @@ class DialogForCollectionAdding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      child: Container(
+      child: SizedBox(
         height: 120,
         child: Column(
           children: [
             CollectionDialogUserInputReaderTextField(
-                textController: _textController),
+                listToCreate: listToCreate, textController: _textController),
             AddCollectionButton(
                 textController: _textController, listToCreate: listToCreate)
           ],

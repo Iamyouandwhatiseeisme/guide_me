@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:hive/hive.dart';
 
@@ -22,6 +21,7 @@ class AddCollectionButton extends StatelessWidget {
           String nameOfCollection = _textController.text;
           Hive.box<CollectionModel>("CollectionLists").put(nameOfCollection,
               CollectionModel(name: nameOfCollection, items: listToCreate));
+          _textController.clear();
           Navigator.pop(context);
         },
         icon: const Icon(Icons.add),

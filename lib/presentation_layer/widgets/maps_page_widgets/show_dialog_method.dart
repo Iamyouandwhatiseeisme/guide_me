@@ -5,6 +5,8 @@ import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.d
 import '../../../data_layer/models/nearby_places_model.dart';
 
 void showDIalogWindow(
+  final double? distance,
+  String? image,
   BuildContext context,
   double screenHeight,
   double screenWidth,
@@ -20,8 +22,8 @@ void showDIalogWindow(
     context: context,
     builder: (BuildContext context) {
       return lat == null && lon == null
-          ? buildADialogWindowForCollectionsPage(apiKey, textLabel,
-              screenHeight, screenWidth, iconToDisplay, plateToAdd!)
+          ? buildADialogWindowForCollectionsPage(distance!, image!, apiKey,
+              textLabel, screenHeight, screenWidth, iconToDisplay, plateToAdd!)
           : listOfCategories == null
               ? buildDialogWithoutListOfCategories(
                   lat!,
@@ -67,6 +69,8 @@ Widget buildDialogWithoutListOfCategories(
 }
 
 Widget buildADialogWindowForCollectionsPage(
+  final double distance,
+  String image,
   String apiKey,
   String textLabel,
   double screenHeight,
@@ -75,6 +79,8 @@ Widget buildADialogWindowForCollectionsPage(
   final NearbyPlacesModel plateToAdd,
 ) {
   return BuildDialogForCollectionsPage(
+    distance: distance,
+    image: image,
     apiKey: apiKey,
     textLabel: textLabel,
     screenHeight: screenHeight,
