@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/data_layer/data.dart';
 
+import '../../../data_layer/refresh_item_list_function.dart';
 import '../presentation_layer_widgets.dart';
 
 class CardUiForBookmarksPage extends CardUi {
   final String apiKey;
   final Function onDelete;
   final bool tabOptionState;
+  final String? name;
 
   const CardUiForBookmarksPage(
       {super.key,
+      this.name,
       required this.tabOptionState,
       required this.onDelete,
       required this.apiKey,
@@ -85,18 +88,18 @@ class CardUiForBookmarksPage extends CardUi {
                         ),
                       ),
                       Builder(builder: (context) {
-                        return tabOptionState == true
-                            ? GestureDetector(
-                                onTap: () {
-                                  onDelete();
-                                },
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.grey.withOpacity(0.25)),
-                                    child: const Icon(Icons.close_outlined)),
-                              )
-                            : Container();
+                        return GestureDetector(
+                          onTap: () {
+                            tabOptionState == true
+                                ? onDelete()
+                                : refreshItemList(name!, place);
+                          },
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey.withOpacity(0.25)),
+                              child: const Icon(Icons.close_outlined)),
+                        );
                       })
                     ],
                   ),

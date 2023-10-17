@@ -79,3 +79,4 @@ export 'bookmarks_page_widgets.dart/collections_lists_for_collections_page_when_
 export 'bookmarks_page_widgets.dart/bookmarks_page_bottom_label_or_button_widget.dart';
 export 'bookmarks_page_widgets.dart/list_view_for_collections_list_that_is_expanded.dart';
 export 'bookmarks_page_widgets.dart/collections_tab_page_contet.dart';
+export 'bookmarks_page_widgets.dart/bookmarks_page_content.dart';

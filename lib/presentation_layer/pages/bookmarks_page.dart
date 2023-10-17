@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:guide_me/business_layer/cubit/is_exapnded_cubit.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:guide_me/business_layer/cubits.dart';
@@ -10,7 +9,6 @@ import 'package:guide_me/data_layer/create_distance_map_method.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
-import '../../data_layer/models/collection_model.dart';
 import '../widgets/custom_bottom_navigatio_bar_widget.dart';
 
 class BookmarksPage extends StatefulWidget {
@@ -97,23 +95,12 @@ class _BookmarksPageState extends State<BookmarksPage> {
                     createDistanceMap(
                         distanceMap, listOfFavorites, userLat, userLon);
                   }
-                  return BlocBuilder<BookmarksTabCubit, TabOption>(
-                    builder: (context, tabOptionstate) {
-                      bool isFavorites = tabOptionstate == TabOption.favorites;
-                      return isFavorites
-                          ? FavoritesPageContent(
-                              tabOptionState: isFavorites,
-                              onDelete: deleteItemAndRefresh,
-                              listOfFavorites: listOfFavorites,
-                              widget: widget,
-                              box: box,
-                              distanceMap: distanceMap)
-                          : CollectionsTabPageContent(
-                              isFavorites: isFavorites,
-                              widget: widget,
-                              distanceMap: distanceMap);
-                    },
-                  );
+                  return BookmarksPageContent(
+                      deleteItemAndRefresh: deleteItemAndRefresh,
+                      listOfFavorites: listOfFavorites,
+                      widget: widget,
+                      box: box,
+                      distanceMap: distanceMap);
                 },
               ),
               const BookmarksPageBottomLabelAndButtonBuilder()

@@ -8,6 +8,7 @@ import '../../../data_layer/models/nearby_places_model.dart';
 class FavoritesPageContent extends StatefulWidget {
   const FavoritesPageContent({
     super.key,
+    this.nameOfList,
     required this.onDelete,
     required this.listOfFavorites,
     required this.widget,
@@ -15,6 +16,7 @@ class FavoritesPageContent extends StatefulWidget {
     required this.distanceMap,
     required this.tabOptionState,
   });
+  final String? nameOfList;
   final bool tabOptionState;
   final List<NearbyPlacesModel> listOfFavorites;
   final BookmarksPage widget;
@@ -58,6 +60,7 @@ class _FavoritesPageContentState extends State<FavoritesPageContent> {
                         valueListenable: widget.box.listenable(),
                         builder: (context, box, child) {
                           return BookmarksPageCardWidget(
+                            name: widget.nameOfList,
                             tabOptionState: widget.tabOptionState,
                             onDelete: () {
                               widget.onDelete(widget.listOfFavorites[index],
