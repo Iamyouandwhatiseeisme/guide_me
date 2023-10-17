@@ -73,3 +73,7 @@ export 'bookmarks_page_widgets.dart/image_for_card_on_dialog_page.dart';
 export 'bookmarks_page_widgets.dart/name_label_for_cards_on_favorite_page.dart';
 export 'bookmarks_page_widgets.dart/dialog_place_type_to_add_type_label.dart';
 export 'bookmarks_page_widgets.dart/place_to_add_to_collections_card_widget.dart';
+export 'bookmarks_page_widgets.dart/favorites_page_content_builder.dart';
+export 'buttons/add_collection_elevated_button.dart';
+export 'bookmarks_page_widgets.dart/collections_lists_for_collections_page_when_not_expanded.dart';
+export 'bookmarks_page_widgets.dart/bookmarks_page_bottom_label_or_button_widget.dart';

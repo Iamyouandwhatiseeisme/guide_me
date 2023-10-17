@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/sightseeing_sorting_cubit.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../business_layer/cubit/sorter_toggle_button_cubit.dart';
 
@@ -37,7 +39,7 @@ class SortableListViewCardBuilder extends StatelessWidget {
                 BlocProvider.of<SightseeingSortingCubit>(context);
             sightseeingSortingCubit.sortList(
                 sortedList, state.value, userLat, userLon, distanceMap);
-
+            final box = Hive.box<NearbyPlacesModel>('FavoritedPlaces');
             // Now, build the UI using the sorted list
             return SizedBox(
               width: 430,
@@ -46,34 +48,57 @@ class SortableListViewCardBuilder extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 child: SizedBox(
                   height: 300,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: sortedList.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(
-                          left: 20,
-                          top: 10,
-                        ),
-                        child: SizedBox(
-                          height: 280,
-                          width: 250,
-                          child: GestureDetector(
-                            onTap: () => Navigator.pushNamed(
-                              context,
-                              'placePage',
-                              arguments: [apiKey, sortedList[index]],
-                            ),
-                            child: SightseeingsPlaceCard(
-                              apiKey: apiKey,
-                              distance: distanceMap[sortedList[index]],
-                              place: sortedList[index],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                  child: ValueListenableBuilder(
+                      valueListenable: box.listenable(),
+                      builder: (context, value, child) {
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: sortedList.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                left: 20,
+                                top: 10,
+                              ),
+                              child: SizedBox(
+                                height: 280,
+                                width: 250,
+                                child: GestureDetector(
+                                  onTap: () => Navigator.pushNamed(
+                                    context,
+                                    'placePage',
+                                    arguments: [apiKey, sortedList[index]],
+                                  ),
+                                  child: Stack(children: [
+                                    SightseeingsPlaceCard(
+                                      apiKey: apiKey,
+                                      distance: distanceMap[sortedList[index]],
+                                      place: sortedList[index],
+                                    ),
+                                    Positioned(
+                                        top: 10,
+                                        right: 10,
+                                        child: Container(
+                                            width: 36,
+                                            height: 36,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(32),
+                                              color: const Color(0xffF3F0E6)
+                                                  .withAlpha(40),
+                                            ),
+                                            child: FavoriteButton(
+                                                color: const Color(0xffF3F0E6),
+                                                placeToDisplay:
+                                                    sortedList[index],
+                                                box: box)))
+                                  ]),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      }),
                 ),
               ),
             );

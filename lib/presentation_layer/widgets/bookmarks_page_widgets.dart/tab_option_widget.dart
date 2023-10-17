@@ -28,11 +28,10 @@ class TabOptionWidget extends StatelessWidget {
         decoration: BoxDecoration(
             border: Border(
                 bottom: BorderSide(
-          width: 2,
-          color: isSelected
-              ? Colors.black // Selected tab color
-              : Colors.transparent,
-        ))),
+                    width: 0.5,
+                    color: isSelected
+                        ? const Color(0xff292F32) // Selected tab color
+                        : const Color(0xff292F32).withOpacity(0.5)))),
         width: contaienrWidth,
         height: 60,
         child: Center(

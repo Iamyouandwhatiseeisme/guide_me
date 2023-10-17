@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 
 import '../../../data_layer/models/collection_model.dart';
 
-class AddCollectionButton extends StatelessWidget {
+class AddCollectionButton extends StatefulWidget {
   const AddCollectionButton({
     super.key,
     required TextEditingController textController,
@@ -15,16 +15,31 @@ class AddCollectionButton extends StatelessWidget {
   final List<NearbyPlacesModel> listToCreate;
 
   @override
+  State<AddCollectionButton> createState() => _AddCollectionButtonState();
+}
+
+class _AddCollectionButtonState extends State<AddCollectionButton> {
+  @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-        onPressed: () {
-          String nameOfCollection = _textController.text;
-          Hive.box<CollectionModel>("CollectionLists").put(nameOfCollection,
-              CollectionModel(name: nameOfCollection, items: listToCreate));
-          _textController.clear();
-          Navigator.pop(context);
-        },
-        icon: const Icon(Icons.add),
-        label: const Text('Create collection'));
+    return ValueListenableBuilder<TextEditingValue>(
+        valueListenable: widget._textController,
+        builder: (context, value, child) {
+          return ElevatedButton.icon(
+            onPressed: widget._textController.text.isNotEmpty
+                ? () {
+                    String nameOfCollection = widget._textController.text;
+                    Hive.box<CollectionModel>("CollectionLists").put(
+                      nameOfCollection,
+                      CollectionModel(
+                          name: nameOfCollection, items: widget.listToCreate),
+                    );
+                    widget._textController.clear();
+                    Navigator.pop(context);
+                  }
+                : null, // Set to null when text is empty
+            icon: const Icon(Icons.add),
+            label: const Text('Create collection'),
+          );
+        });
   }
 }
