@@ -13,11 +13,12 @@ class FavoritesPageContent extends StatefulWidget {
     required this.widget,
     required this.box,
     required this.distanceMap,
+    required this.tabOptionState,
   });
-
+  final bool tabOptionState;
   final List<NearbyPlacesModel> listOfFavorites;
   final BookmarksPage widget;
-  final Box<NearbyPlacesModel> box;
+  final Box<dynamic> box;
   final Map<NearbyPlacesModel, double?> distanceMap;
   final Function onDelete;
 
@@ -37,8 +38,9 @@ class _FavoritesPageContentState extends State<FavoritesPageContent> {
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.only(
-                  left: 20,
+                  left: 10,
                   top: 10,
+                  right: 10,
                 ),
                 child: SizedBox(
                   height: 113,
@@ -56,12 +58,10 @@ class _FavoritesPageContentState extends State<FavoritesPageContent> {
                         valueListenable: widget.box.listenable(),
                         builder: (context, box, child) {
                           return BookmarksPageCardWidget(
+                            tabOptionState: widget.tabOptionState,
                             onDelete: () {
-                              widget.onDelete(
-                                  widget.listOfFavorites[index],
-                                  widget.listOfFavorites,
-                                  Hive.box<NearbyPlacesModel>(
-                                      "FavoritedPlaces"));
+                              widget.onDelete(widget.listOfFavorites[index],
+                                  widget.listOfFavorites, box);
                             },
                             apiKey: widget.widget.apiKey!,
                             distance: widget

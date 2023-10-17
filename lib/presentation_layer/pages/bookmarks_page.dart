@@ -43,14 +43,13 @@ class _BookmarksPageState extends State<BookmarksPage> {
   void deleteItemAndRefresh(NearbyPlacesModel place,
       List<NearbyPlacesModel> listOfFavorites, Box<NearbyPlacesModel> box) {
     Hive.box<NearbyPlacesModel>('FavoritedPlaces').delete(place.hashCode);
-    listOfFavorites = box.toMap().values.toList();
-    refreshList(listOfFavorites, box);
-  }
-
-  void refreshList(
-      List<NearbyPlacesModel> listOfFavorites, Box<NearbyPlacesModel> box) {
     listOfFavorites.clear();
     listOfFavorites = box.toMap().values.toList();
+
+    refreshList();
+  }
+
+  void refreshList() {
     setState(() {});
   }
 
@@ -58,8 +57,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
   Widget build(BuildContext context) {
     final box = Hive.box<NearbyPlacesModel>("FavoritedPlaces");
     final listOfFavorites = box.toMap().values.toList();
-    final List<CollectionModel> listOfCollections =
-        Hive.box<CollectionModel>("CollectionLists").toMap().values.toList();
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -100,63 +98,20 @@ class _BookmarksPageState extends State<BookmarksPage> {
                         distanceMap, listOfFavorites, userLat, userLon);
                   }
                   return BlocBuilder<BookmarksTabCubit, TabOption>(
-                    builder: (context, state) {
-                      return state == TabOption.favorites
+                    builder: (context, tabOptionstate) {
+                      bool isFavorites = tabOptionstate == TabOption.favorites;
+                      return isFavorites
                           ? FavoritesPageContent(
+                              tabOptionState: isFavorites,
                               onDelete: deleteItemAndRefresh,
                               listOfFavorites: listOfFavorites,
                               widget: widget,
                               box: box,
                               distanceMap: distanceMap)
-                          : Expanded(
-                              child: ValueListenableBuilder(
-                                  valueListenable: Hive.box<CollectionModel>(
-                                          'CollectionLists')
-                                      .listenable(),
-                                  builder: (context, box, child) {
-                                    final List<CollectionModel> listToPass =
-                                        Hive.box<CollectionModel>(
-                                                "CollectionLists")
-                                            .toMap()
-                                            .values
-                                            .toList();
-                                    return Padding(
-                                      padding: const EdgeInsets.only(top: 20.0),
-                                      child: ListView.builder(
-                                          itemCount: listToPass.length,
-                                          itemBuilder: (context, index) {
-                                            return BlocProvider(
-                                                create: (context) =>
-                                                    IsExapndedCubit(),
-                                                child: BlocBuilder<
-                                                        IsExapndedCubit, bool>(
-                                                    builder: (context, state) {
-                                                  return state == false
-                                                      ? CollectionsListForCollectionsPage(
-                                                          icon: const Icon(
-                                                              Icons
-                                                                  .arrow_right_outlined,
-                                                              size: 40),
-                                                          index: index,
-                                                          listOfCollections:
-                                                              listToPass)
-                                                      : CollectionsListForCollectionsPage(
-                                                          color: const Color(
-                                                                  0xff292F32)
-                                                              .withOpacity(
-                                                                  0.25),
-                                                          listOfCollections:
-                                                              listOfCollections,
-                                                          index: index,
-                                                          icon: const Icon(
-                                                              Icons
-                                                                  .arrow_drop_down_outlined,
-                                                              size: 40));
-                                                }));
-                                          }),
-                                    );
-                                  }),
-                            );
+                          : CollectionsTabPageContent(
+                              isFavorites: isFavorites,
+                              widget: widget,
+                              distanceMap: distanceMap);
                     },
                   );
                 },

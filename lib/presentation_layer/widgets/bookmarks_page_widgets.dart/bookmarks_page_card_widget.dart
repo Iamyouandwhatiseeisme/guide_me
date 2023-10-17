@@ -4,12 +4,14 @@ import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.d
 class BookmarksPageCardWidget extends SightseeingsPlaceCard {
   const BookmarksPageCardWidget(
       {super.key,
+      required this.tabOptionState,
       required this.onDelete,
       required super.place,
       required super.distance,
       required super.apiKey});
 
   final Function onDelete;
+  final bool tabOptionState;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class BookmarksPageCardWidget extends SightseeingsPlaceCard {
       final imageIfImageIsAvailable =
           'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=$apiKey';
       return CardUiForBookmarksPage(
+        tabOptionState: tabOptionState,
         onDelete: onDelete,
         apiKey: apiKey,
         distance: distance,
@@ -28,6 +31,7 @@ class BookmarksPageCardWidget extends SightseeingsPlaceCard {
       );
     } else {
       return CardUiForBookmarksPage(
+        tabOptionState: tabOptionState,
         onDelete: onDelete,
         apiKey: apiKey,
         distance: distance,

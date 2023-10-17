@@ -6,9 +6,11 @@ import '../presentation_layer_widgets.dart';
 class CardUiForBookmarksPage extends CardUi {
   final String apiKey;
   final Function onDelete;
+  final bool tabOptionState;
 
   const CardUiForBookmarksPage(
       {super.key,
+      required this.tabOptionState,
       required this.onDelete,
       required this.apiKey,
       required super.distance,
@@ -82,16 +84,20 @@ class CardUiForBookmarksPage extends CardUi {
                           color: const Color(0xff292F32),
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          onDelete();
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.grey.withOpacity(0.25)),
-                            child: const Icon(Icons.close_outlined)),
-                      )
+                      Builder(builder: (context) {
+                        return tabOptionState == true
+                            ? GestureDetector(
+                                onTap: () {
+                                  onDelete();
+                                },
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.grey.withOpacity(0.25)),
+                                    child: const Icon(Icons.close_outlined)),
+                              )
+                            : Container();
+                      })
                     ],
                   ),
                   if (place.rating != null && place.userRatingsTotal != null)
