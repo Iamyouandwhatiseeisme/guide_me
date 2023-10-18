@@ -80,3 +80,9 @@ export 'bookmarks_page_widgets.dart/bookmarks_page_bottom_label_or_button_widget
 export 'bookmarks_page_widgets.dart/list_view_for_collections_list_that_is_expanded.dart';
 export 'bookmarks_page_widgets.dart/collections_tab_page_contet.dart';
 export 'bookmarks_page_widgets.dart/bookmarks_page_content.dart';
+export 'authentification_page.widgets/sign_up_widget.dart';
+export 'authentification_page.widgets/logged_in_widget.dart';
+export 'authentification_page.widgets/email_text_field.dart';
+export 'authentification_page.widgets/auth_page_widget.dart';
+export 'authentification_page.widgets/login_page_widget.dart';
+export 'authentification_page.widgets/sign_up_or_log_in_text.dart';

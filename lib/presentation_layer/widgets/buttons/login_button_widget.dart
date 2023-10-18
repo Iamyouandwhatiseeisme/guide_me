@@ -1,8 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginButtonWidget extends StatelessWidget {
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
   const LoginButtonWidget({
     super.key,
+    required this.emailController,
+    required this.passwordController,
   });
 
   @override
@@ -15,7 +20,7 @@ class LoginButtonWidget extends StatelessWidget {
         foregroundColor: const Color(0xffF3F0E6),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
         onPressed: () {
-          Navigator.pushNamed(context, 'firstPage');
+          signIn();
         },
         child: const Text(
           'Login',
@@ -26,5 +31,15 @@ class LoginButtonWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future signIn() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+    } on Exception catch (e) {
+      throw ('print: $e');
+    }
   }
 }

@@ -1,8 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:guide_me/business_layer/widgets/business_widgets.dart';
+import 'package:guide_me/presentation_layer/pages/first_page.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -12,64 +15,61 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   @override
+  Widget build(BuildContext context) {
+    return LoginPageWIdget(
+        emailController: _emailController,
+        passwordController: _passwordController);
+  }
+}
+
+class LoginPageWIdget extends StatefulWidget {
+  const LoginPageWIdget({
+    super.key,
+    required TextEditingController emailController,
+    required TextEditingController passwordController,
+  })  : _emailController = emailController,
+        _passwordController = passwordController;
+
+  final TextEditingController _emailController;
+  final TextEditingController _passwordController;
+
+  @override
+  State<LoginPageWIdget> createState() => _LoginPageWIdgetState();
+}
+
+class _LoginPageWIdgetState extends State<LoginPageWIdget> {
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    widget._emailController.dispose();
+    widget._passwordController.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF3F0E6),
-      body: Stack(
-        alignment: Alignment.topCenter,
-        children: <Widget>[
-          Image.asset('assets/images/Eclipse smaller.png'),
-          SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  height: 40,
-                ),
-                Image.asset('assets/images/GuideMe (1) 3.png'),
-                const SizedBox(
-                  height: 120,
-                ),
-                const MyTextField(
-                  label: 'Email',
-                  hintText: 'Example@gmail.com',
-                ),
-                const SizedBox(height: 24),
-                const MyTextField(
-                    label: 'Password', hintText: 'Enter Password'),
-                const ForgotPasswordLabel(),
-                const SizedBox(
-                  height: 44,
-                ),
-                const LoginButtonWidget(),
-                const SizedBox(
-                  height: 16,
-                ),
-                const DontHaveAnAccountSignUpLabel(),
-                const SizedBox(
-                  height: 30,
-                ),
-                const DividerWidget(),
-                const SignInWithButtonWIdget(
-                  heroTag: 'bas1',
-                  logo: 'assets/images/logos/facebook logo.png',
-                  label: 'Facebook',
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const SignInWithButtonWIdget(
-                  heroTag: 'bas2',
-                  logo: 'assets/images/logos/google logo.png',
-                  label: 'Google',
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
+      body: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData && snapshot.data != null) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                Navigator.of(context).pushReplacementNamed('firstPage');
+              });
+              // Return a placeholder widget or loading indicator while navigating.
+              return Center(
+                child:
+                    LoadingAnimationWidget.inkDrop(color: Colors.red, size: 40),
+              );
+            } else {
+              return AuthPageWidget(
+                  emailController: widget._emailController,
+                  passwordController: widget._passwordController);
+            }
+          }),
     );
   }
 }
