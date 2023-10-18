@@ -5,9 +5,15 @@ import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.d
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key, required this.onClickedLogIn});
+  const SignUpPage(
+      {super.key,
+      required this.onClickedLogIn,
+      required this.emailController,
+      required this.passwordController});
 
   final VoidCallback onClickedLogIn;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -28,7 +34,10 @@ class _SignUpPageState extends State<SignUpPage> {
           } else if (snapshot.hasError) {
             return const Center(child: Text('Something Went Wrong'));
           } else {
-            return SignUpPageWidgets(onClickedLogIn: widget.onClickedLogIn);
+            return SignUpPageWidgets(
+                emailController: widget.emailController,
+                passwordController: widget.passwordController,
+                onClickedLogIn: widget.onClickedLogIn);
           }
         });
   }

@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:guide_me/business_layer/widgets/auth_page_text_field_widget.dart';
 
@@ -13,12 +14,20 @@ class EmailTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 48,
       width: 320,
-      child: TextField(
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: (email) => email != null && !EmailValidator.validate(email)
+            ? "Enter a valid E-Mail"
+            : null,
         controller: _controller,
         decoration: InputDecoration(
+          focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(32),
+              borderSide: BorderSide(
+                  width: 0.5, color: const Color(0xff292F32).withOpacity(0.5))),
           contentPadding: const EdgeInsets.only(left: 16),
           label: Text(widget.label),
           hintStyle: TextStyle(
@@ -28,6 +37,10 @@ class EmailTextField extends StatelessWidget {
           hintText: widget.hintText,
           floatingLabelBehavior: FloatingLabelBehavior.always,
           enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(32),
+              borderSide: BorderSide(
+                  width: 0.5, color: const Color(0xff292F32).withOpacity(0.5))),
+          errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(32),
               borderSide: BorderSide(
                   width: 0.5, color: const Color(0xff292F32).withOpacity(0.5))),

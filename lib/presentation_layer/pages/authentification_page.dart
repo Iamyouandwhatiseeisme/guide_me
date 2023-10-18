@@ -15,26 +15,16 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return LoginPageWIdget(
-        emailController: _emailController,
-        passwordController: _passwordController);
+    return const LoginPageWIdget();
   }
 }
 
 class LoginPageWIdget extends StatefulWidget {
   const LoginPageWIdget({
     super.key,
-    required TextEditingController emailController,
-    required TextEditingController passwordController,
-  })  : _emailController = emailController,
-        _passwordController = passwordController;
-
-  final TextEditingController _emailController;
-  final TextEditingController _passwordController;
+  });
 
   @override
   State<LoginPageWIdget> createState() => _LoginPageWIdgetState();
@@ -42,13 +32,6 @@ class LoginPageWIdget extends StatefulWidget {
 
 class _LoginPageWIdgetState extends State<LoginPageWIdget> {
   @override
-  void dispose() {
-    // TODO: implement dispose
-    widget._emailController.dispose();
-    widget._passwordController.dispose();
-    super.dispose();
-  }
-
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF3F0E6),
@@ -65,9 +48,7 @@ class _LoginPageWIdgetState extends State<LoginPageWIdget> {
                     LoadingAnimationWidget.inkDrop(color: Colors.red, size: 40),
               );
             } else {
-              return AuthPageWidget(
-                  emailController: widget._emailController,
-                  passwordController: widget._passwordController);
+              return const AuthPageWidget();
             }
           }),
     );

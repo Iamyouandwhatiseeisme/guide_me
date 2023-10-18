@@ -5,13 +5,7 @@ import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.d
 class AuthPageWidget extends StatefulWidget {
   const AuthPageWidget({
     super.key,
-    required TextEditingController emailController,
-    required TextEditingController passwordController,
-  })  : _emailController = emailController,
-        _passwordController = passwordController;
-
-  final TextEditingController _emailController;
-  final TextEditingController _passwordController;
+  });
 
   @override
   State<AuthPageWidget> createState() => _AuthPageWidgetState();
@@ -19,14 +13,25 @@ class AuthPageWidget extends StatefulWidget {
 
 class _AuthPageWidgetState extends State<AuthPageWidget> {
   bool isLogin = true;
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return isLogin
         ? LoginWidget(
             onClickedSignUp: toggle,
-            emailController: widget._emailController,
-            passwordController: widget._passwordController)
+            emailController: _emailController,
+            passwordController: _passwordController)
         : SignUpPage(
+            emailController: _emailController,
+            passwordController: _passwordController,
             onClickedLogIn: toggle,
           );
   }

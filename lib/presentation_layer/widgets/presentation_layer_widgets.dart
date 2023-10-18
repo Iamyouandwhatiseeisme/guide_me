@@ -86,3 +86,4 @@ export 'authentification_page.widgets/email_text_field.dart';
 export 'authentification_page.widgets/auth_page_widget.dart';
 export 'authentification_page.widgets/login_page_widget.dart';
 export 'authentification_page.widgets/sign_up_or_log_in_text.dart';
+export 'package:guide_me/presentation_layer/widgets/buttons/google_sign_in_button.dart';

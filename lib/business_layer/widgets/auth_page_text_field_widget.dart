@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../../presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:email_validator/email_validator.dart';
 
 class MyTextField extends StatefulWidget {
   final String label;
@@ -47,7 +48,10 @@ class _MyTextFieldState extends State<MyTextField> {
     return SizedBox(
       height: 48,
       width: 320,
-      child: TextField(
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) =>
+            value != null && value.length < 6 ? "Enter min 6 chatacters" : null,
         obscureText: hideText,
         onChanged: (text) {
           setState(() {});
@@ -69,6 +73,14 @@ class _MyTextFieldState extends State<MyTextField> {
           hintText: widget.hintText,
           floatingLabelBehavior: FloatingLabelBehavior.always,
           enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(32),
+              borderSide: BorderSide(
+                  width: 0.5, color: const Color(0xff292F32).withOpacity(0.5))),
+          focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(32),
+              borderSide: BorderSide(
+                  width: 0.5, color: const Color(0xff292F32).withOpacity(0.5))),
+          errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(32),
               borderSide: BorderSide(
                   width: 0.5, color: const Color(0xff292F32).withOpacity(0.5))),

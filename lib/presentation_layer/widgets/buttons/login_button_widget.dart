@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class LoginButtonWidget extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
+  final GlobalKey<FormState> formKey;
   const LoginButtonWidget({
     super.key,
     required this.emailController,
     required this.passwordController,
+    required this.formKey,
   });
 
   @override
@@ -34,6 +36,8 @@ class LoginButtonWidget extends StatelessWidget {
   }
 
   Future signIn() async {
+    final isValid = formKey!.currentState!.validate();
+    if (!isValid) return;
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text.trim(),
