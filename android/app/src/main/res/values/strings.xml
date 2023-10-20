@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">"GuideMe"</string>
+    <string name="facebook_app_id">1310539126517907</string>
+    <string name="fb_login_protocol_scheme">fb1310539126517907</string>
+    <string name="facebook_client_token">51c89debb13f2885e9d6a1ada4b60522</string>
+</resources>

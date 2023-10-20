@@ -1,5 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../data_layer/provider/google_sign_in.dart';
 
 class SignInWithButtonWIdget extends StatelessWidget {
   final String logo;
@@ -22,7 +25,13 @@ class SignInWithButtonWIdget extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
         backgroundColor: const Color(0xffF3F0E6),
         foregroundColor: const Color(0xff292F32),
-        onPressed: () {},
+        onPressed: () {
+          if (label.contains('Google')) {
+            final provider =
+                Provider.of<GoogleSignInprovider>(context, listen: false);
+            provider.googleLogin();
+          }
+        },
         child: Row(
           children: [
             Padding(
