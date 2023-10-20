@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-import 'package:provider/provider.dart';
 
 import '../../../business_layer/widgets/business_widgets.dart';
-import '../../../data_layer/provider/google_sign_in.dart';
 
 class SignUpPageWidgets extends StatefulWidget {
   SignUpPageWidgets({

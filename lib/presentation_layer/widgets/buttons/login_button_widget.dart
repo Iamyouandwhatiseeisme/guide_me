@@ -36,7 +36,7 @@ class LoginButtonWidget extends StatelessWidget {
   }
 
   Future signIn() async {
-    final isValid = formKey!.currentState!.validate();
+    final isValid = formKey.currentState!.validate();
     if (!isValid) return;
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(

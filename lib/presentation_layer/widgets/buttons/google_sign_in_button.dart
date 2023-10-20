@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/provider/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
@@ -36,23 +37,10 @@ class GoogleSignUpButton extends StatelessWidget {
                   Provider.of<GoogleSignInprovider>(context, listen: false);
               provider.googleLogin();
             } else if (text.contains('E-Mail')) {
-              signUpWithEmail();
+              signUpWithEmail(formKey, emailController!, passwordController!);
             }
           },
           label: Text(text)),
     );
-  }
-
-  Future signUpWithEmail() async {
-    final isValid = formKey!.currentState!.validate();
-    if (!isValid) return;
-    try {
-      print('print: attempting to create user');
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController!.text.trim(),
-          password: passwordController!.text.trim());
-    } on FirebaseAuthException catch (e) {
-      print(e);
-    }
   }
 }
