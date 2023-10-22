@@ -26,6 +26,7 @@ Future<void> main() async {
   await Hive.openBox<CollectionModel>('CollectionLists');
   await Hive.openBox<NearbyPlacesModel>('FavoritedPlaces');
   await requestWritePermission();
+
   runApp(const MyApp());
 }
 
@@ -69,7 +70,10 @@ class MyApp extends StatelessWidget {
             routes: {
               '/': (context) => const WelcomePage(
                   backGroundPhoto: 'assets/images/Navigation-amico (1) 2.png'),
-              'authPage': (context) => const AuthPage(),
+              'authPage': (context) => const AuthPage(
+                    bottomNavigationBar: bottomAppBar,
+                    apiKey: apiKey,
+                  ),
               'firstPage': (context) => const FirstPage(
                     bottomNavigationBar: bottomAppBar,
                     apiKey: apiKey,
@@ -84,6 +88,7 @@ class MyApp extends StatelessWidget {
                     customBottomAppBar: bottomAppBar,
                     apiKey: apiKey,
                   ),
+              'forgotPassword': (context) => const ForgotPasswordPage(),
             },
           ),
         ),

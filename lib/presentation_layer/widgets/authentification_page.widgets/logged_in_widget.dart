@@ -25,30 +25,18 @@ class LoggedInWidget extends StatelessWidget {
       ),
       body: Container(
         alignment: Alignment.center,
-        child: Column(
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+            Text(
               'Profile',
               style: TextStyle(fontSize: 24),
             ),
-            const SizedBox(
+            SizedBox(
               height: 32,
             ),
-            CircleAvatar(
-              backgroundImage: NetworkImage(user.photoURL!),
-              radius: 40,
-            ),
-            const SizedBox(
+            SizedBox(
               height: 8,
-            ),
-            Text(
-              'Name: ${user.displayName!}',
-              style: const TextStyle(color: Colors.black, fontSize: 16),
-            ),
-            Text(
-              'E-mail: ${user.email!}',
-              style: const TextStyle(color: Colors.black, fontSize: 16),
             ),
           ],
         ),

@@ -7,17 +7,20 @@ class ForgotPasswordLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Align(
+    return Align(
       alignment: Alignment.topRight,
       child: Padding(
-        padding: EdgeInsets.only(top: 16.0, right: 40),
-        child: Text(
-          'Forgot password?',
-          style: TextStyle(
-              decoration: TextDecoration.underline,
-              fontFamily: 'Telegraf',
-              fontWeight: FontWeight.w400,
-              color: Color(0xff292F32)),
+        padding: const EdgeInsets.only(top: 16.0, right: 40),
+        child: GestureDetector(
+          onTap: () => Navigator.pushNamed(context, 'forgotPassword'),
+          child: const Text(
+            'Forgot password?',
+            style: TextStyle(
+                decoration: TextDecoration.underline,
+                fontFamily: 'Telegraf',
+                fontWeight: FontWeight.w400,
+                color: Color(0xff292F32)),
+          ),
         ),
       ),
     );

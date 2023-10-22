@@ -32,7 +32,7 @@ class _TextForSignUpOrSignInState extends State<TextForSignUpOrSignIn> {
                 fontSize: 14,
                 color: Color(0xff292F32)),
           ),
-          SignUpOrLogInText(
+          ClickableRichText(
             onClick: widget.onClick,
             widget: widget,
             textToDisplay: widget.signUpOrSignIn,

@@ -22,7 +22,7 @@ class LoginButtonWidget extends StatelessWidget {
         foregroundColor: const Color(0xffF3F0E6),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
         onPressed: () {
-          signIn();
+          signIn(context);
         },
         child: const Text(
           'Login',
@@ -35,15 +35,16 @@ class LoginButtonWidget extends StatelessWidget {
     );
   }
 
-  Future signIn() async {
+  Future signIn(BuildContext context) async {
     final isValid = formKey.currentState!.validate();
     if (!isValid) return;
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
-    } on Exception catch (e) {
-      throw ('print: $e');
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message!)));
     }
   }
 }

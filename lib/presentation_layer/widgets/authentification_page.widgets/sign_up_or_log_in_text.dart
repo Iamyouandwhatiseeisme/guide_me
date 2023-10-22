@@ -2,16 +2,16 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
-class SignUpOrLogInText extends StatelessWidget {
-  const SignUpOrLogInText({
+class ClickableRichText extends StatelessWidget {
+  const ClickableRichText({
     super.key,
     required this.onClick,
-    required this.widget,
+    this.widget,
     required this.textToDisplay,
   });
   final VoidCallback onClick;
   final String textToDisplay;
-  final TextForSignUpOrSignIn widget;
+  final TextForSignUpOrSignIn? widget;
 
   @override
   Widget build(BuildContext context) {

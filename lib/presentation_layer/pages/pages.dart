@@ -3,3 +3,5 @@ export 'package:guide_me/presentation_layer/pages/authentification_page.dart';
 export 'see_all_page.dart';
 export 'bookmarks_page.dart';
 export 'sign_up_page.dart';
+export 'forgot_password_page.dart';
+export 'verify_email_page.dart';
