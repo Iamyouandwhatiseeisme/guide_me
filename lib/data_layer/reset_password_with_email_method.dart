@@ -13,13 +13,16 @@ Future resetPassword(
   try {
     await FirebaseAuth.instance
         .sendPasswordResetEmail(email: emailController.text.trim());
-    ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Password reset E-Mail sent')));
-    Navigator.of(context).popUntil((route) => route.isFirst);
-  } on FirebaseAuthException catch (e) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(e.message!)));
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Password reset E-Mail sent')));
 
-    // TODO
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    }
+  } on FirebaseAuthException catch (e) {
+    if (context.mounted) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message!)));
+    }
   }
 }

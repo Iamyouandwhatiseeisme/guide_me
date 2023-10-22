@@ -16,3 +16,4 @@ export 'add_place_to_favorites_fucntion.dart';
 export 'requiest_write_permission_function.dart';
 export 'sign_up_with_email.dart';
 export 'reset_password_with_email_method.dart';
+export 'change_display_name_function.dart';

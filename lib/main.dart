@@ -10,6 +10,7 @@ import 'package:guide_me/presentation_layer/pages/first_page.dart';
 import 'package:guide_me/presentation_layer/pages/maps_page.dart';
 import 'package:guide_me/presentation_layer/pages/place_page.dart';
 import 'package:guide_me/presentation_layer/widgets/custom_bottom_navigatio_bar_widget.dart';
+import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'data_layer/models/nearby_places_model.dart';
@@ -89,6 +90,7 @@ class MyApp extends StatelessWidget {
                     apiKey: apiKey,
                   ),
               'forgotPassword': (context) => const ForgotPasswordPage(),
+              'profilePage': (context) => const ProfilePage()
             },
           ),
         ),

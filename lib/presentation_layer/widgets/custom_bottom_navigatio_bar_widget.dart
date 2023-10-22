@@ -13,7 +13,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List screens = ['firstPage', 'mapsPage', 'bookmarksPage'];
+    List screens = ['firstPage', 'mapsPage', 'bookmarksPage', 'profilePage'];
+
     final bottomNavigationCubit =
         BlocProvider.of<BottomNavigationBarCubit>(context);
     return BlocBuilder<BottomNavigationBarCubit, BottomNavigationBarState>(
