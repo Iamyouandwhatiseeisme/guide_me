@@ -17,3 +17,5 @@ export 'requiest_write_permission_function.dart';
 export 'sign_up_with_email.dart';
 export 'reset_password_with_email_method.dart';
 export 'change_display_name_function.dart';
+export 'change_password_function.dart';
+export 'text_field_for_new_password_function.dart';

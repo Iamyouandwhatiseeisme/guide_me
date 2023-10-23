@@ -1,7 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -13,9 +13,13 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final nameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final passedControllerForNewPassword = TextEditingController();
   @override
   void dispose() {
     nameController.dispose();
+    passwordController.dispose();
+    passedControllerForNewPassword.dispose();
     super.dispose();
   }
 
@@ -85,14 +89,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.w400),
                     ),
-                    GestureDetector(
-                        onTap: () {
-                          changeDisplayName(
-                              nameController, user, context, updateUI);
-                        },
-                        child: TextWithUnderLine(
-                            color: Colors.grey.withOpacity(0.75),
-                            textToDisplay: 'Change display name'))
+                    ChangeUserInfoButton(
+                      passedController: nameController,
+                      user: user,
+                      updateUI: updateUI,
+                      label: 'Change display name',
+                    )
                   ],
                 ),
               ],
@@ -101,9 +103,12 @@ class _ProfilePageState extends State<ProfilePage> {
               color: Colors.grey.withOpacity(0.5),
               height: 1,
             ),
-            Divider(
-              color: Colors.grey.withOpacity(0.5),
-              height: 1,
+            ChangeUserInfoButton(
+              passedControllerForNewPassword: passedControllerForNewPassword,
+              label: 'Change password',
+              passedController: passwordController,
+              user: user,
+              updateUI: updateUI,
             ),
             const SizedBox(
               height: 8,

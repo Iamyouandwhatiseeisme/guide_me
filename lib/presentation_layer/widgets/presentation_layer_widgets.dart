@@ -88,3 +88,6 @@ export 'authentification_page.widgets/login_widget.dart';
 export 'authentification_page.widgets/sign_up_or_log_in_text.dart';
 export 'package:guide_me/presentation_layer/widgets/buttons/google_sign_in_button.dart';
 export 'package:guide_me/presentation_layer/widgets/authentification_page.widgets/login_page_widget.dart';
+export 'package:guide_me/presentation_layer/widgets/buttons/change_user_info_button.dart';
+export 'package:guide_me/presentation_layer/profile_page_widgets.dart/password_text_form_field_for_password_change_dialog.dart';
+export 'buttons/update_password_button.dart';
