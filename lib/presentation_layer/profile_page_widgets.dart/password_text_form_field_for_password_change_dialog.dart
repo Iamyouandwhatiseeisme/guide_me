@@ -32,7 +32,7 @@ class _PasswordTextFormFieldForChangePasswordPageState
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (password) => password == null ? "incorrect password" : null,
       onChanged: (text) {
-        widget.updateUI;
+        widget.updateUI();
       },
       controller: widget.controller,
       decoration: InputDecoration(

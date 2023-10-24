@@ -2,6 +2,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -15,11 +17,28 @@ class _ProfilePageState extends State<ProfilePage> {
   final nameController = TextEditingController();
   final passwordController = TextEditingController();
   final passedControllerForNewPassword = TextEditingController();
+  final passedControllerForOldPassword = TextEditingController();
+  final List<String> listOfSettings = [
+    'Edit name',
+    'Change password',
+    'Payments & cards',
+    'Settings'
+  ];
+  final List<FaIcon> listofIcons = [
+    const FaIcon(FontAwesomeIcons.pen),
+    const FaIcon(FontAwesomeIcons.key),
+    const FaIcon(
+      FontAwesomeIcons.creditCard,
+    ),
+    const FaIcon(Icons.settings)
+  ];
+
   @override
   void dispose() {
     nameController.dispose();
     passwordController.dispose();
     passedControllerForNewPassword.dispose();
+    passedControllerForOldPassword.dispose();
     super.dispose();
   }
 
@@ -52,9 +71,9 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        child: SingleChildScrollView(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
@@ -69,51 +88,25 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 12, bottom: 12),
-                  child: Container(
-                      decoration: const BoxDecoration(shape: BoxShape.circle),
-                      child: ClipOval(child: Image.network(user.photoURL!))),
-                ),
-                const SizedBox(
-                  width: 12,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      user.displayName!,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w400),
-                    ),
-                    ChangeUserInfoButton(
-                      passedController: nameController,
-                      user: user,
-                      updateUI: updateUI,
-                      label: 'Change display name',
-                    )
-                  ],
-                ),
-              ],
+            ProfileInfo(user: user),
+            ListViewBuilderForProfilePage(
+              listOfSettings: listOfSettings,
+              listofIcons: listofIcons,
+              nameController: nameController,
+              user: user,
+              updateUI: updateUI,
+              passedControllerForOldPassword: passedControllerForOldPassword,
+              passedControllerForNewPassword: passedControllerForNewPassword,
             ),
             Divider(
               color: Colors.grey.withOpacity(0.5),
               height: 1,
             ),
-            ChangeUserInfoButton(
-              passedControllerForNewPassword: passedControllerForNewPassword,
-              label: 'Change password',
-              passedController: passwordController,
-              user: user,
-              updateUI: updateUI,
-            ),
             const SizedBox(
               height: 8,
             ),
-          ],
+            //
+          ]),
         ),
       ),
     );

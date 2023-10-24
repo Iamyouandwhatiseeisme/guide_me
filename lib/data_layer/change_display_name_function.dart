@@ -25,7 +25,7 @@ Future changeDisplayName(TextEditingController nameController, User user,
                         name == null ? "Enter your name" : null,
                     onEditingComplete: () async {
                       await user.updateDisplayName(nameController.text);
-                      updateUI;
+                      updateUI();
                       nameController.clear();
                       if (context.mounted) Navigator.of(context).pop();
                     },

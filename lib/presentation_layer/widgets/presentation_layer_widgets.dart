@@ -91,3 +91,6 @@ export 'package:guide_me/presentation_layer/widgets/authentification_page.widget
 export 'package:guide_me/presentation_layer/widgets/buttons/change_user_info_button.dart';
 export 'package:guide_me/presentation_layer/profile_page_widgets.dart/password_text_form_field_for_password_change_dialog.dart';
 export 'buttons/update_password_button.dart';
+export 'package:guide_me/presentation_layer/profile_page_widgets.dart/settings_list_view.dart';
+export 'package:guide_me/presentation_layer/profile_page_widgets.dart/profile_info.dart';
+export 'package:guide_me/presentation_layer/profile_page_widgets.dart/list_view_builder_for_profile_page.dart';
