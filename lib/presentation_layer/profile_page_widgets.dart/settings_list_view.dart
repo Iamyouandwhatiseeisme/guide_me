@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../business_layer/cubit/is_exapnded_cubit.dart';
-
 class SettingsListView extends StatelessWidget {
   const SettingsListView({
     super.key,
@@ -25,7 +23,7 @@ class SettingsListView extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
+              SizedBox(
                 width: 200,
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,

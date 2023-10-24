@@ -29,6 +29,7 @@ class SignInWithButtonWIdget extends StatelessWidget {
           if (label.contains('Google')) {
             final provider =
                 Provider.of<GoogleSignInprovider>(context, listen: false);
+
             provider.googleLogin();
           }
         },

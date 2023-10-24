@@ -41,7 +41,6 @@ class _ListViewBuilderForProfilePageState
   void showPassword() {
     setState(() {
       hideText = !hideText;
-      print(hideText);
     });
   }
 
@@ -142,6 +141,9 @@ class _ListViewBuilderForProfilePageState
                         widget.user,
                         context,
                         widget.updateUI);
+                  } else if (widget.listOfSettings[index].contains('cards')) {
+                    print('print: payments');
+                    Navigator.pushNamed(context, 'paymentsPage');
                   }
                 },
                 child: SettingsListView(

@@ -30,9 +30,11 @@ class _LoginPageWIdgetState extends State<LoginPageWIdget> {
                 Navigator.of(context).pushReplacementNamed('firstPage');
               });
               // Return a placeholder widget or loading indicator while navigating.
-              return Center(
-                child:
-                    LoadingAnimationWidget.inkDrop(color: Colors.red, size: 40),
+              return Scaffold(
+                body: Center(
+                  child: LoadingAnimationWidget.inkDrop(
+                      color: Colors.red, size: 40),
+                ),
               );
             } else {
               return AuthPageWidget(

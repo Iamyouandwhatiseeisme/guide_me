@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
-
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/collection_model.dart';
 import 'package:guide_me/data_layer/models/opening_hours.dart';
 import 'package:guide_me/data_layer/provider/google_sign_in.dart';
-import 'package:guide_me/presentation_layer/pages/first_page.dart';
-import 'package:guide_me/presentation_layer/pages/maps_page.dart';
-import 'package:guide_me/presentation_layer/pages/place_page.dart';
 import 'package:guide_me/presentation_layer/widgets/custom_bottom_navigatio_bar_widget.dart';
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'presentation_layer/pages/pages.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'data_layer/models/nearby_places_model.dart';
-import 'presentation_layer/pages/pages.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
@@ -90,7 +85,8 @@ class MyApp extends StatelessWidget {
                     apiKey: apiKey,
                   ),
               'forgotPassword': (context) => const ForgotPasswordPage(),
-              'profilePage': (context) => const ProfilePage()
+              'profilePage': (context) => const ProfilePage(),
+              'paymentsPage': (context) => const PaymentsMethodsPage()
             },
           ),
         ),

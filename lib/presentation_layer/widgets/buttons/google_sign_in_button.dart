@@ -34,6 +34,7 @@ class GoogleSignUpButton extends StatelessWidget {
             if (text.contains('Google')) {
               final provider =
                   Provider.of<GoogleSignInprovider>(context, listen: false);
+
               provider.googleLogin();
             } else if (text.contains('E-Mail')) {
               signUpWithEmail(formKey, emailController!, passwordController!);
