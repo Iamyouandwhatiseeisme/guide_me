@@ -9,23 +9,8 @@ import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class SeeAllPage extends StatefulWidget {
-  late List<NearbyPlacesModel>? listTobuild;
-  late double? userLat;
-  late double? userLon;
-  late String? apiKey;
-  late SightseeingSortingCubit? sightseeingSortingCubit;
-  late SorterToggleButtonCubit? sorterToggleButtonCubit;
-  late SorterRadioButtonWidget? sorterRadioButtonWidget;
-
-  SeeAllPage({
+  const SeeAllPage({
     Key? key,
-    this.listTobuild,
-    this.userLat,
-    this.userLon,
-    this.apiKey,
-    this.sightseeingSortingCubit,
-    this.sorterToggleButtonCubit,
-    this.sorterRadioButtonWidget,
   }) : super(key: key);
 
   @override
@@ -33,28 +18,34 @@ class SeeAllPage extends StatefulWidget {
 }
 
 class _SeeAllPageState extends State<SeeAllPage> {
+  List<NearbyPlacesModel>? listTobuild;
+  double? userLat;
+  double? userLon;
+  String? apiKey;
+  SightseeingSortingCubit? sightseeingSortingCubit;
+  SorterToggleButtonCubit? sorterToggleButtonCubit;
+  SorterRadioButtonWidget? sorterRadioButtonWidget;
+
   Map<NearbyPlacesModel, double?> distanceMap = {};
 
   @override
   Widget build(BuildContext context) {
     final listOfArguments =
         ModalRoute.of(context)!.settings.arguments as List<dynamic>;
-    widget.listTobuild = listOfArguments[0] as List<NearbyPlacesModel>;
-    widget.userLat = listOfArguments[1] as double;
-    widget.userLon = listOfArguments[2] as double;
-    widget.apiKey = listOfArguments[3];
-    widget.sightseeingSortingCubit =
-        listOfArguments[4] as SightseeingSortingCubit;
-    widget.sorterToggleButtonCubit =
-        listOfArguments[5] as SorterToggleButtonCubit;
+    listTobuild = listOfArguments[0] as List<NearbyPlacesModel>;
+    userLat = listOfArguments[1] as double;
+    userLon = listOfArguments[2] as double;
+    apiKey = listOfArguments[3];
+    sightseeingSortingCubit = listOfArguments[4] as SightseeingSortingCubit;
+    sorterToggleButtonCubit = listOfArguments[5] as SorterToggleButtonCubit;
 
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
-          value: widget.sightseeingSortingCubit!,
+          value: sightseeingSortingCubit!,
         ),
         BlocProvider.value(
-          value: widget.sorterToggleButtonCubit!,
+          value: sorterToggleButtonCubit!,
         ),
       ],
       child: Builder(builder: (context) {
@@ -62,23 +53,19 @@ class _SeeAllPageState extends State<SeeAllPage> {
           builder: (context, sortedListState) {
             return BlocBuilder<SorterToggleButtonCubit,
                 SortertoggleButtonState>(builder: (context, sorterState) {
-              widget.sightseeingSortingCubit!.sortList(
-                  widget.listTobuild!,
-                  sorterState.value,
-                  widget.userLat!,
-                  widget.userLon!,
-                  distanceMap);
+              sightseeingSortingCubit!.sortList(listTobuild!, sorterState.value,
+                  userLat!, userLon!, distanceMap);
 
               return Scaffold(
-                  backgroundColor: const Color(0xffF3F0E6),
+                  backgroundColor: Theme.of(context).primaryColor,
                   appBar: AppBar(),
                   body: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Column(
                       children: [
                         SorterRadioButtonWidget(
-                            userLat: widget.userLat!,
-                            userLon: widget.userLon!,
+                            userLat: userLat!,
+                            userLon: userLon!,
                             state: sorterState),
                         SizedBox(
                           height: 1000,
@@ -93,19 +80,15 @@ class _SeeAllPageState extends State<SeeAllPage> {
                                 onTap: () => Navigator.pushNamed(
                                   context,
                                   'placePage',
-                                  arguments: [
-                                    widget.apiKey,
-                                    widget.listTobuild![index]
-                                  ],
+                                  arguments: [apiKey, listTobuild![index]],
                                 ),
                                 child: SightseeingsPlaceCard(
-                                    place: widget.listTobuild![index],
-                                    distance:
-                                        distanceMap[widget.listTobuild![index]],
-                                    apiKey: widget.apiKey!),
+                                    place: listTobuild![index],
+                                    distance: distanceMap[listTobuild![index]],
+                                    apiKey: apiKey!),
                               );
                             },
-                            itemCount: widget.listTobuild!.length,
+                            itemCount: listTobuild!.length,
                           ),
                         ),
                       ],

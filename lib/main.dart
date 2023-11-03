@@ -45,9 +45,6 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => BottomNavigationBarCubit(),
           ),
-          // BlocProvider(
-          //   create: (context) => FavoritesButtonCubit(),
-          // )
         ],
         child: ChangeNotifierProvider(
           create: (context) => GoogleSignInprovider(),
@@ -59,7 +56,7 @@ class MyApp extends StatelessWidget {
               fontFamily: 'Telegraf',
               primaryColor: const Color(0xffF3F0E6),
               colorScheme: ColorScheme.fromSeed(
-                  seedColor: const Color.fromARGB(255, 243, 229, 182),
+                  seedColor: Color.fromARGB(255, 244, 241, 232),
                   brightness: Brightness.light),
               useMaterial3: true,
             ),
@@ -75,7 +72,7 @@ class MyApp extends StatelessWidget {
                     apiKey: apiKey,
                   ),
               'placePage': (context) => const PlacePage(),
-              'seeAllPage': (context) => SeeAllPage(),
+              'seeAllPage': (context) => const SeeAllPage(),
               'mapsPage': (context) => const MapsPage(
                     apiKey: apiKey,
                     customBottomAppBar: bottomAppBar,

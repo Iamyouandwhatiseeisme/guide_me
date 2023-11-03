@@ -66,7 +66,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
         ),
       ],
       child: Scaffold(
-        backgroundColor: const Color(0xffF3F0E6),
+        backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           centerTitle: true,
           title: const Text(

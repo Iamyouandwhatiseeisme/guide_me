@@ -142,7 +142,6 @@ class _ListViewBuilderForProfilePageState
                         context,
                         widget.updateUI);
                   } else if (widget.listOfSettings[index].contains('cards')) {
-                    print('print: payments');
                     Navigator.pushNamed(context, 'paymentsPage');
                   }
                 },

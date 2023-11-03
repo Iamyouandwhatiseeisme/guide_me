@@ -62,8 +62,10 @@ class _FirstPageState extends State<FirstPage> {
               longtitude = locationState.position.longitude;
             } else {
               return Scaffold(
-                body: LoadingAnimationWidget.inkDrop(
-                    color: const Color(0xffC75E6B), size: 20),
+                body: Center(
+                  child: LoadingAnimationWidget.inkDrop(
+                      color: const Color(0xffC75E6B), size: 20),
+                ),
               );
             }
             final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();

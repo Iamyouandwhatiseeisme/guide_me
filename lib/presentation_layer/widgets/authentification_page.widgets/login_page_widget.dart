@@ -21,7 +21,7 @@ class _LoginPageWIdgetState extends State<LoginPageWIdget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF3F0E6),
+      backgroundColor: Theme.of(context).primaryColor,
       body: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {

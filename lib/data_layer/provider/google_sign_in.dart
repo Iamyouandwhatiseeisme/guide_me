@@ -9,11 +9,7 @@ class GoogleSignInprovider extends ChangeNotifier {
   GoogleSignInAccount get user => _user!;
 
   Future googleLogin() async {
-    await googleSignIn.signOut();
-
     final googleUser = await googleSignIn.signIn();
-
-    print('print ${googleUser.toString()}');
 
     try {
       if (googleUser == null) return;
@@ -33,8 +29,10 @@ class GoogleSignInprovider extends ChangeNotifier {
   }
 
   Future logout() async {
+    await googleSignIn.signOut();
     await googleSignIn.disconnect();
 
     FirebaseAuth.instance.signOut();
+    notifyListeners();
   }
 }

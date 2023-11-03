@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
+import 'package:guide_me/data_layer/provider/google_sign_in.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:provider/provider.dart';
 
 class FirstPageAppBar extends StatelessWidget {
   final String apiKey;
@@ -21,6 +23,10 @@ class FirstPageAppBar extends StatelessWidget {
       actions: [
         TextButton(
             onPressed: () {
+              final provider =
+                  Provider.of<GoogleSignInprovider>(context, listen: false);
+
+              provider.logout();
               FirebaseAuth.instance.signOut();
               Navigator.pushNamed(context, 'authPage');
               Navigator.popUntil(context, ModalRoute.withName('authPage'));

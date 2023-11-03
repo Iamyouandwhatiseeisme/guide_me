@@ -52,7 +52,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
-      backgroundColor: const Color(0xffF3F0E6),
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         title: const Text('Profile Page'),
         centerTitle: true,

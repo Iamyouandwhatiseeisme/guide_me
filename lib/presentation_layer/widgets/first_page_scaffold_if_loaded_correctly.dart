@@ -35,7 +35,7 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xffF3F0E6),
+        backgroundColor: Theme.of(context).primaryColor,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(48),
           child: FirstPageAppBar(
