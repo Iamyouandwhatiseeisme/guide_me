@@ -18,7 +18,7 @@ class FirstPageAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: const Color(0xffF3F0E6),
+      backgroundColor: Theme.of(context).colorScheme.background,
       leadingWidth: 250,
       actions: [
         TextButton(

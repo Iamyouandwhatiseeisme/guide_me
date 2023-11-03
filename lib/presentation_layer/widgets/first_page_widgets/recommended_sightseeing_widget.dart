@@ -10,6 +10,8 @@ import '../../../data_layer/models/nearby_places_model.dart';
 
 class RecommendedSightseeingsWidget extends StatelessWidget {
   final String apiKey;
+
+  final Color colorOfLabel;
   const RecommendedSightseeingsWidget({
     Key? key,
     required this.apiKey,
@@ -17,6 +19,7 @@ class RecommendedSightseeingsWidget extends StatelessWidget {
     required this.lon,
     required this.widget,
     required this.listToBuild,
+    required this.colorOfLabel,
   }) : super(key: key);
 
   final double lat;
@@ -45,6 +48,7 @@ class RecommendedSightseeingsWidget extends StatelessWidget {
             return Column(
               children: [
                 LabelWIthCaregoryTypeNameAndSeeAllRow(
+                    colorOfLabel: colorOfLabel,
                     sortingCubit: sortingCubit,
                     sorterToggleButtonCubit: sorterToggleButtonCubit,
                     listToBuild: listToBuild,

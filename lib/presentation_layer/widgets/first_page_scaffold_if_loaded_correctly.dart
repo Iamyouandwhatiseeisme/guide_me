@@ -34,8 +34,10 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
     extends State<FirstPageScaffoldIfLoadedCorrectly> {
   @override
   Widget build(BuildContext context) {
+    Color secondaryColor = Theme.of(context).colorScheme.secondary;
+    Color primaryColor = Theme.of(context).colorScheme.primary;
     return Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(48),
           child: FirstPageAppBar(
@@ -48,9 +50,8 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SearchTextFieldWIdget(
-                  color: Color.fromARGB(255, 255, 255, 255),
-                ),
+                SearchTextFieldWIdget(
+                    color: secondaryColor, primaryColor: primaryColor),
                 const SizedBox(
                   height: 24,
                 ),
@@ -65,6 +66,7 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                   height: 48,
                 ),
                 RecommendedSightseeingsWidget(
+                  colorOfLabel: secondaryColor,
                   listToBuild: widget.listOfSightseeings,
                   widget: widget,
                   apiKey: widget.apiKey,
@@ -75,6 +77,7 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                   height: 25,
                 ),
                 WhatToEatWidget(
+                    colorOfLabel: secondaryColor,
                     listToBuild: widget.listOfPlacesForFood,
                     apiKey: widget.apiKey,
                     lat: widget.lat,

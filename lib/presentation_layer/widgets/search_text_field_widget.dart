@@ -4,9 +4,12 @@ import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.d
 
 class SearchTextFieldWIdget extends StatelessWidget {
   final Color color;
+
+  final Color primaryColor;
   const SearchTextFieldWIdget({
     Key? key,
     required this.color,
+    required this.primaryColor,
   }) : super(key: key);
 
   @override
@@ -14,7 +17,7 @@ class SearchTextFieldWIdget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 36),
       child: CustomTextFormField(
-        textColor: const Color(0xff292F32).withOpacity(0.75),
+        textColor: primaryColor,
         color: color,
         radiusSize: 32,
       ),

@@ -40,9 +40,10 @@ class SortableListViewCardBuilder extends StatelessWidget {
                 sortedList, state.value, userLat, userLon, distanceMap);
             final box = Hive.box<NearbyPlacesModel>('FavoritedPlaces');
             // Now, build the UI using the sorted list
-            return SizedBox(
+            return Container(
               width: 430,
               height: 300,
+              color: Theme.of(context).colorScheme.primary,
               child: Align(
                 alignment: Alignment.topCenter,
                 child: SizedBox(
@@ -59,7 +60,8 @@ class SortableListViewCardBuilder extends StatelessWidget {
                                 left: 20,
                                 top: 10,
                               ),
-                              child: SizedBox(
+                              child: Container(
+                                color: Theme.of(context).colorScheme.primary,
                                 height: 280,
                                 width: 250,
                                 child: GestureDetector(

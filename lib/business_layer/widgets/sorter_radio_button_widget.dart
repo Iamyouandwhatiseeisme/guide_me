@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubit/sorter_toggle_button_cubit.dart';
 
-
 // ignore: must_be_immutable
 class SorterRadioButtonWidget extends StatelessWidget {
   final double userLat;
@@ -22,6 +21,8 @@ class SorterRadioButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).colorScheme.primary;
+
     return BlocBuilder<SorterToggleButtonCubit, SortertoggleButtonState>(
         builder: (context, state) {
       if (state.value == 0) {
@@ -41,9 +42,12 @@ class SorterRadioButtonWidget extends StatelessWidget {
                           width: 110,
                           height: 28,
                           decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: primaryColor,
                               borderRadius: BorderRadius.circular(32)),
-                          child: const Center(child: Text('Highest Rated')))),
+                          child: const Center(
+                              child: Text(
+                            'Highest Rated',
+                          )))),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 20.0),
@@ -68,7 +72,9 @@ class SorterRadioButtonWidget extends StatelessWidget {
                         BlocProvider.of<SorterToggleButtonCubit>(context)
                             .selectRadioButton(0);
                       },
-                      child: const Text('Highest Rated'))),
+                      child: const Text(
+                        'Highest Rated',
+                      ))),
               Padding(
                 padding: const EdgeInsets.only(right: 25.0),
                 child: GestureDetector(
@@ -80,9 +86,12 @@ class SorterRadioButtonWidget extends StatelessWidget {
                         width: 110,
                         height: 28,
                         decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: primaryColor,
                             borderRadius: BorderRadius.circular(32)),
-                        child: const Center(child: Text('Closest to you')))),
+                        child: const Center(
+                            child: Text(
+                          'Closest to you',
+                        )))),
               ),
             ]));
       } else {

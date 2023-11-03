@@ -21,7 +21,9 @@ class RecommendedWidget extends StatelessWidget {
             const SizedBox(
               width: 8,
             ),
-            Image.asset('assets/images/logos/Information.png')
+            Image.asset(
+              'assets/images/logos/Information.png',
+            )
           ],
         ),
       ),

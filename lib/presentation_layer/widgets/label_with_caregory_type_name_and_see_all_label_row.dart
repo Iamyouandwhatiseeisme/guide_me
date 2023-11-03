@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:guide_me/business_layer/cubits.dart';
@@ -13,8 +14,9 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
   final double userLon;
   final String textToDisplay;
   final SightseeingSortingCubit sortingCubit; // Accept the sorting cubit
-  final SorterToggleButtonCubit
-      sorterToggleButtonCubit; // Accept the sorter toggle button cubit
+  final SorterToggleButtonCubit sorterToggleButtonCubit;
+
+  final Color colorOfLabel; // Accept the sorter toggle button cubit
 
   const LabelWIthCaregoryTypeNameAndSeeAllRow({
     Key? key,
@@ -25,6 +27,7 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
     required this.textToDisplay,
     required this.sortingCubit,
     required this.sorterToggleButtonCubit,
+    required this.colorOfLabel,
   }) : super(key: key);
 
   @override
@@ -46,13 +49,13 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
               sorterToggleButtonCubit,
             ]);
           },
-          child: const Text('See all',
+          child: Text('See all',
               style: TextStyle(
-                  decorationColor: Color.fromARGB(75, 41, 47, 50),
+                  decorationColor: Theme.of(context).colorScheme.secondary,
                   decoration: TextDecoration.underline,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: Color.fromARGB(75, 41, 47, 50))),
+                  color: colorOfLabel)),
         ),
       )
     ]);

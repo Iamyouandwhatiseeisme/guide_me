@@ -5,6 +5,8 @@ import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/collection_model.dart';
 import 'package:guide_me/data_layer/models/opening_hours.dart';
 import 'package:guide_me/data_layer/provider/google_sign_in.dart';
+import 'package:guide_me/presentation_layer/themes/dark_theme.dart';
+import 'package:guide_me/presentation_layer/themes/light_theme.dart';
 import 'package:guide_me/presentation_layer/widgets/custom_bottom_navigatio_bar_widget.dart';
 import 'presentation_layer/pages/pages.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -52,14 +54,8 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             initialRoute: '/',
             title: 'Flutter Demo',
-            theme: ThemeData(
-              fontFamily: 'Telegraf',
-              primaryColor: const Color(0xffF3F0E6),
-              colorScheme: ColorScheme.fromSeed(
-                  seedColor: Color.fromARGB(255, 244, 241, 232),
-                  brightness: Brightness.light),
-              useMaterial3: true,
-            ),
+            theme: lightTheme,
+            darkTheme: darkTheme,
             routes: {
               '/': (context) => const WelcomePage(
                   backGroundPhoto: 'assets/images/Navigation-amico (1) 2.png'),

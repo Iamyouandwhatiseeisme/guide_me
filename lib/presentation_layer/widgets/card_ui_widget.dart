@@ -28,7 +28,8 @@ class CardUi extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(3)),
+          color: Theme.of(context).colorScheme.primary,
+          borderRadius: BorderRadius.circular(3)),
       width: 256,
       height: 280,
       child: Column(

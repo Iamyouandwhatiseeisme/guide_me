@@ -18,10 +18,10 @@ class LabelForBuilderTypesWidget extends StatelessWidget {
           child: Text(
             textToDisplay,
             style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w800,
-                letterSpacing: 0.15,
-                color: Color(0xff292F32)),
+              fontSize: 24,
+              fontWeight: FontWeight.w800,
+              letterSpacing: 0.15,
+            ),
           ),
         ),
       ],

@@ -97,7 +97,7 @@ class _PlacepageState extends State<PlacePage> {
                         child: PlacePageAppbar(
                           placeToDisplay: passedPlace,
                         )),
-                    backgroundColor: Theme.of(context).primaryColor,
+                    backgroundColor: Theme.of(context).colorScheme.background,
                     body: PlacePageContet(
                         openningHours: openningHours,
                         passedPlace: passedPlace,

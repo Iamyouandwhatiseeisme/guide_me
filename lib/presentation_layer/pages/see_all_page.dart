@@ -57,7 +57,7 @@ class _SeeAllPageState extends State<SeeAllPage> {
                   userLat!, userLon!, distanceMap);
 
               return Scaffold(
-                  backgroundColor: Theme.of(context).primaryColor,
+                  backgroundColor: Theme.of(context).colorScheme.background,
                   appBar: AppBar(),
                   body: SingleChildScrollView(
                     scrollDirection: Axis.vertical,

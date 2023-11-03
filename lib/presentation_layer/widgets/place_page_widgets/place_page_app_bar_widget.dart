@@ -13,23 +13,24 @@ class PlacePageAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      actions: [
-        const Icon(Icons.share_outlined),
-        const SizedBox(width: 24),
-        Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: ValueListenableBuilder(
-                valueListenable:
-                    Hive.box<NearbyPlacesModel>("FavoritedPlaces").listenable(),
-                builder: (context, value, child) {
-                  return FavoriteButton(
-                      color: Colors.black,
-                      placeToDisplay: placeToDisplay,
-                      box: Hive.box<NearbyPlacesModel>("FavoritedPlaces"));
-                }))
-      ],
-      backgroundColor: const Color(0xffF3F0E6),
-    );
+    final primaryColor = Theme.of(context).colorScheme.primary;
+    return AppBar(actions: [
+      Icon(
+        Icons.share_outlined,
+        color: primaryColor,
+      ),
+      const SizedBox(width: 24),
+      Padding(
+          padding: const EdgeInsets.only(right: 8.0),
+          child: ValueListenableBuilder(
+              valueListenable:
+                  Hive.box<NearbyPlacesModel>("FavoritedPlaces").listenable(),
+              builder: (context, value, child) {
+                return FavoriteButton(
+                    color: primaryColor,
+                    placeToDisplay: placeToDisplay,
+                    box: Hive.box<NearbyPlacesModel>("FavoritedPlaces"));
+              }))
+    ], backgroundColor: Theme.of(context).colorScheme.background);
   }
 }

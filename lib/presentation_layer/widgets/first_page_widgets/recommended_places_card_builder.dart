@@ -18,7 +18,7 @@ class RecommenPlacesCardBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.primary,
       width: 430,
       height: 150,
       child: Align(

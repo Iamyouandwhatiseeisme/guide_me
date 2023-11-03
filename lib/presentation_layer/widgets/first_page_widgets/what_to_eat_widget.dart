@@ -10,6 +10,8 @@ import '../../../business_layer/widgets/sorter_radio_button_widget.dart';
 
 class WhatToEatWidget extends StatelessWidget {
   final String apiKey;
+
+  final Color colorOfLabel;
   const WhatToEatWidget({
     Key? key,
     required this.apiKey,
@@ -17,6 +19,7 @@ class WhatToEatWidget extends StatelessWidget {
     required this.lon,
     required this.widget,
     required this.listToBuild,
+    required this.colorOfLabel,
   }) : super(key: key);
 
   final double lat;
@@ -44,6 +47,7 @@ class WhatToEatWidget extends StatelessWidget {
             return Column(
               children: [
                 LabelWIthCaregoryTypeNameAndSeeAllRow(
+                    colorOfLabel: colorOfLabel,
                     sortingCubit: sortingCubit,
                     sorterToggleButtonCubit: sorterToggleButtonCubit,
                     listToBuild: listToBuild,

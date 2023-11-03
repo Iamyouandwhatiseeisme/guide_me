@@ -87,6 +87,8 @@ class _MapsPageState extends State<MapsPage> {
                     } else {
                       if (snapshot.hasData) {
                         return Scaffold(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.background,
                           bottomNavigationBar: widget.customBottomAppBar,
                           appBar: PreferredSize(
                             preferredSize: const Size.fromHeight(48),

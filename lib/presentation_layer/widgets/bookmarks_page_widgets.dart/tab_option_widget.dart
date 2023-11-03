@@ -38,9 +38,9 @@ class TabOptionWidget extends StatelessWidget {
             child: Text(
           tabLabel,
           style: const TextStyle(
-              fontWeight: FontWeight.w800,
-              fontSize: 20,
-              color: Color(0xff292F32)),
+            fontWeight: FontWeight.w800,
+            fontSize: 20,
+          ),
         )),
       ),
     );
