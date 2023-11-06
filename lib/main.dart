@@ -8,6 +8,8 @@ import 'package:guide_me/data_layer/provider/google_sign_in.dart';
 import 'package:guide_me/presentation_layer/themes/dark_theme.dart';
 import 'package:guide_me/presentation_layer/themes/light_theme.dart';
 import 'package:guide_me/presentation_layer/widgets/custom_bottom_navigatio_bar_widget.dart';
+import 'data_layer/enums/app_theme.dart';
+import 'data_layer/provider/theme_provider.dart';
 import 'presentation_layer/pages/pages.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
@@ -48,40 +50,49 @@ class MyApp extends StatelessWidget {
             create: (context) => BottomNavigationBarCubit(),
           ),
         ],
-        child: ChangeNotifierProvider(
-          create: (context) => GoogleSignInprovider(),
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            initialRoute: '/',
-            title: 'Flutter Demo',
-            theme: lightTheme,
-            darkTheme: darkTheme,
-            routes: {
-              '/': (context) => const WelcomePage(
-                  backGroundPhoto: 'assets/images/Navigation-amico (1) 2.png'),
-              'authPage': (context) => const AuthPage(
-                    bottomNavigationBar: bottomAppBar,
-                    apiKey: apiKey,
-                  ),
-              'firstPage': (context) => const FirstPage(
-                    bottomNavigationBar: bottomAppBar,
-                    apiKey: apiKey,
-                  ),
-              'placePage': (context) => const PlacePage(),
-              'seeAllPage': (context) => const SeeAllPage(),
-              'mapsPage': (context) => const MapsPage(
-                    apiKey: apiKey,
-                    customBottomAppBar: bottomAppBar,
-                  ),
-              'bookmarksPage': (context) => const BookmarksPage(
-                    customBottomAppBar: bottomAppBar,
-                    apiKey: apiKey,
-                  ),
-              'forgotPassword': (context) => const ForgotPasswordPage(),
-              'profilePage': (context) => const ProfilePage(),
-              'paymentsPage': (context) => const PaymentsMethodsPage()
-            },
-          ),
+        child: ChangeNotifierProvider<ThemeProvider>(
+          create: (BuildContext context) => ThemeProvider(),
+          child: Builder(builder: (context) {
+            return ChangeNotifierProvider(
+              create: (context) => GoogleSignInprovider(),
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                initialRoute: '/',
+                title: 'Flutter Demo',
+                theme: context.watch<ThemeProvider>().currentTheme ==
+                        AppTheme.light
+                    ? lightTheme
+                    : darkTheme,
+                darkTheme: darkTheme,
+                routes: {
+                  '/': (context) => const WelcomePage(
+                      backGroundPhoto:
+                          'assets/images/Navigation-amico (1) 2.png'),
+                  'authPage': (context) => const AuthPage(
+                        bottomNavigationBar: bottomAppBar,
+                        apiKey: apiKey,
+                      ),
+                  'firstPage': (context) => const FirstPage(
+                        bottomNavigationBar: bottomAppBar,
+                        apiKey: apiKey,
+                      ),
+                  'placePage': (context) => const PlacePage(),
+                  'seeAllPage': (context) => const SeeAllPage(),
+                  'mapsPage': (context) => const MapsPage(
+                        apiKey: apiKey,
+                        customBottomAppBar: bottomAppBar,
+                      ),
+                  'bookmarksPage': (context) => const BookmarksPage(
+                        customBottomAppBar: bottomAppBar,
+                        apiKey: apiKey,
+                      ),
+                  'forgotPassword': (context) => const ForgotPasswordPage(),
+                  'profilePage': (context) => const ProfilePage(),
+                  'paymentsPage': (context) => const PaymentsMethodsPage()
+                },
+              ),
+            );
+          }),
         ),
       );
     });

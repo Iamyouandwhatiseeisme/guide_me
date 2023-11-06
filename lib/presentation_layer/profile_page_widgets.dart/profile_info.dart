@@ -31,7 +31,6 @@ class ProfileInfo extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w800,
-                  color: Color(0xff292F32),
                   letterSpacing: 0.15),
             ),
             Text(
