@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../data_layer/models/collection_model.dart';
 import '../../../data_layer/models/nearby_places_model.dart';
@@ -30,7 +31,7 @@ class CollectionDialogUserInputReaderTextField extends StatelessWidget {
               fontSize: 14,
               fontWeight: FontWeight.w400,
               color: Colors.grey.withOpacity(0.8)),
-          hintText: "Enter name of your collection",
+          hintText: AppLocalizations.of(context)!.enterNameOfCollection,
           filled: true,
           fillColor: Colors.white,
           border: OutlineInputBorder(

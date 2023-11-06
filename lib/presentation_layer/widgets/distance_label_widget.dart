@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DistanceLabelWidget extends StatelessWidget {
   final double? width;
@@ -31,7 +32,7 @@ class DistanceLabelWidget extends StatelessWidget {
         width: 5,
       ),
       Text(
-        "${distance.toString()} Km. away from you",
+        "${distance.toString()} ${AppLocalizations.of(context)!.distance} ",
         style: TextStyle(
             fontSize: fontSize, fontWeight: FontWeight.w400, color: color),
       ),

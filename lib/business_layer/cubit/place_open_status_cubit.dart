@@ -1,18 +1,23 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 part 'place_open_status_state.dart';
 
 class PlaceOpenStatuslabelCubit extends Cubit<PlaceOpenStatusLabelState> {
-  PlaceOpenStatuslabelCubit() : super(PlaceOpenStatusInitial());
+  PlaceOpenStatuslabelCubit(this.openNow, this.closed, this.noInfo)
+      : super(PlaceOpenStatusInitial());
+  final String openNow;
+  final String closed;
+  final String noInfo;
 
   void updateOpenStatus(bool? isOpenNow) {
     if (isOpenNow == true) {
-      emit(const OpenNowState('Open Now'));
+      emit(OpenNowState(openNow));
     } else if (isOpenNow == false) {
-      emit(const ClosedState('Closed'));
+      emit(ClosedState(closed));
     } else {
-      emit(const ErrorState('No Information'));
+      emit(ErrorState(noInfo));
     }
   }
 }

@@ -4,6 +4,7 @@ import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 
 import '../../../business_layer/cubit/open_location_on_map_cubit.dart';
 import '../text_with_underline_grey_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AdressLabelAndOpenInMapButtonRowWIdget extends StatelessWidget {
   const AdressLabelAndOpenInMapButtonRowWIdget({
@@ -26,7 +27,10 @@ class AdressLabelAndOpenInMapButtonRowWIdget extends StatelessWidget {
         children: [
           Text(
             adress!,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+            style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                overflow: TextOverflow.ellipsis),
           ),
           BlocBuilder<OpenLocationOnMapCubit, bool>(
             builder: (context, state) {
@@ -39,7 +43,7 @@ class AdressLabelAndOpenInMapButtonRowWIdget extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 20.0),
                   child: TextWithUnderLine(
-                    textToDisplay: 'See on Map',
+                    textToDisplay: AppLocalizations.of(context)!.seeOnMap,
                     color: const Color(0xff292F32).withOpacity(0.75),
                   ),
                 ),

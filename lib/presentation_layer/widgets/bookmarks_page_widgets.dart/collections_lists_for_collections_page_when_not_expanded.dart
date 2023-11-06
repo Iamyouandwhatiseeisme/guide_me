@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/is_exapnded_cubit.dart';
 import 'package:guide_me/data_layer/models/collection_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CollectionsListForCollectionsPage extends StatelessWidget {
   const CollectionsListForCollectionsPage({
@@ -42,7 +43,8 @@ class CollectionsListForCollectionsPage extends StatelessWidget {
                     const SizedBox(
                       height: 12,
                     ),
-                    Text('${listOfCollections[index].items.length} Items',
+                    Text(
+                        '${listOfCollections[index].items.length} ${AppLocalizations.of(context)!.items}',
                         style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,

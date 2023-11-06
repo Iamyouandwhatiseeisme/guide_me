@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:hive/hive.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../data_layer/models/collection_model.dart';
 
@@ -38,7 +39,7 @@ class _AddCollectionButtonState extends State<AddCollectionButton> {
                   }
                 : null, // Set to null when text is empty
             icon: const Icon(Icons.add),
-            label: const Text('Create collection'),
+            label: Text(AppLocalizations.of(context)!.createCollection),
           );
         });
   }

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future changeDisplayName(TextEditingController nameController, User user,
     BuildContext context, Function updateUI) async {
@@ -12,17 +13,19 @@ Future changeDisplayName(TextEditingController nameController, User user,
               width: double.infinity,
               child: Column(
                 children: [
-                  const Text(
-                    'Please enter your name: ',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                  Text(
+                    AppLocalizations.of(context)!.enterYourName,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w400),
                   ),
                   const SizedBox(
                     height: 12,
                   ),
                   TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (name) =>
-                        name == null ? "Enter your name" : null,
+                    validator: (name) => name == null
+                        ? AppLocalizations.of(context)!.nameExample
+                        : null,
                     onEditingComplete: () async {
                       await user.updateDisplayName(nameController.text);
                       updateUI();
@@ -38,7 +41,7 @@ Future changeDisplayName(TextEditingController nameController, User user,
                           fontFamily: 'Telegraf',
                           fontWeight: FontWeight.w400,
                           color: const Color(0xff292F32).withOpacity(0.75)),
-                      hintText: 'Enter your name',
+                      hintText: AppLocalizations.of(context)!.nameExample,
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(32),

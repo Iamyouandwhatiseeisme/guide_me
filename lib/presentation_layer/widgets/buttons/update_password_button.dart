@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpdatePasswordButton extends StatelessWidget {
   final User currentUser;
@@ -42,6 +42,9 @@ class UpdatePasswordButton extends StatelessWidget {
             Navigator.pop(context);
           }
         },
-        child: const Text("Update password"));
+        child: Text(
+          AppLocalizations.of(context)!.updatePassword,
+          style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+        ));
   }
 }

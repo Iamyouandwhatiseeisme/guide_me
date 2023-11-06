@@ -8,6 +8,7 @@ import 'package:guide_me/business_layer/cubits.dart';
 import 'package:guide_me/data_layer/create_distance_map_method.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/custom_bottom_navigatio_bar_widget.dart';
 
@@ -69,9 +70,9 @@ class _BookmarksPageState extends State<BookmarksPage> {
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           centerTitle: true,
-          title: const Text(
-            'Bookmarks',
-            style: TextStyle(
+          title: Text(
+            AppLocalizations.of(context)!.bookmarks,
+            style: const TextStyle(
                 fontWeight: FontWeight.w800,
                 fontSize: 20,
                 color: Color(0xffF3F0E6)),

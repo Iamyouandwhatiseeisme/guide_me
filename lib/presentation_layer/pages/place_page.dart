@@ -7,6 +7,7 @@ import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PlacePage extends StatefulWidget {
   final String? apiKey;
@@ -29,6 +30,9 @@ class _PlacepageState extends State<PlacePage> {
   Map<String, String?> openningHours = {};
   @override
   Widget build(BuildContext context) {
+    final String open = AppLocalizations.of(context)!.openNow;
+    final String closed = AppLocalizations.of(context)!.closed;
+    final String noInfo = AppLocalizations.of(context)!.noInformation;
     final listOfArguments =
         ModalRoute.of(context)!.settings.arguments as List<dynamic>;
     final passedPlace = listOfArguments[1] as NearbyPlacesModel;
@@ -48,7 +52,9 @@ class _PlacepageState extends State<PlacePage> {
         BlocProvider(create: (context) => FetchPhoneNumberAndAdressCubit()),
         BlocProvider(create: (context) => MakeACallCubit()),
         BlocProvider(create: (context) => OpenLocationOnMapCubit()),
-        BlocProvider(create: (context) => PlaceOpenStatuslabelCubit())
+        BlocProvider(
+            create: (context) =>
+                PlaceOpenStatuslabelCubit(open, closed, noInfo))
       ],
       child:
           BlocBuilder<PhotosByPlaceIdFetcherCubit, PhotosByPlaceIdFetcherState>(

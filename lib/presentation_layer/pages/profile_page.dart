@@ -3,8 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:guide_me/data_layer/get_localized_string_method.dart';
 import 'package:guide_me/data_layer/provider/google_sign_in.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -20,12 +21,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final passwordController = TextEditingController();
   final passedControllerForNewPassword = TextEditingController();
   final passedControllerForOldPassword = TextEditingController();
-  final List<String> listOfSettings = [
-    'Edit name',
-    'Change password',
-    'Payments & cards',
-    'Settings'
-  ];
+
   final List<FaIcon> listofIcons = [
     const FaIcon(FontAwesomeIcons.pen),
     const FaIcon(FontAwesomeIcons.key),
@@ -52,11 +48,21 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final String editName = getLocalizedString('editName', context);
+    final String changePassword = getLocalizedString('changePassword', context);
+    final String paymentsNCads = getLocalizedString('paymentsNCards', context);
+    final String settings = getLocalizedString('settings', context);
+    final List<String> listOfSettings = [
+      editName,
+      changePassword,
+      paymentsNCads,
+      settings
+    ];
     final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text('Profile Page'),
+        title: Text(AppLocalizations.of(context)!.profilePage),
         centerTitle: true,
         actions: [
           TextButton(
@@ -69,9 +75,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 Navigator.pushNamed(context, 'authPage');
                 Navigator.popUntil(context, ModalRoute.withName('authPage'));
               },
-              child: const Text(
-                'Logout',
-                style: TextStyle(color: Colors.blue),
+              child: Text(
+                AppLocalizations.of(context)!.logout,
+                style: const TextStyle(color: Colors.blue),
               ))
         ],
       ),
@@ -85,10 +91,10 @@ class _ProfilePageState extends State<ProfilePage> {
               decoration: BoxDecoration(
                   border: Border.all(),
                   borderRadius: BorderRadius.circular(32)),
-              child: const Center(
+              child: Center(
                 child: Text(
-                  'Profile information',
-                  style: TextStyle(
+                  AppLocalizations.of(context)!.profileInformation,
+                  style: const TextStyle(
                     fontSize: 24,
                   ),
                 ),

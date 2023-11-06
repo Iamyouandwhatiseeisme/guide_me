@@ -21,6 +21,14 @@ String getLocalizedString(String textLabel, BuildContext context) {
       return AppLocalizations.of(context)!.other;
     case "nightLife":
       return AppLocalizations.of(context)!.nightLife;
+    case "editName":
+      return AppLocalizations.of(context)!.editName;
+    case "changePassword":
+      return AppLocalizations.of(context)!.changePassword;
+    case "paymentsNCards":
+      return AppLocalizations.of(context)!.paymentsNCards;
+    case "settings":
+      return AppLocalizations.of(context)!.settings;
   }
   return textLabel;
 }

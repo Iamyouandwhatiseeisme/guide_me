@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:guide_me/data_layer/data.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class ListViewBuilderForProfilePage extends StatefulWidget {
@@ -73,9 +73,9 @@ class _ListViewBuilderForProfilePageState
                       const SizedBox(
                         height: 20,
                       ),
-                      const Text(
-                        'Change password ',
-                        style: TextStyle(
+                      Text(
+                        AppLocalizations.of(context)!.changePassword,
+                        style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.w400),
                       ),
                       const SizedBox(
@@ -86,7 +86,7 @@ class _ListViewBuilderForProfilePageState
                         controller: widget.passedControllerForOldPassword,
                         updateUI: updateUI,
                         showPassword: showPassword,
-                        label: 'Enter your old password',
+                        label: AppLocalizations.of(context)!.enterOldPassword,
                         hideText: hideText,
                       ),
                       const SizedBox(
@@ -95,7 +95,7 @@ class _ListViewBuilderForProfilePageState
                       PasswordTextFormFieldForChangePasswordPage(
                           setState: setState,
                           controller: widget.passedControllerForNewPassword,
-                          label: "Enter your new password",
+                          label: AppLocalizations.of(context)!.enterNewPassword,
                           hideText: hideText,
                           updateUI: updateUI,
                           showPassword: () => showPassword()),
@@ -130,18 +130,21 @@ class _ListViewBuilderForProfilePageState
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  if (widget.listOfSettings[index].contains('name')) {
+                  String name = AppLocalizations.of(context)!.editName;
+                  String password =
+                      AppLocalizations.of(context)!.changePassword;
+                  String cards = AppLocalizations.of(context)!.paymentsNCards;
+                  if (widget.listOfSettings[index].contains(name)) {
                     changeDisplayName(widget.nameController, widget.user,
                         context, widget.updateUI);
-                  } else if (widget.listOfSettings[index]
-                      .contains('password')) {
+                  } else if (widget.listOfSettings[index].contains(password)) {
                     changePassword(
                         widget.passedControllerForOldPassword,
                         widget.passedControllerForNewPassword,
                         widget.user,
                         context,
                         widget.updateUI);
-                  } else if (widget.listOfSettings[index].contains('cards')) {
+                  } else if (widget.listOfSettings[index].contains(cards)) {
                     Navigator.pushNamed(context, 'paymentsPage');
                   }
                 },

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubits.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BookmarksPageTabOptionsButtons extends StatelessWidget {
   const BookmarksPageTabOptionsButtons({
@@ -17,12 +18,12 @@ class BookmarksPageTabOptionsButtons extends StatelessWidget {
           TabOptionWidget(
             isSelected: selectedTab == TabOption.favorites,
             tabOption: TabOption.favorites,
-            tabLabel: 'Favorites',
+            tabLabel: AppLocalizations.of(context)!.favorites,
           ),
           TabOptionWidget(
             isSelected: selectedTab == TabOption.collections,
             tabOption: TabOption.collections,
-            tabLabel: 'Collection',
+            tabLabel: AppLocalizations.of(context)!.collection,
           ),
         ]);
       },

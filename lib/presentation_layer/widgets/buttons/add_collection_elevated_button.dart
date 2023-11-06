@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../data_layer/models/nearby_places_model.dart';
 import '../bookmarks_page_widgets.dart/dialog_for_collection_adding.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddCollectionElevatedButton extends StatelessWidget {
   const AddCollectionElevatedButton({
@@ -31,10 +32,10 @@ class AddCollectionElevatedButton extends StatelessWidget {
                       listToCreate: listToCreate);
                 });
           },
-          child: const Center(
+          child: Center(
             child: Text(
-              'Add collection',
-              style: TextStyle(
+              AppLocalizations.of(context)!.addCollection,
+              style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w800,
                   color: Color(0xffF3F0E6)),
