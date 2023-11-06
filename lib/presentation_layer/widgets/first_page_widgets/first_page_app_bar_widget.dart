@@ -48,23 +48,6 @@ class FirstPageAppBar extends StatelessWidget {
             context.read<ThemeProvider>().toggleTheme();
           },
         ),
-        TextButton(
-            onPressed: () {
-              final provider =
-                  Provider.of<GoogleSignInprovider>(context, listen: false);
-
-              provider.logout();
-              FirebaseAuth.instance.signOut();
-              Navigator.pushNamed(context, 'authPage');
-              Navigator.popUntil(context, ModalRoute.withName('authPage'));
-            },
-            child: const Padding(
-              padding: EdgeInsets.only(right: 10.0),
-              child: Text(
-                'Logout',
-                style: TextStyle(fontSize: 14, color: Colors.blue),
-              ),
-            ))
       ],
       leading: Padding(
         padding: const EdgeInsets.only(left: 20.0),
