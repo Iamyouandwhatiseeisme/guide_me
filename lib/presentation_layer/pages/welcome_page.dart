@@ -6,6 +6,7 @@ import 'package:guide_me/business_layer/widgets/business_widgets.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 import 'package:guide_me/business_layer/cubit/radio_button_cubit_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key, required this.backGroundPhoto});
@@ -43,14 +44,14 @@ class _MyHomePageState extends State<WelcomePage> {
                   BlocBuilder<RadioButtonCubitCubit, RadioButtonCubitInitial>(
                     builder: (context, state) {
                       return state.value == 0
-                          ? const Column(
+                          ? Column(
                               children: [
                                 BackgroundPhotoAndTitleWidget(
-                                    pageTitle:
-                                        'Discover the best of\n each city!',
+                                    pageTitle: AppLocalizations.of(context)!
+                                        .welcomePageFirstSlideText,
                                     photo:
                                         'assets/images/Navigation-amico (1) 2.png'),
-                                RadioButtonWidget(
+                                const RadioButtonWidget(
                                   firstButton: 'assets/buttons/Rectangle 7.png',
                                   secondButton:
                                       'assets/buttons/Rectangle 8.png',
@@ -59,14 +60,14 @@ class _MyHomePageState extends State<WelcomePage> {
                               ],
                             )
                           : state.value == 1
-                              ? const Column(
+                              ? Column(
                                   children: [
                                     BackgroundPhotoAndTitleWidget(
-                                        pageTitle:
-                                            'Create your Own \n adventure!',
+                                        pageTitle: AppLocalizations.of(context)!
+                                            .welcomePageSecondSlideText,
                                         photo:
                                             'assets/images/Location review-amico (1) 1.png'),
-                                    RadioButtonWidget(
+                                    const RadioButtonWidget(
                                         firstButton:
                                             'assets/buttons/Rectangle 8.png',
                                         secondButton:
@@ -75,14 +76,15 @@ class _MyHomePageState extends State<WelcomePage> {
                                             'assets/buttons/Rectangle 8.png'),
                                   ],
                                 )
-                              : const Column(
+                              : Column(
                                   children: [
                                     BackgroundPhotoAndTitleWidget(
-                                        pageTitle: 'Stay up to date!',
+                                        pageTitle: AppLocalizations.of(context)!
+                                            .welcomePageThirdSlideText,
                                         photo:
                                             'assets/images/Modern life-cuate (1) 1.png'),
-                                    SizedBox(height: 30),
-                                    RadioButtonWidget(
+                                    const SizedBox(height: 30),
+                                    const RadioButtonWidget(
                                         firstButton:
                                             'assets/buttons/Rectangle 8.png',
                                         secondButton:

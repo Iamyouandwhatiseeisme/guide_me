@@ -7,6 +7,7 @@ import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.d
 
 import '../../../business_layer/widgets/sorter_radio_button_widget.dart';
 import '../../../data_layer/models/nearby_places_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RecommendedSightseeingsWidget extends StatelessWidget {
   final String apiKey;
@@ -55,7 +56,8 @@ class RecommendedSightseeingsWidget extends StatelessWidget {
                     apiKey: widget.apiKey,
                     userLat: widget.lat,
                     userLon: widget.lon,
-                    textToDisplay: 'What to Visit'),
+                    textToDisplay:
+                        AppLocalizations.of(context)!.whatToVisitLabel),
                 const SizedBox(
                   height: 12,
                 ),

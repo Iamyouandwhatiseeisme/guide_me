@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RecommendedWidget extends StatelessWidget {
   const RecommendedWidget({
@@ -10,13 +11,13 @@ class RecommendedWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 24),
       child: SizedBox(
-        width: 230,
-        height: 30,
+        width: 400,
+        height: 40,
         child: Row(
           children: [
-            const Text(
-              'Recommended',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
+            Text(
+              AppLocalizations.of(context)!.recommended,
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
             ),
             const SizedBox(
               width: 8,

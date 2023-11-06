@@ -38,7 +38,7 @@ class MapsPageContent extends StatelessWidget {
       return BlocBuilder<IsExapndedCubit, bool>(
         builder: (context, state) {
           double topPosition =
-              state == true ? screenHeight / 2.2 - 132 : screenHeight / 2.2;
+              state == true ? screenHeight / 2.8 - 132 : screenHeight / 2.8;
           return Positioned(
               top: topPosition,
               left: 16,

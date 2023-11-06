@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GetStartedButton extends StatelessWidget {
   const GetStartedButton({
@@ -11,13 +12,14 @@ class GetStartedButton extends StatelessWidget {
       padding: const EdgeInsets.only(top: 15.0),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xffC75E6B), fixedSize: const Size(320, 60)),
+            backgroundColor: const Color(0xffC75E6B),
+            fixedSize: const Size(320, 60)),
         onPressed: () {
           Navigator.of(context).pushReplacementNamed('authPage');
         },
-        child: const Text(
-          'Get Started',
-          style: TextStyle(color: Colors.white),
+        child: Text(
+          AppLocalizations.of(context)!.getStartedButtonText,
+          style: const TextStyle(color: Colors.white),
         ),
       ),
     );

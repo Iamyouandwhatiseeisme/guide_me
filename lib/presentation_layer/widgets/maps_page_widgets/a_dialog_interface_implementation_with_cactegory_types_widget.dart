@@ -47,72 +47,77 @@ class ADialogWithInterfaceListCategories
               borderRadius: BorderRadius.circular(16)),
           height: screenHeight - 136,
           width: screenWidth,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, right: 20, top: 25),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    iconToDisplay,
-                    Text(
-                      textLabel,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w800,
-                          fontSize: 24,
-                          color: Color(0xffF3F0E6)),
-                    ),
-                    GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: const Color(0xffF3F0E6).withOpacity(0.25),
-                        ),
-                        child: const Icon(
-                          Icons.close_rounded,
-                          color: Color(0xffF3F0E6),
-                        ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 20.0, right: 20, top: 25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      iconToDisplay,
+                      Text(
+                        textLabel,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 24,
+                            color: Color(0xffF3F0E6)),
                       ),
-                    )
-                  ],
+                      GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: const Color(0xffF3F0E6).withOpacity(0.25),
+                          ),
+                          child: const Icon(
+                            Icons.close_rounded,
+                            color: Color(0xffF3F0E6),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 36),
-              OtherCategoryTypesRowWidget(listOfCategories: listOfCategories),
-              BlocBuilder<CategoryTypesFetcherCubit, CategoryTypesFetcherState>(
-                builder: (context, state) {
-                  List<NearbyPlacesModel> listOfPlaces = [];
-                  return BlocBuilder<CategoryCubit, CategoryCubitState>(
-                    builder: (context, state) {
-                      return Builder(builder: (BuildContext context) {
-                        String category = state.selectedCategory;
-                        final categoryTypesFetcherCubit =
-                            BlocProvider.of<CategoryTypesFetcherCubit>(context);
-                        createMap(
-                            apiKey,
-                            lat!,
-                            lon!,
-                            cachedData,
-                            category,
-                            categoryTypesFetcherCubit,
-                            listOfPlaces,
-                            mapLoadedController);
-                        createDistanceMap(
-                            distanceMap, cachedData[category]!, lat!, lon!);
+                const SizedBox(height: 36),
+                OtherCategoryTypesRowWidget(listOfCategories: listOfCategories),
+                BlocBuilder<CategoryTypesFetcherCubit,
+                    CategoryTypesFetcherState>(
+                  builder: (context, state) {
+                    List<NearbyPlacesModel> listOfPlaces = [];
+                    return BlocBuilder<CategoryCubit, CategoryCubitState>(
+                      builder: (context, state) {
+                        return Builder(builder: (BuildContext context) {
+                          String category = state.selectedCategory;
+                          final categoryTypesFetcherCubit =
+                              BlocProvider.of<CategoryTypesFetcherCubit>(
+                                  context);
+                          createMap(
+                              apiKey,
+                              lat!,
+                              lon!,
+                              cachedData,
+                              category,
+                              categoryTypesFetcherCubit,
+                              listOfPlaces,
+                              mapLoadedController);
+                          createDistanceMap(
+                              distanceMap, cachedData[category]!, lat!, lon!);
 
-                        return FutureBuilderForAlistInMapsPageTypeView(
-                            distanceMap: distanceMap,
-                            apiKey: apiKey,
-                            dataFetchController: mapLoadedController,
-                            listOfPlaces: cachedData[category]!);
-                      });
-                    },
-                  );
-                },
-              )
-            ],
+                          return FutureBuilderForAlistInMapsPageTypeView(
+                              distanceMap: distanceMap,
+                              apiKey: apiKey,
+                              dataFetchController: mapLoadedController,
+                              listOfPlaces: cachedData[category]!);
+                        });
+                      },
+                    );
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:guide_me/data_layer/get_localized_string_method.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
   final double? lat;
@@ -32,11 +34,12 @@ class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String localizedString = getLocalizedString(textLabel, context);
     return GestureDetector(
       onTap: () {
-        if (textLabel != 'Other') {
+        if (textLabel != 'other') {
           showDIalogWindow(null, null, context, screenHeight, screenWidth,
-              iconToDisplay, textLabel, null, lat!, lon!, apiKey, null);
+              iconToDisplay, localizedString, null, lat!, lon!, apiKey, null);
         } else {
           showDIalogWindow(
             null,
@@ -45,7 +48,7 @@ class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
             screenHeight,
             screenWidth,
             iconToDisplay,
-            textLabel,
+            localizedString,
             listOfCategories,
             lat!,
             lon!,
@@ -69,7 +72,7 @@ class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
             children: [
               iconToDisplay,
               Text(
-                textLabel,
+                localizedString,
                 style: const TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 16,

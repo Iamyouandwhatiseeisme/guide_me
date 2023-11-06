@@ -1,0 +1,15 @@
+arb-dir: lib/l10n
+
+## Names the template arb file that will be used to check and validate the
+## remaining arb files when generating `output-class` and its supporting
+## classes.
+template-arb-file: app_en.arb
+
+## The name of the localizations class your application will use to lookup
+## localized message strings.
+output-class: AppLocalizations
+
+## The name of the generated file which will contain the
+## class named `output-class`. The file will appear in `arb-dir`
+## and the application must import it.
+output-localization-file: app_localizations.dart

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubit/sorter_toggle_button_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // ignore: must_be_immutable
 class SorterRadioButtonWidget extends StatelessWidget {
@@ -44,9 +45,9 @@ class SorterRadioButtonWidget extends StatelessWidget {
                           decoration: BoxDecoration(
                               color: primaryColor,
                               borderRadius: BorderRadius.circular(32)),
-                          child: const Center(
+                          child: Center(
                               child: Text(
-                            'Highest Rated',
+                            AppLocalizations.of(context)!.highestRated,
                           )))),
                 ),
                 Padding(
@@ -56,7 +57,7 @@ class SorterRadioButtonWidget extends StatelessWidget {
                         BlocProvider.of<SorterToggleButtonCubit>(context)
                             .selectRadioButton(1);
                       },
-                      child: const Text('Closest to you')),
+                      child: Text(AppLocalizations.of(context)!.closestToYou)),
                 ),
               ],
             ));
@@ -72,8 +73,8 @@ class SorterRadioButtonWidget extends StatelessWidget {
                         BlocProvider.of<SorterToggleButtonCubit>(context)
                             .selectRadioButton(0);
                       },
-                      child: const Text(
-                        'Highest Rated',
+                      child: Text(
+                        AppLocalizations.of(context)!.highestRated,
                       ))),
               Padding(
                 padding: const EdgeInsets.only(right: 25.0),
@@ -88,9 +89,9 @@ class SorterRadioButtonWidget extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: primaryColor,
                             borderRadius: BorderRadius.circular(32)),
-                        child: const Center(
+                        child: Center(
                             child: Text(
-                          'Closest to you',
+                          AppLocalizations.of(context)!.closestToYou,
                         )))),
               ),
             ]));

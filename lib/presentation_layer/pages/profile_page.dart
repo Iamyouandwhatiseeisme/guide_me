@@ -3,8 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:guide_me/data_layer/provider/google_sign_in.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -59,6 +61,10 @@ class _ProfilePageState extends State<ProfilePage> {
         actions: [
           TextButton(
               onPressed: () {
+                final provider =
+                    Provider.of<GoogleSignInprovider>(context, listen: false);
+
+                provider.logout();
                 FirebaseAuth.instance.signOut();
                 Navigator.pushNamed(context, 'authPage');
                 Navigator.popUntil(context, ModalRoute.withName('authPage'));

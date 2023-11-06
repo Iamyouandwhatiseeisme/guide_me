@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
 import 'package:guide_me/data_layer/provider/google_sign_in.dart';
 import 'package:guide_me/data_layer/provider/theme_provider.dart';
+import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,9 @@ class FirstPageAppBar extends StatelessWidget {
       leadingWidth: 250,
       actions: [
         DropdownButton<Language>(
-            icon: const Icon(Icons.language),
+            icon: const Icon(
+              Icons.language,
+            ),
             items: Language.languageList()
                 .map<DropdownMenuItem<Language>>(
                     (e) => DropdownMenuItem<Language>(
@@ -41,9 +44,13 @@ class FirstPageAppBar extends StatelessWidget {
                           ],
                         )))
                 .toList(),
-            onChanged: (Language? language) {}),
+            onChanged: (Language? language) {
+              if (language != null) {
+                MyApp.setLocale(context, Locale(language.languageCode, ''));
+              }
+            }),
         IconButton(
-          icon: Icon(Icons.brightness_4), // Icon for theme toggle
+          icon: const Icon(Icons.brightness_4), // Icon for theme toggle
           onPressed: () {
             context.read<ThemeProvider>().toggleTheme();
           },

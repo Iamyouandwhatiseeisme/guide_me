@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:guide_me/business_layer/cubits.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
@@ -49,7 +50,7 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
               sorterToggleButtonCubit,
             ]);
           },
-          child: Text('See all',
+          child: Text(AppLocalizations.of(context)!.seeAllLabel,
               style: TextStyle(
                   decorationColor: Theme.of(context).colorScheme.secondary,
                   decoration: TextDecoration.underline,
