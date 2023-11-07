@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guide_me/data_layer/constants/language_constants.dart';
 
 import '../../../business_layer/widgets/business_widgets.dart';
 import '../presentation_layer_widgets.dart';
@@ -43,14 +44,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                 ),
                 MyTextField(
                   controller: widget._emailController,
-                  label: 'Email',
+                  label: translation(context).email,
                   hintText: 'Example@gmail.com',
                 ),
                 const SizedBox(height: 24),
                 MyTextField(
                     controller: widget._passwordController,
-                    label: 'Password',
-                    hintText: 'Enter Password'),
+                    label: translation(context).password,
+                    hintText: translation(context).enterPassword),
                 const ForgotPasswordLabel(),
                 const SizedBox(
                   height: 44,
@@ -64,8 +65,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                   height: 16,
                 ),
                 TextForSignUpOrSignIn(
-                  signUpOrSignIn: 'Sign up',
-                  textToDisplay: 'Don\'t have an account?',
+                  signUpOrSignIn: translation(context).signup,
+                  textToDisplay: translation(context).dontHaveAccount,
                   onClick: widget.onClickedSignUp,
                 ),
                 const SizedBox(

@@ -46,5 +46,21 @@
     "createCollection" : "Create collection",
     "enterNameOfCollection" : "Enter name of your collection",
     "items" : "Items",
-    "pressAndHold" : "Press and hold item to add to collection"
+    "pressAndHold" : "Press and hold item to add to collection",
+    "email" : "Email",
+    "signup" : "Sign up",
+    "dontHaveAccount" : "Don't have an account?",
+    "password" : "Password",
+    "enterPassword" : "Enter Password",
+    "forgotPassword" : "Forgot password?",
+    "somethingWentWrong" : "Something Went Wrong",
+    "emailVerificationSent" : "E-Mail verification sent",
+    "resendEmail" : "Resend email",
+    "welcomeToGuideMe" : "Hey there!\nWelcome to GuideMe",
+    "chooseAuthMethod" : "Choose your preffered way of\nauthentication",
+    "alreadyHaveAccount" : "Already have an account?",
+    "login" : "Log in",
+    "signUpWithMail" : "Sign up with E-Mail",
+    "signUpWithGoogle" : "Sign up with Google"
+
     }

@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 import '../../../business_layer/widgets/business_widgets.dart';
+import '../../../data_layer/constants/language_constants.dart';
 
 class SignUpPageWidgets extends StatefulWidget {
   SignUpPageWidgets({
@@ -45,9 +46,9 @@ class _SignUpPageWidgetsState extends State<SignUpPageWidgets> {
                 const SizedBox(
                   height: 40,
                 ),
-                const Text(
-                  'Hey there!\nWelcome to GuideMe',
-                  style: TextStyle(
+                Text(
+                  translation(context).welcomeToGuideMe,
+                  style: const TextStyle(
                       fontFamily: 'paragraf',
                       fontSize: 20,
                       fontWeight: FontWeight.w800,
@@ -56,10 +57,10 @@ class _SignUpPageWidgetsState extends State<SignUpPageWidgets> {
                 const SizedBox(
                   height: 12,
                 ),
-                const Text(
-                  'Choose your preffered way of\nauthentication.',
+                Text(
+                  translation(context).chooseAuthMethod,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontFamily: 'paragraf',
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -67,34 +68,34 @@ class _SignUpPageWidgetsState extends State<SignUpPageWidgets> {
                 ),
                 MyTextField(
                   controller: widget.emailController,
-                  label: 'Email',
+                  label: translation(context).email,
                   hintText: 'Example@gmail.com',
                 ),
                 const SizedBox(height: 24),
                 MyTextField(
                     controller: widget.passwordController,
-                    label: 'Password',
-                    hintText: 'Enter Password'),
+                    label: translation(context).password,
+                    hintText: translation(context).enterPassword),
                 GoogleSignUpButton(
                     formKey: widget.formKey,
                     emailController: widget.emailController,
                     passwordController: widget.passwordController,
-                    text: 'Sign up with E-Mail',
+                    text: translation(context).signUpWithMail,
                     icon: const FaIcon(
                       Icons.mail,
                       color: Colors.red,
                     )),
-                const GoogleSignUpButton(
-                  text: 'Sign up with Google',
-                  icon: FaIcon(
+                GoogleSignUpButton(
+                  text: translation(context).signUpWithGoogle,
+                  icon: const FaIcon(
                     FontAwesomeIcons.google,
                     color: Colors.red,
                   ),
                 ),
                 TextForSignUpOrSignIn(
                     onClick: widget.onClickedLogIn,
-                    textToDisplay: "Already have an account? ",
-                    signUpOrSignIn: 'Log in')
+                    textToDisplay: translation(context).alreadyHaveAccount,
+                    signUpOrSignIn: translation(context).login)
               ]),
             ),
           )

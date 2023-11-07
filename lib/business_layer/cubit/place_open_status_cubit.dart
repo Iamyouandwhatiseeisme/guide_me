@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 part 'place_open_status_state.dart';
 

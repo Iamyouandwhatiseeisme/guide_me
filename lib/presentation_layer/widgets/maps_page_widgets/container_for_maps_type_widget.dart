@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:guide_me/data_layer/get_localized_string_method.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
   final double? lat;

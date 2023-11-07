@@ -46,5 +46,20 @@
     "createCollection" : "კოლექციის შექმნა",
     "enterNameOfCollection" : "მიუთითეთ კოლექციის სახელი",
     "items" : "ერთეული",
-    "pressAndHold" : "დააწექით დიდი ხანი, რომ დაამატოთ კოლექციაში"
+    "pressAndHold" : "დააწექით დიდი ხანი, რომ დაამატოთ კოლექციაში",
+    "email" : "ე-მეილი",
+    "signup" : "რეგისტრაცია",
+    "dontHaveAccount" : "არ გაქვთ ანგარიში?",
+    "password" : "პაროლი",
+    "enterPassword" : "მიუთითეთ პაროლი",
+    "forgotPassword" : "დაგავიწყდათ პაროლი?",
+    "somethingWentWrong" : "დაფიქსირდა შეცდომა",
+    "emailVerificationSent" : "ვერიფიკაციის ლინკი გამოიგზავნა მეილზე",
+    "resendEmail" : "ხელახლა გაგზავნა",
+    "welcomeToGuideMe" : "კეთილი იყოს თქვენი \n მობრძანება",
+    "chooseAuthMethod" : "აირჩიეთ ავთენტიფიკაციის \nმეთოდი",
+    "alreadyHaveAccount" : "უკვე გაქვთ ანგარიში?",
+    "login" : "შესვლა",
+    "signUpWithMail" : "მეილით რეგისტრაცია",
+    "signUpWithGoogle" : "გუგლით რეგისტრაცია"
 }

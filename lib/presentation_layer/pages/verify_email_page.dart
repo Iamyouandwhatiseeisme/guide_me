@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:guide_me/presentation_layer/pages/first_page.dart';
 import 'package:guide_me/presentation_layer/widgets/custom_bottom_navigatio_bar_widget.dart';
 
+import '../../data_layer/constants/language_constants.dart';
 
 class VerifyEmailPage extends StatefulWidget {
   final String apiKey;
@@ -69,9 +70,9 @@ class _VerifyEmailPage extends State<VerifyEmailPage> {
                     const SizedBox(
                       height: 40,
                     ),
-                    const Text(
-                      'E-Mail verification sent',
-                      style: TextStyle(
+                    Text(
+                      translation(context).emailVerificationSent,
+                      style: const TextStyle(
                           fontFamily: 'paragraf',
                           fontSize: 20,
                           fontWeight: FontWeight.w800,
@@ -88,7 +89,7 @@ class _VerifyEmailPage extends State<VerifyEmailPage> {
                           };
                         },
                         icon: const FaIcon(Icons.email_outlined),
-                        label: const Text('Resend email'))
+                        label: Text(translation(context).resendEmail))
                   ]),
                 )
               ]),

@@ -20,8 +20,8 @@ class _TextForSignUpOrSignInState extends State<TextForSignUpOrSignIn> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 16,
-      width: 220,
+      height: 20,
+      width: 260,
       child: Row(
         children: [
           Text(
@@ -31,6 +31,9 @@ class _TextForSignUpOrSignInState extends State<TextForSignUpOrSignIn> {
                 fontWeight: FontWeight.w400,
                 fontSize: 14,
                 color: Color(0xff292F32)),
+          ),
+          const SizedBox(
+            width: 5,
           ),
           ClickableRichText(
             onClick: widget.onClick,

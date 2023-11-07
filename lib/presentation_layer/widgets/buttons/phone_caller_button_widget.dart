@@ -30,12 +30,11 @@ class PhoneCallerWidget extends StatelessWidget {
         return BlocBuilder<MakeACallCubit, bool>(
           builder: (context, callReview) {
             String? number = '';
-            String? adress = '';
+
             if (numberAndAdressState is FetchPhoneNumberAndAdressLoaded) {
               final adressAndNumber =
                   numberAndAdressState.numberAndAdressByPlaceId;
               number = adressAndNumber['phone'];
-              adress = adressAndNumber['addres'];
             }
             return Padding(
               padding: const EdgeInsets.only(right: 20.0),

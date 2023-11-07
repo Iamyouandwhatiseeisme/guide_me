@@ -9,6 +9,7 @@ import 'package:guide_me/data_layer/provider/google_sign_in.dart';
 import 'package:guide_me/presentation_layer/themes/dark_theme.dart';
 import 'package:guide_me/presentation_layer/themes/light_theme.dart';
 import 'package:guide_me/presentation_layer/widgets/custom_bottom_navigatio_bar_widget.dart';
+import 'data_layer/constants/language_constants.dart';
 import 'data_layer/enums/app_theme.dart';
 import 'data_layer/provider/theme_provider.dart';
 import 'presentation_layer/pages/pages.dart';
@@ -50,6 +51,12 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _locale = locale;
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    getLocale().then((locale) => {setLocale(locale)});
+    super.didChangeDependencies();
   }
 
   @override
