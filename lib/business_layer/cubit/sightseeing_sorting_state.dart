@@ -9,6 +9,8 @@ sealed class SightseeingSortingState extends Equatable {
 
 final class SightseeingSortingInitial extends SightseeingSortingState {}
 
+class SightseeingsortingLoading extends SightseeingSortingState {}
+
 class SightseeingsortingLoaded extends SightseeingSortingState {
   final List<NearbyPlacesModel> sortedList;
   const SightseeingsortingLoaded(this.sortedList);

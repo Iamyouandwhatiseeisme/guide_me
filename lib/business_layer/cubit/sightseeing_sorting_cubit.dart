@@ -16,6 +16,7 @@ class SightseeingSortingCubit extends Cubit<SightseeingSortingState> {
       double userLon,
       Map<NearbyPlacesModel, double?> distanceMap) {
     List<NearbyPlacesModel> sortedList = [];
+    emit(SightseeingsortingLoading());
     switch (sortingOption) {
       case 0:
         unsortedList.sort((a, b) {

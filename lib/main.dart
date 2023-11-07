@@ -6,6 +6,7 @@ import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/collection_model.dart';
 import 'package:guide_me/data_layer/models/opening_hours.dart';
 import 'package:guide_me/data_layer/provider/google_sign_in.dart';
+import 'package:guide_me/presentation_layer/pages/searches_page.dart';
 import 'package:guide_me/presentation_layer/themes/dark_theme.dart';
 import 'package:guide_me/presentation_layer/themes/light_theme.dart';
 import 'package:guide_me/presentation_layer/widgets/custom_bottom_navigatio_bar_widget.dart';
@@ -119,7 +120,8 @@ class _MyAppState extends State<MyApp> {
                       ),
                   'forgotPassword': (context) => const ForgotPasswordPage(),
                   'profilePage': (context) => const ProfilePage(),
-                  'paymentsPage': (context) => const PaymentsMethodsPage()
+                  'paymentsPage': (context) => const PaymentsMethodsPage(),
+                  'searchesPage': (context) => const SearchesPage()
                 },
               ),
             );

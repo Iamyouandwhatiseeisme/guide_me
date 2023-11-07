@@ -12,6 +12,7 @@ import 'package:guide_me/presentation_layer/widgets/custom_bottom_navigatio_bar_
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import '../../business_layer/cubit/fetch_searched_items_cubit.dart';
 import '../../business_layer/cubit/recommended_places_cubit_dart_cubit.dart';
 
 class FirstPage extends StatefulWidget {
@@ -49,6 +50,7 @@ class _FirstPageState extends State<FirstPage> {
         BlocProvider(
           create: (context) => WhatToEatCubit(),
         ),
+        BlocProvider(create: (context) => FetchSearchedItemsCubit()),
         BlocProvider(create: (context) => GeolocatorCubit())
       ],
       child: BlocBuilder<GeolocatorCubit, LocationState>(

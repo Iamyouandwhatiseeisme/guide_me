@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class CustomMapsTextField extends StatelessWidget {
   const CustomMapsTextField({
@@ -14,11 +13,11 @@ class CustomMapsTextField extends StatelessWidget {
     return SizedBox(
       width: screenWidth - 32,
       height: 48,
-      child: CustomTextFormField(
-        textColor: const Color(0xffF3F0E6),
-        radiusSize: 16,
-        color: const Color(0xff292F32).withOpacity(0.75),
-      ),
+      // child: CustomTextFormField(
+      //   textColor: const Color(0xffF3F0E6),
+      //   radiusSize: 16,
+      //   color: const Color(0xff292F32).withOpacity(0.75),
+      // ),
     );
   }
 }
