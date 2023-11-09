@@ -8,13 +8,12 @@ import '../../../business_layer/cubits.dart';
 class MapsToolbarWIthDirectionsLocationAndThreeDotsWidget
     extends StatefulWidget {
   final GoogleMapController controller;
-  final bool isExpanded;
+
   final LatLng userLocation;
   const MapsToolbarWIthDirectionsLocationAndThreeDotsWidget({
     super.key,
     required this.controller,
     required this.userLocation,
-    required this.isExpanded,
   });
 
   @override

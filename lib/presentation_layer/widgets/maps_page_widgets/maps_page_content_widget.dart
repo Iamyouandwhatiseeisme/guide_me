@@ -28,60 +28,32 @@ class MapsPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isExpanded = true;
     List<MapItem> mapItemListForRowOne = [];
     List<MapItem> mapItemListForRowTwo = [];
     List<String> listOfCategories = [];
     createLists(mapItemListForRowOne, mapItemListForRowTwo, listOfCategories);
 
-    return Builder(builder: (context) {
-      return BlocBuilder<IsExapndedCubit, bool>(
-        builder: (context, state) {
-          double topPosition =
-              state == true ? screenHeight / 2.8 - 132 : screenHeight / 2.8;
-          return Positioned(
-              top: topPosition,
-              left: 16,
-              right: 16,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  MapsToolbarWIthDirectionsLocationAndThreeDotsWidget(
-                    isExpanded: isExpanded,
-                    controller: controller,
-                    userLocation: LatLng(lat, lon),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  CustomMapsTextField(screenWidth: screenWidth),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  MapsTypesRowWidget(
-                      listOfCategories: listOfCategories,
-                      lon: lon,
-                      lat: lat,
-                      apiKey: apiKey,
-                      screenHeight: screenHeight,
-                      mapItemList: mapItemListForRowOne,
-                      screenWidth: screenWidth),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  MapsTypesRowWidget(
-                    apiKey: apiKey,
-                    lat: lat,
-                    lon: lon,
-                    listOfCategories: listOfCategories,
-                    screenHeight: screenHeight,
-                    screenWidth: screenWidth,
-                    mapItemList: mapItemListForRowTwo,
-                  )
-                ],
-              ));
-        },
-      );
-    });
+    return BlocBuilder<IsExapndedCubit, bool>(
+      builder: (context, state) {
+        print(state);
+        return state == false
+            ? Container()
+            // ? const Positioned(
+            //     top: 5,
+            //     right: 16,
+            //     child: MenuExpandButtonWidget(),
+            //   )
+            : IfMenuExpanded(
+                screenHeight: screenHeight,
+                controller: controller,
+                lat: lat,
+                lon: lon,
+                listOfCategories: listOfCategories,
+                apiKey: apiKey,
+                mapItemListForRowOne: mapItemListForRowOne,
+                screenWidth: screenWidth,
+                mapItemListForRowTwo: mapItemListForRowTwo);
+      },
+    );
   }
 }

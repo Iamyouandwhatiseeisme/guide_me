@@ -12,10 +12,10 @@ class RotatingTrasitition extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-        child: child,
         animation: angle,
         builder: (context, child) {
           return Transform.rotate(angle: angle.value, child: child);
-        });
+        },
+        child: child);
   }
 }
