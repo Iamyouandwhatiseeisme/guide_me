@@ -16,6 +16,8 @@ class ProfileInfo extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 12, bottom: 12),
           child: Container(
+              width: 100,
+              height: 100,
               decoration: const BoxDecoration(shape: BoxShape.circle),
               child: ClipOval(child: Image.network(user.photoURL!))),
         ),
