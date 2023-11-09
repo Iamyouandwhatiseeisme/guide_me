@@ -95,3 +95,6 @@ export 'package:guide_me/presentation_layer/profile_page_widgets.dart/settings_l
 export 'package:guide_me/presentation_layer/profile_page_widgets.dart/profile_info.dart';
 export 'package:guide_me/presentation_layer/profile_page_widgets.dart/list_view_builder_for_profile_page.dart';
 export 'first_page_widgets/language_drop_down_menu_widget.dart';
+export 'package:guide_me/presentation_layer/widgets/welcome_page_widgets/animation_widget.dart';
+export 'welcome_page_widgets/rotating_transition.dart';
+export 'welcome_page_widgets/rotatin_logo_widget.dart';
