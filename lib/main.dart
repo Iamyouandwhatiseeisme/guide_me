@@ -19,9 +19,11 @@ import 'package:provider/provider.dart';
 import 'data_layer/models/nearby_places_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   await Firebase.initializeApp();
   await Hive.initFlutter();
   Hive.registerAdapter(NearbyPlacesModelAdapter());
@@ -69,8 +71,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
-      const String apiKey = 'AIzaSyDzW8mtXzGKSfoNPDrdPFbDomkmpBRGK9c';
-      const bottomAppBar = CustomBottomNavigationBar(
+      String apiKey = dotenv.env['GOOGLE_API_KEY']!;
+      CustomBottomNavigationBar bottomAppBar = CustomBottomNavigationBar(
         apiKey: apiKey,
       );
       return MultiBlocProvider(
@@ -100,21 +102,21 @@ class _MyAppState extends State<MyApp> {
                   '/': (context) => const WelcomePage(
                       backGroundPhoto:
                           'assets/images/Navigation-amico (1) 2.png'),
-                  'authPage': (context) => const AuthPage(
+                  'authPage': (context) => AuthPage(
                         bottomNavigationBar: bottomAppBar,
                         apiKey: apiKey,
                       ),
-                  'firstPage': (context) => const FirstPage(
+                  'firstPage': (context) => FirstPage(
                         bottomNavigationBar: bottomAppBar,
                         apiKey: apiKey,
                       ),
                   'placePage': (context) => const PlacePage(),
                   'seeAllPage': (context) => const SeeAllPage(),
-                  'mapsPage': (context) => const MapsPage(
+                  'mapsPage': (context) => MapsPage(
                         apiKey: apiKey,
                         customBottomAppBar: bottomAppBar,
                       ),
-                  'bookmarksPage': (context) => const BookmarksPage(
+                  'bookmarksPage': (context) => BookmarksPage(
                         customBottomAppBar: bottomAppBar,
                         apiKey: apiKey,
                       ),

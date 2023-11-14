@@ -24,7 +24,7 @@ class MapsPageAppBarWidget extends StatelessWidget {
       actions: [
         Padding(
             padding: const EdgeInsets.only(right: 10.0),
-            child: Container(
+            child: SizedBox(
               width: 150,
               child: Row(
                 children: [

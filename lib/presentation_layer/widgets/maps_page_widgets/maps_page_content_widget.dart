@@ -35,14 +35,10 @@ class MapsPageContent extends StatelessWidget {
 
     return BlocBuilder<IsExapndedCubit, bool>(
       builder: (context, state) {
-        print(state);
+       
         return state == false
             ? Container()
-            // ? const Positioned(
-            //     top: 5,
-            //     right: 16,
-            //     child: MenuExpandButtonWidget(),
-            //   )
+            
             : IfMenuExpanded(
                 screenHeight: screenHeight,
                 controller: controller,
