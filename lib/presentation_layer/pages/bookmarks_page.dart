@@ -10,7 +10,7 @@ import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../widgets/custom_bottom_navigatio_bar_widget.dart';
+import '../widgets/first_page_widgets/custom_bottom_navigatio_bar_widget.dart';
 
 class BookmarksPage extends StatefulWidget {
   final String? apiKey;

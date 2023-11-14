@@ -7,8 +7,6 @@ import 'package:guide_me/business_layer/cubits.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
-import '../../../business_layer/widgets/sorter_radio_button_widget.dart';
-
 class WhatToEatWidget extends StatelessWidget {
   final String apiKey;
 

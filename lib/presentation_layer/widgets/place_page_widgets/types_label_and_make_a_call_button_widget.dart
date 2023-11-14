@@ -1,11 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-import 'package:guide_me/presentation_layer/widgets/text_with_underline_grey_widget.dart';
+import 'package:guide_me/presentation_layer/widgets/place_page_widgets/text_with_underline_grey_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../business_layer/cubit/make_a_call_cubit.dart';
-import '../type_label_widget.dart';
+import 'type_label_widget.dart';
 
 class TypesLabelAndMakeACallButtonWidgetRow extends StatelessWidget {
   const TypesLabelAndMakeACallButtonWidgetRow({

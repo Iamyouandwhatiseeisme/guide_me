@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import '../../business_layer/cubit/geolocator_cubit.dart';
+import '../../../business_layer/cubit/geolocator_cubit.dart';
 
 class LocationDisplayWidget extends StatelessWidget {
   final String apiKey;
@@ -47,7 +47,8 @@ class LocationDisplayWidget extends StatelessWidget {
                   // Display a loading indicator while waiting for the location info
 
                   return LoadingAnimationWidget.inkDrop(
-                      color: const Color.fromARGB(255, 210, 203, 204), size: 20);
+                      color: const Color.fromARGB(255, 210, 203, 204),
+                      size: 20);
                 } else if (snapshot.hasError) {
                   // Handle errors if the future throws an exception
                   return Center(

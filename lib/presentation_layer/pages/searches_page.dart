@@ -8,8 +8,6 @@ import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import '../../business_layer/widgets/business_widgets.dart';
-
 class SearchesPage extends StatefulWidget {
   const SearchesPage({
     Key? key,

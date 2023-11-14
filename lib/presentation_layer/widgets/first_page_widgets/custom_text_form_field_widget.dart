@@ -6,7 +6,7 @@ import 'package:guide_me/business_layer/cubit/fetch_searched_items_cubit.dart';
 import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
 import 'package:guide_me/main.dart';
 
-import '../../data_layer/models/nearby_places_model.dart';
+import '../../../data_layer/models/nearby_places_model.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final List<NearbyPlacesModel> listOfSearchedPlaces;

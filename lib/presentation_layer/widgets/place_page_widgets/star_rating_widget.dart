@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guide_me/presentation_layer/widgets/star_icon_widget.dart';
+import 'package:guide_me/presentation_layer/widgets/place_page_widgets/star_icon_widget.dart';
 
 class StarRating extends StatelessWidget {
   final num rating;
