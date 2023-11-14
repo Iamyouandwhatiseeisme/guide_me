@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubits.dart';
 import 'package:guide_me/data_layer/data.dart';
+import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -33,6 +35,7 @@ class _PlacepageState extends State<PlacePage> {
     final String open = AppLocalizations.of(context)!.openNow;
     final String closed = AppLocalizations.of(context)!.closed;
     final String noInfo = AppLocalizations.of(context)!.noInformation;
+    final googleApiClient = sl.sl<GoogleApiClient>();
     final listOfArguments =
         ModalRoute.of(context)!.settings.arguments as List<dynamic>;
     final passedPlace = listOfArguments[1] as NearbyPlacesModel;
@@ -63,7 +66,7 @@ class _PlacepageState extends State<PlacePage> {
           final photosByPlaceIdFetchedCubit =
               context.read<PhotosByPlaceIdFetcherCubit>();
           photosByPlaceIdFetchedCubit.fetchPhotos(
-              passedPlace.placeId, apiKeyTransformed);
+              passedPlace.placeId, apiKeyTransformed, googleApiClient);
         }
         if (photosState is PhotosByPlaceIdFetcherLoaded) {
           return BlocBuilder<FetchPhoneNumberAndAdressCubit,
@@ -72,7 +75,7 @@ class _PlacepageState extends State<PlacePage> {
             final numberAndAdressFetcherCubit =
                 context.read<FetchPhoneNumberAndAdressCubit>();
             numberAndAdressFetcherCubit.fetchMoreDetails(
-                passedPlace.placeId, apiKeyTransformed);
+                passedPlace.placeId, apiKeyTransformed, googleApiClient);
 
             if (numberAndAdressState is FetchPhoneNumberAndAdressLoaded) {
               final detailsOfPlace =

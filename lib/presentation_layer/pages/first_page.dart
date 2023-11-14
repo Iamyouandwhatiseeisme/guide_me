@@ -8,12 +8,14 @@ import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_da
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_state.dart';
 import 'package:guide_me/business_layer/cubit/what_to_eat_cubit.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation_layer/widgets/custom_bottom_navigatio_bar_widget.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../business_layer/cubit/fetch_searched_items_cubit.dart';
 import '../../business_layer/cubit/recommended_places_cubit_dart_cubit.dart';
+import '../../data_layer/httpClients/google_api_client.dart';
 
 class FirstPage extends StatefulWidget {
   final String apiKey;
@@ -31,6 +33,7 @@ class FirstPage extends StatefulWidget {
 class _FirstPageState extends State<FirstPage> {
   double latitude = 0;
   double longtitude = 0;
+  final googleApiClient = sl.sl<GoogleApiClient>();
 
   List<NearbyPlacesModel> listOfNearbyPlaces = [];
   List<NearbyPlacesModel> listOfSightseeingPlaces = [];
@@ -72,20 +75,24 @@ class _FirstPageState extends State<FirstPage> {
             }
             final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();
             if (listOfNearbyPlaces.isEmpty) {
-              nearbyPlacesCubit.fetchNearbyPlaces(
-                  listOfNearbyPlaces, apiKey, latitude, longtitude);
+              nearbyPlacesCubit.fetchNearbyPlaces(listOfNearbyPlaces, apiKey,
+                  latitude, longtitude, googleApiClient);
             }
 
             final nearbySightSeeingCubit =
                 context.read<NearbySightSeeingCubit>();
             if (listOfSightseeingPlaces.isEmpty) {
               nearbySightSeeingCubit.fetchNearbySightseeings(
-                  listOfSightseeingPlaces, apiKey, latitude, longtitude);
+                  listOfSightseeingPlaces,
+                  apiKey,
+                  latitude,
+                  longtitude,
+                  googleApiClient);
             }
             final whatToEatCubit = context.read<WhatToEatCubit>();
             if (listPlacesForFood.isEmpty) {
-              whatToEatCubit.fetchPlacesForWhatToEat(
-                  listPlacesForFood, apiKey, latitude, longtitude);
+              whatToEatCubit.fetchPlacesForWhatToEat(listPlacesForFood, apiKey,
+                  latitude, longtitude, googleApiClient);
             }
 
             return BlocBuilder<NearbySightSeeingCubit, NearbySightseeingsState>(

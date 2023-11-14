@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
-import 'package:guide_me/data_layer/data.dart';
-import 'package:guide_me/data_layer/models/collection_model.dart';
-import 'package:guide_me/data_layer/models/opening_hours.dart';
+
+import 'package:guide_me/data_layer/firebase_service.dart';
+import 'package:guide_me/data_layer/localDataBase/local_data_base.dart';
+
 import 'package:guide_me/data_layer/provider/google_sign_in.dart';
+import 'package:guide_me/data_layer/servie_locator.dart';
 import 'package:guide_me/presentation_layer/pages/searches_page.dart';
 import 'package:guide_me/presentation_layer/themes/dark_theme.dart';
 import 'package:guide_me/presentation_layer/themes/light_theme.dart';
@@ -16,22 +18,19 @@ import 'data_layer/provider/theme_provider.dart';
 import 'presentation_layer/pages/pages.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import 'data_layer/models/nearby_places_model.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+final sl = ServiceLocator();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
-  await Firebase.initializeApp();
-  await Hive.initFlutter();
-  Hive.registerAdapter(NearbyPlacesModelAdapter());
-  Hive.registerAdapter(OpeningHoursAdapter());
-  Hive.registerAdapter(CollectionModelAdapter());
-  await Hive.openBox<CollectionModel>('CollectionLists');
-  await Hive.openBox<NearbyPlacesModel>('FavoritedPlaces');
-  await requestWritePermission();
+
+  sl.setUp();
+  sl.sl<FirebaseService>().initFirebase();
+  sl.sl<LocalDataBase>().initLocalDataBase();
 
   runApp(const MyApp());
 }

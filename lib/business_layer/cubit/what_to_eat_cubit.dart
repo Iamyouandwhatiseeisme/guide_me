@@ -1,18 +1,21 @@
 import 'package:bloc/bloc.dart';
 
 import 'package:guide_me/business_layer/cubit/what_to_eat_state.dart';
+import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
 
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 
-import '../../data_layer/helper_functions/http_helper_places_for_food.dart';
-
 class WhatToEatCubit extends Cubit<WhatToEatState> {
   WhatToEatCubit() : super(WhatToEatInitial());
-  void fetchPlacesForWhatToEat(List<NearbyPlacesModel> listOfpLacesForWhatToEat,
-      String apiKey, double userLat, double userLon) async {
+  void fetchPlacesForWhatToEat(
+      List<NearbyPlacesModel> listOfpLacesForWhatToEat,
+      String apiKey,
+      double userLat,
+      double userLon,
+      GoogleApiClient googleApiClient) async {
     try {
       emit(WhatToEatLoading());
-      final listOfSightseeings = await fetchPlacesForFoodData(
+      final listOfSightseeings = await googleApiClient.fetchPlacesForFoodData(
           listOfpLacesForWhatToEat, apiKey, userLat, userLon);
 
       if (isClosed) {

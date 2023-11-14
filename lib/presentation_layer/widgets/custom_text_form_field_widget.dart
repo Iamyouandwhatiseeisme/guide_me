@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:guide_me/business_layer/cubit/fetch_searched_items_cubit.dart';
+import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
+import 'package:guide_me/main.dart';
 
 import '../../data_layer/models/nearby_places_model.dart';
 
@@ -15,7 +17,7 @@ class CustomTextFormField extends StatelessWidget {
   final double userLat;
   final double userLon;
   final FetchSearchedItemsCubit? fetchSearchedItemsCubit;
-  const CustomTextFormField({
+  CustomTextFormField({
     Key? key,
     required this.textColor,
     required this.radiusSize,
@@ -29,13 +31,17 @@ class CustomTextFormField extends StatelessWidget {
   }) : super(key: key);
 
   final Color color;
+  final googleApiClient = sl.sl<GoogleApiClient>();
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       onEditingComplete: () async {
         BlocProvider.of<FetchSearchedItemsCubit>(context).searchListFetcher(
-            searchController.text, listOfSearchedPlaces, apiKey);
+            searchController.text,
+            listOfSearchedPlaces,
+            apiKey,
+            googleApiClient);
         Navigator.pushNamed(context, 'searchesPage', arguments: [
           listOfSearchedPlaces,
           apiKey,

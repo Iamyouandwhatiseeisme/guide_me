@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
 
-import '../../data_layer/helper_functions/http_fetch_place_for_search_list.dart';
 import '../../data_layer/models/nearby_places_model.dart';
 
 part 'fetch_searched_items_state.dart';
@@ -9,14 +9,14 @@ part 'fetch_searched_items_state.dart';
 class FetchSearchedItemsCubit extends Cubit<FetchSearchedItemsState> {
   FetchSearchedItemsCubit() : super(FetchSearchedItemsInitial());
   Future<void> searchListFetcher(
-    String nameOfPlace,
-    List<NearbyPlacesModel> listOfSearched,
-    String apiKey,
-  ) async {
+      String nameOfPlace,
+      List<NearbyPlacesModel> listOfSearched,
+      String apiKey,
+      GoogleApiClient googleApiClient) async {
     try {
       emit(FetchSearchedItemsLoading());
-      final listOfFetchedSearches =
-          await fetchForSearchList(nameOfPlace, listOfSearched, apiKey);
+      final listOfFetchedSearches = await googleApiClient.fetchForSearchList(
+          nameOfPlace, listOfSearched, apiKey);
 
       if (isClosed) {
         return;
