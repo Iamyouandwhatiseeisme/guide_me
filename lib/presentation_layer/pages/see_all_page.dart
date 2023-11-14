@@ -21,7 +21,7 @@ class _SeeAllPageState extends State<SeeAllPage> {
   List<NearbyPlacesModel>? listTobuild;
   double? userLat;
   double? userLon;
-  String? apiKey;
+
   SightseeingSortingCubit? sightseeingSortingCubit;
   SorterToggleButtonCubit? sorterToggleButtonCubit;
   SorterRadioButtonWidget? sorterRadioButtonWidget;
@@ -30,14 +30,15 @@ class _SeeAllPageState extends State<SeeAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    final listOfArguments =
+    final passedPayLoad =
         ModalRoute.of(context)!.settings.arguments as List<dynamic>;
-    listTobuild = listOfArguments[0] as List<NearbyPlacesModel>;
-    userLat = listOfArguments[1] as double;
-    userLon = listOfArguments[2] as double;
-    apiKey = listOfArguments[3];
-    sightseeingSortingCubit = listOfArguments[4] as SightseeingSortingCubit;
-    sorterToggleButtonCubit = listOfArguments[5] as SorterToggleButtonCubit;
+    final seeAllPagePayload = passedPayLoad[0] as SeeAllPagePayload;
+    listTobuild = seeAllPagePayload.listToBuild;
+    userLat = seeAllPagePayload.userLat;
+    userLon = seeAllPagePayload.userLon;
+
+    sightseeingSortingCubit = seeAllPagePayload.sortingCubit;
+    sorterToggleButtonCubit = seeAllPagePayload.sorterToggleButtonCubit;
 
     return MultiBlocProvider(
       providers: [
@@ -77,15 +78,19 @@ class _SeeAllPageState extends State<SeeAllPage> {
                                     crossAxisCount: 2, childAspectRatio: 0.70),
                             itemBuilder: (BuildContext context, int index) {
                               return GestureDetector(
-                                onTap: () => Navigator.pushNamed(
-                                  context,
-                                  'placePage',
-                                  arguments: [apiKey, listTobuild![index]],
-                                ),
+                                onTap: () {
+                                  final placePagePayLoad = PlacePagePayLoad(
+                                      model: listTobuild![index]);
+                                  Navigator.pushNamed(
+                                    context,
+                                    'placePage',
+                                    arguments: [placePagePayLoad],
+                                  );
+                                },
                                 child: SightseeingsPlaceCard(
-                                    place: listTobuild![index],
-                                    distance: distanceMap[listTobuild![index]],
-                                    apiKey: apiKey!),
+                                  place: listTobuild![index],
+                                  distance: distanceMap[listTobuild![index]],
+                                ),
                               );
                             },
                             itemCount: listTobuild!.length,

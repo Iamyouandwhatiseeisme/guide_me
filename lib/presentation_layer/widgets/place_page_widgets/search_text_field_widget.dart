@@ -8,7 +8,7 @@ import '../../../data_layer/models/nearby_places_model.dart';
 class SearchTextFieldWIdget extends StatelessWidget {
   final Color color;
   final TextEditingController searchController;
-  final String apiKey;
+
   final List<NearbyPlacesModel> listOfSearchedPlaces;
   final Color primaryColor;
   final double userLat;
@@ -19,7 +19,6 @@ class SearchTextFieldWIdget extends StatelessWidget {
     required this.color,
     required this.primaryColor,
     required this.searchController,
-    required this.apiKey,
     required this.listOfSearchedPlaces,
     this.fetchSearchedItemsCubit,
     required this.userLat,
@@ -35,7 +34,6 @@ class SearchTextFieldWIdget extends StatelessWidget {
         userLon: userLon,
         fetchSearchedItemsCubit: fetchSearchedItemsCubit,
         listOfSearchedPlaces: listOfSearchedPlaces,
-        apiKey: apiKey,
         searchController: searchController,
         textColor: primaryColor,
         color: color,

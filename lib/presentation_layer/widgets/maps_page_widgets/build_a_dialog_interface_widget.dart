@@ -6,7 +6,7 @@ abstract class BuildADialogOnMapsWindowWidget extends StatelessWidget {
   final dynamic iconToDisplay;
   final double screenHeight;
   final double screenWidth;
-  final String apiKey;
+
   final double? lat;
   final double? lon;
   const BuildADialogOnMapsWindowWidget({
@@ -15,7 +15,6 @@ abstract class BuildADialogOnMapsWindowWidget extends StatelessWidget {
     required this.iconToDisplay,
     required this.screenHeight,
     required this.screenWidth,
-    required this.apiKey,
     this.lat,
     this.lon,
   }) : super(key: key);

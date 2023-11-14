@@ -15,20 +15,18 @@ void showDIalogWindow(
   List<String>? listOfCategories,
   final double? lat,
   final double? lon,
-  final String apiKey,
   final NearbyPlacesModel? plateToAdd,
 ) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
       return lat == null && lon == null
-          ? buildADialogWindowForCollectionsPage(distance!, image!, apiKey,
-              textLabel, screenHeight, screenWidth, iconToDisplay, plateToAdd!)
+          ? buildADialogWindowForCollectionsPage(distance!, image!, textLabel,
+              screenHeight, screenWidth, iconToDisplay, plateToAdd!)
           : listOfCategories == null
               ? buildDialogWithoutListOfCategories(
                   lat!,
                   lon!,
-                  apiKey,
                   textLabel,
                   screenHeight,
                   screenWidth,
@@ -37,7 +35,6 @@ void showDIalogWindow(
               : buildDialogWithListOfCategories(
                   lat!,
                   lon!,
-                  apiKey,
                   listOfCategories,
                   textLabel,
                   iconToDisplay,
@@ -51,7 +48,6 @@ void showDIalogWindow(
 Widget buildDialogWithoutListOfCategories(
   double lat,
   double lon,
-  String apiKey,
   String textLabel,
   double screenHeight,
   double screenWidth,
@@ -60,7 +56,6 @@ Widget buildDialogWithoutListOfCategories(
   return ADialogWithoutListOfCategories(
     lat: lat,
     lon: lon,
-    apiKey: apiKey,
     textLabel: textLabel,
     screenHeight: screenHeight,
     screenWidth: screenWidth,
@@ -71,7 +66,6 @@ Widget buildDialogWithoutListOfCategories(
 Widget buildADialogWindowForCollectionsPage(
   final double distance,
   String image,
-  String apiKey,
   String textLabel,
   double screenHeight,
   double screenWidth,
@@ -81,7 +75,6 @@ Widget buildADialogWindowForCollectionsPage(
   return BuildDialogForCollectionsPage(
     distance: distance,
     image: image,
-    apiKey: apiKey,
     textLabel: textLabel,
     screenHeight: screenHeight,
     screenWidth: screenWidth,
@@ -93,7 +86,6 @@ Widget buildADialogWindowForCollectionsPage(
 Widget buildDialogWithListOfCategories(
   double lat,
   double lon,
-  String apiKey,
   List<String> listOfCategories,
   String textLabel,
   dynamic iconToDisplay,
@@ -103,7 +95,7 @@ Widget buildDialogWithListOfCategories(
   return ADialogWithInterfaceListCategories(
     lat: lat,
     lon: lon,
-    apiKey: apiKey,
+
     listOfCategories: listOfCategories,
     textLabel: textLabel,
     iconToDisplay: iconToDisplay,

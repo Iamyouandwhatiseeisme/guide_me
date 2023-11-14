@@ -13,7 +13,6 @@ class BuildDialogForCollectionsPage extends BuildADialogOnMapsWindowWidget {
       required super.iconToDisplay,
       required super.screenHeight,
       required super.screenWidth,
-      required super.apiKey,
       required this.placeToAdd,
       required this.distance,
       super.lat,

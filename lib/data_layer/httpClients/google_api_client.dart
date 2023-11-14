@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:http/http.dart' as http;
 
 class GoogleApiClient {
+  String apiKey = dotenv.env['GOOGLE_API_KEY']!;
   Future<List<String>> fetChPhotosHelper(
-      List<String> listOfPhotos, String placeId, String apiKey) async {
+      List<String> listOfPhotos, String placeId) async {
     final url = Uri.parse(
         'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&fields=photos&key=$apiKey');
     try {
@@ -47,7 +49,6 @@ class GoogleApiClient {
   Future<List<NearbyPlacesModel>> fetchForSearchList(
     String nameOfPlace,
     List<NearbyPlacesModel> listOfSearchedItems,
-    String apiKey,
   ) async {
     try {
       final url = Uri.parse(
@@ -87,7 +88,6 @@ class GoogleApiClient {
 
   Future<List<NearbyPlacesModel>> fetchDataForOtherCategories(
       List<NearbyPlacesModel> listOfPlaces,
-      String apiKey,
       double userLat,
       double userLon,
       String category) async {
@@ -129,7 +129,6 @@ class GoogleApiClient {
 
   Future<List<NearbyPlacesModel>> fetchData(
       List<NearbyPlacesModel> listOfPlaces,
-      String apiKey,
       double userLat,
       double userLon) async {
     try {
@@ -171,7 +170,6 @@ class GoogleApiClient {
 
   Future<List<NearbyPlacesModel>> fetchSightseeingData(
       List<NearbyPlacesModel> listOfSightseeingPlaces,
-      String apiKey,
       double userLat,
       double userLon) async {
     try {
@@ -213,7 +211,6 @@ class GoogleApiClient {
 
   Future<List<NearbyPlacesModel>> fetchPlacesForFoodData(
       List<NearbyPlacesModel> listPlacesForFood,
-      String apiKey,
       double userLat,
       double userLon) async {
     try {
@@ -255,8 +252,7 @@ class GoogleApiClient {
     }
   }
 
-  Future<Map<String?, String?>> fetchDetails(
-      String placeId, String apiKey) async {
+  Future<Map<String?, String?>> fetchDetails(String placeId) async {
     final apiUrl =
         'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=$apiKey';
 

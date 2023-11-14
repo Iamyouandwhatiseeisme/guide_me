@@ -11,7 +11,6 @@ import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.d
 class MapsPageContent extends StatelessWidget {
   const MapsPageContent({
     Key? key,
-    required this.apiKey,
     required this.screenHeight,
     required this.controller,
     required this.lat,
@@ -19,7 +18,6 @@ class MapsPageContent extends StatelessWidget {
     required this.screenWidth,
   }) : super(key: key);
 
-  final String apiKey;
   final double screenHeight;
   final GoogleMapController controller;
   final double lat;
@@ -35,17 +33,14 @@ class MapsPageContent extends StatelessWidget {
 
     return BlocBuilder<IsExapndedCubit, bool>(
       builder: (context, state) {
-       
         return state == false
             ? Container()
-            
             : IfMenuExpanded(
                 screenHeight: screenHeight,
                 controller: controller,
                 lat: lat,
                 lon: lon,
                 listOfCategories: listOfCategories,
-                apiKey: apiKey,
                 mapItemListForRowOne: mapItemListForRowOne,
                 screenWidth: screenWidth,
                 mapItemListForRowTwo: mapItemListForRowTwo);

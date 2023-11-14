@@ -8,13 +8,14 @@ part 'photos_by_place_id_fetcher_state.dart';
 class PhotosByPlaceIdFetcherCubit extends Cubit<PhotosByPlaceIdFetcherState> {
   PhotosByPlaceIdFetcherCubit() : super(PhotosByPlaceIdFetcherInitial());
   bool photosFetched = false;
-  void fetchPhotos(
-      String placeId, String apiKey, GoogleApiClient googleApiClient) async {
+  void fetchPhotos(String placeId, GoogleApiClient googleApiClient) async {
     try {
       if (!photosFetched) {
         emit(PhotosByPlaceIdFetcherLoading());
-        final fetchedPhotosByPlaceId =
-            await googleApiClient.fetChPhotosHelper([], placeId, apiKey);
+        final fetchedPhotosByPlaceId = await googleApiClient.fetChPhotosHelper(
+          [],
+          placeId,
+        );
 
         if (isClosed) {
           return;

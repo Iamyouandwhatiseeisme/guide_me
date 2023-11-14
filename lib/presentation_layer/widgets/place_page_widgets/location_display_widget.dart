@@ -7,10 +7,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../business_layer/cubit/geolocator_cubit.dart';
 
 class LocationDisplayWidget extends StatelessWidget {
-  final String apiKey;
   const LocationDisplayWidget({
     Key? key,
-    required this.apiKey,
   }) : super(key: key);
 
   @override
@@ -40,7 +38,10 @@ class LocationDisplayWidget extends StatelessWidget {
 
           return FutureBuilder<String>(
               future: displayLocationInfoInWords(
-                  latitude, longtitude, locationInfo, apiKey),
+                latitude,
+                longtitude,
+                locationInfo,
+              ),
               builder: (context, snapshot) {
                 // print(locationInfo);
                 if (snapshot.connectionState == ConnectionState.waiting) {

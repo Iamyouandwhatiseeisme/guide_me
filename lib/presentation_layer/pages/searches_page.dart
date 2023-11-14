@@ -5,8 +5,11 @@ import 'package:guide_me/business_layer/cubit/fetch_searched_items_cubit.dart';
 import 'package:guide_me/business_layer/cubits.dart';
 
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/presentation_layer/widgets/page_payloads/searches_page_payload.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+import '../widgets/page_payloads/place_page_payload.dart';
 
 class SearchesPage extends StatefulWidget {
   const SearchesPage({
@@ -19,7 +22,7 @@ class SearchesPage extends StatefulWidget {
 
 class _SearchesPageState extends State<SearchesPage> {
   List<NearbyPlacesModel>? listTobuild;
-  String? apiKey;
+
   FetchSearchedItemsCubit? fetchSearchedItemsCubit;
   double? userLat;
   double? userLon;
@@ -28,13 +31,13 @@ class _SearchesPageState extends State<SearchesPage> {
 
   @override
   Widget build(BuildContext context) {
-    final listOfArguments =
+    final passedPayload =
         ModalRoute.of(context)!.settings.arguments as List<dynamic>;
-    listTobuild = listOfArguments[0] as List<NearbyPlacesModel>;
-    apiKey = listOfArguments[1];
-    fetchSearchedItemsCubit = listOfArguments[2];
-    userLat = listOfArguments[3];
-    userLon = listOfArguments[4];
+    final searchesPagePayload = passedPayload[0] as SearchesPagePayload;
+    listTobuild = searchesPagePayload.listToBuild;
+    fetchSearchedItemsCubit = searchesPagePayload.fetchSearchedItemsCubit;
+    userLat = searchesPagePayload.userLat;
+    userLon = searchesPagePayload.userLon;
 
     return MultiBlocProvider(
       providers: [
@@ -86,19 +89,22 @@ class _SearchesPageState extends State<SearchesPage> {
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return GestureDetector(
-                                            onTap: () => Navigator.pushNamed(
-                                              context,
-                                              'placePage',
-                                              arguments: [
-                                                apiKey,
-                                                listTobuild![index]
-                                              ],
-                                            ),
+                                            onTap: () {
+                                              final placePagePayload =
+                                                  PlacePagePayLoad(
+                                                      model:
+                                                          listTobuild![index]);
+                                              Navigator.pushNamed(
+                                                context,
+                                                'placePage',
+                                                arguments: [placePagePayload],
+                                              );
+                                            },
                                             child: SightseeingsPlaceCard(
-                                                place: listTobuild![index],
-                                                distance: distanceMap[
-                                                    listTobuild![index]],
-                                                apiKey: apiKey!),
+                                              place: listTobuild![index],
+                                              distance: distanceMap[
+                                                  listTobuild![index]],
+                                            ),
                                           );
                                         },
                                         itemCount: listTobuild!.length,

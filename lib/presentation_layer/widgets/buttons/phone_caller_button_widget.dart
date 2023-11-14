@@ -11,10 +11,8 @@ import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.d
 import '../../../data_layer/httpClients/google_api_client.dart';
 
 class PhoneCallerWidget extends StatelessWidget {
-  final String apiKey;
   PhoneCallerWidget({
     Key? key,
-    required this.apiKey,
     required this.passedPlace,
   }) : super(key: key);
 
@@ -29,7 +27,7 @@ class PhoneCallerWidget extends StatelessWidget {
         final numberAndAdressFetcherCubit =
             context.read<FetchPhoneNumberAndAdressCubit>();
         numberAndAdressFetcherCubit.fetchMoreDetails(
-            passedPlace.placeId, apiKey, googleApiClient);
+            passedPlace.placeId, googleApiClient);
 
         return BlocBuilder<MakeACallCubit, bool>(
           builder: (context, callReview) {

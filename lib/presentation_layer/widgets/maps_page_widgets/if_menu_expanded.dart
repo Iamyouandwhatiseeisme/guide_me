@@ -14,7 +14,6 @@ class IfMenuExpanded extends StatelessWidget {
     required this.lat,
     required this.lon,
     required this.listOfCategories,
-    required this.apiKey,
     required this.mapItemListForRowOne,
     required this.screenWidth,
     required this.mapItemListForRowTwo,
@@ -25,7 +24,7 @@ class IfMenuExpanded extends StatelessWidget {
   final double lat;
   final double lon;
   final List<String> listOfCategories;
-  final String apiKey;
+
   final List<MapItem> mapItemListForRowOne;
   final double screenWidth;
   final List<MapItem> mapItemListForRowTwo;
@@ -58,7 +57,6 @@ class IfMenuExpanded extends StatelessWidget {
                           listOfCategories: listOfCategories,
                           lon: lon,
                           lat: lat,
-                          apiKey: apiKey,
                           screenHeight: screenHeight,
                           mapItemList: mapItemListForRowOne,
                           screenWidth: screenWidth),
@@ -66,7 +64,6 @@ class IfMenuExpanded extends StatelessWidget {
                         height: 12,
                       ),
                       MapsTypesRowWidget(
-                        apiKey: apiKey,
                         lat: lat,
                         lon: lon,
                         listOfCategories: listOfCategories,

@@ -10,7 +10,6 @@ class CategoryTypesFetcherCubit extends Cubit<CategoryTypesFetcherState> {
   CategoryTypesFetcherCubit() : super(CategoryTypesFetcherInitial());
   Future<void> fetchDataForCategories(
       List<NearbyPlacesModel> listOfPlaces,
-      String apiKey,
       double userLat,
       double userLon,
       String category,
@@ -20,7 +19,7 @@ class CategoryTypesFetcherCubit extends Cubit<CategoryTypesFetcherState> {
         emit(CategoryTypesFetcherLoading());
         final listOfFetchedPlaces =
             await googleApiClient.fetchDataForOtherCategories(
-                listOfPlaces, apiKey, userLat, userLon, category);
+                listOfPlaces, userLat, userLon, category);
 
         if (isClosed) {
           return;

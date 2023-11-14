@@ -13,13 +13,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../widgets/first_page_widgets/custom_bottom_navigatio_bar_widget.dart';
 
 class BookmarksPage extends StatefulWidget {
-  final String? apiKey;
-  final CustomBottomNavigationBar customBottomAppBar;
-
   const BookmarksPage({
     Key? key,
-    required this.apiKey,
-    required this.customBottomAppBar,
   }) : super(key: key);
 
   @override

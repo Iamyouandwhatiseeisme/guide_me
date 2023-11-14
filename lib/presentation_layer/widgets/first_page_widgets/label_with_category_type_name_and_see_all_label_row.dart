@@ -9,7 +9,7 @@ import '../../../data_layer/models/nearby_places_model.dart';
 
 class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
   final List<NearbyPlacesModel> listToBuild;
-  final String apiKey;
+
   final double userLat;
   final double userLon;
   final String textToDisplay;
@@ -21,7 +21,6 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
   const LabelWIthCaregoryTypeNameAndSeeAllRow({
     Key? key,
     required this.listToBuild,
-    required this.apiKey,
     required this.userLat,
     required this.userLon,
     required this.textToDisplay,
@@ -40,14 +39,14 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
         padding: const EdgeInsets.only(right: 20.0),
         child: GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, 'seeAllPage', arguments: [
-              listToBuild,
-              userLat,
-              userLon,
-              apiKey,
-              sortingCubit,
-              sorterToggleButtonCubit,
-            ]);
+            final seeAllPagePayload = SeeAllPagePayload(
+                listToBuild: listToBuild,
+                userLat: userLat,
+                userLon: userLon,
+                sortingCubit: sortingCubit,
+                sorterToggleButtonCubit: sorterToggleButtonCubit);
+            Navigator.pushNamed(context, 'seeAllPage',
+                arguments: [seeAllPagePayload]);
           },
           child: Text(AppLocalizations.of(context)!.seeAllLabel,
               style: TextStyle(

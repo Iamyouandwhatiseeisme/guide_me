@@ -5,12 +5,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:guide_me/business_layer/cubit/fetch_searched_items_cubit.dart';
 import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
 import 'package:guide_me/main.dart';
+import 'package:guide_me/presentation_layer/widgets/page_payloads/searches_page_payload.dart';
 
 import '../../../data_layer/models/nearby_places_model.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final List<NearbyPlacesModel> listOfSearchedPlaces;
-  final String apiKey;
+
   final TextEditingController searchController;
   final Color textColor;
   final double radiusSize;
@@ -24,7 +25,6 @@ class CustomTextFormField extends StatelessWidget {
     required this.color,
     required this.searchController,
     required this.listOfSearchedPlaces,
-    required this.apiKey,
     this.fetchSearchedItemsCubit,
     required this.userLat,
     required this.userLon,
@@ -38,17 +38,14 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       onEditingComplete: () async {
         BlocProvider.of<FetchSearchedItemsCubit>(context).searchListFetcher(
-            searchController.text,
-            listOfSearchedPlaces,
-            apiKey,
-            googleApiClient);
-        Navigator.pushNamed(context, 'searchesPage', arguments: [
-          listOfSearchedPlaces,
-          apiKey,
-          fetchSearchedItemsCubit,
-          userLat,
-          userLon
-        ]);
+            searchController.text, listOfSearchedPlaces, googleApiClient);
+        final searchesPagePayload = SearchesPagePayload(
+            listToBuild: listOfSearchedPlaces,
+            fetchSearchedItemsCubit: fetchSearchedItemsCubit!,
+            userLat: userLat,
+            userLon: userLon);
+        Navigator.pushNamed(context, 'searchesPage',
+            arguments: [searchesPagePayload]);
       },
       controller: searchController,
       textAlign: TextAlign.start,

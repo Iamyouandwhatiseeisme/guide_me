@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:guide_me/main.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
@@ -15,14 +16,11 @@ import 'package:guide_me/presentation_layer/widgets/first_page_widgets/custom_bo
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class MapsPage extends StatefulWidget {
-  final CustomBottomNavigationBar customBottomAppBar;
   final LocationDisplayWidget? locationDisplayWidget;
-  final String apiKey;
+
   const MapsPage({
     Key? key,
-    required this.customBottomAppBar,
     this.locationDisplayWidget,
-    required this.apiKey,
   }) : super(key: key);
 
   @override
@@ -89,7 +87,8 @@ class _MapsPageState extends State<MapsPage> {
                         return Scaffold(
                           backgroundColor:
                               Theme.of(context).colorScheme.background,
-                          bottomNavigationBar: widget.customBottomAppBar,
+                          bottomNavigationBar:
+                              sl.sl.get<CustomBottomNavigationBar>(),
                           appBar: PreferredSize(
                             preferredSize: const Size.fromHeight(48),
                             child: MapsPageAppBarWidget(
@@ -122,7 +121,6 @@ class _MapsPageState extends State<MapsPage> {
                                       ConnectionState.done) {
                                     if (snapshot.hasData) {
                                       return MapsPageContent(
-                                          apiKey: widget.apiKey,
                                           screenHeight: screenHeight,
                                           controller: _controller!,
                                           lat: lat,

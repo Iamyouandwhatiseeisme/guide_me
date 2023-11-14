@@ -8,12 +8,9 @@ import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class WhatToEatWidget extends StatelessWidget {
-  final String apiKey;
-
   final Color colorOfLabel;
   const WhatToEatWidget({
     Key? key,
-    required this.apiKey,
     required this.lat,
     required this.lon,
     required this.widget,
@@ -50,7 +47,6 @@ class WhatToEatWidget extends StatelessWidget {
                     sortingCubit: sortingCubit,
                     sorterToggleButtonCubit: sorterToggleButtonCubit,
                     listToBuild: listToBuild,
-                    apiKey: widget.apiKey,
                     userLat: widget.lat,
                     userLon: widget.lon,
                     textToDisplay: AppLocalizations.of(context)!.whatToEat),
@@ -65,7 +61,6 @@ class WhatToEatWidget extends StatelessWidget {
                 BlocBuilder<WhatToEatCubit, WhatToEatState>(
                   builder: (context, state) {
                     return SortableListViewCardBuilder(
-                        apiKey: apiKey,
                         userLat: lat,
                         userLon: lon,
                         listOfPassedPlaces: widget.listOfPlacesForFood);

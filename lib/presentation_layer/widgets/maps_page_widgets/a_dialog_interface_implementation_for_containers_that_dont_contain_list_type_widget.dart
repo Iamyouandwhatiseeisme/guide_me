@@ -14,7 +14,6 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
     required super.iconToDisplay,
     required super.screenHeight,
     required super.screenWidth,
-    required super.apiKey,
     required super.lat,
     required super.lon,
   });
@@ -80,7 +79,6 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
                       BlocProvider.of<CategoryTypesFetcherCubit>(context);
                   createList(
                       distanceMap,
-                      apiKey,
                       lat!,
                       lon!,
                       category,
@@ -90,7 +88,6 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
 
                   return FutureBuilderForAlistInMapsPageTypeView(
                       distanceMap: distanceMap,
-                      apiKey: apiKey,
                       dataFetchController: dataFetchController,
                       listOfPlaces: listOfPlaces);
                 })

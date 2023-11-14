@@ -11,12 +11,13 @@ class FetchSearchedItemsCubit extends Cubit<FetchSearchedItemsState> {
   Future<void> searchListFetcher(
       String nameOfPlace,
       List<NearbyPlacesModel> listOfSearched,
-      String apiKey,
       GoogleApiClient googleApiClient) async {
     try {
       emit(FetchSearchedItemsLoading());
       final listOfFetchedSearches = await googleApiClient.fetchForSearchList(
-          nameOfPlace, listOfSearched, apiKey);
+        nameOfPlace,
+        listOfSearched,
+      );
 
       if (isClosed) {
         return;

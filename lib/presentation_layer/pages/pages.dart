@@ -10,3 +10,4 @@ export 'maps_page.dart';
 export 'first_page.dart';
 export 'profile_page.dart';
 export 'payment_methods_page.dart';
+export 'searches_page.dart';

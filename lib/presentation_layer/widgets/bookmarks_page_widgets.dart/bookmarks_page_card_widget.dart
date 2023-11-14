@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class BookmarksPageCardWidget extends SightseeingsPlaceCard {
-  const BookmarksPageCardWidget(
-      {super.key,
-      this.name,
-      required this.tabOptionState,
-      required this.onDelete,
-      required super.place,
-      required super.distance,
-      required super.apiKey});
+  const BookmarksPageCardWidget({
+    super.key,
+    this.name,
+    required this.tabOptionState,
+    required this.onDelete,
+    required super.place,
+    required super.distance,
+  });
 
   final Function onDelete;
   final bool tabOptionState;
@@ -17,6 +18,7 @@ class BookmarksPageCardWidget extends SightseeingsPlaceCard {
 
   @override
   Widget build(BuildContext context) {
+    String apiKey = dotenv.env['GOOGLE_API_KEY']!;
     const imageIfNoImageIsAvailable =
         'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small/no-image-available-icon-vector.jpg';
     String? photoReference = place.photos?[0]['photo_reference'];
@@ -27,7 +29,6 @@ class BookmarksPageCardWidget extends SightseeingsPlaceCard {
         name: name,
         tabOptionState: tabOptionState,
         onDelete: onDelete,
-        apiKey: apiKey,
         distance: distance,
         place: place,
         image: imageIfImageIsAvailable,
@@ -37,7 +38,6 @@ class BookmarksPageCardWidget extends SightseeingsPlaceCard {
         name: name,
         tabOptionState: tabOptionState,
         onDelete: onDelete,
-        apiKey: apiKey,
         distance: distance,
         place: place,
         image: imageIfNoImageIsAvailable,

@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -12,13 +13,11 @@ import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.d
 class FutureBuilderForAlistInMapsPageTypeView extends StatefulWidget {
   const FutureBuilderForAlistInMapsPageTypeView(
       {super.key,
-      required this.apiKey,
       required Completer<String> dataFetchController,
       required this.listOfPlaces,
       required this.distanceMap,
       r})
       : _dataFetchController = dataFetchController;
-  final String apiKey;
 
   final Completer<String> _dataFetchController;
   final List<NearbyPlacesModel> listOfPlaces;
@@ -31,6 +30,7 @@ class FutureBuilderForAlistInMapsPageTypeView extends StatefulWidget {
 
 class _FutureBuilderForAlistInMapsPageTypeViewState
     extends State<FutureBuilderForAlistInMapsPageTypeView> {
+  String apiKey = dotenv.env['GOOGLE_API_KEY']!;
   @override
   void initState() {
     super.initState();
@@ -66,7 +66,7 @@ class _FutureBuilderForAlistInMapsPageTypeViewState
                               .photos?[0]['photo_reference'];
                           if (photoReference != null) {
                             image =
-                                'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=${widget.apiKey}';
+                                'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=$apiKey';
                           } else {
                             image = imageIfNoImageIsAvailable;
                           }
@@ -75,7 +75,6 @@ class _FutureBuilderForAlistInMapsPageTypeViewState
                             height: 282,
                             child: Stack(children: [
                               PlaceCardForMapsTypeListWidget(
-                                  apiKey: widget.apiKey,
                                   placeToDisplay: placeToDisplay,
                                   image: image,
                                   listOfPlaces: widget.listOfPlaces,

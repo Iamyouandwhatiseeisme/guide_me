@@ -7,16 +7,12 @@ import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 
 class NearbySightSeeingCubit extends Cubit<NearbySightseeingsState> {
   NearbySightSeeingCubit() : super(NearbySightseeingsInitial());
-  void fetchNearbySightseeings(
-      List<NearbyPlacesModel> listOfNearbySightseeings,
-      String apiKey,
-      double userLat,
-      double userLon,
-      GoogleApiClient googleApiClient) async {
+  void fetchNearbySightseeings(List<NearbyPlacesModel> listOfNearbySightseeings,
+      double userLat, double userLon, GoogleApiClient googleApiClient) async {
     try {
       emit(NearbySightseeingsLoading());
       final listOfSightseeings = await googleApiClient.fetchSightseeingData(
-          listOfNearbySightseeings, apiKey, userLat, userLon);
+          listOfNearbySightseeings, userLat, userLon);
 
       if (isClosed) {
         return;

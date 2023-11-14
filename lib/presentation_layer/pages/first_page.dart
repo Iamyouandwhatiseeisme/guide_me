@@ -18,12 +18,8 @@ import '../../business_layer/cubit/recommended_places_cubit_dart_cubit.dart';
 import '../../data_layer/httpClients/google_api_client.dart';
 
 class FirstPage extends StatefulWidget {
-  final String apiKey;
-  final CustomBottomNavigationBar bottomNavigationBar;
   const FirstPage({
     Key? key,
-    required this.apiKey,
-    required this.bottomNavigationBar,
   }) : super(key: key);
 
   @override
@@ -41,7 +37,6 @@ class _FirstPageState extends State<FirstPage> {
 
   @override
   Widget build(BuildContext context) {
-    final String apiKey = widget.apiKey;
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -75,8 +70,8 @@ class _FirstPageState extends State<FirstPage> {
             }
             final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();
             if (listOfNearbyPlaces.isEmpty) {
-              nearbyPlacesCubit.fetchNearbyPlaces(listOfNearbyPlaces, apiKey,
-                  latitude, longtitude, googleApiClient);
+              nearbyPlacesCubit.fetchNearbyPlaces(
+                  listOfNearbyPlaces, latitude, longtitude, googleApiClient);
             }
 
             final nearbySightSeeingCubit =
@@ -84,15 +79,14 @@ class _FirstPageState extends State<FirstPage> {
             if (listOfSightseeingPlaces.isEmpty) {
               nearbySightSeeingCubit.fetchNearbySightseeings(
                   listOfSightseeingPlaces,
-                  apiKey,
                   latitude,
                   longtitude,
                   googleApiClient);
             }
             final whatToEatCubit = context.read<WhatToEatCubit>();
             if (listPlacesForFood.isEmpty) {
-              whatToEatCubit.fetchPlacesForWhatToEat(listPlacesForFood, apiKey,
-                  latitude, longtitude, googleApiClient);
+              whatToEatCubit.fetchPlacesForWhatToEat(
+                  listPlacesForFood, latitude, longtitude, googleApiClient);
             }
 
             return BlocBuilder<NearbySightSeeingCubit, NearbySightseeingsState>(
@@ -119,13 +113,11 @@ class _FirstPageState extends State<FirstPage> {
                                           size: 20)));
                             } else {
                               return FirstPageScaffoldIfLoadedCorrectly(
-                                bottomNavigationBar: widget.bottomNavigationBar,
                                 lat: latitude,
                                 lon: longtitude,
                                 listOfNearbyPlaces: listOfNearbyPlaces,
                                 listOfSightseeings: listOfSightseeingPlaces,
                                 listOfPlacesForFood: listPlacesForFood,
-                                apiKey: apiKey,
                               );
                             }
                           }));

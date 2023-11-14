@@ -6,12 +6,9 @@ import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
 import 'package:guide_me/data_layer/provider/theme_provider.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
-
 class FirstPageAppBar extends StatelessWidget {
-  final String apiKey;
   const FirstPageAppBar({
     Key? key,
-    required this.apiKey,
   }) : super(key: key);
 
   @override
@@ -32,9 +29,7 @@ class FirstPageAppBar extends StatelessWidget {
         padding: const EdgeInsets.only(left: 20.0),
         child: BlocProvider(
           create: (context) => GeolocatorCubit(),
-          child: LocationDisplayWidget(
-            apiKey: apiKey,
-          ),
+          child: const LocationDisplayWidget(),
         ),
       ),
     );

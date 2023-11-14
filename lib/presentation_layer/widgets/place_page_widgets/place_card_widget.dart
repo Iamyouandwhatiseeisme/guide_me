@@ -1,20 +1,20 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../../../data_layer/models/nearby_places_model.dart';
 
 class PlaceCard extends StatelessWidget {
-  final String apiKey;
   final NearbyPlacesModel place;
 
   const PlaceCard({
     Key? key,
-    required this.apiKey,
     required this.place,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String apiKey = dotenv.env['GOOGLE_API_KEY']!;
     String? photoReference = place.photos?[0]['photo_reference'];
     if (photoReference != null && place.rating != null && place.rating! > 4.0) {
       return Column(

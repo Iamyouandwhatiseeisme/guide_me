@@ -5,20 +5,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/fetch_searched_items_cubit.dart';
 
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation_layer/widgets/first_page_widgets/custom_bottom_navigatio_bar_widget.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class FirstPageScaffoldIfLoadedCorrectly extends StatefulWidget {
-  final CustomBottomNavigationBar bottomNavigationBar;
   final double lat;
   final double lon;
-  final String apiKey;
+
   const FirstPageScaffoldIfLoadedCorrectly({
     Key? key,
-    required this.bottomNavigationBar,
     required this.lat,
     required this.lon,
-    required this.apiKey,
     required this.listOfPlacesForFood,
     required this.listOfNearbyPlaces,
     required this.listOfSightseeings,
@@ -53,11 +51,9 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
           backgroundColor: Theme.of(context).colorScheme.background,
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(48),
-            child: FirstPageAppBar(
-              apiKey: widget.apiKey,
-            ),
+            child: FirstPageAppBar(),
           ),
-          bottomNavigationBar: widget.bottomNavigationBar,
+          bottomNavigationBar: sl.sl.get<CustomBottomNavigationBar>(),
           body: SingleChildScrollView(child: Builder(
             builder: (context) {
               return Column(
@@ -68,7 +64,6 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                       userLon: widget.lon,
                       fetchSearchedItemsCubit: fetchSearchedItemsCubit,
                       listOfSearchedPlaces: listOfSearchedPlaces,
-                      apiKey: widget.apiKey,
                       searchController: searchController,
                       color: secondaryColor,
                       primaryColor: primaryColor),
@@ -80,7 +75,6 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                     height: 12,
                   ),
                   RecommenPlacesCardBuilder(
-                      apiKey: widget.apiKey,
                       listOfNearbyPlaces: widget.listOfNearbyPlaces),
                   const SizedBox(
                     height: 48,
@@ -89,7 +83,6 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                     colorOfLabel: secondaryColor,
                     listToBuild: widget.listOfSightseeings,
                     widget: widget,
-                    apiKey: widget.apiKey,
                     lat: widget.lat,
                     lon: widget.lon,
                   ),
@@ -99,7 +92,6 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                   WhatToEatWidget(
                       colorOfLabel: secondaryColor,
                       listToBuild: widget.listOfPlacesForFood,
-                      apiKey: widget.apiKey,
                       lat: widget.lat,
                       lon: widget.lon,
                       widget: widget)

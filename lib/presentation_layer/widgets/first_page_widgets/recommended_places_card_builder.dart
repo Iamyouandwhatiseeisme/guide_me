@@ -1,15 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:guide_me/presentation_layer/widgets/page_payloads/place_page_payload.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 import '../../../data_layer/models/nearby_places_model.dart';
 
 class RecommenPlacesCardBuilder extends StatelessWidget {
-  final String apiKey;
   const RecommenPlacesCardBuilder({
     Key? key,
-    required this.apiKey,
     required this.listOfNearbyPlaces,
   }) : super(key: key);
 
@@ -36,11 +35,12 @@ class RecommenPlacesCardBuilder extends StatelessWidget {
                   width: 160,
                   child: GestureDetector(
                     onTap: () {
+                      final placePagePayLoad =
+                          PlacePagePayLoad(model: listOfNearbyPlaces[index]);
                       Navigator.pushNamed(context, 'placePage',
-                          arguments: [apiKey, listOfNearbyPlaces[index]]);
+                          arguments: [placePagePayLoad]);
                     },
                     child: PlaceCard(
-                      apiKey: apiKey,
                       place: listOfNearbyPlaces[index],
                     ),
                   ),

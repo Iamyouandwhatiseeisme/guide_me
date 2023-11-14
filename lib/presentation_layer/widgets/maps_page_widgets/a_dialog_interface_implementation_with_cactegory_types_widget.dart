@@ -18,7 +18,6 @@ class ADialogWithInterfaceListCategories
     required super.iconToDisplay,
     required super.screenHeight,
     required super.screenWidth,
-    required super.apiKey,
     required super.lat,
     required super.lon,
   });
@@ -95,7 +94,6 @@ class ADialogWithInterfaceListCategories
                               BlocProvider.of<CategoryTypesFetcherCubit>(
                                   context);
                           createMap(
-                              apiKey,
                               lat!,
                               lon!,
                               cachedData,
@@ -108,7 +106,6 @@ class ADialogWithInterfaceListCategories
 
                           return FutureBuilderForAlistInMapsPageTypeView(
                               distanceMap: distanceMap,
-                              apiKey: apiKey,
                               dataFetchController: mapLoadedController,
                               listOfPlaces: cachedData[category]!);
                         });

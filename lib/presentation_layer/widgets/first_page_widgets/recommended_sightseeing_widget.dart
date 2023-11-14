@@ -9,12 +9,9 @@ import '../../../data_layer/models/nearby_places_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RecommendedSightseeingsWidget extends StatelessWidget {
-  final String apiKey;
-
   final Color colorOfLabel;
   const RecommendedSightseeingsWidget({
     Key? key,
-    required this.apiKey,
     required this.lat,
     required this.lon,
     required this.widget,
@@ -52,7 +49,6 @@ class RecommendedSightseeingsWidget extends StatelessWidget {
                     sortingCubit: sortingCubit,
                     sorterToggleButtonCubit: sorterToggleButtonCubit,
                     listToBuild: listToBuild,
-                    apiKey: widget.apiKey,
                     userLat: widget.lat,
                     userLon: widget.lon,
                     textToDisplay:
@@ -66,7 +62,6 @@ class RecommendedSightseeingsWidget extends StatelessWidget {
                   height: 12,
                 ),
                 SortableListViewCardBuilder(
-                    apiKey: apiKey,
                     userLat: lat,
                     userLon: lon,
                     listOfPassedPlaces: widget.listOfSightseeings),

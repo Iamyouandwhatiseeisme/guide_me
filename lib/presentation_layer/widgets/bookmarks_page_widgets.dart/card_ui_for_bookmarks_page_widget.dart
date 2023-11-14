@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:guide_me/data_layer/data.dart';
+import 'package:guide_me/presentation_layer/widgets/page_payloads/place_page_payload.dart';
 
 import '../../../data_layer/refresh_item_list_function.dart';
 import '../presentation_layer_widgets.dart';
 
 class CardUiForBookmarksPage extends CardUi {
-  final String apiKey;
   final Function onDelete;
   final bool tabOptionState;
   final String? name;
@@ -15,7 +16,6 @@ class CardUiForBookmarksPage extends CardUi {
       this.name,
       required this.tabOptionState,
       required this.onDelete,
-      required this.apiKey,
       required super.distance,
       required super.image,
       required super.place});
@@ -45,10 +45,12 @@ class CardUiForBookmarksPage extends CardUi {
           null,
           null,
           null,
-          apiKey,
           place),
-      onTap: () =>
-          Navigator.pushNamed(context, 'placePage', arguments: [apiKey, place]),
+      onTap: () {
+        final placePagePayload = PlacePagePayLoad(model: place);
+        Navigator.pushNamed(context, 'placePage',
+            arguments: [placePagePayload]);
+      },
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(

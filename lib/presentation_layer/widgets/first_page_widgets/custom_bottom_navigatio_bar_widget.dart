@@ -5,10 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
-  final String apiKey;
   const CustomBottomNavigationBar({
     Key? key,
-    required this.apiKey,
   }) : super(key: key);
 
   @override
@@ -29,8 +27,10 @@ class CustomBottomNavigationBar extends StatelessWidget {
               onTap: (index) {
                 bottomNavigationCubit.changeTab(index);
                 if (ModalRoute.of(context)!.settings.name != screens[index]) {
-                  Navigator.pushNamed(context, screens[index],
-                      arguments: [apiKey]);
+                  Navigator.pushNamed(
+                    context,
+                    screens[index],
+                  );
                 }
               },
               items: const [

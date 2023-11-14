@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/presentation_layer/pages/bookmarks_page.dart';
+import 'package:guide_me/presentation_layer/widgets/page_payloads/place_page_payload.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -48,14 +49,15 @@ class _FavoritesPageContentState extends State<FavoritesPageContent> {
                   height: 113,
                   width: 250,
                   child: GestureDetector(
-                    onTap: () => Navigator.pushNamed(
-                      context,
-                      'placePage',
-                      arguments: [
-                        widget.widget.apiKey,
-                        widget.listOfFavorites[index]
-                      ],
-                    ),
+                    onTap: () {
+                      final placePagePayLoad = PlacePagePayLoad(
+                          model: widget.listOfFavorites[index]);
+                      Navigator.pushNamed(
+                        context,
+                        'placePage',
+                        arguments: [placePagePayLoad],
+                      );
+                    },
                     child: ValueListenableBuilder(
                         valueListenable: widget.box.listenable(),
                         builder: (context, box, child) {
@@ -66,7 +68,6 @@ class _FavoritesPageContentState extends State<FavoritesPageContent> {
                               widget.onDelete(widget.listOfFavorites[index],
                                   widget.listOfFavorites, box);
                             },
-                            apiKey: widget.widget.apiKey!,
                             distance: widget
                                 .distanceMap[widget.listOfFavorites[index]],
                             place: widget.listOfFavorites[index],

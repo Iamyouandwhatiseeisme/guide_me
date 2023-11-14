@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/presentation_layer/widgets/page_payloads/place_page_payload.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class PlaceCardForMapsTypeListWidget extends StatelessWidget {
   const PlaceCardForMapsTypeListWidget({
     Key? key,
-    required this.apiKey,
     required this.placeToDisplay,
     required this.image,
     required this.listOfPlaces,
@@ -13,7 +13,6 @@ class PlaceCardForMapsTypeListWidget extends StatelessWidget {
     required this.placeName,
   }) : super(key: key);
 
-  final String apiKey;
   final NearbyPlacesModel placeToDisplay;
   final String image;
   final List<NearbyPlacesModel> listOfPlaces;
@@ -23,8 +22,11 @@ class PlaceCardForMapsTypeListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, 'placePage',
-          arguments: [apiKey, placeToDisplay]),
+      onTap: () {
+        final placePagePayload = PlacePagePayLoad(model: placeToDisplay);
+        Navigator.pushNamed(context, 'placePage',
+            arguments: [placePagePayload]);
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

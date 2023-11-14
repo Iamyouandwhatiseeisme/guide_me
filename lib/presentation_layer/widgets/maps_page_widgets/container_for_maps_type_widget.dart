@@ -13,7 +13,6 @@ class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
   final String textLabel;
   final dynamic iconToDisplay;
   final List<String>? listOfCategories;
-  final String apiKey;
 
   const ContainerForTypesOfPlacesOnMapWidget({
     Key? key,
@@ -25,7 +24,6 @@ class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
     required this.textLabel,
     required this.iconToDisplay,
     this.listOfCategories,
-    required this.apiKey,
     required this.screenWidth,
   }) : super(key: key);
 
@@ -38,7 +36,7 @@ class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
       onTap: () {
         if (textLabel != 'other') {
           showDIalogWindow(null, null, context, screenHeight, screenWidth,
-              iconToDisplay, localizedString, null, lat!, lon!, apiKey, null);
+              iconToDisplay, localizedString, null, lat!, lon!, null);
         } else {
           showDIalogWindow(
             null,
@@ -51,7 +49,6 @@ class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
             listOfCategories,
             lat!,
             lon!,
-            apiKey,
             null,
           );
         }

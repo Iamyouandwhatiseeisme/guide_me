@@ -10,14 +10,15 @@ class FetchPhoneNumberAndAdressCubit
   FetchPhoneNumberAndAdressCubit() : super(FetchPhoneNumberAndAdressInitial());
   bool numberAndAdressFetched = false;
 
-  void fetchMoreDetails(
-      String placeId, String apiKey, GoogleApiClient googleApiClient) async {
+  void fetchMoreDetails(String placeId, GoogleApiClient googleApiClient) async {
     try {
       if (!numberAndAdressFetched) {
         emit(FetchPhoneNumberAndAdressLoading());
 
         final fetchedNumberAndAdressByPlaceId =
-            await googleApiClient.fetchDetails(placeId, apiKey);
+            await googleApiClient.fetchDetails(
+          placeId,
+        );
         emit(FetchPhoneNumberAndAdressLoaded(fetchedNumberAndAdressByPlaceId));
 
         numberAndAdressFetched = true;

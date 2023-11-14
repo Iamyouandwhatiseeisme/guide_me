@@ -5,14 +5,12 @@ import 'package:flutter/widgets.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
-
 class MapsTypesRowWidget extends StatelessWidget {
   final double? lat;
   final double? lon;
   final double screenHeight;
   final List<MapItem> mapItemList;
   final List<String>? listOfCategories;
-  final String apiKey;
 
   const MapsTypesRowWidget({
     Key? key,
@@ -21,7 +19,6 @@ class MapsTypesRowWidget extends StatelessWidget {
     required this.screenHeight,
     required this.mapItemList,
     this.listOfCategories,
-    required this.apiKey,
     required this.screenWidth,
   }) : super(key: key);
 
@@ -35,7 +32,6 @@ class MapsTypesRowWidget extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
             return ContainerForTypesOfPlacesOnMapWidget(
-              apiKey: apiKey,
               lat: lat,
               lon: lon,
               listOfCategories: listOfCategories,
