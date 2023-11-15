@@ -25,12 +25,23 @@ class CustomBottomNavigationBar extends StatelessWidget {
               selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
               currentIndex: currentIndex.currentIndex,
               onTap: (index) {
+                final String currentPage =
+                    ModalRoute.of(context)!.settings.name!;
+
                 bottomNavigationCubit.changeTab(index);
-                if (ModalRoute.of(context)!.settings.name != screens[index]) {
+
+                if (screens[index] == screens[0] &&
+                    !currentPage.contains(screens[0])) {
+                  Navigator.pop(context);
+                } else if (currentPage.contains(screens[0]) &&
+                    currentPage != screens[index]) {
                   Navigator.pushNamed(
                     context,
                     screens[index],
                   );
+                } else if (!currentPage.contains(screens[0]) &&
+                    currentPage != screens[index]) {
+                  Navigator.pushReplacementNamed(context, screens[index]);
                 }
               },
               items: const [

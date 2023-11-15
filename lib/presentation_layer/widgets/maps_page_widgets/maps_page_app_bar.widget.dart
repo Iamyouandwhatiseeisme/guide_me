@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
@@ -17,13 +19,15 @@ class MapsPageAppBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bottomNavigationCubit =
+        BlocProvider.of<BottomNavigationBarCubit>(context);
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.transparent,
-      leadingWidth: 200,
+      leadingWidth: 400,
       actions: [
         Padding(
-            padding: const EdgeInsets.only(right: 10.0),
+            padding: const EdgeInsets.only(right: 10.0, left: 40),
             child: SizedBox(
               width: 150,
               child: Row(
@@ -62,9 +66,21 @@ class MapsPageAppBarWidget extends StatelessWidget {
               ),
             ))
       ],
-      leading: const Padding(
-        padding: EdgeInsets.only(left: 20.0),
-        child: LocationDisplayWidget(),
+      leading: Row(
+        children: [
+          IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () {
+              bottomNavigationCubit.changeTab(0);
+
+              Navigator.of(context).pop();
+            },
+          ),
+          const Padding(
+            padding: EdgeInsets.only(),
+            child: SizedBox(width: 180, child: LocationDisplayWidget()),
+          ),
+        ],
       ),
     );
   }

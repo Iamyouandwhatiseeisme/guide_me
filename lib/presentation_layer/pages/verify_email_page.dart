@@ -41,6 +41,8 @@ class _VerifyEmailPage extends State<VerifyEmailPage> {
 
   @override
   Widget build(BuildContext context) {
+    //checks if email is verified, if verified, takes the user to firstpage, if not,
+    // gives user a timer and an option to resend verification
     return isEmailVerified
         ? const FirstPage()
         : Scaffold(
@@ -74,6 +76,7 @@ class _VerifyEmailPage extends State<VerifyEmailPage> {
                     const SizedBox(
                       height: 12,
                     ),
+                    //email verification resend button
                     ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(),
                         onPressed: () {

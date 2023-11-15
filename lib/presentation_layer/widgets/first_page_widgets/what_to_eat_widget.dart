@@ -16,7 +16,7 @@ class WhatToEatWidget extends StatelessWidget {
     required this.colorOfLabel,
   }) : super(key: key);
 
-  final FirstPageScaffoldIfLoadedCorrectly widget;
+  final FirstPageContent widget;
   final List<NearbyPlacesModel> listToBuild;
 
   @override

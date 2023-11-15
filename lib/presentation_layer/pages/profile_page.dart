@@ -1,13 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
 import 'package:guide_me/data_layer/get_localized_string_method.dart';
-import 'package:guide_me/data_layer/provider/google_sign_in.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -59,27 +60,13 @@ class _ProfilePageState extends State<ProfilePage> {
       settings
     ];
     final user = FirebaseAuth.instance.currentUser!;
+    final bottomNavigationCubit =
+        BlocProvider.of<BottomNavigationBarCubit>(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.profilePage),
-        centerTitle: true,
-        actions: [
-          TextButton(
-              onPressed: () {
-                final provider =
-                    Provider.of<GoogleSignInprovider>(context, listen: false);
-
-                provider.logout();
-                FirebaseAuth.instance.signOut();
-                Navigator.pushNamed(context, 'authPage');
-                Navigator.popUntil(context, ModalRoute.withName('authPage'));
-              },
-              child: Text(
-                AppLocalizations.of(context)!.logout,
-                style: const TextStyle(color: Colors.blue),
-              ))
-        ],
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(48),
+        child: ProfilePageAppbar(bottomNavigationCubit: bottomNavigationCubit),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),

@@ -5,12 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 import 'package:guide_me/business_layer/cubit/radio_button_cubit_cubit.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WelcomePage extends StatefulWidget {
-  const WelcomePage({super.key, required this.backGroundPhoto});
-
-  final String backGroundPhoto;
+  const WelcomePage({
+    super.key,
+  });
 
   @override
   State<WelcomePage> createState() => _MyHomePageState();
@@ -27,72 +26,19 @@ class _MyHomePageState extends State<WelcomePage> {
           create: (context) => RadioButtonCubitCubit(),
           child: Center(
             child: Builder(builder: (context) {
-              return Column(
+              return const Column(
                 children: <Widget>[
-                  const SizedBox(
+                  SizedBox(
                     height: 40,
                   ),
-                  const AnimationWidget(
-                    animatedWidget: RotatingLogo(),
+                  AnimationWidget(
+                    animatedWidget: TranzitioningLogo(),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 40,
                   ),
-                  BlocBuilder<RadioButtonCubitCubit, RadioButtonCubitInitial>(
-                    builder: (context, state) {
-                      return state.value == 0
-                          ? Column(
-                              children: [
-                                BackgroundPhotoAndTitleWidget(
-                                    pageTitle: AppLocalizations.of(context)!
-                                        .welcomePageFirstSlideText,
-                                    photo:
-                                        'assets/images/Navigation-amico (1) 2.png'),
-                                const RadioButtonWidget(
-                                  firstButton: 'assets/buttons/Rectangle 7.png',
-                                  secondButton:
-                                      'assets/buttons/Rectangle 8.png',
-                                  thirdButton: 'assets/buttons/Rectangle 8.png',
-                                ),
-                              ],
-                            )
-                          : state.value == 1
-                              ? Column(
-                                  children: [
-                                    BackgroundPhotoAndTitleWidget(
-                                        pageTitle: AppLocalizations.of(context)!
-                                            .welcomePageSecondSlideText,
-                                        photo:
-                                            'assets/images/Location review-amico (1) 1.png'),
-                                    const RadioButtonWidget(
-                                        firstButton:
-                                            'assets/buttons/Rectangle 8.png',
-                                        secondButton:
-                                            'assets/buttons/Rectangle 7.png',
-                                        thirdButton:
-                                            'assets/buttons/Rectangle 8.png'),
-                                  ],
-                                )
-                              : Column(
-                                  children: [
-                                    BackgroundPhotoAndTitleWidget(
-                                        pageTitle: AppLocalizations.of(context)!
-                                            .welcomePageThirdSlideText,
-                                        photo:
-                                            'assets/images/Modern life-cuate (1) 1.png'),
-                                    const SizedBox(height: 30),
-                                    const RadioButtonWidget(
-                                        firstButton:
-                                            'assets/buttons/Rectangle 8.png',
-                                        secondButton:
-                                            'assets/buttons/Rectangle 8.png',
-                                        thirdButton:
-                                            'assets/buttons/Rectangle 7.png'),
-                                  ],
-                                );
-                    },
-                  ),
-                  const GetStartedButton()
+                  WelcomePageSlider(),
+                  GetStartedButton()
                 ],
               );
             }),

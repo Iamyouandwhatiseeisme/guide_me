@@ -26,6 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
+          //takes user to email verification page
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingAnimationScaffold();
           } else if (snapshot.hasData) {

@@ -8,7 +8,7 @@ export 'package:guide_me/presentation_layer/widgets/buttons/sign_in_with_button_
 export 'package:guide_me/presentation_layer/widgets/place_page_widgets/location_display_widget.dart';
 export 'first_page_widgets/recommended_places_card_builder.dart';
 export 'package:guide_me/presentation_layer/widgets/place_page_widgets/search_text_field_widget.dart';
-export 'package:guide_me/presentation_layer/widgets/first_page_widgets/first_page_scaffold_if_loaded_correctly.dart';
+export 'package:guide_me/presentation_layer/widgets/first_page_widgets/first_page_content.dart';
 export 'package:guide_me/presentation_layer/widgets/first_page_widgets/recommended_label_widget.dart';
 export 'first_page_widgets/first_page_app_bar_widget.dart';
 export 'place_page_widgets/label_for_builder_types_widget.dart';
@@ -108,3 +108,6 @@ export 'page_payloads/see_all_page_payload.dart';
 export 'page_payloads/place_page_payload.dart';
 export 'profile_page_widgets.dart/change_name_dialog.dart';
 export 'loading/loading_animation_scaffold.dart';
+export 'welcome_page_widgets/welcome_page_slider.dart';
+export 'bookmarks_page_widgets.dart/bookmarks_page_app_bar.dart';
+export 'profile_page_widgets.dart/profile_page_app_bar.dart';

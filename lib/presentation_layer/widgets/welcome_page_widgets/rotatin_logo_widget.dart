@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RotatingLogo extends StatelessWidget {
-  const RotatingLogo({
+class TranzitioningLogo extends StatelessWidget {
+  const TranzitioningLogo({
     super.key,
   });
 

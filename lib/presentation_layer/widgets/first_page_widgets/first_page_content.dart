@@ -5,13 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/fetch_searched_items_cubit.dart';
 
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
-import 'package:guide_me/data_layer/user_location_class.dart';
+
 import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation_layer/widgets/first_page_widgets/custom_bottom_navigatio_bar_widget.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
-class FirstPageScaffoldIfLoadedCorrectly extends StatefulWidget {
-  const FirstPageScaffoldIfLoadedCorrectly({
+class FirstPageContent extends StatefulWidget {
+  const FirstPageContent({
     Key? key,
     required this.listOfPlacesForFood,
     required this.listOfNearbyPlaces,
@@ -22,12 +22,10 @@ class FirstPageScaffoldIfLoadedCorrectly extends StatefulWidget {
   final List<NearbyPlacesModel> listOfSightseeings;
 
   @override
-  State<FirstPageScaffoldIfLoadedCorrectly> createState() =>
-      _FirstPageScaffoldIfLoadedCorrectlyState();
+  State<FirstPageContent> createState() => _FirstPageContentState();
 }
 
-class _FirstPageScaffoldIfLoadedCorrectlyState
-    extends State<FirstPageScaffoldIfLoadedCorrectly> {
+class _FirstPageContentState extends State<FirstPageContent> {
   final List<NearbyPlacesModel> listOfSearchedPlaces = [];
   final searchController = TextEditingController();
   @override

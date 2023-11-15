@@ -23,16 +23,16 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+// set up serviceLocator with GetIT package;
 final sl = ServiceLocator();
 
 Future<void> main() async {
+  //initialize everything needed for startup
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
-
   sl.setUp();
   sl.sl<FirebaseService>().initFirebase();
   sl.sl<LocalDataBase>().initLocalDataBase();
-
   runApp(const MyApp());
 }
 
@@ -42,6 +42,7 @@ class MyApp extends StatefulWidget {
   @override
   State<MyApp> createState() => _MyAppState();
 
+  // sets the current language of the application
   static void setLocale(BuildContext context, Locale newLocale) {
     _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
     state?.setLocale(newLocale);
@@ -70,36 +71,40 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      return MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => BottomNavigationBarCubit(),
+    return Builder(
+      builder: (context) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => BottomNavigationBarCubit(),
+            ),
+          ],
+          child: ChangeNotifierProvider<ThemeProvider>(
+            create: (BuildContext context) => ThemeProvider(),
+            child: Builder(
+              builder: (context) {
+                return ChangeNotifierProvider(
+                  create: (context) => GoogleSignInprovider(),
+                  child: MaterialApp(
+                      localizationsDelegates:
+                          AppLocalizations.localizationsDelegates,
+                      supportedLocales: AppLocalizations.supportedLocales,
+                      locale: _locale,
+                      debugShowCheckedModeBanner: false,
+                      initialRoute: '/',
+                      title: 'GuideMe',
+                      theme: context.watch<ThemeProvider>().currentTheme ==
+                              AppTheme.light
+                          ? lightTheme
+                          : darkTheme,
+                      darkTheme: darkTheme,
+                      routes: routes),
+                );
+              },
+            ),
           ),
-        ],
-        child: ChangeNotifierProvider<ThemeProvider>(
-          create: (BuildContext context) => ThemeProvider(),
-          child: Builder(builder: (context) {
-            return ChangeNotifierProvider(
-              create: (context) => GoogleSignInprovider(),
-              child: MaterialApp(
-                  localizationsDelegates:
-                      AppLocalizations.localizationsDelegates,
-                  supportedLocales: AppLocalizations.supportedLocales,
-                  locale: _locale,
-                  debugShowCheckedModeBanner: false,
-                  initialRoute: '/',
-                  title: 'GuideMe',
-                  theme: context.watch<ThemeProvider>().currentTheme ==
-                          AppTheme.light
-                      ? lightTheme
-                      : darkTheme,
-                  darkTheme: darkTheme,
-                  routes: routes),
-            );
-          }),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }

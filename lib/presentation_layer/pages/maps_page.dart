@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:guide_me/main.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
 import 'package:guide_me/business_layer/cubit/go_to_my_location_cubit_cubit.dart';
 import 'package:guide_me/business_layer/cubit/is_exapnded_cubit.dart';
 import 'package:guide_me/business_layer/cubit/weather_cubit_cubit.dart';

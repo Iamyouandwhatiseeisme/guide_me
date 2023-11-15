@@ -56,28 +56,7 @@ class _FirstPageState extends State<FirstPage> {
             geoLocatorCubit.getLocation();
 
             if (locationState is LocationLoaded) {
-              final userLocation = UserLocation(
-                  userLat: locationState.position.latitude,
-                  userLon: locationState.position.longitude);
-              sl.registerLocationSingleton(userLocation);
-
-              final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();
-              if (listOfNearbyPlaces.isEmpty) {
-                nearbyPlacesCubit.fetchNearbyPlaces(
-                    listOfNearbyPlaces, googleApiClient);
-              }
-
-              final nearbySightSeeingCubit =
-                  context.read<NearbySightSeeingCubit>();
-              if (listOfSightseeingPlaces.isEmpty) {
-                nearbySightSeeingCubit.fetchNearbySightseeings(
-                    listOfSightseeingPlaces, googleApiClient);
-              }
-              final whatToEatCubit = context.read<WhatToEatCubit>();
-              if (listPlacesForFood.isEmpty) {
-                whatToEatCubit.fetchPlacesForWhatToEat(
-                    listPlacesForFood, googleApiClient);
-              }
+              _initalizeFirstPageData(locationState, context);
               return BlocBuilder<NearbySightSeeingCubit,
                   NearbySightseeingsState>(
                 builder: (context, state) {
@@ -85,28 +64,30 @@ class _FirstPageState extends State<FirstPage> {
                     padding: const EdgeInsets.only(top: 40),
                     child: BlocBuilder<NearbyPlacesCubit, NearbyPlacesState>(
                       builder: (context, state) {
-                        if (state is NearbyPlacesLoading) {
+                        if (state is NearbyPlacesLoading ||
+                            state is NearbyPlacesInitial) {
                           return const LoadingAnimationScaffold();
+                        } else if (state is NearbyPlacesError) {
+                          return Scaffold(
+                            body: Center(child: Text(state.errorMessage)),
+                          );
+                        } else {
+                          return FirstPageContent(
+                            listOfNearbyPlaces: listOfNearbyPlaces,
+                            listOfSightseeings: listOfSightseeingPlaces,
+                            listOfPlacesForFood: listPlacesForFood,
+                          );
                         }
-                        return FutureBuilder(
-                            future: Future.delayed(const Duration(seconds: 2)),
-                            builder: ((context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const LoadingAnimationScaffold();
-                              } else {
-                                return FirstPageScaffoldIfLoadedCorrectly(
-                                  listOfNearbyPlaces: listOfNearbyPlaces,
-                                  listOfSightseeings: listOfSightseeingPlaces,
-                                  listOfPlacesForFood: listPlacesForFood,
-                                );
-                              }
-                            }));
                       },
                     ),
                   );
                 },
               );
+            } else if (locationState is LocationErorr) {
+              return Scaffold(
+                  body: Center(
+                child: Text(locationState.message),
+              ));
             } else {
               return const LoadingAnimationScaffold();
             }
@@ -114,5 +95,29 @@ class _FirstPageState extends State<FirstPage> {
         },
       ),
     );
+  }
+
+  void _initalizeFirstPageData(
+      LocationLoaded locationState, BuildContext context) {
+    final userLocation = UserLocation(
+        userLat: locationState.position.latitude,
+        userLon: locationState.position.longitude);
+    sl.registerLocationSingleton(userLocation);
+
+    final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();
+    if (listOfNearbyPlaces.isEmpty) {
+      nearbyPlacesCubit.fetchNearbyPlaces(listOfNearbyPlaces, googleApiClient);
+    }
+
+    final nearbySightSeeingCubit = context.read<NearbySightSeeingCubit>();
+    if (listOfSightseeingPlaces.isEmpty) {
+      nearbySightSeeingCubit.fetchNearbySightseeings(
+          listOfSightseeingPlaces, googleApiClient);
+    }
+    final whatToEatCubit = context.read<WhatToEatCubit>();
+    if (listPlacesForFood.isEmpty) {
+      whatToEatCubit.fetchPlacesForWhatToEat(
+          listPlacesForFood, googleApiClient);
+    }
   }
 }

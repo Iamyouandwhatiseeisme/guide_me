@@ -25,6 +25,7 @@ class _AuthPageWidgetState extends State<AuthPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    //displays login page, if the  user clicks the signup button on login page, displays signup page
     return isLogin
         ? LoginWidget(
             onClickedSignUp: toggle,

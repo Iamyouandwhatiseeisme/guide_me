@@ -20,9 +20,7 @@ class ServiceLocator {
   }
 
   void registerLocationSingleton(UserLocation userLocation) {
-    print('print: registering');
     if (!sl.isRegistered<UserLocation>()) {
-      print('print: registering2');
       sl.registerSingleton<UserLocation>(UserLocation(
           userLat: userLocation.userLat, userLon: userLocation.userLon));
     }

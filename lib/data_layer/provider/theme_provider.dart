@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../enums/app_theme.dart';
 
+// a theme provider that lets user change the apptheme
 class ThemeProvider with ChangeNotifier {
   AppTheme _theme = AppTheme.light;
 
