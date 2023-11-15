@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/main.dart';
+
 import 'package:http/http.dart' as http;
 
 class GoogleApiClient {
@@ -87,10 +90,7 @@ class GoogleApiClient {
   }
 
   Future<List<NearbyPlacesModel>> fetchDataForOtherCategories(
-      List<NearbyPlacesModel> listOfPlaces,
-      double userLat,
-      double userLon,
-      String category) async {
+      List<NearbyPlacesModel> listOfPlaces, String category) async {
     try {
       final url = Uri.parse(
           'https://maps.googleapis.com/maps/api/place/textsearch/json?query=$category&key=$apiKey');
@@ -128,12 +128,12 @@ class GoogleApiClient {
   }
 
   Future<List<NearbyPlacesModel>> fetchData(
-      List<NearbyPlacesModel> listOfPlaces,
-      double userLat,
-      double userLon) async {
+    List<NearbyPlacesModel> listOfPlaces,
+  ) async {
+    final UserLocation userLocation = sl.sl.get<UserLocation>();
     try {
       final url = Uri.parse(
-          'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$userLat,$userLon&radius=8000&type=park|museum&key=$apiKey');
+          'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLocation.userLat},${userLocation.userLon}&radius=8000&type=park|museum&key=$apiKey');
 
       try {
         final response = await http.get(url);
@@ -169,12 +169,12 @@ class GoogleApiClient {
   }
 
   Future<List<NearbyPlacesModel>> fetchSightseeingData(
-      List<NearbyPlacesModel> listOfSightseeingPlaces,
-      double userLat,
-      double userLon) async {
+    List<NearbyPlacesModel> listOfSightseeingPlaces,
+  ) async {
+    final UserLocation userLocation = sl.sl.get<UserLocation>();
     try {
       final url = Uri.parse(
-          'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$userLat,$userLon&radius=8000&type=hotel|food&key=$apiKey');
+          'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLocation.userLat},${userLocation.userLon}&radius=8000&type=hotel|food&key=$apiKey');
 
       try {
         final response = await http.get(url);
@@ -210,9 +210,8 @@ class GoogleApiClient {
   }
 
   Future<List<NearbyPlacesModel>> fetchPlacesForFoodData(
-      List<NearbyPlacesModel> listPlacesForFood,
-      double userLat,
-      double userLon) async {
+    List<NearbyPlacesModel> listPlacesForFood,
+  ) async {
     try {
       final url = Uri.parse(
           'https://maps.googleapis.com/maps/api/place/textsearch/json?query=bar+food&key=$apiKey');
@@ -296,7 +295,7 @@ class GoogleApiClient {
         throw ('Failed to fetch');
       }
     } catch (error) {
-      rethrow;
+      throw Exception(error);
     }
   }
 }

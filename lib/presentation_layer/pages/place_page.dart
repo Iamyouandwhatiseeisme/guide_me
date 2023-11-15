@@ -4,15 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:guide_me/business_layer/cubits.dart';
-import 'package:guide_me/data_layer/data.dart';
+
 import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/main.dart';
-import 'package:guide_me/presentation_layer/widgets/page_payloads/place_page_payload.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../data_layer/data.dart';
 
 class PlacePage extends StatefulWidget {
   final NearbyPlacesModel? placeToDisplay;
@@ -28,9 +29,10 @@ class PlacePage extends StatefulWidget {
 class _PlacepageState extends State<PlacePage> {
   bool placeStatusFetched = false;
   bool photosFetched = false;
-  String? adress = '';
+  // String? adress = '';
   String? number = '';
-  Map<String, String?> openningHours = {};
+  // Map<String, String?> openningHours = {};
+  PlaceDetails? placeDetails;
   String apiKey = dotenv.env['GOOGLE_API_KEY']!;
   @override
   Widget build(BuildContext context) {
@@ -80,14 +82,21 @@ class _PlacepageState extends State<PlacePage> {
                 passedModel.placeId, googleApiClient);
 
             if (numberAndAdressState is FetchPhoneNumberAndAdressLoaded) {
-              final detailsOfPlace =
-                  numberAndAdressState.numberAndAdressByPlaceId;
-              number = detailsOfPlace['phone'];
-              adress = correctFormattedAdress(detailsOfPlace['adress']);
-              openningHours = {
-                'open_hour': detailsOfPlace['open_hour'],
-                'close_hour': detailsOfPlace['close_hour']
-              };
+              placeDetails = numberAndAdressState.placeDetails;
+              return Scaffold(
+                  appBar: PreferredSize(
+                      preferredSize: const Size.fromHeight(48),
+                      child: PlacePageAppbar(
+                        placeToDisplay: passedModel,
+                      )),
+                  backgroundColor: Theme.of(context).colorScheme.background,
+                  body: PlacePageContet(
+                    placeDetails: placeDetails!,
+                    passedPlace: passedModel,
+                    userRatingTotal: userRatingTotal,
+                    transformedUserRatingTotal: transformedUserRatingTotal,
+                    typesInString: typesInString,
+                  ));
             }
             return BlocBuilder<PlaceOpenStatuslabelCubit,
                 PlaceOpenStatusLabelState>(
@@ -101,33 +110,14 @@ class _PlacepageState extends State<PlacePage> {
 
                   placeStatusFetched = true;
                 }
-
-                return Scaffold(
-                    appBar: PreferredSize(
-                        preferredSize: const Size.fromHeight(48),
-                        child: PlacePageAppbar(
-                          placeToDisplay: passedModel,
-                        )),
-                    backgroundColor: Theme.of(context).colorScheme.background,
-                    body: PlacePageContet(
-                        openningHours: openningHours,
-                        passedPlace: passedModel,
-                        userRatingTotal: userRatingTotal,
-                        transformedUserRatingTotal: transformedUserRatingTotal,
-                        typesInString: typesInString,
-                        number: number,
-                        adress: adress));
+                return const LoadingAnimationScaffold();
               },
             );
           });
         } else if (photosState is PhotosByPlaceIdFetcherLoading) {
-          return LoadingAnimationWidget.inkDrop(
-              color: const Color(0xffC75E6B), size: 20);
+          return const LoadingAnimationScaffold();
         } else if (photosState is PhotosByPlaceIdFetcherInitial) {
-          return Scaffold(
-              body: Center(
-                  child: LoadingAnimationWidget.inkDrop(
-                      color: const Color(0xffC75E6B), size: 20)));
+          return const LoadingAnimationScaffold();
         } else {
           return const Text('NO PHOTOS');
         }

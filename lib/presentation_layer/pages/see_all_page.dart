@@ -19,8 +19,6 @@ class SeeAllPage extends StatefulWidget {
 
 class _SeeAllPageState extends State<SeeAllPage> {
   List<NearbyPlacesModel>? listTobuild;
-  double? userLat;
-  double? userLon;
 
   SightseeingSortingCubit? sightseeingSortingCubit;
   SorterToggleButtonCubit? sorterToggleButtonCubit;
@@ -34,9 +32,8 @@ class _SeeAllPageState extends State<SeeAllPage> {
         ModalRoute.of(context)!.settings.arguments as List<dynamic>;
     final seeAllPagePayload = passedPayLoad[0] as SeeAllPagePayload;
     listTobuild = seeAllPagePayload.listToBuild;
-    userLat = seeAllPagePayload.userLat;
-    userLon = seeAllPagePayload.userLon;
 
+    final userLocation = seeAllPagePayload.userLocation;
     sightseeingSortingCubit = seeAllPagePayload.sortingCubit;
     sorterToggleButtonCubit = seeAllPagePayload.sorterToggleButtonCubit;
 
@@ -54,8 +51,8 @@ class _SeeAllPageState extends State<SeeAllPage> {
           builder: (context, sortedListState) {
             return BlocBuilder<SorterToggleButtonCubit,
                 SortertoggleButtonState>(builder: (context, sorterState) {
-              sightseeingSortingCubit!.sortList(listTobuild!, sorterState.value,
-                  userLat!, userLon!, distanceMap);
+              sightseeingSortingCubit!.sortList(
+                  listTobuild!, sorterState.value, userLocation, distanceMap);
 
               return Scaffold(
                   backgroundColor: Theme.of(context).colorScheme.background,
@@ -64,10 +61,7 @@ class _SeeAllPageState extends State<SeeAllPage> {
                     scrollDirection: Axis.vertical,
                     child: Column(
                       children: [
-                        SorterRadioButtonWidget(
-                            userLat: userLat!,
-                            userLon: userLon!,
-                            state: sorterState),
+                        SorterRadioButtonWidget(state: sorterState),
                         SizedBox(
                           height: 1000,
                           width: 460,

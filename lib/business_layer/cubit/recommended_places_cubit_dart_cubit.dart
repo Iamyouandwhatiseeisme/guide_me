@@ -8,11 +8,12 @@ class NearbyPlacesCubit extends Cubit<NearbyPlacesState> {
   NearbyPlacesCubit() : super(NearbyPlacesInitial());
   bool nearbyPlacesFetched = false;
   void fetchNearbyPlaces(List<NearbyPlacesModel> listOfNearbyPlaces,
-      double userLat, double userLon, GoogleApiClient googleApiClient) async {
+      GoogleApiClient googleApiClient) async {
     try {
       emit(NearbyPlacesLoading());
-      final listOfPlaces =
-          await googleApiClient.fetchData(listOfNearbyPlaces, userLat, userLon);
+      final listOfPlaces = await googleApiClient.fetchData(
+        listOfNearbyPlaces,
+      );
 
       emit(NearbyPlacesLoaded(listOfPlaces));
       nearbyPlacesFetched = true;

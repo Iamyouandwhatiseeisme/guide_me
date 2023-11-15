@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:guide_me/data_layer/data.dart';
 
 import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
 
@@ -19,7 +20,21 @@ class FetchPhoneNumberAndAdressCubit
             await googleApiClient.fetchDetails(
           placeId,
         );
-        emit(FetchPhoneNumberAndAdressLoaded(fetchedNumberAndAdressByPlaceId));
+
+        final adress =
+            correctFormattedAdress(fetchedNumberAndAdressByPlaceId['adress']);
+        final number = fetchedNumberAndAdressByPlaceId['phone'];
+
+        final openHour = fetchedNumberAndAdressByPlaceId['open_hour'];
+        final closeHour = fetchedNumberAndAdressByPlaceId['close_hour'];
+        final placedetails = PlaceDetails(
+          openHour: openHour,
+          closeHour: closeHour,
+          adress: adress,
+          number: number,
+        );
+
+        emit(FetchPhoneNumberAndAdressLoaded(placedetails));
 
         numberAndAdressFetched = true;
       }

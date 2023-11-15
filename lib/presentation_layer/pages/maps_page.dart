@@ -16,11 +16,8 @@ import 'package:guide_me/presentation_layer/widgets/first_page_widgets/custom_bo
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class MapsPage extends StatefulWidget {
-  final LocationDisplayWidget? locationDisplayWidget;
-
   const MapsPage({
     Key? key,
-    this.locationDisplayWidget,
   }) : super(key: key);
 
   @override
@@ -30,8 +27,7 @@ class MapsPage extends StatefulWidget {
 class _MapsPageState extends State<MapsPage> {
   bool locationFetched = false;
   bool weatherFetched = false;
-  double lat = 0.0;
-  double lon = 0.0;
+
   late GoogleMapController? _controller;
   late Completer<GoogleMapController> _googleMapControllerCompleter;
   late Completer<String> _googleMapLocationCompleter;
@@ -48,113 +44,87 @@ class _MapsPageState extends State<MapsPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
+    final userLocation = sl.sl.get<UserLocation>();
+
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => GeolocatorCubit(),
-        ),
-        BlocProvider(
-          create: (context) => WeatherCubit(),
-        ),
-        BlocProvider(
-          create: (context) => LocationCubit(),
-        ),
-        BlocProvider(create: (context) => IsExapndedCubit())
-      ],
-      child: BlocBuilder<WeatherCubit, WeatherState>(
-        builder: (context, weatherState) {
-          return BlocBuilder<GeolocatorCubit, LocationState>(
-              builder: (context, state) {
-            final geoLocatorCubit = BlocProvider.of<GeolocatorCubit>(context);
-            geoLocatorCubit.getLocation();
+        providers: [
+          BlocProvider(
+            create: (context) => WeatherCubit(),
+          ),
+          BlocProvider(
+            create: (context) => LocationCubit(),
+          ),
+          BlocProvider(create: (context) => IsExapndedCubit())
+        ],
+        child: BlocBuilder<WeatherCubit, WeatherState>(
+            builder: (context, weatherState) {
+          loadData(context, userLocation.userLat, userLocation.userLon,
+              _googleMapLocationCompleter);
 
-            if (state is LocationLoaded) {
-              lat = state.position.latitude;
-              lon = state.position.longitude;
-
-              loadData(context, lat, lon, _googleMapLocationCompleter);
-
-              return FutureBuilder(
-                  future: _googleMapLocationCompleter.future,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Scaffold(
-                          body: Center(
-                              child: LoadingAnimationWidget.inkDrop(
-                                  color: const Color(0xffC75E6B), size: 20)));
-                    } else {
-                      if (snapshot.hasData) {
-                        return Scaffold(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.background,
-                          bottomNavigationBar:
-                              sl.sl.get<CustomBottomNavigationBar>(),
-                          appBar: PreferredSize(
-                            preferredSize: const Size.fromHeight(48),
-                            child: MapsPageAppBarWidget(
-                              widget: widget,
-                              temperature: weatherState.temperature!,
-                            ),
-                          ),
-                          body: Stack(children: [
-                            BlocBuilder<LocationCubit, LatLng>(
-                              builder: (context, userLocation) {
-                                return GoogleMap(
-                                    zoomControlsEnabled: false,
-                                    onMapCreated:
-                                        (GoogleMapController controller) {
-                                      _controller = controller;
-                                      _googleMapControllerCompleter
-                                          .complete(_controller);
-                                    },
-                                    myLocationButtonEnabled: false,
-                                    myLocationEnabled: true,
-                                    mapType: MapType.terrain,
-                                    initialCameraPosition: CameraPosition(
-                                        zoom: 18, target: LatLng(lat, lon)));
-                              },
-                            ),
-                            FutureBuilder(
-                                future: _googleMapControllerCompleter.future,
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.done) {
-                                    if (snapshot.hasData) {
-                                      return MapsPageContent(
-                                          screenHeight: screenHeight,
-                                          controller: _controller!,
-                                          lat: lat,
-                                          lon: lon,
-                                          screenWidth: screenWidth);
-                                    } else {
-                                      return const Text('No data');
-                                    }
-                                  } else if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return Center(
-                                        child: LoadingAnimationWidget.inkDrop(
-                                            color: const Color(0xffC75E6B),
-                                            size: 20));
-                                  } else {
-                                    return const Text('Erro');
-                                  }
-                                })
-                          ]),
-                        );
-                      } else {
-                        return const Text('No data');
-                      }
-                    }
-                  });
-            } else if (state is LocationLoading) {
-              return LoadingAnimationWidget.inkDrop(
-                  color: const Color(0xffC75E6B), size: 20);
-            } else {
-              return const Text('Couldn\' retrieve location');
-            }
-          });
-        },
-      ),
-    );
+          return FutureBuilder(
+              future: _googleMapLocationCompleter.future,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const LoadingAnimationScaffold();
+                } else {
+                  if (snapshot.hasData) {
+                    return Scaffold(
+                      backgroundColor: Theme.of(context).colorScheme.background,
+                      bottomNavigationBar:
+                          sl.sl.get<CustomBottomNavigationBar>(),
+                      appBar: PreferredSize(
+                        preferredSize: const Size.fromHeight(48),
+                        child: MapsPageAppBarWidget(
+                          widget: widget,
+                          temperature: weatherState.temperature!,
+                        ),
+                      ),
+                      body: Stack(children: [
+                        BlocBuilder<LocationCubit, UserLocation>(
+                          builder: (context, userLocations) {
+                            return GoogleMap(
+                                zoomControlsEnabled: false,
+                                onMapCreated: (GoogleMapController controller) {
+                                  _controller = controller;
+                                  _googleMapControllerCompleter
+                                      .complete(_controller);
+                                },
+                                myLocationButtonEnabled: false,
+                                myLocationEnabled: true,
+                                mapType: MapType.terrain,
+                                initialCameraPosition: CameraPosition(
+                                    zoom: 18,
+                                    target: LatLng(userLocation.userLat,
+                                        userLocation.userLon)));
+                          },
+                        ),
+                        FutureBuilder(
+                            future: _googleMapControllerCompleter.future,
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                if (snapshot.hasData) {
+                                  return MapsPageContent(
+                                      screenHeight: screenHeight,
+                                      controller: _controller!,
+                                      screenWidth: screenWidth);
+                                } else {
+                                  return const Text('No data');
+                                }
+                              } else if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const LoadingAnimationScaffold();
+                              } else {
+                                return const Text('Erro');
+                              }
+                            })
+                      ]),
+                    );
+                  } else {
+                    return const Text('No data');
+                  }
+                }
+              });
+        }));
   }
 }

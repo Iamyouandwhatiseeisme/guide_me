@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class LoginPageWIdget extends StatefulWidget {
   const LoginPageWIdget({
@@ -25,13 +24,8 @@ class _LoginPageWIdgetState extends State<LoginPageWIdget> {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.of(context).pushReplacementNamed('firstPage');
               });
-              // Return a placeholder widget or loading indicator while navigating.
-              return Scaffold(
-                body: Center(
-                  child: LoadingAnimationWidget.inkDrop(
-                      color: Colors.red, size: 40),
-                ),
-              );
+
+              return const LoadingAnimationScaffold();
             } else {
               return const AuthPageWidget();
             }

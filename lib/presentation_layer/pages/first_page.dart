@@ -7,11 +7,11 @@ import 'package:guide_me/business_layer/cubit/recommended_places_cubit_dart_stat
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_cubit.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_state.dart';
 import 'package:guide_me/business_layer/cubit/what_to_eat_cubit.dart';
+import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/main.dart';
-import 'package:guide_me/presentation_layer/widgets/first_page_widgets/custom_bottom_navigatio_bar_widget.dart';
+
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../business_layer/cubit/fetch_searched_items_cubit.dart';
 import '../../business_layer/cubit/recommended_places_cubit_dart_cubit.dart';
@@ -27,8 +27,6 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
-  double latitude = 0;
-  double longtitude = 0;
   final googleApiClient = sl.sl<GoogleApiClient>();
 
   List<NearbyPlacesModel> listOfNearbyPlaces = [];
@@ -58,74 +56,60 @@ class _FirstPageState extends State<FirstPage> {
             geoLocatorCubit.getLocation();
 
             if (locationState is LocationLoaded) {
-              latitude = locationState.position.latitude;
-              longtitude = locationState.position.longitude;
-            } else {
-              return Scaffold(
-                body: Center(
-                  child: LoadingAnimationWidget.inkDrop(
-                      color: const Color(0xffC75E6B), size: 20),
-                ),
+              final userLocation = UserLocation(
+                  userLat: locationState.position.latitude,
+                  userLon: locationState.position.longitude);
+              sl.registerLocationSingleton(userLocation);
+
+              final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();
+              if (listOfNearbyPlaces.isEmpty) {
+                nearbyPlacesCubit.fetchNearbyPlaces(
+                    listOfNearbyPlaces, googleApiClient);
+              }
+
+              final nearbySightSeeingCubit =
+                  context.read<NearbySightSeeingCubit>();
+              if (listOfSightseeingPlaces.isEmpty) {
+                nearbySightSeeingCubit.fetchNearbySightseeings(
+                    listOfSightseeingPlaces, googleApiClient);
+              }
+              final whatToEatCubit = context.read<WhatToEatCubit>();
+              if (listPlacesForFood.isEmpty) {
+                whatToEatCubit.fetchPlacesForWhatToEat(
+                    listPlacesForFood, googleApiClient);
+              }
+              return BlocBuilder<NearbySightSeeingCubit,
+                  NearbySightseeingsState>(
+                builder: (context, state) {
+                  return Container(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: BlocBuilder<NearbyPlacesCubit, NearbyPlacesState>(
+                      builder: (context, state) {
+                        if (state is NearbyPlacesLoading) {
+                          return const LoadingAnimationScaffold();
+                        }
+                        return FutureBuilder(
+                            future: Future.delayed(const Duration(seconds: 2)),
+                            builder: ((context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const LoadingAnimationScaffold();
+                              } else {
+                                return FirstPageScaffoldIfLoadedCorrectly(
+                                  listOfNearbyPlaces: listOfNearbyPlaces,
+                                  listOfSightseeings: listOfSightseeingPlaces,
+                                  listOfPlacesForFood: listPlacesForFood,
+                                );
+                              }
+                            }));
+                      },
+                    ),
+                  );
+                },
               );
+            } else {
+              return const LoadingAnimationScaffold();
             }
-            final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();
-            if (listOfNearbyPlaces.isEmpty) {
-              nearbyPlacesCubit.fetchNearbyPlaces(
-                  listOfNearbyPlaces, latitude, longtitude, googleApiClient);
-            }
-
-            final nearbySightSeeingCubit =
-                context.read<NearbySightSeeingCubit>();
-            if (listOfSightseeingPlaces.isEmpty) {
-              nearbySightSeeingCubit.fetchNearbySightseeings(
-                  listOfSightseeingPlaces,
-                  latitude,
-                  longtitude,
-                  googleApiClient);
-            }
-            final whatToEatCubit = context.read<WhatToEatCubit>();
-            if (listPlacesForFood.isEmpty) {
-              whatToEatCubit.fetchPlacesForWhatToEat(
-                  listPlacesForFood, latitude, longtitude, googleApiClient);
-            }
-
-            return BlocBuilder<NearbySightSeeingCubit, NearbySightseeingsState>(
-              builder: (context, state) {
-                return Container(
-                  padding: const EdgeInsets.only(top: 40),
-                  child: BlocBuilder<NearbyPlacesCubit, NearbyPlacesState>(
-                    builder: (context, state) {
-                      if (state is NearbyPlacesLoading) {
-                        return Scaffold(
-                            body: Center(
-                                child: LoadingAnimationWidget.inkDrop(
-                                    color: const Color(0xffC75E6B), size: 20)));
-                      }
-                      return FutureBuilder(
-                          future: Future.delayed(const Duration(seconds: 2)),
-                          builder: ((context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Scaffold(
-                                  body: Center(
-                                      child: LoadingAnimationWidget.inkDrop(
-                                          color: const Color(0xffC75E6B),
-                                          size: 20)));
-                            } else {
-                              return FirstPageScaffoldIfLoadedCorrectly(
-                                lat: latitude,
-                                lon: longtitude,
-                                listOfNearbyPlaces: listOfNearbyPlaces,
-                                listOfSightseeings: listOfSightseeingPlaces,
-                                listOfPlacesForFood: listPlacesForFood,
-                              );
-                            }
-                          }));
-                    },
-                  ),
-                );
-              },
-            );
           });
         },
       ),

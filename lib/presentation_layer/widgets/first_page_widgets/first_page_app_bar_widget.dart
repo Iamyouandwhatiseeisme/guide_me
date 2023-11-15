@@ -25,12 +25,9 @@ class FirstPageAppBar extends StatelessWidget {
           },
         ),
       ],
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 20.0),
-        child: BlocProvider(
-          create: (context) => GeolocatorCubit(),
-          child: const LocationDisplayWidget(),
-        ),
+      leading: const Padding(
+        padding: EdgeInsets.only(left: 20.0),
+        child: LocationDisplayWidget(),
       ),
     );
   }

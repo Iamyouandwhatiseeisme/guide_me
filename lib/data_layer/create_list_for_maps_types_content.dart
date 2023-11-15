@@ -9,20 +9,24 @@ import 'httpClients/google_api_client.dart';
 
 Future<void> createList(
     Map<NearbyPlacesModel, double?> distanceMap,
-    double lat,
-    double lon,
     String category,
     CategoryTypesFetcherCubit categoryTypesFetcherCubit,
     List<NearbyPlacesModel> listOfPlaces,
     Completer<String> listLoaderController) async {
   if (listOfPlaces.isEmpty) {
     await categoryTypesFetcherCubit.fetchDataForCategories(
-        listOfPlaces, lat, lon, category, sl.sl<GoogleApiClient>());
-    createDistanceMap(distanceMap, listOfPlaces, lat, lon);
+        listOfPlaces, category, sl.sl<GoogleApiClient>());
+    createDistanceMap(
+      distanceMap,
+      listOfPlaces,
+    );
     listLoaderController.complete('Completed');
   }
   if (listOfPlaces.isNotEmpty) {
     listLoaderController.complete('Completed');
-    createDistanceMap(distanceMap, listOfPlaces, lat, lon);
+    createDistanceMap(
+      distanceMap,
+      listOfPlaces,
+    );
   }
 }

@@ -4,9 +4,10 @@ import 'package:guide_me/data_layer/get_localized_string_method.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
+import '../../../data_layer/data.dart';
+
 class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
-  final double? lat;
-  final double? lon;
+  final UserLocation? userLocation;
   final double screenHeight;
   final Color color;
   final int numOfItems;
@@ -16,8 +17,7 @@ class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
 
   const ContainerForTypesOfPlacesOnMapWidget({
     Key? key,
-    this.lat,
-    this.lon,
+    this.userLocation,
     required this.screenHeight,
     required this.color,
     required this.numOfItems,
@@ -36,7 +36,7 @@ class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
       onTap: () {
         if (textLabel != 'other') {
           showDIalogWindow(null, null, context, screenHeight, screenWidth,
-              iconToDisplay, localizedString, null, lat!, lon!, null);
+              iconToDisplay, localizedString, null, userLocation!, null);
         } else {
           showDIalogWindow(
             null,
@@ -47,8 +47,7 @@ class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
             iconToDisplay,
             localizedString,
             listOfCategories,
-            lat!,
-            lon!,
+            userLocation!,
             null,
           );
         }

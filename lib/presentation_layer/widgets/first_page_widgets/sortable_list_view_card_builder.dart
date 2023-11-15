@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubit/sightseeing_sorting_cubit.dart';
+import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
-import 'package:guide_me/presentation_layer/widgets/page_payloads/place_page_payload.dart';
+import 'package:guide_me/main.dart';
+
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -14,21 +16,16 @@ import '../../../business_layer/cubit/sorter_toggle_button_cubit.dart';
 class SortableListViewCardBuilder extends StatelessWidget {
   final List<NearbyPlacesModel> listOfPassedPlaces;
 
-  final double userLat;
-  final double userLon;
-
   const SortableListViewCardBuilder({
     Key? key,
     required this.listOfPassedPlaces,
-    required this.userLat,
-    required this.userLon,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     List<NearbyPlacesModel> sortedList = List.from(listOfPassedPlaces);
     Map<NearbyPlacesModel, double?> distanceMap = {};
-
+    final UserLocation userLocation = sl.sl.get<UserLocation>();
     return BlocBuilder<SightseeingSortingCubit, SightseeingSortingState>(
       builder: (context, sightseeingSortingState) {
         return Builder(builder: (context) {
@@ -37,7 +34,7 @@ class SortableListViewCardBuilder extends StatelessWidget {
             final sightseeingSortingCubit =
                 BlocProvider.of<SightseeingSortingCubit>(context);
             sightseeingSortingCubit.sortList(
-                sortedList, state.value, userLat, userLon, distanceMap);
+                sortedList, state.value, userLocation, distanceMap);
             final box = Hive.box<NearbyPlacesModel>('FavoritedPlaces');
             // Now, build the UI using the sorted list
             return Container(

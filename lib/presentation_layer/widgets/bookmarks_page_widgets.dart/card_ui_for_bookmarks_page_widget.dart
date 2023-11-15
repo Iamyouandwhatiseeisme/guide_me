@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:guide_me/data_layer/data.dart';
-import 'package:guide_me/presentation_layer/widgets/page_payloads/place_page_payload.dart';
 
 import '../../../data_layer/refresh_item_list_function.dart';
 import '../presentation_layer_widgets.dart';
@@ -42,7 +41,6 @@ class CardUiForBookmarksPage extends CardUi {
             color: Colors.white,
           ),
           'Add to collections',
-          null,
           null,
           null,
           place),

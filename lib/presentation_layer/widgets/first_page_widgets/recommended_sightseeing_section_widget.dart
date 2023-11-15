@@ -38,8 +38,6 @@ class RecommendedSightseeingsSectiogWidget extends StatelessWidget {
             BlocBuilder<SorterToggleButtonCubit, SortertoggleButtonState>(
               builder: (context, state) {
                 return SorterRadioButtonWidget(
-                  userLat: lat,
-                  userLon: lon,
                   state: state,
                 );
               },
@@ -49,26 +47,20 @@ class RecommendedSightseeingsSectiogWidget extends StatelessWidget {
             ),
             BlocBuilder<SorterToggleButtonCubit, SortertoggleButtonState>(
               builder: (context, whatTovisitstate) {
-                return BlocBuilder<GeolocatorCubit, LocationState>(
-                  builder: (context, locationState) {
-                    return BlocBuilder<NearbySightSeeingCubit,
-                        NearbySightseeingsState>(builder: (context, state) {
-                      if (state is NearbySightseeingsLoaded) {
-                        return SortableListViewCardBuilder(
-                          listOfPassedPlaces: widget.listOfSightseeings,
-                          userLat: lat,
-                          userLon: lon,
-                        );
-                      } else if (state is NearbySightseeingsLoading) {
-                        return const CircularProgressIndicator(
-                          color: Colors.black,
-                        );
-                      } else {
-                        return const CircularProgressIndicator.adaptive();
-                      }
-                    });
-                  },
-                );
+                return BlocBuilder<NearbySightSeeingCubit,
+                    NearbySightseeingsState>(builder: (context, state) {
+                  if (state is NearbySightseeingsLoaded) {
+                    return SortableListViewCardBuilder(
+                      listOfPassedPlaces: widget.listOfSightseeings,
+                    );
+                  } else if (state is NearbySightseeingsLoading) {
+                    return const CircularProgressIndicator(
+                      color: Colors.black,
+                    );
+                  } else {
+                    return const CircularProgressIndicator.adaptive();
+                  }
+                });
               },
             ),
           ],

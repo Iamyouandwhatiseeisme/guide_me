@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/presentation_layer/pages/bookmarks_page.dart';
-import 'package:guide_me/presentation_layer/widgets/page_payloads/place_page_payload.dart';
+
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

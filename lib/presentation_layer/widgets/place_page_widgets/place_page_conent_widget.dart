@@ -4,27 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubits.dart';
+import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class PlacePageContet extends StatelessWidget {
   const PlacePageContet({
     Key? key,
-    required this.openningHours,
     required this.passedPlace,
     required this.userRatingTotal,
     required this.transformedUserRatingTotal,
     required this.typesInString,
-    required this.number,
-    required this.adress,
+    required this.placeDetails,
   }) : super(key: key);
-  final Map<String, String?> openningHours;
+  final PlaceDetails placeDetails;
   final NearbyPlacesModel passedPlace;
   final String userRatingTotal;
   final String transformedUserRatingTotal;
   final String typesInString;
-  final String? number;
-  final String? adress;
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +41,14 @@ class PlacePageContet extends StatelessWidget {
                 userRatingTotal: userRatingTotal,
                 transformedUserRatingTotal: transformedUserRatingTotal),
             TypesLabelAndMakeACallButtonWidgetRow(
-                typesInString: typesInString, number: number),
+                typesInString: typesInString, number: placeDetails.number),
             AdressLabelAndOpenInMapButtonRowWIdget(
-                adress: adress, passedPlace: passedPlace),
+                adress: placeDetails.adress, passedPlace: passedPlace),
             OpenStatusLabelWidget(openStatus: openStatus),
-            OpenHoursInfoWidget(openningHours: openningHours)
+            OpenHoursInfoWidget(openningHours: {
+              'open_hour': placeDetails.openHour,
+              'close_hour': placeDetails.closeHour
+            })
           ],
         );
       },

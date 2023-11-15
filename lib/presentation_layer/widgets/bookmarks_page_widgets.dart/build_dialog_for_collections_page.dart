@@ -6,17 +6,17 @@ class BuildDialogForCollectionsPage extends BuildADialogOnMapsWindowWidget {
   final NearbyPlacesModel placeToAdd;
   final double distance;
   final String image;
-  const BuildDialogForCollectionsPage(
-      {super.key,
-      required this.image,
-      required super.textLabel,
-      required super.iconToDisplay,
-      required super.screenHeight,
-      required super.screenWidth,
-      required this.placeToAdd,
-      required this.distance,
-      super.lat,
-      super.lon});
+  const BuildDialogForCollectionsPage({
+    super.key,
+    required this.image,
+    required super.textLabel,
+    required super.iconToDisplay,
+    required super.screenHeight,
+    required super.screenWidth,
+    required this.placeToAdd,
+    required this.distance,
+    super.userLocation,
+  });
   @override
   Widget build(BuildContext context) {
     const snackBar = SnackBar(

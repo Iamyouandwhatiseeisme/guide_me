@@ -3,19 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:guide_me/data_layer/data.dart';
+import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class MapsTypesRowWidget extends StatelessWidget {
-  final double? lat;
-  final double? lon;
   final double screenHeight;
   final List<MapItem> mapItemList;
   final List<String>? listOfCategories;
 
   const MapsTypesRowWidget({
     Key? key,
-    this.lat,
-    this.lon,
     required this.screenHeight,
     required this.mapItemList,
     this.listOfCategories,
@@ -31,9 +28,9 @@ class MapsTypesRowWidget extends StatelessWidget {
       child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
+            final UserLocation userLocation = sl.sl.get<UserLocation>();
             return ContainerForTypesOfPlacesOnMapWidget(
-              lat: lat,
-              lon: lon,
+              userLocation: userLocation,
               listOfCategories: listOfCategories,
               screenHeight: screenHeight,
               color: mapItemList[index].color,

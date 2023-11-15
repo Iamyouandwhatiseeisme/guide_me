@@ -1,8 +1,22 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:guide_me/data_layer/user_location_class.dart';
+import 'package:guide_me/main.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class GeocodingUtil {
+  Future<String> displayLocationInfoInWords(
+    locationInfo,
+  ) async {
+    final UserLocation userLocation = sl.sl.get<UserLocation>();
+    final updatedLocationInfo = await GeocodingUtil.reverseGeocode(
+        userLocation.userLat, userLocation.userLon);
+
+    locationInfo = updatedLocationInfo;
+
+    return locationInfo;
+  }
+
   static Future<String> reverseGeocode(
     double latitude,
     double longitude,

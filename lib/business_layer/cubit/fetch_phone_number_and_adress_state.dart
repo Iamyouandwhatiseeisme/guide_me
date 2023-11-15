@@ -14,11 +14,12 @@ class FetchPhoneNumberAndAdressInitial extends FetchPhoneNumberAndAdressState {}
 class FetchPhoneNumberAndAdressLoading extends FetchPhoneNumberAndAdressState {}
 
 class FetchPhoneNumberAndAdressLoaded extends FetchPhoneNumberAndAdressState {
-  final Map<String?, String?> numberAndAdressByPlaceId;
+  // final Map<String?, String?> numberAndAdressByPlaceId;
+  final PlaceDetails placeDetails;
 
-  const FetchPhoneNumberAndAdressLoaded(this.numberAndAdressByPlaceId);
+  const FetchPhoneNumberAndAdressLoaded(this.placeDetails);
   @override
-  List<Object> get props => [numberAndAdressByPlaceId];
+  List<Object> get props => [placeDetails];
 }
 
 class FetchPhonenumberAndAdressError extends FetchPhoneNumberAndAdressState {

@@ -13,15 +13,12 @@ class MapsPageContent extends StatelessWidget {
     Key? key,
     required this.screenHeight,
     required this.controller,
-    required this.lat,
-    required this.lon,
     required this.screenWidth,
   }) : super(key: key);
 
   final double screenHeight;
   final GoogleMapController controller;
-  final double lat;
-  final double lon;
+
   final double screenWidth;
 
   @override
@@ -38,8 +35,6 @@ class MapsPageContent extends StatelessWidget {
             : IfMenuExpanded(
                 screenHeight: screenHeight,
                 controller: controller,
-                lat: lat,
-                lon: lon,
                 listOfCategories: listOfCategories,
                 mapItemListForRowOne: mapItemListForRowOne,
                 screenWidth: screenWidth,

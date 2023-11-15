@@ -106,3 +106,5 @@ export '../../presentation_layer/widgets/maps_page_widgets/map_screen.dart';
 export '../../presentation_layer/widgets/buttons/sorter_radio_button_widget.dart';
 export 'page_payloads/see_all_page_payload.dart';
 export 'page_payloads/place_page_payload.dart';
+export 'profile_page_widgets.dart/change_name_dialog.dart';
+export 'loading/loading_animation_scaffold.dart';

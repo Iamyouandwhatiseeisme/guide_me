@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:guide_me/business_layer/cubits.dart';
+import 'package:guide_me/data_layer/data.dart';
+import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 import '../../../data_layer/models/nearby_places_model.dart';
@@ -10,8 +12,6 @@ import '../../../data_layer/models/nearby_places_model.dart';
 class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
   final List<NearbyPlacesModel> listToBuild;
 
-  final double userLat;
-  final double userLon;
   final String textToDisplay;
   final SightseeingSortingCubit sortingCubit; // Accept the sorting cubit
   final SorterToggleButtonCubit sorterToggleButtonCubit;
@@ -21,8 +21,6 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
   const LabelWIthCaregoryTypeNameAndSeeAllRow({
     Key? key,
     required this.listToBuild,
-    required this.userLat,
-    required this.userLon,
     required this.textToDisplay,
     required this.sortingCubit,
     required this.sorterToggleButtonCubit,
@@ -39,10 +37,10 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
         padding: const EdgeInsets.only(right: 20.0),
         child: GestureDetector(
           onTap: () {
+            final UserLocation userLocation = sl.sl.get<UserLocation>();
             final seeAllPagePayload = SeeAllPagePayload(
                 listToBuild: listToBuild,
-                userLat: userLat,
-                userLon: userLon,
+                userLocation: userLocation,
                 sortingCubit: sortingCubit,
                 sorterToggleButtonCubit: sorterToggleButtonCubit);
             Navigator.pushNamed(context, 'seeAllPage',

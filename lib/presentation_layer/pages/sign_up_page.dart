@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:guide_me/presentation_layer/pages/pages.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({
@@ -28,9 +27,7 @@ class _SignUpPageState extends State<SignUpPage> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-                child: LoadingAnimationWidget.inkDrop(
-                    color: Colors.red, size: 20));
+            return const LoadingAnimationScaffold();
           } else if (snapshot.hasData) {
             return const VerifyEmailPage();
           } else if (snapshot.hasError) {

@@ -9,12 +9,8 @@ part 'sightseeing_sorting_state.dart';
 
 class SightseeingSortingCubit extends Cubit<SightseeingSortingState> {
   SightseeingSortingCubit() : super(SightseeingSortingInitial());
-  void sortList(
-      List<NearbyPlacesModel> unsortedList,
-      int sortingOption,
-      double userLat,
-      double userLon,
-      Map<NearbyPlacesModel, double?> distanceMap) {
+  void sortList(List<NearbyPlacesModel> unsortedList, int sortingOption,
+      UserLocation userLocation, Map<NearbyPlacesModel, double?> distanceMap) {
     List<NearbyPlacesModel> sortedList = [];
     emit(SightseeingsortingLoading());
     switch (sortingOption) {
@@ -36,14 +32,17 @@ class SightseeingSortingCubit extends Cubit<SightseeingSortingState> {
           final aDistance = calculateDistance(
             a.lat,
             a.lng,
-            userLat, // Make sure to pass userLat and userLon to the Cubit
-            userLon,
+            userLocation
+                .userLat, // Make sure to pass userLat and userLon to the Cubit
+            userLocation
+                .userLon, // Make sure to pass userLat and userLon to the Cubit
           );
           final bDistance = calculateDistance(
             b.lat,
             b.lng,
-            userLat,
-            userLon,
+            userLocation
+                .userLat, // Make sure to pass userLat and userLon to the Cubit
+            userLocation.userLon,
           );
 
           return aDistance!.compareTo(bDistance!);
@@ -53,22 +52,10 @@ class SightseeingSortingCubit extends Cubit<SightseeingSortingState> {
         break;
     }
 
-    createDistanceMap(distanceMap, sortedList, userLat, userLon);
+    createDistanceMap(
+      distanceMap,
+      sortedList,
+    );
     emit(SightseeingsortingLoaded(sortedList));
   }
-
-  // void createDistanceMap(
-  //     Map<NearbyPlacesModel, double?> distanceMap,
-  //     List<NearbyPlacesModel> listOfDestinations,
-  //     double userLat,
-  //     double userLon) {
-  //   for (int i = 0; i < listOfDestinations.length; i++) {
-  //     double? distance = calculateDistance(listOfDestinations[i].lat,
-  //         listOfDestinations[i].lng, userLat, userLon);
-  //     String roundedValue = distance!.toStringAsFixed(2);
-  //     double.parse(roundedValue);
-  //     distanceMap.putIfAbsent(
-  //         listOfDestinations[i], () => double.parse(roundedValue));
-  //   }
-  // }
 }

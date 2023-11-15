@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_me/data_layer/data.dart';
+import 'package:guide_me/main.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:guide_me/business_layer/cubits.dart';
@@ -9,8 +11,6 @@ import 'package:guide_me/data_layer/create_distance_map_method.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../widgets/first_page_widgets/custom_bottom_navigatio_bar_widget.dart';
 
 class BookmarksPage extends StatefulWidget {
   const BookmarksPage({
@@ -24,8 +24,6 @@ class BookmarksPage extends StatefulWidget {
 class _BookmarksPageState extends State<BookmarksPage> {
   late List<NearbyPlacesModel> listOfPlaces = [];
   Map<NearbyPlacesModel, double?> distanceMap = {};
-  late double userLat;
-  late double userLon;
 
   bool isLoading = false;
 
@@ -57,9 +55,6 @@ class _BookmarksPageState extends State<BookmarksPage> {
         BlocProvider(
           create: (context) => BookmarksTabCubit(),
         ),
-        BlocProvider(
-          create: (context) => GeolocatorCubit(),
-        ),
       ],
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
@@ -76,29 +71,21 @@ class _BookmarksPageState extends State<BookmarksPage> {
           backgroundColor: const Color(0xff292F32),
         ),
         body: Builder(builder: (context) {
-          final locationState = BlocProvider.of<GeolocatorCubit>(context);
-          locationState.getLocation();
+          createDistanceMap(
+            distanceMap,
+            listOfFavorites,
+          );
+
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const BookmarksPageTabOptionsButtons(),
-              BlocBuilder<GeolocatorCubit, LocationState>(
-                builder: (context, state) {
-                  if (state is LocationLoaded) {
-                    userLat = state.position.latitude;
-                    userLon = state.position.longitude;
-
-                    createDistanceMap(
-                        distanceMap, listOfFavorites, userLat, userLon);
-                  }
-                  return BookmarksPageContent(
-                      deleteItemAndRefresh: deleteItemAndRefresh,
-                      listOfFavorites: listOfFavorites,
-                      widget: widget,
-                      box: box,
-                      distanceMap: distanceMap);
-                },
-              ),
+              BookmarksPageContent(
+                  deleteItemAndRefresh: deleteItemAndRefresh,
+                  listOfFavorites: listOfFavorites,
+                  widget: widget,
+                  box: box,
+                  distanceMap: distanceMap),
               const BookmarksPageBottomLabelAndButtonBuilder()
             ],
           );

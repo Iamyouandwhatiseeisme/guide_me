@@ -6,8 +6,6 @@ import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/main.dart';
 
 Future<void> createMap(
-    double lat,
-    double lon,
     Map<String, List<NearbyPlacesModel>> cachedData,
     String category,
     CategoryTypesFetcherCubit categoryTypesFetcherCubit,
@@ -17,7 +15,7 @@ Future<void> createMap(
     category,
   )) {
     categoryTypesFetcherCubit.fetchDataForCategories(
-        listOfPlaces, lat, lon, category, sl.sl<GoogleApiClient>());
+        listOfPlaces, category, sl.sl<GoogleApiClient>());
     cachedData[category] = listOfPlaces;
   }
   if (cachedData[category]!.isNotEmpty) {

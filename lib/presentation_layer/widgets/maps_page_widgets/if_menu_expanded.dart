@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:guide_me/data_layer/models/map_item.dart';
+
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 import '../../../business_layer/cubit/is_exapnded_cubit.dart';
+import '../../../data_layer/data.dart';
 
 class IfMenuExpanded extends StatelessWidget {
   const IfMenuExpanded({
     super.key,
     required this.screenHeight,
     required this.controller,
-    required this.lat,
-    required this.lon,
     required this.listOfCategories,
     required this.mapItemListForRowOne,
     required this.screenWidth,
@@ -21,8 +20,7 @@ class IfMenuExpanded extends StatelessWidget {
 
   final double screenHeight;
   final GoogleMapController controller;
-  final double lat;
-  final double lon;
+
   final List<String> listOfCategories;
 
   final List<MapItem> mapItemListForRowOne;
@@ -48,15 +46,12 @@ class IfMenuExpanded extends StatelessWidget {
                     children: [
                       MapsToolbarWIthDirectionsLocationAndThreeDotsWidget(
                         controller: controller,
-                        userLocation: LatLng(lat, lon),
                       ),
                       const SizedBox(
                         height: 12,
                       ),
                       MapsTypesRowWidget(
                           listOfCategories: listOfCategories,
-                          lon: lon,
-                          lat: lat,
                           screenHeight: screenHeight,
                           mapItemList: mapItemListForRowOne,
                           screenWidth: screenWidth),
@@ -64,8 +59,6 @@ class IfMenuExpanded extends StatelessWidget {
                         height: 12,
                       ),
                       MapsTypesRowWidget(
-                        lat: lat,
-                        lon: lon,
                         listOfCategories: listOfCategories,
                         screenHeight: screenHeight,
                         screenWidth: screenWidth,

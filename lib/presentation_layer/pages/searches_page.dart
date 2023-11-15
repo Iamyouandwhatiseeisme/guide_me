@@ -7,9 +7,6 @@ import 'package:guide_me/business_layer/cubits.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/page_payloads/searches_page_payload.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-
-import '../widgets/page_payloads/place_page_payload.dart';
 
 class SearchesPage extends StatefulWidget {
   const SearchesPage({
@@ -36,8 +33,8 @@ class _SearchesPageState extends State<SearchesPage> {
     final searchesPagePayload = passedPayload[0] as SearchesPagePayload;
     listTobuild = searchesPagePayload.listToBuild;
     fetchSearchedItemsCubit = searchesPagePayload.fetchSearchedItemsCubit;
-    userLat = searchesPagePayload.userLat;
-    userLon = searchesPagePayload.userLon;
+
+    final userLocation = searchesPagePayload.userLocation;
 
     return MultiBlocProvider(
       providers: [
@@ -53,11 +50,7 @@ class _SearchesPageState extends State<SearchesPage> {
             builder: (context, sorterState) {
               return Builder(builder: (context) {
                 BlocProvider.of<SightseeingSortingCubit>(context).sortList(
-                    listTobuild!,
-                    sorterState.value,
-                    userLat!,
-                    userLon!,
-                    distanceMap);
+                    listTobuild!, sorterState.value, userLocation, distanceMap);
 
                 return BlocBuilder<FetchSearchedItemsCubit,
                     FetchSearchedItemsState>(builder: (context, state) {
@@ -75,10 +68,7 @@ class _SearchesPageState extends State<SearchesPage> {
                                 width: 460,
                                 child: Column(
                                   children: [
-                                    SorterRadioButtonWidget(
-                                        userLat: userLat!,
-                                        userLon: userLon!,
-                                        state: sorterState),
+                                    SorterRadioButtonWidget(state: sorterState),
                                     Expanded(
                                       child: GridView.builder(
                                         shrinkWrap: true,
@@ -116,17 +106,10 @@ class _SearchesPageState extends State<SearchesPage> {
                             ));
                       });
                     } else {
-                      return Scaffold(
-                          body: Center(
-                              child: LoadingAnimationWidget.inkDrop(
-                                  color: Colors.red, size: 50)));
+                      return const LoadingAnimationScaffold();
                     }
                   } else if (state is FetchSearchedItemsLoading) {
-                    return Scaffold(
-                      body: Center(
-                          child: LoadingAnimationWidget.inkDrop(
-                              color: Colors.red, size: 50)),
-                    );
+                    return const LoadingAnimationScaffold();
                   } else if (state is FetchSearchedItemsError) {
                     return Scaffold(
                       body: Center(

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:guide_me/business_layer/cubit/is_exapnded_cubit.dart';
+import 'package:guide_me/data_layer/data.dart';
+import 'package:guide_me/main.dart';
 
 import '../../../business_layer/cubits.dart';
 
@@ -9,11 +11,9 @@ class MapsToolbarWIthDirectionsLocationAndThreeDotsWidget
     extends StatefulWidget {
   final GoogleMapController controller;
 
-  final LatLng userLocation;
   const MapsToolbarWIthDirectionsLocationAndThreeDotsWidget({
     super.key,
     required this.controller,
-    required this.userLocation,
   });
 
   @override
@@ -55,8 +55,12 @@ class _MapsToolbarWIthDirectionsLocationAndThreeDotsWidgetState
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GestureDetector(
-                              onTap: () => locationCubit.goToMyLocation(
-                                  widget.controller, widget.userLocation),
+                              onTap: () {
+                                final UserLocation userLocation =
+                                    sl.sl.get<UserLocation>();
+                                locationCubit.goToMyLocation(
+                                    widget.controller, userLocation);
+                              },
                               child: Image.asset('assets/images/Arrow.png')),
                           const Icon(
                             Icons.directions_outlined,

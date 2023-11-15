@@ -18,8 +18,6 @@ class ADialogWithInterfaceListCategories
     required super.iconToDisplay,
     required super.screenHeight,
     required super.screenWidth,
-    required super.lat,
-    required super.lon,
   });
 
   @override
@@ -94,15 +92,15 @@ class ADialogWithInterfaceListCategories
                               BlocProvider.of<CategoryTypesFetcherCubit>(
                                   context);
                           createMap(
-                              lat!,
-                              lon!,
                               cachedData,
                               category,
                               categoryTypesFetcherCubit,
                               listOfPlaces,
                               mapLoadedController);
                           createDistanceMap(
-                              distanceMap, cachedData[category]!, lat!, lon!);
+                            distanceMap,
+                            cachedData[category]!,
+                          );
 
                           return FutureBuilderForAlistInMapsPageTypeView(
                               distanceMap: distanceMap,

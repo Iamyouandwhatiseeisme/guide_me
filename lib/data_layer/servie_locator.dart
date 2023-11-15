@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/firebase_service.dart';
 import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
 import 'package:guide_me/data_layer/httpClients/weather_api_client.dart';
@@ -9,11 +10,21 @@ class ServiceLocator {
   final sl = GetIt.instance;
 
   void setUp() {
+    sl.registerSingleton<GeocodingUtil>(GeocodingUtil());
     sl.registerSingleton<CustomBottomNavigationBar>(
         const CustomBottomNavigationBar());
     sl.registerSingleton<FirebaseService>(FirebaseService());
     sl.registerSingleton<LocalDataBase>(LocalDataBase());
     sl.registerSingleton<GoogleApiClient>(GoogleApiClient());
     sl.registerSingleton<WeatherApiClient>(WeatherApiClient());
+  }
+
+  void registerLocationSingleton(UserLocation userLocation) {
+    print('print: registering');
+    if (!sl.isRegistered<UserLocation>()) {
+      print('print: registering2');
+      sl.registerSingleton<UserLocation>(UserLocation(
+          userLat: userLocation.userLat, userLon: userLocation.userLon));
+    }
   }
 }

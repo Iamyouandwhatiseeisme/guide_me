@@ -5,18 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/fetch_searched_items_cubit.dart';
 
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/data_layer/user_location_class.dart';
 import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation_layer/widgets/first_page_widgets/custom_bottom_navigatio_bar_widget.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class FirstPageScaffoldIfLoadedCorrectly extends StatefulWidget {
-  final double lat;
-  final double lon;
-
   const FirstPageScaffoldIfLoadedCorrectly({
     Key? key,
-    required this.lat,
-    required this.lon,
     required this.listOfPlacesForFood,
     required this.listOfNearbyPlaces,
     required this.listOfSightseeings,
@@ -49,8 +45,8 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
           BlocProvider.of<FetchSearchedItemsCubit>(context);
       return Scaffold(
           backgroundColor: Theme.of(context).colorScheme.background,
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(48),
+          appBar: const PreferredSize(
+            preferredSize: Size.fromHeight(48),
             child: FirstPageAppBar(),
           ),
           bottomNavigationBar: sl.sl.get<CustomBottomNavigationBar>(),
@@ -60,8 +56,6 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SearchTextFieldWIdget(
-                      userLat: widget.lat,
-                      userLon: widget.lon,
                       fetchSearchedItemsCubit: fetchSearchedItemsCubit,
                       listOfSearchedPlaces: listOfSearchedPlaces,
                       searchController: searchController,
@@ -83,8 +77,6 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                     colorOfLabel: secondaryColor,
                     listToBuild: widget.listOfSightseeings,
                     widget: widget,
-                    lat: widget.lat,
-                    lon: widget.lon,
                   ),
                   const SizedBox(
                     height: 25,
@@ -92,8 +84,6 @@ class _FirstPageScaffoldIfLoadedCorrectlyState
                   WhatToEatWidget(
                       colorOfLabel: secondaryColor,
                       listToBuild: widget.listOfPlacesForFood,
-                      lat: widget.lat,
-                      lon: widget.lon,
                       widget: widget)
                 ],
               );

@@ -8,15 +8,15 @@ import 'package:guide_me/data_layer/localDataBase/local_data_base.dart';
 
 import 'package:guide_me/data_layer/provider/google_sign_in.dart';
 import 'package:guide_me/data_layer/servie_locator.dart';
-import 'package:guide_me/presentation_layer/pages/searches_page.dart';
+
 import 'package:guide_me/presentation_layer/themes/dark_theme.dart';
 import 'package:guide_me/presentation_layer/themes/light_theme.dart';
-import 'package:guide_me/presentation_layer/widgets/first_page_widgets/custom_bottom_navigatio_bar_widget.dart';
+
 import 'package:guide_me/presentation_layer/widgets/routes/routes.dart';
 import 'data_layer/constants/language_constants.dart';
 import 'data_layer/enums/app_theme.dart';
 import 'data_layer/provider/theme_provider.dart';
-import 'presentation_layer/pages/pages.dart';
+
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -71,8 +71,6 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
-      String apiKey = dotenv.env['GOOGLE_API_KEY']!;
-
       return MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -91,7 +89,7 @@ class _MyAppState extends State<MyApp> {
                   locale: _locale,
                   debugShowCheckedModeBanner: false,
                   initialRoute: '/',
-                  title: 'Flutter Demo',
+                  title: 'GuideMe',
                   theme: context.watch<ThemeProvider>().currentTheme ==
                           AppTheme.light
                       ? lightTheme

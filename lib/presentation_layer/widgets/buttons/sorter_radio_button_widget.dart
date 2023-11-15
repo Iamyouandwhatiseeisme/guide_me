@@ -8,15 +8,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // ignore: must_be_immutable
 class SorterRadioButtonWidget extends StatelessWidget {
-  final double userLat;
-  final double userLon;
-
   SortertoggleButtonState state;
 
   SorterRadioButtonWidget({
     Key? key,
-    required this.userLat,
-    required this.userLon,
     required this.state,
   }) : super(key: key);
 

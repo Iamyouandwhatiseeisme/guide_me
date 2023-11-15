@@ -11,15 +11,11 @@ class WhatToEatWidget extends StatelessWidget {
   final Color colorOfLabel;
   const WhatToEatWidget({
     Key? key,
-    required this.lat,
-    required this.lon,
     required this.widget,
     required this.listToBuild,
     required this.colorOfLabel,
   }) : super(key: key);
 
-  final double lat;
-  final double lon;
   final FirstPageScaffoldIfLoadedCorrectly widget;
   final List<NearbyPlacesModel> listToBuild;
 
@@ -47,22 +43,17 @@ class WhatToEatWidget extends StatelessWidget {
                     sortingCubit: sortingCubit,
                     sorterToggleButtonCubit: sorterToggleButtonCubit,
                     listToBuild: listToBuild,
-                    userLat: widget.lat,
-                    userLon: widget.lon,
                     textToDisplay: AppLocalizations.of(context)!.whatToEat),
                 const SizedBox(
                   height: 12,
                 ),
-                SorterRadioButtonWidget(
-                    userLat: lat, userLon: lon, state: state),
+                SorterRadioButtonWidget(state: state),
                 const SizedBox(
                   height: 12,
                 ),
                 BlocBuilder<WhatToEatCubit, WhatToEatState>(
                   builder: (context, state) {
                     return SortableListViewCardBuilder(
-                        userLat: lat,
-                        userLon: lon,
                         listOfPassedPlaces: widget.listOfPlacesForFood);
                   },
                 ),

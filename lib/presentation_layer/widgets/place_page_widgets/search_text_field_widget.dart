@@ -11,8 +11,7 @@ class SearchTextFieldWIdget extends StatelessWidget {
 
   final List<NearbyPlacesModel> listOfSearchedPlaces;
   final Color primaryColor;
-  final double userLat;
-  final double userLon;
+
   final FetchSearchedItemsCubit? fetchSearchedItemsCubit;
   const SearchTextFieldWIdget({
     Key? key,
@@ -21,8 +20,6 @@ class SearchTextFieldWIdget extends StatelessWidget {
     required this.searchController,
     required this.listOfSearchedPlaces,
     this.fetchSearchedItemsCubit,
-    required this.userLat,
-    required this.userLon,
   }) : super(key: key);
 
   @override
@@ -30,8 +27,6 @@ class SearchTextFieldWIdget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 36),
       child: CustomTextFormField(
-        userLat: userLat,
-        userLon: userLon,
         fetchSearchedItemsCubit: fetchSearchedItemsCubit,
         listOfSearchedPlaces: listOfSearchedPlaces,
         searchController: searchController,
