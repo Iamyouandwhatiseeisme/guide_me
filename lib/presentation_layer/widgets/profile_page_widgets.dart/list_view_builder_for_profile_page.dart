@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:guide_me/data_layer/data.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:guide_me/data_layer/remoteDataBase/firebase_service.dart';
+import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class ListViewBuilderForProfilePage extends StatefulWidget {
@@ -37,6 +38,7 @@ class ListViewBuilderForProfilePage extends StatefulWidget {
 
 class _ListViewBuilderForProfilePageState
     extends State<ListViewBuilderForProfilePage> {
+  final firebaseService = sl.sl.get<FirebaseService>();
   bool hideText = true;
   void showPassword() {
     setState(() {
@@ -135,8 +137,8 @@ class _ListViewBuilderForProfilePageState
                       AppLocalizations.of(context)!.changePassword;
                   String cards = AppLocalizations.of(context)!.paymentsNCards;
                   if (widget.listOfSettings[index].contains(name)) {
-                    changeDisplayName(widget.nameController, widget.user,
-                        context, widget.updateUI);
+                    firebaseService.changeDisplayName(widget.nameController,
+                        widget.user, context, widget.updateUI);
                   } else if (widget.listOfSettings[index].contains(password)) {
                     changePassword(
                         widget.passedControllerForOldPassword,

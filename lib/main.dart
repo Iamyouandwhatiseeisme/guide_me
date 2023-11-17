@@ -3,16 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
 
-import 'package:guide_me/data_layer/firebase_service.dart';
+import 'package:guide_me/data_layer/remoteDataBase/firebase_service.dart';
 import 'package:guide_me/data_layer/localDataBase/local_data_base.dart';
 
 import 'package:guide_me/data_layer/provider/google_sign_in.dart';
-import 'package:guide_me/data_layer/servie_locator.dart';
+import 'package:guide_me/data_layer/service_locator.dart';
 
 import 'package:guide_me/presentation_layer/themes/dark_theme.dart';
 import 'package:guide_me/presentation_layer/themes/light_theme.dart';
-
-import 'package:guide_me/presentation_layer/widgets/routes/routes.dart';
+import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
 import 'data_layer/constants/language_constants.dart';
 import 'data_layer/enums/app_theme.dart';
 import 'data_layer/provider/theme_provider.dart';
@@ -98,7 +97,7 @@ class _MyAppState extends State<MyApp> {
                           ? lightTheme
                           : darkTheme,
                       darkTheme: darkTheme,
-                      routes: routes),
+                      routes: sl.sl.get<NavigatorClient>().routes),
                 );
               },
             ),

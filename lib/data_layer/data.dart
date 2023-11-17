@@ -1,11 +1,11 @@
 export 'httpClients/geocoding_util.dart';
 export 'enums/sorting_option.dart';
-export 'types_polishing_method_for_strings.dart';
-export 'create_distance_map_method.dart';
-export 'correct_format_adress_method.dart';
+export 'helper_functions/types_polishing_method_for_strings.dart';
+export 'helper_functions/create_distance_map_method.dart';
+export 'helper_functions/correct_format_adress_method.dart';
 export 'models/map_item.dart';
 export 'helper_functions/load_data_helper_function_for_maps_page.dart';
-export 'user_location_class.dart';
-export 'requiest_write_permission_function.dart';
+export 'models/user_location_class.dart';
+export 'helper_functions/requiest_write_permission_function.dart';
 export 'models/place_details_model.dart';
 export 'service_locator.dart';

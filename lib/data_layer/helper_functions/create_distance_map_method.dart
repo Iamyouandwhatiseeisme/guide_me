@@ -1,6 +1,6 @@
-import 'package:guide_me/data_layer/distance_calculator.dart';
+import 'package:guide_me/data_layer/helper_functions/distance_calculator.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
-import 'package:guide_me/data_layer/user_location_class.dart';
+import 'package:guide_me/data_layer/models/user_location_class.dart';
 import 'package:guide_me/main.dart';
 
 void createDistanceMap(

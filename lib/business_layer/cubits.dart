@@ -16,8 +16,6 @@ export 'cubit/sightseeing_sorting_cubit.dart';
 export 'cubit/sorter_toggle_button_cubit.dart';
 export 'cubit/recommended_places_sightseeings_dart_cubit.dart';
 export 'cubit/category_types_fetcher_cubit.dart';
-
-export 'cubit/place_open_status_label_cubit.dart';
 export 'cubit/place_open_status_cubit.dart';
 export 'cubit/what_to_eat_cubit.dart';
 export 'cubit/what_to_eat_state.dart';

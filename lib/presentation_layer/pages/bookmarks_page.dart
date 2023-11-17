@@ -7,7 +7,7 @@ import 'package:guide_me/data_layer/data.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:guide_me/business_layer/cubits.dart';
-import 'package:guide_me/data_layer/create_distance_map_method.dart';
+import 'package:guide_me/data_layer/helper_functions/create_distance_map_method.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
