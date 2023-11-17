@@ -34,7 +34,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onEditingComplete: () {
+      onEditingComplete: () async {
         final UserLocation userLocation = sl.sl.get<UserLocation>();
         BlocProvider.of<FetchSearchedItemsCubit>(context).searchListFetcher(
             searchController.text, listOfSearchedPlaces, googleApiClient);

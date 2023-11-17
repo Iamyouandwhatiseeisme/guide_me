@@ -62,8 +62,34 @@ class _SeeAllPageState extends State<SeeAllPage> {
                     child: Column(
                       children: [
                         SorterRadioButtonWidget(state: sorterState),
-                        SeeAllPageGridView(
-                            listTobuild: listTobuild, distanceMap: distanceMap),
+                        SizedBox(
+                          height: 1000,
+                          width: 460,
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2, childAspectRatio: 0.70),
+                            itemBuilder: (BuildContext context, int index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  final placePagePayLoad = PlacePagePayLoad(
+                                      model: listTobuild![index]);
+                                  Navigator.pushNamed(
+                                    context,
+                                    'placePage',
+                                    arguments: [placePagePayLoad],
+                                  );
+                                },
+                                child: SightseeingsPlaceCard(
+                                  place: listTobuild![index],
+                                  distance: distanceMap[listTobuild![index]],
+                                ),
+                              );
+                            },
+                            itemCount: listTobuild!.length,
+                          ),
+                        ),
                       ],
                     ),
                   ));

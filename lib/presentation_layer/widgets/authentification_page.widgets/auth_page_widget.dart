@@ -3,16 +3,16 @@ import 'package:guide_me/presentation_layer/pages/pages.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
-class AuthPageContent extends StatefulWidget {
-  const AuthPageContent({
+class AuthPageWidget extends StatefulWidget {
+  const AuthPageWidget({
     super.key,
   });
 
   @override
-  State<AuthPageContent> createState() => _AuthPageContentState();
+  State<AuthPageWidget> createState() => _AuthPageWidgetState();
 }
 
-class _AuthPageContentState extends State<AuthPageContent> {
+class _AuthPageWidgetState extends State<AuthPageWidget> {
   bool isLogin = true;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
