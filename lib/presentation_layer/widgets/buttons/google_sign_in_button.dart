@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:guide_me/data_layer/data.dart';
+
 import 'package:guide_me/data_layer/provider/google_sign_in.dart';
+import 'package:guide_me/data_layer/remoteDataBase/firebase_service.dart';
+import 'package:guide_me/main.dart';
 import 'package:provider/provider.dart';
 
 class GoogleSignUpButton extends StatelessWidget {
@@ -21,6 +23,7 @@ class GoogleSignUpButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final firebaseService = sl.sl.get<FirebaseService>();
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: ElevatedButton.icon(
@@ -37,7 +40,8 @@ class GoogleSignUpButton extends StatelessWidget {
 
               provider.googleLogin();
             } else if (text.contains('E-Mail')) {
-              signUpWithEmail(formKey, emailController!, passwordController!);
+              firebaseService.signUpWithEmail(
+                  formKey, emailController!, passwordController!);
             }
           },
           label: Text(text)),

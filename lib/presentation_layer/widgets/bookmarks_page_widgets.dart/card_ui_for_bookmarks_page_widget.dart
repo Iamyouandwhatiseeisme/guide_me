@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:guide_me/data_layer/data.dart';
+import 'package:guide_me/main.dart';
 
-import '../../../data_layer/refresh_item_list_function.dart';
+import '../../../data_layer/localDataBase/local_data_base.dart';
 import '../presentation_layer_widgets.dart';
 
 class CardUiForBookmarksPage extends CardUi {
@@ -28,6 +29,7 @@ class CardUiForBookmarksPage extends CardUi {
     String type = '';
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
+    final localDatabase = sl.sl.get<LocalDataBase>();
 
     return GestureDetector(
       onLongPress: () => showDIalogWindow(
@@ -92,7 +94,7 @@ class CardUiForBookmarksPage extends CardUi {
                           onTap: () {
                             tabOptionState == true
                                 ? onDelete()
-                                : refreshItemList(name!, place);
+                                : localDatabase.refreshItemList(name!, place);
                           },
                           child: Container(
                               decoration: BoxDecoration(

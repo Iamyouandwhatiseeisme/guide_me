@@ -1,11 +1,17 @@
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:guide_me/business_layer/cubits.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/main.dart';
 
 import 'package:http/http.dart' as http;
+
+// this client is responsible for all the operations connected with google_places_api and google_maps api, has methods associated with
+// data from those clients
 
 class GoogleApiClient {
   String apiKey = dotenv.env['GOOGLE_API_KEY']!;
@@ -296,6 +302,93 @@ class GoogleApiClient {
       }
     } catch (error) {
       throw Exception(error);
+    }
+  }
+
+  Future<void> createMap(
+      Map<String, List<NearbyPlacesModel>> cachedData,
+      String category,
+      CategoryTypesFetcherCubit categoryTypesFetcherCubit,
+      List<NearbyPlacesModel> listOfPlaces,
+      Completer<String> mapLoaderController) async {
+    if (!cachedData.containsKey(
+      category,
+    )) {
+      categoryTypesFetcherCubit.fetchDataForCategories(
+          listOfPlaces, category, sl.sl<GoogleApiClient>());
+      cachedData[category] = listOfPlaces;
+    }
+    if (cachedData[category]!.isNotEmpty) {
+      mapLoaderController.complete('Completed');
+    }
+  }
+
+  void createLists(List<MapItem> firstList, List<MapItem> secondList,
+      List<String> categoryList) {
+    categoryList.add('grocery');
+    categoryList.add('mall');
+    categoryList.add('hospital');
+    categoryList.add('park');
+    firstList.add(MapItem(
+        icon: const Icon(
+          Icons.fort_outlined,
+          color: Color(0xffF4C871),
+        ),
+        color: const Color(0xffF4C871),
+        textLabel: 'sights'));
+    firstList.add(MapItem(
+        icon: const Icon(
+          Icons.hotel,
+          color: Color(
+            0xffA3C3DB,
+          ),
+        ),
+        color: const Color(
+          0xffA3C3DB,
+        ),
+        textLabel: 'hotels'));
+    firstList.add(MapItem(
+        icon: const Icon(
+          Icons.nightlife,
+          color: Color(0xffC75E6B),
+        ),
+        color: const Color(0xffC75E6B),
+        textLabel: 'nightLife'));
+    secondList.add(MapItem(
+        icon: const Icon(
+          Icons.restaurant,
+          color: Color(0xffC2807E),
+        ),
+        color: const Color(0xffC2807E),
+        textLabel: 'restaurants'));
+    secondList.add(MapItem(
+        icon: Image.asset('assets/images/Other.png',
+            color: const Color(0xffF3F0E6)),
+        color: const Color(0xffF3F0E6),
+        textLabel: 'other'));
+  }
+
+  Future<void> createList(
+      Map<NearbyPlacesModel, double?> distanceMap,
+      String category,
+      CategoryTypesFetcherCubit categoryTypesFetcherCubit,
+      List<NearbyPlacesModel> listOfPlaces,
+      Completer<String> listLoaderController) async {
+    if (listOfPlaces.isEmpty) {
+      await categoryTypesFetcherCubit.fetchDataForCategories(
+          listOfPlaces, category, sl.sl<GoogleApiClient>());
+      createDistanceMap(
+        distanceMap,
+        listOfPlaces,
+      );
+      listLoaderController.complete('Completed');
+    }
+    if (listOfPlaces.isNotEmpty) {
+      listLoaderController.complete('Completed');
+      createDistanceMap(
+        distanceMap,
+        listOfPlaces,
+      );
     }
   }
 }

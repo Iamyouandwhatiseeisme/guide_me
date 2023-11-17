@@ -6,9 +6,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:guide_me/business_layer/cubit/is_exapnded_cubit.dart';
 import 'package:guide_me/data_layer/data.dart';
+import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
+import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
-class MapsPageContent extends StatelessWidget {
+class MapsPageContent extends StatefulWidget {
   const MapsPageContent({
     Key? key,
     required this.screenHeight,
@@ -22,22 +24,32 @@ class MapsPageContent extends StatelessWidget {
   final double screenWidth;
 
   @override
-  Widget build(BuildContext context) {
-    List<MapItem> mapItemListForRowOne = [];
-    List<MapItem> mapItemListForRowTwo = [];
-    List<String> listOfCategories = [];
-    createLists(mapItemListForRowOne, mapItemListForRowTwo, listOfCategories);
+  State<MapsPageContent> createState() => _MapsPageContentState();
+}
 
+class _MapsPageContentState extends State<MapsPageContent> {
+  List<MapItem> mapItemListForRowOne = [];
+  List<MapItem> mapItemListForRowTwo = [];
+  List<String> listOfCategories = [];
+  @override
+  void initState() {
+    sl.sl.get<GoogleApiClient>().createLists(
+        mapItemListForRowOne, mapItemListForRowTwo, listOfCategories);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<IsExapndedCubit, bool>(
       builder: (context, state) {
         return state == false
             ? Container()
             : IfMenuExpanded(
-                screenHeight: screenHeight,
-                controller: controller,
+                screenHeight: widget.screenHeight,
+                controller: widget.controller,
                 listOfCategories: listOfCategories,
                 mapItemListForRowOne: mapItemListForRowOne,
-                screenWidth: screenWidth,
+                screenWidth: widget.screenWidth,
                 mapItemListForRowTwo: mapItemListForRowTwo);
       },
     );

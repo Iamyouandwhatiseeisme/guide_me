@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:guide_me/data_layer/data.dart';
+
+import 'package:guide_me/data_layer/firebase_service.dart';
+import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -11,6 +13,7 @@ class ForgotPasswordPage extends StatefulWidget {
 }
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+  final firebaseServie = sl.sl.get<FirebaseService>();
   final emailController = TextEditingController();
   @override
   void dispose() {
@@ -52,7 +55,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               ),
               ElevatedButton.icon(
                   onPressed: () {
-                    resetPassword(emailController, context);
+                    firebaseServie.resetPassword(emailController, context);
                   },
                   icon: const FaIcon(
                     Icons.email_outlined,
