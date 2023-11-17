@@ -24,13 +24,6 @@ class _BookmarksPageState extends State<BookmarksPage> {
   late List<NearbyPlacesModel> listOfPlaces = [];
   Map<NearbyPlacesModel, double?> distanceMap = {};
 
-  bool isLoading = false;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   void deleteItemAndRefresh(NearbyPlacesModel place,
       List<NearbyPlacesModel> listOfFavorites, Box<NearbyPlacesModel> box) {
     Hive.box<NearbyPlacesModel>('FavoritedPlaces').delete(place.hashCode);

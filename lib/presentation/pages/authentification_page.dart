@@ -29,7 +29,7 @@ class _AuthPageState extends State<AuthPage> {
 
               return const LoadingAnimationScaffold();
             } else {
-              return const AuthPageWidget();
+              return const AuthPageContent();
             }
           }),
     );

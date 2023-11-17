@@ -11,7 +11,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List screens = ['firstPage', 'mapsPage', 'bookmarksPage', 'profilePage'];
+    List<String> screens = [
+      'firstPage',
+      'mapsPage',
+      'bookmarksPage',
+      'profilePage'
+    ];
 
     final bottomNavigationCubit =
         BlocProvider.of<BottomNavigationBarCubit>(context);
@@ -30,19 +35,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
                 bottomNavigationCubit.changeTab(index);
 
-                if (screens[index] == screens[0] &&
-                    !currentPage.contains(screens[0])) {
-                  Navigator.pop(context);
-                } else if (currentPage.contains(screens[0]) &&
-                    currentPage != screens[index]) {
-                  Navigator.pushNamed(
-                    context,
-                    screens[index],
-                  );
-                } else if (!currentPage.contains(screens[0]) &&
-                    currentPage != screens[index]) {
-                  Navigator.pushReplacementNamed(context, screens[index]);
-                }
+                _pushDesiredPage(screens, index, currentPage, context);
               },
               items: const [
                 BottomNavigationBarItem(
@@ -66,5 +59,21 @@ class CustomBottomNavigationBar extends StatelessWidget {
         );
       },
     );
+  }
+
+  void _pushDesiredPage(List<String> screens, int index, String currentPage,
+      BuildContext context) {
+    if (screens[index] == screens[0] && !currentPage.contains(screens[0])) {
+      Navigator.pop(context);
+    } else if (currentPage.contains(screens[0]) &&
+        currentPage != screens[index]) {
+      Navigator.pushNamed(
+        context,
+        screens[index],
+      );
+    } else if (!currentPage.contains(screens[0]) &&
+        currentPage != screens[index]) {
+      Navigator.pushReplacementNamed(context, screens[index]);
+    }
   }
 }
