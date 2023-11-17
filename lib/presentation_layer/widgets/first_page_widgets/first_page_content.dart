@@ -26,7 +26,6 @@ class FirstPageContent extends StatefulWidget {
 }
 
 class _FirstPageContentState extends State<FirstPageContent> {
-  final List<NearbyPlacesModel> listOfSearchedPlaces = [];
   final searchController = TextEditingController();
   @override
   void dispose() {
@@ -55,7 +54,6 @@ class _FirstPageContentState extends State<FirstPageContent> {
                 children: [
                   SearchTextFieldWIdget(
                       fetchSearchedItemsCubit: fetchSearchedItemsCubit,
-                      listOfSearchedPlaces: listOfSearchedPlaces,
                       searchController: searchController,
                       color: secondaryColor,
                       primaryColor: primaryColor),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guide_me/presentation_layer/widgets/bookmarks_page_widgets.dart/build_dialog_for_collections_page.dart';
+import 'package:guide_me/presentation_layer/widgets/bookmarks_page_widgets/build_dialog_for_collections_page.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 import '../../../data_layer/data.dart';

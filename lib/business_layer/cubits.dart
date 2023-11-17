@@ -8,8 +8,6 @@ export 'cubit/bookmarks_tab_cubit.dart';
 export 'cubit/photos_by_place_id_fetcher_cubit.dart';
 export 'cubit/category_button_cubit.dart';
 export 'cubit/category_button_state.dart';
-export 'cubit/radio_button_cubit_cubit.dart';
-
 export 'cubit/recommended_places_cubit_dart_cubit.dart';
 export 'cubit/write_a_review_cubit.dart';
 export 'cubit/sightseeing_sorting_cubit.dart';

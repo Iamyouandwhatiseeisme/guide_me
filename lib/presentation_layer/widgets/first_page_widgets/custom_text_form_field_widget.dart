@@ -11,8 +11,6 @@ import 'package:guide_me/presentation_layer/widgets/page_payloads/searches_page_
 import '../../../data_layer/models/nearby_places_model.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  final List<NearbyPlacesModel> listOfSearchedPlaces;
-
   final TextEditingController searchController;
   final Color textColor;
   final double radiusSize;
@@ -24,7 +22,6 @@ class CustomTextFormField extends StatelessWidget {
     required this.radiusSize,
     required this.color,
     required this.searchController,
-    required this.listOfSearchedPlaces,
     this.fetchSearchedItemsCubit,
   }) : super(key: key);
 
@@ -35,6 +32,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       onEditingComplete: () async {
+        List<NearbyPlacesModel> listOfSearchedPlaces = [];
         final UserLocation userLocation = sl.sl.get<UserLocation>();
         BlocProvider.of<FetchSearchedItemsCubit>(context).searchListFetcher(
             searchController.text, listOfSearchedPlaces, googleApiClient);

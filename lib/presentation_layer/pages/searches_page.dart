@@ -69,37 +69,9 @@ class _SearchesPageState extends State<SearchesPage> {
                                 child: Column(
                                   children: [
                                     SorterRadioButtonWidget(state: sorterState),
-                                    Expanded(
-                                      child: GridView.builder(
-                                        shrinkWrap: true,
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,
-                                                childAspectRatio: 0.50),
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          return GestureDetector(
-                                            onTap: () {
-                                              final placePagePayload =
-                                                  PlacePagePayLoad(
-                                                      model:
-                                                          listTobuild![index]);
-                                              Navigator.pushNamed(
-                                                context,
-                                                'placePage',
-                                                arguments: [placePagePayload],
-                                              );
-                                            },
-                                            child: SightseeingsPlaceCard(
-                                              place: listTobuild![index],
-                                              distance: distanceMap[
-                                                  listTobuild![index]],
-                                            ),
-                                          );
-                                        },
-                                        itemCount: listTobuild!.length,
-                                      ),
-                                    ),
+                                    SearchPageGridView(
+                                        listTobuild: listTobuild,
+                                        distanceMap: distanceMap),
                                   ],
                                 ),
                               ),

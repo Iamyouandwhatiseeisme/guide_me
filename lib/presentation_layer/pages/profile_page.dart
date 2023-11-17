@@ -8,6 +8,8 @@ import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
 import 'package:guide_me/data_layer/get_localized_string_method.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:guide_me/main.dart';
+import 'package:guide_me/presentation_layer/widgets/first_page_widgets/custom_bottom_navigatio_bar_widget.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -22,13 +24,12 @@ class _ProfilePageState extends State<ProfilePage> {
   final passwordController = TextEditingController();
   final passedControllerForNewPassword = TextEditingController();
   final passedControllerForOldPassword = TextEditingController();
+  final bottomNavigationBar = sl.sl.get<CustomBottomNavigationBar>();
+  final user = FirebaseAuth.instance.currentUser!;
 
   final List<FaIcon> listofIcons = [
     const FaIcon(FontAwesomeIcons.pen),
     const FaIcon(FontAwesomeIcons.key),
-    const FaIcon(
-      FontAwesomeIcons.creditCard,
-    ),
     const FaIcon(Icons.settings)
   ];
 
@@ -51,18 +52,13 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final String editName = getLocalizedString('editName', context);
     final String changePassword = getLocalizedString('changePassword', context);
-    final String paymentsNCads = getLocalizedString('paymentsNCards', context);
     final String settings = getLocalizedString('settings', context);
-    final List<String> listOfSettings = [
-      editName,
-      changePassword,
-      paymentsNCads,
-      settings
-    ];
-    final user = FirebaseAuth.instance.currentUser!;
+    final List<String> listOfSettings = [editName, changePassword, settings];
+
     final bottomNavigationCubit =
         BlocProvider.of<BottomNavigationBarCubit>(context);
     return Scaffold(
+      bottomNavigationBar: bottomNavigationBar,
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(48),

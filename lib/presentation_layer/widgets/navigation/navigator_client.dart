@@ -31,7 +31,6 @@ class NavigatorClient {
     'bookmarksPage': (context) => const BookmarksPage(),
     'forgotPassword': (context) => const ForgotPasswordPage(),
     'profilePage': (context) => const ProfilePage(),
-    'paymentsPage': (context) => const PaymentsMethodsPage(),
     'searchesPage': (context) => const SearchesPage()
   };
 }

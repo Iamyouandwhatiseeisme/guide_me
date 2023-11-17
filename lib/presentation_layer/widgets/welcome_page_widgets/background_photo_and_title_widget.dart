@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class BackgroundPhotoAndTitleWidget extends StatelessWidget {
   final String pageTitle;
   final String photo;
@@ -12,20 +11,22 @@ class BackgroundPhotoAndTitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image.asset(
-          photo,
-          width: 370,
-          height: 370,
-        ),
-        Text(
-          pageTitle,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-              fontFamily: 'Telegraf', fontSize: 30, color: Color(0xff292F32)),
-        ),
-      ],
+    return Expanded(
+      child: Column(
+        children: [
+          Image.asset(
+            'assets/images/$photo',
+            width: 370,
+            height: 370,
+          ),
+          Text(
+            pageTitle,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+                fontFamily: 'Telegraf', fontSize: 30, color: Color(0xff292F32)),
+          ),
+        ],
+      ),
     );
   }
 }

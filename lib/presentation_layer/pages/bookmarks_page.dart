@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/data_layer/data.dart';
+import 'package:guide_me/main.dart';
+import 'package:guide_me/presentation_layer/widgets/first_page_widgets/custom_bottom_navigatio_bar_widget.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -25,6 +27,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
   Map<NearbyPlacesModel, double?> distanceMap = {};
 
   bool isLoading = false;
+  final bottomNavigationBar = sl.sl.get<CustomBottomNavigationBar>();
 
   void deleteItemAndRefresh(NearbyPlacesModel place,
       List<NearbyPlacesModel> listOfFavorites, Box<NearbyPlacesModel> box) {
@@ -52,6 +55,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
       ],
       child: Builder(builder: (context) {
         return Scaffold(
+          bottomNavigationBar: bottomNavigationBar,
           backgroundColor: Theme.of(context).colorScheme.background,
           appBar: const PreferredSize(
             preferredSize: Size.fromHeight(48),
