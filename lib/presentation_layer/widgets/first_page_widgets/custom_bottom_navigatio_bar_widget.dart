@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
+import 'package:guide_me/main.dart';
+import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({
@@ -11,7 +13,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List screens = ['firstPage', 'mapsPage', 'bookmarksPage', 'profilePage'];
+    List<String> screens = [
+      'firstPage',
+      'mapsPage',
+      'bookmarksPage',
+      'profilePage'
+    ];
 
     final bottomNavigationCubit =
         BlocProvider.of<BottomNavigationBarCubit>(context);
@@ -28,21 +35,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 final String currentPage =
                     ModalRoute.of(context)!.settings.name!;
 
-                bottomNavigationCubit.changeTab(index);
-
-                if (screens[index] == screens[0] &&
-                    !currentPage.contains(screens[0])) {
-                  Navigator.pop(context);
-                } else if (currentPage.contains(screens[0]) &&
-                    currentPage != screens[index]) {
-                  Navigator.pushNamed(
-                    context,
-                    screens[index],
-                  );
-                } else if (!currentPage.contains(screens[0]) &&
-                    currentPage != screens[index]) {
-                  Navigator.pushReplacementNamed(context, screens[index]);
-                }
+                sl.sl.get<NavigatorClient>().pushPage(bottomNavigationCubit,
+                    index, screens, currentPage, context);
               },
               items: const [
                 BottomNavigationBarItem(
