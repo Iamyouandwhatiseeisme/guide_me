@@ -23,7 +23,7 @@ class GoogleSignUpButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final firebaseService = sl.sl.get<FirebaseService>();
+    final firebaseService = sl.get<FirebaseService>();
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: ElevatedButton.icon(

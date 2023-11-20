@@ -6,6 +6,7 @@ import 'package:guide_me/business_layer/cubit/fetch_searched_items_cubit.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
 import 'package:guide_me/main.dart';
+import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
 import 'package:guide_me/presentation_layer/widgets/page_payloads/searches_page_payload.dart';
 
 import '../../../data_layer/models/nearby_places_model.dart';
@@ -26,21 +27,21 @@ class CustomTextFormField extends StatelessWidget {
   }) : super(key: key);
 
   final Color color;
-  final googleApiClient = sl.sl<GoogleApiClient>();
+  final googleApiClient = sl<GoogleApiClient>();
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       onEditingComplete: () async {
         List<NearbyPlacesModel> listOfSearchedPlaces = [];
-        final UserLocation userLocation = sl.sl.get<UserLocation>();
+        final UserLocation userLocation = sl.get<UserLocation>();
         BlocProvider.of<FetchSearchedItemsCubit>(context).searchListFetcher(
             searchController.text, listOfSearchedPlaces, googleApiClient);
         final searchesPagePayload = SearchesPagePayload(
             listToBuild: listOfSearchedPlaces,
             fetchSearchedItemsCubit: fetchSearchedItemsCubit!,
             userLocation: userLocation);
-        Navigator.pushNamed(context, 'searchesPage',
+        Navigator.pushNamed(context, NavigatorClient.searchesPage,
             arguments: [searchesPagePayload]);
       },
       controller: searchController,

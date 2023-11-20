@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:guide_me/main.dart';
+import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
@@ -24,7 +26,8 @@ class _AuthPageState extends State<AuthPage> {
             if (snapshot.hasData && snapshot.data != null) {
               //checks if there is an authenticated user, if there is, shows first page, else takes user to authentication page
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                Navigator.of(context).pushReplacementNamed('firstPage');
+                Navigator.of(context)
+                    .pushReplacementNamed(NavigatorClient.firstPage);
               });
 
               return const LoadingAnimationScaffold();

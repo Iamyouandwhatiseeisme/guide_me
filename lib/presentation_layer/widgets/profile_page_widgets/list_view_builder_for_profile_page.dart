@@ -38,7 +38,7 @@ class ListViewBuilderForProfilePage extends StatefulWidget {
 
 class _ListViewBuilderForProfilePageState
     extends State<ListViewBuilderForProfilePage> {
-  final firebaseService = sl.sl.get<FirebaseService>();
+  final firebaseService = sl.get<FirebaseService>();
   bool hideText = true;
   void showPassword() {
     setState(() {
@@ -135,7 +135,7 @@ class _ListViewBuilderForProfilePageState
                   String name = AppLocalizations.of(context)!.editName;
                   String password =
                       AppLocalizations.of(context)!.changePassword;
-                  String cards = AppLocalizations.of(context)!.paymentsNCards;
+
                   if (widget.listOfSettings[index].contains(name)) {
                     firebaseService.changeDisplayName(widget.nameController,
                         widget.user, context, widget.updateUI);
@@ -146,8 +146,6 @@ class _ListViewBuilderForProfilePageState
                         widget.user,
                         context,
                         widget.updateUI);
-                  } else if (widget.listOfSettings[index].contains(cards)) {
-                    Navigator.pushNamed(context, 'paymentsPage');
                   }
                 },
                 child: SettingsListView(

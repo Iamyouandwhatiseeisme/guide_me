@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
 
 import '../../../data_layer/constants/language_constants.dart';
 
@@ -14,7 +15,8 @@ class ForgotPasswordLabel extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 16.0, right: 40),
         child: GestureDetector(
-          onTap: () => Navigator.pushNamed(context, 'forgotPassword'),
+          onTap: () =>
+              Navigator.pushNamed(context, NavigatorClient.forgotPassword),
           child: Text(
             translation(context).forgotPassword,
             style: const TextStyle(

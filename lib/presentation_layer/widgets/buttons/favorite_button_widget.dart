@@ -19,7 +19,7 @@ class FavoriteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localDataBase = sl.sl.get<LocalDataBase>();
+    final localDataBase = sl.get<LocalDataBase>();
     return GestureDetector(
       onTap: () async {
         localDataBase.toggleFavorites(placeToDisplay, box);

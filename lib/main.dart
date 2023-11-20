@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
 
@@ -7,11 +8,10 @@ import 'package:guide_me/data_layer/remoteDataBase/firebase_service.dart';
 import 'package:guide_me/data_layer/localDataBase/local_data_base.dart';
 
 import 'package:guide_me/data_layer/provider/google_sign_in.dart';
-import 'package:guide_me/data_layer/service_locator.dart';
+import 'package:guide_me/data_layer/get_it_methods.dart';
 
 import 'package:guide_me/presentation_layer/themes/dark_theme.dart';
 import 'package:guide_me/presentation_layer/themes/light_theme.dart';
-import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
 import 'data_layer/constants/language_constants.dart';
 import 'data_layer/enums/app_theme.dart';
 import 'data_layer/provider/theme_provider.dart';
@@ -22,16 +22,18 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import 'presentation_layer/widgets/navigation/navigator_client.dart';
+
 // set up serviceLocator with GetIT package;
-final sl = ServiceLocator();
+final sl = GetIt.instance;
 
 Future<void> main() async {
   //initialize everything needed for startup
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
-  sl.setUp();
-  sl.sl<FirebaseService>().initFirebase();
-  sl.sl<LocalDataBase>().initLocalDataBase();
+  setUp();
+  sl<FirebaseService>().initFirebase();
+  sl<LocalDataBase>().initLocalDataBase();
   runApp(const MyApp());
 }
 
@@ -97,7 +99,7 @@ class _MyAppState extends State<MyApp> {
                           ? lightTheme
                           : darkTheme,
                       darkTheme: darkTheme,
-                      routes: sl.sl.get<NavigatorClient>().routes),
+                      routes: sl.get<NavigatorClient>().routes),
                 );
               },
             ),

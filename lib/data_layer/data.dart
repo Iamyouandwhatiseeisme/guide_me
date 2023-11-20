@@ -8,4 +8,4 @@ export 'helper_functions/load_data_helper_function_for_maps_page.dart';
 export 'models/user_location_class.dart';
 export 'helper_functions/requiest_write_permission_function.dart';
 export 'models/place_details_model.dart';
-export 'service_locator.dart';
+export 'get_it_methods.dart';

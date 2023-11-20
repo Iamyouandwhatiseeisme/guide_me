@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/presentation_layer/pages/bookmarks_page.dart';
+import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -54,7 +55,7 @@ class _FavoritesPageContentState extends State<FavoritesPageContent> {
                           model: widget.listOfFavorites[index]);
                       Navigator.pushNamed(
                         context,
-                        'placePage',
+                        NavigatorClient.placePage,
                         arguments: [placePagePayLoad],
                       );
                     },

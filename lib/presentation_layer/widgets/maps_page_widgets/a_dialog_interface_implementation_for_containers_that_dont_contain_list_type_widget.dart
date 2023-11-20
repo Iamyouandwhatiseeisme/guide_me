@@ -78,7 +78,7 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
                   String category = textLabel;
                   final categoryTypesFetcherCubit =
                       BlocProvider.of<CategoryTypesFetcherCubit>(context);
-                  sl.sl.get<GoogleApiClient>().createList(
+                  sl.get<GoogleApiClient>().createList(
                       distanceMap,
                       category,
                       categoryTypesFetcherCubit,

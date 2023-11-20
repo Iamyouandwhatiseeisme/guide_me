@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:guide_me/business_layer/cubits.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/main.dart';
+import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 import '../../../data_layer/models/nearby_places_model.dart';
@@ -37,13 +38,13 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
         padding: const EdgeInsets.only(right: 20.0),
         child: GestureDetector(
           onTap: () {
-            final UserLocation userLocation = sl.sl.get<UserLocation>();
+            final UserLocation userLocation = sl.get<UserLocation>();
             final seeAllPagePayload = SeeAllPagePayload(
                 listToBuild: listToBuild,
                 userLocation: userLocation,
                 sortingCubit: sortingCubit,
                 sorterToggleButtonCubit: sorterToggleButtonCubit);
-            Navigator.pushNamed(context, 'seeAllPage',
+            Navigator.pushNamed(context, NavigatorClient.seeAllPage,
                 arguments: [seeAllPagePayload]);
           },
           child: Text(AppLocalizations.of(context)!.seeAllLabel,

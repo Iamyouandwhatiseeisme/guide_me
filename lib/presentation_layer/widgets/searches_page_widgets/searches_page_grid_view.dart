@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 import '../../../data_layer/models/nearby_places_model.dart';
@@ -27,7 +28,7 @@ class SearchPageGridView extends StatelessWidget {
                   PlacePagePayLoad(model: listTobuild![index]);
               Navigator.pushNamed(
                 context,
-                'placePage',
+                NavigatorClient.placePage,
                 arguments: [placePagePayload],
               );
             },

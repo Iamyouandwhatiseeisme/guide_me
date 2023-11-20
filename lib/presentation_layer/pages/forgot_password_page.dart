@@ -13,7 +13,7 @@ class ForgotPasswordPage extends StatefulWidget {
 }
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
-  final firebaseServie = sl.sl.get<FirebaseService>();
+  final firebaseServie = sl.get<FirebaseService>();
   final emailController = TextEditingController();
   @override
   void dispose() {

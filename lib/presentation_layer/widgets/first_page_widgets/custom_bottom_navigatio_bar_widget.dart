@@ -35,8 +35,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 final String currentPage =
                     ModalRoute.of(context)!.settings.name!;
 
-                sl.sl.get<NavigatorClient>().pushPage(bottomNavigationCubit,
-                    index, screens, currentPage, context);
+                sl.get<NavigatorClient>().pushPage(
+                    bottomNavigationCubit: bottomNavigationCubit,
+                    index: index,
+                    screens: screens,
+                    currentPage: currentPage,
+                    context: context);
               },
               items: const [
                 BottomNavigationBarItem(

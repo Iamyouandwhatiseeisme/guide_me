@@ -33,7 +33,7 @@ class _MapsPageContentState extends State<MapsPageContent> {
   List<String> listOfCategories = [];
   @override
   void initState() {
-    sl.sl.get<GoogleApiClient>().createLists(
+    sl.get<GoogleApiClient>().createLists(
         mapItemListForRowOne, mapItemListForRowTwo, listOfCategories);
     super.initState();
   }

@@ -26,7 +26,7 @@ class LocationDisplayWidget extends StatelessWidget {
         width: 250,
         height: 48,
         child: FutureBuilder<String>(
-            future: sl.sl.get<GeocodingUtil>().displayLocationInfoInWords(
+            future: sl.get<GeocodingUtil>().displayLocationInfoInWords(
                   locationInfo,
                 ),
             builder: (context, snapshot) {

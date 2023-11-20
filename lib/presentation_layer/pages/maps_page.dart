@@ -42,7 +42,7 @@ class _MapsPageState extends State<MapsPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    final userLocation = sl.sl.get<UserLocation>();
+    final userLocation = sl.get<UserLocation>();
 
     return MultiBlocProvider(
         providers: [
@@ -68,8 +68,7 @@ class _MapsPageState extends State<MapsPage> {
                   if (snapshot.hasData) {
                     return Scaffold(
                       backgroundColor: Theme.of(context).colorScheme.background,
-                      bottomNavigationBar:
-                          sl.sl.get<CustomBottomNavigationBar>(),
+                      bottomNavigationBar: sl.get<CustomBottomNavigationBar>(),
                       appBar: PreferredSize(
                         preferredSize: const Size.fromHeight(48),
                         child: MapsPageAppBarWidget(

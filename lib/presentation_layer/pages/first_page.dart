@@ -27,7 +27,7 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
-  final googleApiClient = sl.sl<GoogleApiClient>();
+  final googleApiClient = sl<GoogleApiClient>();
 
   List<NearbyPlacesModel> listOfNearbyPlaces = [];
   List<NearbyPlacesModel> listOfSightseeingPlaces = [];
@@ -102,7 +102,7 @@ class _FirstPageState extends State<FirstPage> {
     final userLocation = UserLocation(
         userLat: locationState.position.latitude,
         userLon: locationState.position.longitude);
-    sl.registerLocationSingleton(userLocation);
+    registerLocationSingleton(userLocation);
 
     final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();
     if (listOfNearbyPlaces.isEmpty) {

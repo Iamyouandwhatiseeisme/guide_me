@@ -93,7 +93,7 @@ class ADialogWithInterfaceListCategories
                           final categoryTypesFetcherCubit =
                               BlocProvider.of<CategoryTypesFetcherCubit>(
                                   context);
-                          sl.sl.get<GoogleApiClient>().createMap(
+                          sl.get<GoogleApiClient>().createMap(
                               cachedData,
                               category,
                               categoryTypesFetcherCubit,

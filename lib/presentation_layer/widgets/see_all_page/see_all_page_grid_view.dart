@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/presentation_layer/widgets/first_page_widgets/sightseeings_place_card.wiget.dart';
+import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
 import 'package:guide_me/presentation_layer/widgets/page_payloads/place_page_payload.dart';
 
 import '../../../data_layer/models/nearby_places_model.dart';
@@ -30,7 +31,7 @@ class SeeAllPageGridView extends StatelessWidget {
                   PlacePagePayLoad(model: listTobuild![index]);
               Navigator.pushNamed(
                 context,
-                'placePage',
+                NavigatorClient.placePage,
                 arguments: [placePagePayLoad],
               );
             },

@@ -136,7 +136,7 @@ class GoogleApiClient {
   Future<List<NearbyPlacesModel>> fetchData(
     List<NearbyPlacesModel> listOfPlaces,
   ) async {
-    final UserLocation userLocation = sl.sl.get<UserLocation>();
+    final UserLocation userLocation = sl.get<UserLocation>();
     try {
       final url = Uri.parse(
           'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLocation.userLat},${userLocation.userLon}&radius=8000&type=park|museum&key=$apiKey');
@@ -177,7 +177,7 @@ class GoogleApiClient {
   Future<List<NearbyPlacesModel>> fetchSightseeingData(
     List<NearbyPlacesModel> listOfSightseeingPlaces,
   ) async {
-    final UserLocation userLocation = sl.sl.get<UserLocation>();
+    final UserLocation userLocation = sl.get<UserLocation>();
     try {
       final url = Uri.parse(
           'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLocation.userLat},${userLocation.userLon}&radius=8000&type=hotel|food&key=$apiKey');
@@ -315,7 +315,7 @@ class GoogleApiClient {
       category,
     )) {
       categoryTypesFetcherCubit.fetchDataForCategories(
-          listOfPlaces, category, sl.sl<GoogleApiClient>());
+          listOfPlaces, category, sl<GoogleApiClient>());
       cachedData[category] = listOfPlaces;
     }
     if (cachedData[category]!.isNotEmpty) {
@@ -376,7 +376,7 @@ class GoogleApiClient {
       Completer<String> listLoaderController) async {
     if (listOfPlaces.isEmpty) {
       await categoryTypesFetcherCubit.fetchDataForCategories(
-          listOfPlaces, category, sl.sl<GoogleApiClient>());
+          listOfPlaces, category, sl<GoogleApiClient>());
       createDistanceMap(
         distanceMap,
         listOfPlaces,

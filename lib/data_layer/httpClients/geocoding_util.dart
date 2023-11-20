@@ -8,7 +8,7 @@ class GeocodingUtil {
   Future<String> displayLocationInfoInWords(
     locationInfo,
   ) async {
-    final UserLocation userLocation = sl.sl.get<UserLocation>();
+    final UserLocation userLocation = sl.get<UserLocation>();
     final updatedLocationInfo = await GeocodingUtil.reverseGeocode(
         userLocation.userLat, userLocation.userLon);
 

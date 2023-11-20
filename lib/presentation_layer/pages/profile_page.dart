@@ -24,7 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final passwordController = TextEditingController();
   final passedControllerForNewPassword = TextEditingController();
   final passedControllerForOldPassword = TextEditingController();
-  final bottomNavigationBar = sl.sl.get<CustomBottomNavigationBar>();
+  final bottomNavigationBar = sl.get<CustomBottomNavigationBar>();
   final user = FirebaseAuth.instance.currentUser!;
 
   final List<FaIcon> listofIcons = [

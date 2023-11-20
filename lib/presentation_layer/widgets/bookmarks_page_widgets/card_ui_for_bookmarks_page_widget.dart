@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/main.dart';
+import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
 
 import '../../../data_layer/localDataBase/local_data_base.dart';
 import '../presentation_layer_widgets.dart';
@@ -29,7 +30,7 @@ class CardUiForBookmarksPage extends CardUi {
     String type = '';
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
-    final localDatabase = sl.sl.get<LocalDataBase>();
+    final localDatabase = sl.get<LocalDataBase>();
 
     return GestureDetector(
       onLongPress: () => showDIalogWindow(
@@ -48,7 +49,7 @@ class CardUiForBookmarksPage extends CardUi {
           place),
       onTap: () {
         final placePagePayload = PlacePagePayLoad(model: place);
-        Navigator.pushNamed(context, 'placePage',
+        Navigator.pushNamed(context, NavigatorClient.placePage,
             arguments: [placePagePayload]);
       },
       child: Container(

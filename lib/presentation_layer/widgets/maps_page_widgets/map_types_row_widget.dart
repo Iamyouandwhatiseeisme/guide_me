@@ -28,7 +28,7 @@ class MapsTypesRowWidget extends StatelessWidget {
       child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
-            final UserLocation userLocation = sl.sl.get<UserLocation>();
+            final UserLocation userLocation = sl.get<UserLocation>();
             return ContainerForTypesOfPlacesOnMapWidget(
               userLocation: userLocation,
               listOfCategories: listOfCategories,

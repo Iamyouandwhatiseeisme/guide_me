@@ -27,7 +27,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
   Map<NearbyPlacesModel, double?> distanceMap = {};
 
   bool isLoading = false;
-  final bottomNavigationBar = sl.sl.get<CustomBottomNavigationBar>();
+  final bottomNavigationBar = sl.get<CustomBottomNavigationBar>();
 
   void deleteItemAndRefresh(NearbyPlacesModel place,
       List<NearbyPlacesModel> listOfFavorites, Box<NearbyPlacesModel> box) {

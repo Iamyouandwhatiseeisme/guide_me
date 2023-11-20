@@ -46,7 +46,7 @@ class _FirstPageContentState extends State<FirstPageContent> {
             preferredSize: Size.fromHeight(48),
             child: FirstPageAppBar(),
           ),
-          bottomNavigationBar: sl.sl.get<CustomBottomNavigationBar>(),
+          bottomNavigationBar: sl.get<CustomBottomNavigationBar>(),
           body: SingleChildScrollView(child: Builder(
             builder: (context) {
               return Column(

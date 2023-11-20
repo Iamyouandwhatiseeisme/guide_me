@@ -12,7 +12,7 @@ Future<void> loadData(BuildContext context, double lat, double lon,
   final weatherCubit = BlocProvider.of<WeatherCubit>(context);
 
   // Fetch weather data using lat and lon
-  await weatherCubit.fetchWeather(lat, lon, sl.sl.get<WeatherApiClient>());
+  await weatherCubit.fetchWeather(lat, lon, sl.get<WeatherApiClient>());
 
   googleMapLocationCompleter.complete('Completed');
 }

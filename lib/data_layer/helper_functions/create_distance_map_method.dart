@@ -7,7 +7,7 @@ void createDistanceMap(
   Map<NearbyPlacesModel, double?> distanceMap,
   List<NearbyPlacesModel> listOfDestinations,
 ) {
-  final UserLocation userLocation = sl.sl.get<UserLocation>();
+  final UserLocation userLocation = sl.get<UserLocation>();
   for (int i = 0; i < listOfDestinations.length; i++) {
     double? distance = calculateDistance(listOfDestinations[i].lat,
         listOfDestinations[i].lng, userLocation.userLat, userLocation.userLon);

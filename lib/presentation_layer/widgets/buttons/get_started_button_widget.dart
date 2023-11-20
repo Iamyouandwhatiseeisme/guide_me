@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
 
 class GetStartedButton extends StatelessWidget {
   const GetStartedButton({
@@ -15,7 +16,7 @@ class GetStartedButton extends StatelessWidget {
             backgroundColor: const Color(0xffC75E6B),
             fixedSize: const Size(320, 60)),
         onPressed: () {
-          Navigator.of(context).pushReplacementNamed('authPage');
+          Navigator.of(context).pushReplacementNamed(NavigatorClient.authPage);
         },
         child: Text(
           AppLocalizations.of(context)!.getStartedButtonText,

@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:guide_me/business_layer/cubits.dart';
-
 import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
+
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/main.dart';
 
@@ -39,7 +39,7 @@ class _PlacepageState extends State<PlacePage> {
     final String open = AppLocalizations.of(context)!.openNow;
     final String closed = AppLocalizations.of(context)!.closed;
     final String noInfo = AppLocalizations.of(context)!.noInformation;
-    final googleApiClient = sl.sl<GoogleApiClient>();
+    final googleApiClient = sl<GoogleApiClient>();
     final passedPayLoad =
         ModalRoute.of(context)!.settings.arguments as List<dynamic>;
     final placePagePayLoad = passedPayLoad[0] as PlacePagePayLoad;

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
@@ -36,7 +37,7 @@ class RecommenPlacesCardBuilder extends StatelessWidget {
                     onTap: () {
                       final placePagePayLoad =
                           PlacePagePayLoad(model: listOfNearbyPlaces[index]);
-                      Navigator.pushNamed(context, 'placePage',
+                      Navigator.pushNamed(context, NavigatorClient.placePage,
                           arguments: [placePagePayLoad]);
                     },
                     child: PlaceCard(

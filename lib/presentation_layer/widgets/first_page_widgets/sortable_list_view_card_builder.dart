@@ -7,6 +7,7 @@ import 'package:guide_me/business_layer/cubit/sightseeing_sorting_cubit.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/main.dart';
+import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -25,7 +26,7 @@ class SortableListViewCardBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     List<NearbyPlacesModel> sortedList = List.from(listOfPassedPlaces);
     Map<NearbyPlacesModel, double?> distanceMap = {};
-    final UserLocation userLocation = sl.sl.get<UserLocation>();
+    final UserLocation userLocation = sl.get<UserLocation>();
     return BlocBuilder<SightseeingSortingCubit, SightseeingSortingState>(
       builder: (context, sightseeingSortingState) {
         return Builder(builder: (context) {
@@ -67,7 +68,7 @@ class SortableListViewCardBuilder extends StatelessWidget {
                                         model: sortedList[index]);
                                     Navigator.pushNamed(
                                       context,
-                                      'placePage',
+                                      NavigatorClient.placePage,
                                       arguments: [placePagePayLoad],
                                     );
                                   },

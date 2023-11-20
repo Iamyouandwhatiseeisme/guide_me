@@ -57,7 +57,7 @@ class _MapsToolbarWIthDirectionsLocationAndThreeDotsWidgetState
                           GestureDetector(
                               onTap: () {
                                 final UserLocation userLocation =
-                                    sl.sl.get<UserLocation>();
+                                    sl.get<UserLocation>();
                                 locationCubit.goToMyLocation(
                                     widget.controller, userLocation);
                               },
