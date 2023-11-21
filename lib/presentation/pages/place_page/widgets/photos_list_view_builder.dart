@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../business_layer/cubit/photos_by_place_id_fetcher_cubit.dart';
+import 'package:guide_me/bloc/cubits.dart';
 
 class PhotoListViewBuilder extends StatelessWidget {
   const PhotoListViewBuilder({

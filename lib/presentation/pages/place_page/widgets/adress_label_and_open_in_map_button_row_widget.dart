@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
 
-import '../../../../business_layer/cubit/open_location_on_map_cubit.dart';
 import 'text_with_underline_grey_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

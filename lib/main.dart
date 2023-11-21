@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-
-import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
+import 'package:guide_me/bloc/cubits.dart';
 
 import 'package:guide_me/presentation/themes/dark_theme.dart';
 import 'package:guide_me/presentation/themes/light_theme.dart';

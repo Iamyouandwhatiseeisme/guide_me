@@ -1,11 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../../business_layer/cubit/bottom_navigation_bar_cubit.dart';
 
 class ProfilePageAppbar extends StatelessWidget {
   const ProfilePageAppbar({

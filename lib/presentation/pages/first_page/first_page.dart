@@ -1,20 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_me/bloc/cubits.dart';
 
-import 'package:guide_me/business_layer/cubit/geolocator_cubit.dart';
-import 'package:guide_me/business_layer/cubit/recommended_places_cubit_dart_state.dart';
-import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_cubit.dart';
-import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_state.dart';
-import 'package:guide_me/business_layer/cubit/what_to_eat_cubit.dart';
 import 'package:guide_me/data/data.dart';
 
 import 'package:guide_me/main.dart';
 
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
-
-import '../../../business_layer/cubit/fetch_searched_items_cubit.dart';
-import '../../../business_layer/cubit/recommended_places_cubit_dart_cubit.dart';
 
 class FirstPage extends StatefulWidget {
   const FirstPage({

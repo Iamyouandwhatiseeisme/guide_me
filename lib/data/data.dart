@@ -1,4 +1,4 @@
-export 'httpClients/geocoding_util.dart';
+export 'http_clients/geocoding_util.dart';
 export 'enums/sorting_option.dart';
 export 'helper_functions/types_polishing_method_for_strings.dart';
 export 'helper_functions/create_distance_map_method.dart';
@@ -11,8 +11,8 @@ export 'models/place_details_model.dart';
 export 'get_it_methods.dart';
 export 'localDataBase/local_data_base.dart';
 export 'remoteDataBase/firebase_service.dart';
-export 'httpClients/weather_api_client.dart';
-export 'httpClients/google_api_client.dart';
+export 'http_clients/weather_api_client.dart';
+export 'http_clients/google_api_client.dart';
 export 'models/opening_hours.dart';
 export 'models/nearby_places_model.dart';
 export 'models/collection_model.dart';

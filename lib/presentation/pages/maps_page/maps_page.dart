@@ -4,11 +4,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/main.dart';
 
-import 'package:guide_me/business_layer/cubit/go_to_my_location_cubit_cubit.dart';
-import 'package:guide_me/business_layer/cubit/is_exapnded_cubit.dart';
-import 'package:guide_me/business_layer/cubit/weather_cubit_cubit.dart';
 import 'package:guide_me/data/data.dart';
 import 'package:guide_me/presentation/pages/first_page/widgets/custom_bottom_navigatio_bar_widget.dart';
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';

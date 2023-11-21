@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 
-import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_state.dart';
 import 'package:guide_me/data/data.dart';
+
+import 'nearby_sightseeing_state.dart';
 
 class NearbySightSeeingCubit extends Cubit<NearbySightseeingsState> {
   NearbySightSeeingCubit() : super(NearbySightseeingsInitial());

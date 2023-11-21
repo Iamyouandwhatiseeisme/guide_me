@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:guide_me/business_layer/cubit/fetch_searched_items_cubit.dart';
+import 'package:guide_me/bloc/cubits.dart';
 
 import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation/pages/first_page/widgets/custom_bottom_navigatio_bar_widget.dart';

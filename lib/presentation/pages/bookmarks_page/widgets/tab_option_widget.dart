@@ -2,8 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:guide_me/business_layer/cubit/bookmarks_tab_cubit.dart';
+import 'package:guide_me/bloc/cubits.dart';
 
 class TabOptionWidget extends StatelessWidget {
   final TabOption tabOption;

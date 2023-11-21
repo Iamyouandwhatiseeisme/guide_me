@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_me/bloc/cubits.dart';
 
-import 'package:guide_me/business_layer/cubit/sightseeing_sorting_cubit.dart';
 import 'package:guide_me/data/data.dart';
 
 import 'package:guide_me/main.dart';
@@ -11,8 +11,6 @@ import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
 
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
-import '../../../../business_layer/cubit/sorter_toggle_button_cubit.dart';
 
 class SortableListViewCardBuilder extends StatelessWidget {
   final List<NearbyPlacesModel> listOfPassedPlaces;

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:guide_me/business_layer/cubit/fetch_searched_items_cubit.dart';
+import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
 import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';

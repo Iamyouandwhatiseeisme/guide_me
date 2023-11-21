@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:guide_me/bloc/cubits.dart';
 
-import 'package:guide_me/business_layer/cubit/what_to_eat_state.dart';
 import 'package:guide_me/data/data.dart';
 
 class WhatToEatCubit extends Cubit<WhatToEatState> {

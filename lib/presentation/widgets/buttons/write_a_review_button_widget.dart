@@ -1,11 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:guide_me/presentation/pages/place_page/widgets/text_with_underline_grey_widget.dart';
-
-import '../../../business_layer/cubit/write_a_review_cubit.dart';
 
 class WriteAReviewButtonWidget extends StatelessWidget {
   const WriteAReviewButtonWidget({

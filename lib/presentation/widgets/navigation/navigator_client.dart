@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
+import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/presentation/pages/pages.dart';
 
 class NavigatorClient {

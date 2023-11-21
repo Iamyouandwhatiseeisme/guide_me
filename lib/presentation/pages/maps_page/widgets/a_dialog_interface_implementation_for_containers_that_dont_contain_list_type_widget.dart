@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:guide_me/business_layer/cubit/category_types_fetcher_cubit.dart';
+import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
 
 import 'package:guide_me/main.dart';
