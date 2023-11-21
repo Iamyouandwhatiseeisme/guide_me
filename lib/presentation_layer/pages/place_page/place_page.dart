@@ -13,7 +13,7 @@ import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.d
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../data_layer/data.dart';
+import '../../../data_layer/data.dart';
 
 class PlacePage extends StatefulWidget {
   final NearbyPlacesModel? placeToDisplay;

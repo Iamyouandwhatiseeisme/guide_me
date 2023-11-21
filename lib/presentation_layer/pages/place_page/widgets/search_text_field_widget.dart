@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
-import '../../../business_layer/cubit/fetch_searched_items_cubit.dart';
+import '../../../../business_layer/cubit/fetch_searched_items_cubit.dart';
 
 class SearchTextFieldWIdget extends StatelessWidget {
   final Color color;

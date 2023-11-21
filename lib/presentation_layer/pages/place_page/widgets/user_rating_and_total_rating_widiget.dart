@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
-import 'package:guide_me/presentation_layer/widgets/place_page_widgets/star_rating_widget.dart';
+import 'package:guide_me/presentation_layer/pages/place_page/widgets/star_rating_widget.dart';
 
 class UserRatingAndTotalRatingWidget extends StatelessWidget {
   const UserRatingAndTotalRatingWidget({

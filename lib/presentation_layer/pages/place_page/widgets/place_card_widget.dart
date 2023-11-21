@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import '../../../data_layer/models/nearby_places_model.dart';
+import '../../../../data_layer/models/nearby_places_model.dart';
 
 class PlaceCard extends StatelessWidget {
   final NearbyPlacesModel place;

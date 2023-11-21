@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/category_button_state.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
-import '../../../business_layer/cubit/category_button_cubit.dart';
+import '../../../../business_layer/cubit/category_button_cubit.dart';
 
 class OtherCategoryTypesRowWidget extends StatelessWidget {
   const OtherCategoryTypesRowWidget({

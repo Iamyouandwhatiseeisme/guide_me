@@ -5,7 +5,7 @@ import 'package:guide_me/data_layer/data.dart';
 
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import '../../../main.dart';
+import '../../../../main.dart';
 
 class LocationDisplayWidget extends StatelessWidget {
   const LocationDisplayWidget({

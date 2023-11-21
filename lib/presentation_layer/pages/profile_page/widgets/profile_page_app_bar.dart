@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../business_layer/cubit/bottom_navigation_bar_cubit.dart';
+import '../../../../business_layer/cubit/bottom_navigation_bar_cubit.dart';
 
 class ProfilePageAppbar extends StatelessWidget {
   const ProfilePageAppbar({
