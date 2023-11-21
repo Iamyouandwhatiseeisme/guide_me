@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:guide_me/business_layer/cubits.dart';
-import 'package:guide_me/data_layer/data.dart';
-import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/data/data.dart';
+
 import 'package:guide_me/main.dart';
 
 import 'package:http/http.dart' as http;

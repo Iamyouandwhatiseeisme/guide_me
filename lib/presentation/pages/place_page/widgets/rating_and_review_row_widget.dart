@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-
-import '../../../../data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/data/data.dart';
+import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
 class RatingAndReviewRowWidget extends StatelessWidget {
   const RatingAndReviewRowWidget({

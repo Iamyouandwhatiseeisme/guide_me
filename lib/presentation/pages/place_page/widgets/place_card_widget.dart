@@ -1,8 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
-import '../../../../data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/data/data.dart';
 
 class PlaceCard extends StatelessWidget {
   final NearbyPlacesModel place;

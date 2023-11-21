@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:guide_me/business_layer/cubit/recommended_places_cubit_dart_state.dart';
-
-import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
-import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/data/data.dart';
 
 class NearbyPlacesCubit extends Cubit<NearbyPlacesState> {
   NearbyPlacesCubit() : super(NearbyPlacesInitial());

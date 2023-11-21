@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:guide_me/presentation_layer/pages/pages.dart';
+import 'package:guide_me/presentation/pages/pages.dart';
 
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
 class AuthPageContent extends StatefulWidget {
   const AuthPageContent({

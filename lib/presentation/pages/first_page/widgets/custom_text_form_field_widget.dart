@@ -3,13 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:guide_me/business_layer/cubit/fetch_searched_items_cubit.dart';
-import 'package:guide_me/data_layer/data.dart';
-import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
+import 'package:guide_me/data/data.dart';
 import 'package:guide_me/main.dart';
-import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
-import 'package:guide_me/presentation_layer/widgets/page_payloads/searches_page_payload.dart';
-
-import '../../../../data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
+import 'package:guide_me/presentation/widgets/page_payloads/searches_page_payload.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController searchController;

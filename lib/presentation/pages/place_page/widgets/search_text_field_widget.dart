@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
 import '../../../../business_layer/cubit/fetch_searched_items_cubit.dart';
 

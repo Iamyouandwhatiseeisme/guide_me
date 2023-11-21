@@ -3,12 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubit/category_types_fetcher_cubit.dart';
+import 'package:guide_me/data/data.dart';
 
-import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 import 'package:guide_me/main.dart';
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-
-import '../../../../data_layer/httpClients/google_api_client.dart';
+import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
 class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
   const ADialogWithoutListOfCategories({

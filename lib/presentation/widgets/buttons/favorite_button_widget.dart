@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guide_me/data_layer/localDataBase/local_data_base.dart';
-import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/data/data.dart';
 import 'package:guide_me/main.dart';
 import 'package:hive/hive.dart';
 

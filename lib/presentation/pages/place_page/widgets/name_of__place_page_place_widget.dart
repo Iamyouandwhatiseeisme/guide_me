@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/data/data.dart';
 
 class NameOfThePlaceLabel extends StatelessWidget {
   const NameOfThePlaceLabel({

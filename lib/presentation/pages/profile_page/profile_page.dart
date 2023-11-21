@@ -5,12 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
-import 'package:guide_me/data_layer/get_localized_string_method.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:guide_me/data/data.dart';
 import 'package:guide_me/main.dart';
-import 'package:guide_me/presentation_layer/pages/first_page/widgets/custom_bottom_navigatio_bar_widget.dart';
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:guide_me/presentation/pages/first_page/widgets/custom_bottom_navigatio_bar_widget.dart';
+import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

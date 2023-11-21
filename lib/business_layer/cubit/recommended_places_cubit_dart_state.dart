@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/data/data.dart';
 
 abstract class NearbyPlacesState extends Equatable {
   const NearbyPlacesState();

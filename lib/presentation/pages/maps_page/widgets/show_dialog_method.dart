@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:guide_me/presentation_layer/pages/bookmarks_page/widgets/build_dialog_for_collections_page.dart';
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-
-import '../../../../data_layer/data.dart';
-import '../../../../data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/data/data.dart';
+import 'package:guide_me/presentation/pages/bookmarks_page/widgets/build_dialog_for_collections_page.dart';
+import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
 void showDIalogWindow(
   final double? distance,

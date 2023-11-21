@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:guide_me/data_layer/remoteDataBase/firebase_service.dart';
+import 'package:guide_me/data/data.dart';
 import 'package:guide_me/main.dart';
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
 class ListViewBuilderForProfilePage extends StatefulWidget {
   final TextEditingController nameController;

@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
 class ClickableRichText extends StatelessWidget {
   const ClickableRichText({

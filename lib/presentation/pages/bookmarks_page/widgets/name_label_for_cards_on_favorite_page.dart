@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/data/data.dart';
 
 class NameLabelForCardsOnFavoritesPage extends StatelessWidget {
   const NameLabelForCardsOnFavoritesPage({

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
+import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
 
 class GetStartedButton extends StatelessWidget {
   const GetStartedButton({

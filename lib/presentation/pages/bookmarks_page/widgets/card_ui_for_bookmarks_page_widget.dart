@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:guide_me/data_layer/data.dart';
+import 'package:guide_me/data/data.dart';
 import 'package:guide_me/main.dart';
-import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
+import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
 
-import '../../../../data_layer/localDataBase/local_data_base.dart';
 import '../../../widgets/presentation_layer_widgets.dart';
 
 class CardUiForBookmarksPage extends CardUi {

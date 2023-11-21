@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
-import 'package:guide_me/presentation_layer/pages/pages.dart';
+import 'package:guide_me/presentation/pages/pages.dart';
 
 class NavigatorClient {
   static const String welcomePage = '/';

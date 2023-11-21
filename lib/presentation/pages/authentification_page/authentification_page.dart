@@ -2,9 +2,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
+import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
 
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:guide_me/data_layer/models/collection_model.dart';
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 import 'package:hive/hive.dart';
 
-import '../../../../data_layer/models/nearby_places_model.dart';
+import '../../../../data/data.dart';
 import '../bookmarks_page.dart';
 
 class ListViewForCollectionsListThatIsExpanded extends StatelessWidget {

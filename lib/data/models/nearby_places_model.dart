@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:guide_me/data_layer/models/opening_hours.dart';
+
+import 'package:guide_me/data/data.dart';
 import 'package:hive/hive.dart';
 
 part 'nearby_places_model.g.dart';

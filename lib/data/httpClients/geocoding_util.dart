@@ -1,5 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:guide_me/data_layer/models/user_location_class.dart';
+import 'package:guide_me/data/data.dart';
+
 import 'package:guide_me/main.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';

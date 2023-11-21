@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:guide_me/data/data.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../../data_layer/models/collection_model.dart';
-import '../../../../data_layer/models/nearby_places_model.dart';
 
 class CollectionDialogUserInputReaderTextField extends StatelessWidget {
   const CollectionDialogUserInputReaderTextField({

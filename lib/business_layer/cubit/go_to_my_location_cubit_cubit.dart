@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import '../../data_layer/data.dart';
+import 'package:guide_me/data/data.dart';
 
 class LocationCubit extends Cubit<UserLocation> {
   LocationCubit() : super(UserLocation(userLat: 0.0, userLon: 0.0));

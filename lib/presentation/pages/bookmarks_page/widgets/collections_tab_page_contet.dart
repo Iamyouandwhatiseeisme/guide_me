@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:guide_me/data_layer/models/collection_model.dart';
-import 'package:guide_me/data_layer/models/nearby_places_model.dart';
-import 'package:guide_me/presentation_layer/pages/bookmarks_page/bookmarks_page.dart';
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:guide_me/data/data.dart';
+import 'package:guide_me/presentation/pages/bookmarks_page/bookmarks_page.dart';
+import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../../business_layer/cubit/is_exapnded_cubit.dart';

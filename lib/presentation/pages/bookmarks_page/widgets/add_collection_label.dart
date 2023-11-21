@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guide_me/presentation_layer/pages/place_page/widgets/text_with_underline_grey_widget.dart';
+import 'package:guide_me/presentation/pages/place_page/widgets/text_with_underline_grey_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddCollectionLabel extends StatelessWidget {

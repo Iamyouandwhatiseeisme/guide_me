@@ -1,5 +1,5 @@
-export 'package:guide_me/presentation_layer/pages/welcome_page/welcome_page.dart';
-export 'package:guide_me/presentation_layer/pages/authentification_page/authentification_page.dart';
+export 'package:guide_me/presentation/pages/welcome_page/welcome_page.dart';
+export 'package:guide_me/presentation/pages/authentification_page/authentification_page.dart';
 export 'see_all_page/see_all_page.dart';
 export 'bookmarks_page/bookmarks_page.dart';
 export 'sign_up_page/sign_up_page.dart';

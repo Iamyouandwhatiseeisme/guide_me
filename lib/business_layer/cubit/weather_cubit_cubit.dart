@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
-
-import 'package:guide_me/data_layer/httpClients/weather_api_client.dart';
+import 'package:guide_me/data/data.dart';
 
 part 'weather_cubit_state.dart';
 

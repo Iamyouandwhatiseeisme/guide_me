@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:guide_me/data_layer/data.dart';
-
-import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
+import 'package:guide_me/data/data.dart';
 
 part 'fetch_phone_number_and_adress_state.dart';
 

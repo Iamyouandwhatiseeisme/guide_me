@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:guide_me/data_layer/constants/language_constants.dart';
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
+
+import '../../../../data/data.dart';
 
 class WelcomePageSlider extends StatefulWidget {
   const WelcomePageSlider({

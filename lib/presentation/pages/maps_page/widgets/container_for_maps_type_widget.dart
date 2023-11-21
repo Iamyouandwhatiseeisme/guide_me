@@ -1,10 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:guide_me/data_layer/get_localized_string_method.dart';
+import 'package:guide_me/data/data.dart';
 
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
-
-import '../../../../data_layer/data.dart';
+import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
 class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
   final UserLocation? userLocation;

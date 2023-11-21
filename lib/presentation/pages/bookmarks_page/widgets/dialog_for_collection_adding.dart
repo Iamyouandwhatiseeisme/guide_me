@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:guide_me/data/data.dart';
 
-import 'package:guide_me/data_layer/models/nearby_places_model.dart';
-
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
 class DialogForCollectionAdding extends StatelessWidget {
   const DialogForCollectionAdding({

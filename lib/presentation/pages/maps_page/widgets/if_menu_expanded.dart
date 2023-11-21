@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
+import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
 import '../../../../business_layer/cubit/is_exapnded_cubit.dart';
-import '../../../../data_layer/data.dart';
+import '../../../../data/data.dart';
 
 class IfMenuExpanded extends StatelessWidget {
   const IfMenuExpanded({

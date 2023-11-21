@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:guide_me/data_layer/constants/language_constants.dart';
+import 'package:guide_me/data/data.dart';
 
-import '../../../../data_layer/models/language_model.dart';
 import '../../../../main.dart';
 
 class LanguageDropDownMenuWidget extends StatefulWidget {

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:guide_me/data/data.dart';
 
-import 'package:guide_me/data_layer/provider/google_sign_in.dart';
-import 'package:guide_me/data_layer/remoteDataBase/firebase_service.dart';
 import 'package:guide_me/main.dart';
 import 'package:provider/provider.dart';
 

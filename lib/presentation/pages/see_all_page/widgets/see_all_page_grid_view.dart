@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:guide_me/presentation_layer/pages/first_page/widgets/sightseeings_place_card.wiget.dart';
-import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
-import 'package:guide_me/presentation_layer/widgets/page_payloads/place_page_payload.dart';
-
-import '../../../../data_layer/models/nearby_places_model.dart';
+import 'package:guide_me/data/data.dart';
+import 'package:guide_me/presentation/pages/first_page/widgets/sightseeings_place_card.wiget.dart';
+import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
+import 'package:guide_me/presentation/widgets/page_payloads/place_page_payload.dart';
 
 class SeeAllPageGridView extends StatelessWidget {
   const SeeAllPageGridView({

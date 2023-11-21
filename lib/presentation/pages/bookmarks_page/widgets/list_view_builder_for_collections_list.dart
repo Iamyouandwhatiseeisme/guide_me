@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:guide_me/data_layer/models/collection_model.dart';
-import 'package:guide_me/data_layer/models/nearby_places_model.dart';
+
 import 'package:hive/hive.dart';
+
+import '../../../../data/data.dart';
 
 class ListViewBuilderForCollectionsLists extends StatefulWidget {
   const ListViewBuilderForCollectionsLists({

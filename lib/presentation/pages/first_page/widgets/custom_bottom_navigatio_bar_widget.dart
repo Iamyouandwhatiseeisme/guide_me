@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubit/bottom_navigation_bar_cubit.dart';
 import 'package:guide_me/main.dart';
-import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
+import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({

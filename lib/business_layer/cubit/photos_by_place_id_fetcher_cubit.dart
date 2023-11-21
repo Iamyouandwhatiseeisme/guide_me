@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
-import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
+import 'package:guide_me/data/data.dart';
 
 part 'photos_by_place_id_fetcher_state.dart';
 
