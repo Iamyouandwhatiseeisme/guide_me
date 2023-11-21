@@ -22,7 +22,7 @@ class FavoriteButton extends StatelessWidget {
     final localDataBase = sl.get<LocalDataBase>();
     return GestureDetector(
       onTap: () async {
-        localDataBase.toggleFavorites(placeToDisplay, box);
+        localDataBase.toggleFavorites(item: placeToDisplay, box: box);
       },
       child: Center(
           child: Icon(

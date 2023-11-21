@@ -94,14 +94,15 @@ class ADialogWithInterfaceListCategories
                               BlocProvider.of<CategoryTypesFetcherCubit>(
                                   context);
                           sl.get<GoogleApiClient>().createMap(
-                              cachedData,
-                              category,
-                              categoryTypesFetcherCubit,
-                              listOfPlaces,
-                              mapLoadedController);
+                              cachedData: cachedData,
+                              category: category,
+                              categoryTypesFetcherCubit:
+                                  categoryTypesFetcherCubit,
+                              listOfPlaces: listOfPlaces,
+                              mapLoaderController: mapLoadedController);
                           createDistanceMap(
-                            distanceMap,
-                            cachedData[category]!,
+                            distanceMap: distanceMap,
+                            listOfDestinations: cachedData[category]!,
                           );
 
                           return FutureBuilderForAlistInMapsPageTypeView(

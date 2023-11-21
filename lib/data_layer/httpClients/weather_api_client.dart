@@ -4,7 +4,8 @@ import 'package:guide_me/data_layer/models/weather_model.dart';
 import 'package:http/http.dart' as http;
 
 class WeatherApiClient {
-  Future<WeatherModel> fetchTemperature(double lat, double lon) async {
+  Future<WeatherModel> fetchTemperature(
+      {required double lat, required double lon}) async {
     final url = Uri.parse(
         "https://api.open-meteo.com/v1/forecast?latitude=$lat&longitude=$lon&current_weather=true&hourly=temperature_2m,relativehumidity_2m,windspeed_10m");
     try {

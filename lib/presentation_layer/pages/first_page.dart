@@ -106,18 +106,22 @@ class _FirstPageState extends State<FirstPage> {
 
     final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();
     if (listOfNearbyPlaces.isEmpty) {
-      nearbyPlacesCubit.fetchNearbyPlaces(listOfNearbyPlaces, googleApiClient);
+      nearbyPlacesCubit.fetchNearbyPlaces(
+          listOfNearbyPlaces: listOfNearbyPlaces,
+          googleApiClient: googleApiClient);
     }
 
     final nearbySightSeeingCubit = context.read<NearbySightSeeingCubit>();
     if (listOfSightseeingPlaces.isEmpty) {
       nearbySightSeeingCubit.fetchNearbySightseeings(
-          listOfSightseeingPlaces, googleApiClient);
+          listOfNearbySightseeings: listOfSightseeingPlaces,
+          googleApiClient: googleApiClient);
     }
     final whatToEatCubit = context.read<WhatToEatCubit>();
     if (listPlacesForFood.isEmpty) {
       whatToEatCubit.fetchPlacesForWhatToEat(
-          listPlacesForFood, googleApiClient);
+          listOfpLacesForWhatToEat: listPlacesForFood,
+          googleApiClient: googleApiClient);
     }
   }
 }

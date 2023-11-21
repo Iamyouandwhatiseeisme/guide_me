@@ -95,7 +95,8 @@ class CardUiForBookmarksPage extends CardUi {
                           onTap: () {
                             tabOptionState == true
                                 ? onDelete()
-                                : localDatabase.refreshItemList(name!, place);
+                                : localDatabase.refreshItemList(
+                                    name: name!, place: place);
                           },
                           child: Container(
                               decoration: BoxDecoration(

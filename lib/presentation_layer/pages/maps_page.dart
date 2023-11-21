@@ -56,8 +56,11 @@ class _MapsPageState extends State<MapsPage> {
         ],
         child: BlocBuilder<WeatherCubit, WeatherState>(
             builder: (context, weatherState) {
-          loadData(context, userLocation.userLat, userLocation.userLon,
-              _googleMapLocationCompleter);
+          loadData(
+              context: context,
+              lat: userLocation.userLat,
+              lon: userLocation.userLon,
+              googleMapLocationCompleter: _googleMapLocationCompleter);
 
           return FutureBuilder(
               future: _googleMapLocationCompleter.future,

@@ -52,7 +52,10 @@ class _SeeAllPageState extends State<SeeAllPage> {
             return BlocBuilder<SorterToggleButtonCubit,
                 SortertoggleButtonState>(builder: (context, sorterState) {
               sightseeingSortingCubit!.sortList(
-                  listTobuild!, sorterState.value, userLocation, distanceMap);
+                  unsortedList: listTobuild!,
+                  sortingOption: sorterState.value,
+                  userLocation: userLocation,
+                  distanceMap: distanceMap);
 
               return Scaffold(
                   backgroundColor: Theme.of(context).colorScheme.background,

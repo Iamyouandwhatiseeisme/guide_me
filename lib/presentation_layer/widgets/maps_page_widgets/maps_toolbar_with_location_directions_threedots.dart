@@ -59,7 +59,8 @@ class _MapsToolbarWIthDirectionsLocationAndThreeDotsWidgetState
                                 final UserLocation userLocation =
                                     sl.get<UserLocation>();
                                 locationCubit.goToMyLocation(
-                                    widget.controller, userLocation);
+                                    controller: widget.controller,
+                                    myLocation: userLocation);
                               },
                               child: Image.asset('assets/images/Arrow.png')),
                           const Icon(

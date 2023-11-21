@@ -36,7 +36,9 @@ class CustomTextFormField extends StatelessWidget {
         List<NearbyPlacesModel> listOfSearchedPlaces = [];
         final UserLocation userLocation = sl.get<UserLocation>();
         BlocProvider.of<FetchSearchedItemsCubit>(context).searchListFetcher(
-            searchController.text, listOfSearchedPlaces, googleApiClient);
+            nameOfPlace: searchController.text,
+            listOfSearched: listOfSearchedPlaces,
+            googleApiClient: googleApiClient);
         final searchesPagePayload = SearchesPagePayload(
             listToBuild: listOfSearchedPlaces,
             fetchSearchedItemsCubit: fetchSearchedItemsCubit!,

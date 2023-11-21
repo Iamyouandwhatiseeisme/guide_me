@@ -29,8 +29,10 @@ class _BookmarksPageState extends State<BookmarksPage> {
   bool isLoading = false;
   final bottomNavigationBar = sl.get<CustomBottomNavigationBar>();
 
-  void deleteItemAndRefresh(NearbyPlacesModel place,
-      List<NearbyPlacesModel> listOfFavorites, Box<NearbyPlacesModel> box) {
+  void deleteItem(
+      {required NearbyPlacesModel place,
+      required List<NearbyPlacesModel> listOfFavorites,
+      required Box<NearbyPlacesModel> box}) {
     Hive.box<NearbyPlacesModel>('FavoritedPlaces').delete(place.hashCode);
     listOfFavorites.clear();
     listOfFavorites = box.toMap().values.toList();
@@ -63,8 +65,8 @@ class _BookmarksPageState extends State<BookmarksPage> {
           ),
           body: Builder(builder: (context) {
             createDistanceMap(
-              distanceMap,
-              listOfFavorites,
+              distanceMap: distanceMap,
+              listOfDestinations: listOfFavorites,
             );
 
             return Column(
@@ -72,7 +74,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
               children: [
                 const BookmarksPageTabOptionsButtons(),
                 BookmarksPageContent(
-                    deleteItemAndRefresh: deleteItemAndRefresh,
+                    deleteItem: deleteItem,
                     listOfFavorites: listOfFavorites,
                     widget: widget,
                     box: box,

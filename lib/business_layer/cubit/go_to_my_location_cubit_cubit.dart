@@ -7,7 +7,8 @@ class LocationCubit extends Cubit<UserLocation> {
   LocationCubit() : super(UserLocation(userLat: 0.0, userLon: 0.0));
 
   void goToMyLocation(
-      GoogleMapController? controller, UserLocation myLocation) async {
+      {GoogleMapController? controller,
+      required UserLocation myLocation}) async {
     try {
       if (controller != null) {
         _goToMyLocation(controller, myLocation);

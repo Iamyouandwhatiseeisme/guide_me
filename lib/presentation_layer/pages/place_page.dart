@@ -70,7 +70,7 @@ class _PlacepageState extends State<PlacePage> {
           final photosByPlaceIdFetchedCubit =
               context.read<PhotosByPlaceIdFetcherCubit>();
           photosByPlaceIdFetchedCubit.fetchPhotos(
-              passedModel.placeId, googleApiClient);
+              placeId: passedModel.placeId, googleApiClient: googleApiClient);
         }
         if (photosState is PhotosByPlaceIdFetcherLoaded) {
           return BlocBuilder<FetchPhoneNumberAndAdressCubit,
@@ -79,7 +79,7 @@ class _PlacepageState extends State<PlacePage> {
             final numberAndAdressFetcherCubit =
                 context.read<FetchPhoneNumberAndAdressCubit>();
             numberAndAdressFetcherCubit.fetchMoreDetails(
-                passedModel.placeId, googleApiClient);
+                placeId: passedModel.placeId, googleApiClient: googleApiClient);
 
             if (numberAndAdressState is FetchPhoneNumberAndAdressLoaded) {
               placeDetails = numberAndAdressState.placeDetails;

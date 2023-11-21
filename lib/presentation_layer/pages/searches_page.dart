@@ -50,7 +50,10 @@ class _SearchesPageState extends State<SearchesPage> {
             builder: (context, sorterState) {
               return Builder(builder: (context) {
                 BlocProvider.of<SightseeingSortingCubit>(context).sortList(
-                    listTobuild!, sorterState.value, userLocation, distanceMap);
+                    unsortedList: listTobuild!,
+                    sortingOption: sorterState.value,
+                    userLocation: userLocation,
+                    distanceMap: distanceMap);
 
                 return BlocBuilder<FetchSearchedItemsCubit,
                     FetchSearchedItemsState>(builder: (context, state) {

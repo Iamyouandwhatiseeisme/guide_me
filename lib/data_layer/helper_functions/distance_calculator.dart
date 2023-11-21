@@ -1,12 +1,12 @@
 import 'dart:math';
 
-double? calculateDistance(
+double? calculateDistance({
   double? startLat,
-  double? startLng,
-  double endLat,
-  double endLng,
-) {
-  if (startLat != null && startLng != null) {
+  double? startLon,
+  required double endLat,
+  required double endLon,
+}) {
+  if (startLat != null && startLon != null) {
     const double earthRadius = 6371.0; // Radius of the Earth in kilometers
     double radians(double degrees) {
       return degrees * (pi / 180.0);
@@ -14,9 +14,9 @@ double? calculateDistance(
 
     // Convert latitude and longitude from degrees to radians
     final double lat1 = radians(startLat);
-    final double lon1 = radians(startLng);
+    final double lon1 = radians(startLon);
     final double lat2 = radians(endLat);
-    final double lon2 = radians(endLng);
+    final double lon2 = radians(endLon);
 
     // Haversine formula
     final double dlon = lon2 - lon1;

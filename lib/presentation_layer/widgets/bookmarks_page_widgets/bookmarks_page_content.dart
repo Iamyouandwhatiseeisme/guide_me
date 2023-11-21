@@ -14,9 +14,9 @@ class BookmarksPageContent extends StatelessWidget {
     required this.widget,
     required this.box,
     required this.distanceMap,
-    required this.deleteItemAndRefresh,
+    required this.deleteItem,
   });
-  final Function deleteItemAndRefresh;
+  final Function deleteItem;
   final List<NearbyPlacesModel> listOfFavorites;
   final BookmarksPage widget;
   final Box<NearbyPlacesModel> box;
@@ -30,7 +30,7 @@ class BookmarksPageContent extends StatelessWidget {
         return isFavorites
             ? FavoritesPageContent(
                 tabOptionState: isFavorites,
-                onDelete: deleteItemAndRefresh,
+                onDelete: deleteItem,
                 listOfFavorites: listOfFavorites,
                 widget: widget,
                 box: box,

@@ -41,7 +41,9 @@ class GoogleSignUpButton extends StatelessWidget {
               provider.googleLogin();
             } else if (text.contains('E-Mail')) {
               firebaseService.signUpWithEmail(
-                  formKey, emailController!, passwordController!);
+                  formKey: formKey,
+                  emailController: emailController!,
+                  passwordController: passwordController!);
             }
           },
           label: Text(text)),

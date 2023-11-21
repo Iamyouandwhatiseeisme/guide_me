@@ -9,13 +9,16 @@ part 'category_types_fetcher_state.dart';
 
 class CategoryTypesFetcherCubit extends Cubit<CategoryTypesFetcherState> {
   CategoryTypesFetcherCubit() : super(CategoryTypesFetcherInitial());
-  Future<void> fetchDataForCategories(List<NearbyPlacesModel> listOfPlaces,
-      String category, GoogleApiClient googleApiClient) async {
+  Future<void> fetchDataForCategories(
+      {required List<NearbyPlacesModel> listOfPlaces,
+      required String category,
+      required GoogleApiClient googleApiClient}) async {
     if (listOfPlaces.isEmpty) {
       try {
         emit(CategoryTypesFetcherLoading());
-        final listOfFetchedPlaces = await googleApiClient
-            .fetchDataForOtherCategories(listOfPlaces, category);
+        final listOfFetchedPlaces =
+            await googleApiClient.fetchDataForOtherCategories(
+                listOfPlaces: listOfPlaces, category: category);
 
         if (isClosed) {
           return;

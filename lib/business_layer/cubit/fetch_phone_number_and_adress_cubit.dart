@@ -11,7 +11,9 @@ class FetchPhoneNumberAndAdressCubit
   FetchPhoneNumberAndAdressCubit() : super(FetchPhoneNumberAndAdressInitial());
   bool numberAndAdressFetched = false;
 
-  void fetchMoreDetails(String placeId, GoogleApiClient googleApiClient) async {
+  void fetchMoreDetails(
+      {required String placeId,
+      required GoogleApiClient googleApiClient}) async {
     try {
       if (!numberAndAdressFetched) {
         emit(FetchPhoneNumberAndAdressLoading());

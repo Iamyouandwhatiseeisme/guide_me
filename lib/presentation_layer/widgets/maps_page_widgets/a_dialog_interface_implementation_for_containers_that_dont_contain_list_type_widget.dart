@@ -79,11 +79,11 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
                   final categoryTypesFetcherCubit =
                       BlocProvider.of<CategoryTypesFetcherCubit>(context);
                   sl.get<GoogleApiClient>().createList(
-                      distanceMap,
-                      category,
-                      categoryTypesFetcherCubit,
-                      listOfPlaces,
-                      dataFetchController);
+                      distanceMap: distanceMap,
+                      category: category,
+                      categoryTypesFetcherCubit: categoryTypesFetcherCubit,
+                      listOfPlaces: listOfPlaces,
+                      listLoaderController: dataFetchController);
 
                   return FutureBuilderForAlistInMapsPageTypeView(
                       distanceMap: distanceMap,

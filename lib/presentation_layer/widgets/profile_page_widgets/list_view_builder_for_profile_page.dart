@@ -137,8 +137,11 @@ class _ListViewBuilderForProfilePageState
                       AppLocalizations.of(context)!.changePassword;
 
                   if (widget.listOfSettings[index].contains(name)) {
-                    firebaseService.changeDisplayName(widget.nameController,
-                        widget.user, context, widget.updateUI);
+                    firebaseService.changeDisplayName(
+                        nameController: widget.nameController,
+                        user: widget.user,
+                        context: context,
+                        updateUI: widget.updateUI);
                   } else if (widget.listOfSettings[index].contains(password)) {
                     changePassword(
                         widget.passedControllerForOldPassword,

@@ -16,7 +16,7 @@ import 'package:http/http.dart' as http;
 class GoogleApiClient {
   String apiKey = dotenv.env['GOOGLE_API_KEY']!;
   Future<List<String>> fetChPhotosHelper(
-      List<String> listOfPhotos, String placeId) async {
+      {required List<String> listOfPhotos, required String placeId}) async {
     final url = Uri.parse(
         'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&fields=photos&key=$apiKey');
     try {
@@ -55,10 +55,10 @@ class GoogleApiClient {
     }
   }
 
-  Future<List<NearbyPlacesModel>> fetchForSearchList(
-    String nameOfPlace,
-    List<NearbyPlacesModel> listOfSearchedItems,
-  ) async {
+  Future<List<NearbyPlacesModel>> fetchForSearchList({
+    required String nameOfPlace,
+    required List<NearbyPlacesModel> listOfSearchedItems,
+  }) async {
     try {
       final url = Uri.parse(
           'https://maps.googleapis.com/maps/api/place/textsearch/json?query=$nameOfPlace&key=$apiKey');
@@ -96,7 +96,8 @@ class GoogleApiClient {
   }
 
   Future<List<NearbyPlacesModel>> fetchDataForOtherCategories(
-      List<NearbyPlacesModel> listOfPlaces, String category) async {
+      {required List<NearbyPlacesModel> listOfPlaces,
+      required String category}) async {
     try {
       final url = Uri.parse(
           'https://maps.googleapis.com/maps/api/place/textsearch/json?query=$category&key=$apiKey');
@@ -306,16 +307,18 @@ class GoogleApiClient {
   }
 
   Future<void> createMap(
-      Map<String, List<NearbyPlacesModel>> cachedData,
-      String category,
-      CategoryTypesFetcherCubit categoryTypesFetcherCubit,
-      List<NearbyPlacesModel> listOfPlaces,
-      Completer<String> mapLoaderController) async {
+      {required Map<String, List<NearbyPlacesModel>> cachedData,
+      required String category,
+      required CategoryTypesFetcherCubit categoryTypesFetcherCubit,
+      required List<NearbyPlacesModel> listOfPlaces,
+      required Completer<String> mapLoaderController}) async {
     if (!cachedData.containsKey(
       category,
     )) {
       categoryTypesFetcherCubit.fetchDataForCategories(
-          listOfPlaces, category, sl<GoogleApiClient>());
+          listOfPlaces: listOfPlaces,
+          category: category,
+          googleApiClient: sl<GoogleApiClient>());
       cachedData[category] = listOfPlaces;
     }
     if (cachedData[category]!.isNotEmpty) {
@@ -323,20 +326,22 @@ class GoogleApiClient {
     }
   }
 
-  void createLists(List<MapItem> firstList, List<MapItem> secondList,
-      List<String> categoryList) {
+  void createLists(
+      {required List<MapItem> mapItemListForRowOne,
+      required List<MapItem> mapItemListForRowTwo,
+      required List<String> categoryList}) {
     categoryList.add('grocery');
     categoryList.add('mall');
     categoryList.add('hospital');
     categoryList.add('park');
-    firstList.add(MapItem(
+    mapItemListForRowOne.add(MapItem(
         icon: const Icon(
           Icons.fort_outlined,
           color: Color(0xffF4C871),
         ),
         color: const Color(0xffF4C871),
         textLabel: 'sights'));
-    firstList.add(MapItem(
+    mapItemListForRowOne.add(MapItem(
         icon: const Icon(
           Icons.hotel,
           color: Color(
@@ -347,21 +352,21 @@ class GoogleApiClient {
           0xffA3C3DB,
         ),
         textLabel: 'hotels'));
-    firstList.add(MapItem(
+    mapItemListForRowOne.add(MapItem(
         icon: const Icon(
           Icons.nightlife,
           color: Color(0xffC75E6B),
         ),
         color: const Color(0xffC75E6B),
         textLabel: 'nightLife'));
-    secondList.add(MapItem(
+    mapItemListForRowTwo.add(MapItem(
         icon: const Icon(
           Icons.restaurant,
           color: Color(0xffC2807E),
         ),
         color: const Color(0xffC2807E),
         textLabel: 'restaurants'));
-    secondList.add(MapItem(
+    mapItemListForRowTwo.add(MapItem(
         icon: Image.asset('assets/images/Other.png',
             color: const Color(0xffF3F0E6)),
         color: const Color(0xffF3F0E6),
@@ -369,25 +374,27 @@ class GoogleApiClient {
   }
 
   Future<void> createList(
-      Map<NearbyPlacesModel, double?> distanceMap,
-      String category,
-      CategoryTypesFetcherCubit categoryTypesFetcherCubit,
-      List<NearbyPlacesModel> listOfPlaces,
-      Completer<String> listLoaderController) async {
+      {required Map<NearbyPlacesModel, double?> distanceMap,
+      required String category,
+      required CategoryTypesFetcherCubit categoryTypesFetcherCubit,
+      required List<NearbyPlacesModel> listOfPlaces,
+      required Completer<String> listLoaderController}) async {
     if (listOfPlaces.isEmpty) {
       await categoryTypesFetcherCubit.fetchDataForCategories(
-          listOfPlaces, category, sl<GoogleApiClient>());
+          listOfPlaces: listOfPlaces,
+          category: category,
+          googleApiClient: sl<GoogleApiClient>());
       createDistanceMap(
-        distanceMap,
-        listOfPlaces,
+        distanceMap: distanceMap,
+        listOfDestinations: listOfPlaces,
       );
       listLoaderController.complete('Completed');
     }
     if (listOfPlaces.isNotEmpty) {
       listLoaderController.complete('Completed');
       createDistanceMap(
-        distanceMap,
-        listOfPlaces,
+        distanceMap: distanceMap,
+        listOfDestinations: listOfPlaces,
       );
     }
   }

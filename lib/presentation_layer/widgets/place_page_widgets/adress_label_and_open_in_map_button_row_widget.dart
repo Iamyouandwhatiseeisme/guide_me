@@ -38,7 +38,8 @@ class AdressLabelAndOpenInMapButtonRowWIdget extends StatelessWidget {
                 onTap: () {
                   final openLocationCubit =
                       context.read<OpenLocationOnMapCubit>();
-                  openLocationCubit.openInMap(passedPlace.name, adress);
+                  openLocationCubit.openInMap(
+                      name: passedPlace.name, adress: adress);
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 20.0),

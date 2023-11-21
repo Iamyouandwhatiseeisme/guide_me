@@ -35,7 +35,10 @@ class SortableListViewCardBuilder extends StatelessWidget {
             final sightseeingSortingCubit =
                 BlocProvider.of<SightseeingSortingCubit>(context);
             sightseeingSortingCubit.sortList(
-                sortedList, state.value, userLocation, distanceMap);
+                unsortedList: sortedList,
+                sortingOption: state.value,
+                userLocation: userLocation,
+                distanceMap: distanceMap);
             final box = Hive.box<NearbyPlacesModel>('FavoritedPlaces');
             // Now, build the UI using the sorted list
             return Container(

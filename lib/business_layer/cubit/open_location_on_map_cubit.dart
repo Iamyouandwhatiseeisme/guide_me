@@ -7,7 +7,7 @@ part 'open_location_on_map_state.dart';
 class OpenLocationOnMapCubit extends Cubit<bool> {
   OpenLocationOnMapCubit() : super(false);
 
-  Future<void> openInMap(String? name, String? adress) async {
+  Future<void> openInMap({String? name, String? adress}) async {
     final String googleMapsUrl =
         'https://www.google.com/maps/search/?api=1&query=$name,$adress';
     final uri = Uri.parse(googleMapsUrl);

@@ -10,17 +10,17 @@ class GeocodingUtil {
   ) async {
     final UserLocation userLocation = sl.get<UserLocation>();
     final updatedLocationInfo = await GeocodingUtil.reverseGeocode(
-        userLocation.userLat, userLocation.userLon);
+        latitude: userLocation.userLat, longitude: userLocation.userLon);
 
     locationInfo = updatedLocationInfo;
 
     return locationInfo;
   }
 
-  static Future<String> reverseGeocode(
-    double latitude,
-    double longitude,
-  ) async {
+  static Future<String> reverseGeocode({
+    required double latitude,
+    required double longitude,
+  }) async {
     String apiKey = dotenv.env['GOOGLE_API_KEY']!;
     final apiUrl =
         'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$apiKey';

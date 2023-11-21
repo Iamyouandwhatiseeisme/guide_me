@@ -17,7 +17,8 @@ class LocalDataBase {
     await requestWritePermission();
   }
 
-  void refreshItemList(String name, NearbyPlacesModel place) {
+  void refreshItemList(
+      {required String name, required NearbyPlacesModel place}) {
     final listToUpdate =
         Hive.box<CollectionModel>('CollectionLists').get(name)!.items;
 
@@ -28,7 +29,8 @@ class LocalDataBase {
   }
 
   void toggleFavorites(
-      NearbyPlacesModel item, Box<NearbyPlacesModel> box) async {
+      {required NearbyPlacesModel item,
+      required Box<NearbyPlacesModel> box}) async {
     if (box.containsKey(item.hashCode)) {
       await box.delete(item.hashCode);
     } else {

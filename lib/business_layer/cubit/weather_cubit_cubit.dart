@@ -7,12 +7,14 @@ part 'weather_cubit_state.dart';
 class WeatherCubit extends Cubit<WeatherState> {
   WeatherCubit() : super(WeatherState());
 
-  Future<void> fetchWeather(double latitude, double longitude,
-      WeatherApiClient weatherApiClient) async {
+  Future<void> fetchWeather(
+      {required double latitude,
+      required double longitude,
+      required WeatherApiClient weatherApiClient}) async {
     if (state.temperature == null) {
       try {
-        final weather =
-            await weatherApiClient.fetchTemperature(latitude, longitude);
+        final weather = await weatherApiClient.fetchTemperature(
+            lat: latitude, lon: longitude);
         emit(WeatherState(
           temperature: weather.temperature,
           windSpeed: weather.windSpeed,

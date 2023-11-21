@@ -9,14 +9,14 @@ part 'fetch_searched_items_state.dart';
 class FetchSearchedItemsCubit extends Cubit<FetchSearchedItemsState> {
   FetchSearchedItemsCubit() : super(FetchSearchedItemsInitial());
   Future<void> searchListFetcher(
-      String nameOfPlace,
-      List<NearbyPlacesModel> listOfSearched,
-      GoogleApiClient googleApiClient) async {
+      {required String nameOfPlace,
+      required List<NearbyPlacesModel> listOfSearched,
+      required GoogleApiClient googleApiClient}) async {
     try {
       emit(FetchSearchedItemsLoading());
       final listOfFetchedSearches = await googleApiClient.fetchForSearchList(
-        nameOfPlace,
-        listOfSearched,
+        nameOfPlace: nameOfPlace,
+        listOfSearchedItems: listOfSearched,
       );
 
       if (isClosed) {

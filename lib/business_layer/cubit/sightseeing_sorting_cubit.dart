@@ -9,8 +9,11 @@ part 'sightseeing_sorting_state.dart';
 
 class SightseeingSortingCubit extends Cubit<SightseeingSortingState> {
   SightseeingSortingCubit() : super(SightseeingSortingInitial());
-  void sortList(List<NearbyPlacesModel> unsortedList, int sortingOption,
-      UserLocation userLocation, Map<NearbyPlacesModel, double?> distanceMap) {
+  void sortList(
+      {required List<NearbyPlacesModel> unsortedList,
+      required int sortingOption,
+      required UserLocation userLocation,
+      required Map<NearbyPlacesModel, double?> distanceMap}) {
     List<NearbyPlacesModel> sortedList = [];
     emit(SightseeingsortingLoading());
     switch (sortingOption) {
@@ -30,19 +33,19 @@ class SightseeingSortingCubit extends Cubit<SightseeingSortingState> {
       case 1:
         unsortedList.sort((a, b) {
           final aDistance = calculateDistance(
-            a.lat,
-            a.lng,
-            userLocation
+            startLat: a.lat,
+            startLon: a.lng,
+            endLat: userLocation
                 .userLat, // Make sure to pass userLat and userLon to the Cubit
-            userLocation
+            endLon: userLocation
                 .userLon, // Make sure to pass userLat and userLon to the Cubit
           );
           final bDistance = calculateDistance(
-            b.lat,
-            b.lng,
-            userLocation
+            startLat: b.lat,
+            startLon: b.lng,
+            endLat: userLocation
                 .userLat, // Make sure to pass userLat and userLon to the Cubit
-            userLocation.userLon,
+            endLon: userLocation.userLon,
           );
 
           return aDistance!.compareTo(bDistance!);
@@ -53,8 +56,8 @@ class SightseeingSortingCubit extends Cubit<SightseeingSortingState> {
     }
 
     createDistanceMap(
-      distanceMap,
-      sortedList,
+      distanceMap: distanceMap,
+      listOfDestinations: sortedList,
     );
     emit(SightseeingsortingLoaded(sortedList));
   }

@@ -37,9 +37,9 @@ class FirebaseService {
   }
 
   Future signUpWithEmail(
-      GlobalKey<FormState>? formKey,
-      TextEditingController emailController,
-      TextEditingController passwordController) async {
+      {GlobalKey<FormState>? formKey,
+      required TextEditingController emailController,
+      required TextEditingController passwordController}) async {
     final isValid = formKey!.currentState!.validate();
     if (!isValid) return;
     try {
@@ -51,8 +51,11 @@ class FirebaseService {
     }
   }
 
-  Future changeDisplayName(TextEditingController nameController, User user,
-      BuildContext context, Function updateUI) async {
+  Future changeDisplayName(
+      {required TextEditingController nameController,
+      required User user,
+      required BuildContext context,
+      required Function updateUI}) async {
     nameController.clear();
     showDialog(
         context: context,
