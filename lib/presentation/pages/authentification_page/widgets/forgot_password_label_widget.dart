@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
 
-import '../../../data/data.dart';
+import '../../../../data/data.dart';
 
 class ForgotPasswordLabel extends StatelessWidget {
   const ForgotPasswordLabel({

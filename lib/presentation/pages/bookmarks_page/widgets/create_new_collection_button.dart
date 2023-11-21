@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/data.dart';
-import '../presentation_layer_widgets.dart';
+import '../../../../data/data.dart';
+import '../../../widgets/presentation_layer_widgets.dart';
 
 class CreateNewCollectionButton extends StatelessWidget {
   const CreateNewCollectionButton({
