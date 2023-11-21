@@ -1,4 +1,3 @@
-import 'package:get_it/get_it.dart';
 import 'package:guide_me/data_layer/data.dart';
 import 'package:guide_me/data_layer/remoteDataBase/firebase_service.dart';
 import 'package:guide_me/data_layer/httpClients/google_api_client.dart';

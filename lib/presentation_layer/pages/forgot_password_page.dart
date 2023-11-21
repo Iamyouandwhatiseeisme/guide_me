@@ -46,7 +46,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               const SizedBox(
                 height: 50,
               ),
-              MyTextField(
+              AuthPageTextField(
                   label: 'E-Mail',
                   hintText: 'Enter your E-Mail to reset password',
                   controller: emailController),

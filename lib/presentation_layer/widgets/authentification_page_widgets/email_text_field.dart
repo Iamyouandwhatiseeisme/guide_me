@@ -10,7 +10,7 @@ class EmailTextField extends StatelessWidget {
   }) : _controller = controller;
 
   final TextEditingController _controller;
-  final MyTextField widget;
+  final AuthPageTextField widget;
 
   @override
   Widget build(BuildContext context) {

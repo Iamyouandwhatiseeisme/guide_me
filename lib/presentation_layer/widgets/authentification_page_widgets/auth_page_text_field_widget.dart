@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 import '../presentation_layer_widgets.dart';
 
-class MyTextField extends StatefulWidget {
+class AuthPageTextField extends StatefulWidget {
   final String label;
   final String hintText;
   final TextEditingController controller;
 
-  const MyTextField({
+  const AuthPageTextField({
     Key? key,
     required this.label,
     required this.hintText,
@@ -17,10 +17,10 @@ class MyTextField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<MyTextField> createState() => _MyTextFieldState();
+  State<AuthPageTextField> createState() => _AuthPageTextFieldState();
 }
 
-class _MyTextFieldState extends State<MyTextField> {
+class _AuthPageTextFieldState extends State<AuthPageTextField> {
   bool hideText = true;
 
   @override

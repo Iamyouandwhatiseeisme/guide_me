@@ -41,13 +41,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                 const SizedBox(
                   height: 120,
                 ),
-                MyTextField(
+                AuthPageTextField(
                   controller: widget._emailController,
                   label: translation(context).email,
                   hintText: 'Example@gmail.com',
                 ),
                 const SizedBox(height: 24),
-                MyTextField(
+                AuthPageTextField(
                     controller: widget._passwordController,
                     label: translation(context).password,
                     hintText: translation(context).enterPassword),

@@ -65,13 +65,13 @@ class _SignUpPageWidgetsState extends State<SignUpPageWidgets> {
                       fontWeight: FontWeight.w400,
                       color: Colors.white),
                 ),
-                MyTextField(
+                AuthPageTextField(
                   controller: widget.emailController,
                   label: translation(context).email,
                   hintText: 'Example@gmail.com',
                 ),
                 const SizedBox(height: 24),
-                MyTextField(
+                AuthPageTextField(
                     controller: widget.passwordController,
                     label: translation(context).password,
                     hintText: translation(context).enterPassword),
