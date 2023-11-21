@@ -56,7 +56,7 @@ class _SignUpPageWidgetsState extends State<SignUpPageWidgets> {
                   height: 12,
                 ),
                 Text(
-                  translation(context).chooseAuthMethod,
+                  translation(context).chooseYourPrefferedWayOfAuthentication,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontFamily: 'paragraf',

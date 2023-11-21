@@ -45,8 +45,7 @@ class RecommendedSightseeingsWidget extends StatelessWidget {
                     sortingCubit: sortingCubit,
                     sorterToggleButtonCubit: sorterToggleButtonCubit,
                     listToBuild: listToBuild,
-                    textToDisplay:
-                        AppLocalizations.of(context)!.whatToVisitLabel),
+                    textToDisplay: AppLocalizations.of(context)!.whatToVisit),
                 const SizedBox(
                   height: 12,
                 ),

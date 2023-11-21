@@ -45,7 +45,7 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
             Navigator.pushNamed(context, NavigatorClient.seeAllPage,
                 arguments: [seeAllPagePayload]);
           },
-          child: Text(AppLocalizations.of(context)!.seeAllLabel,
+          child: Text(AppLocalizations.of(context)!.seeAll,
               style: TextStyle(
                   decorationColor: Theme.of(context).colorScheme.secondary,
                   decoration: TextDecoration.underline,

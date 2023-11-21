@@ -32,7 +32,7 @@ class DistanceLabelWidget extends StatelessWidget {
         width: 5,
       ),
       Text(
-        "${distance.toString()} ${AppLocalizations.of(context)!.distance} ",
+        "${distance.toString()} ${AppLocalizations.of(context)!.kmAwayFromYou} ",
         style: TextStyle(
             fontSize: fontSize, fontWeight: FontWeight.w400, color: color),
       ),

@@ -23,9 +23,9 @@ class _WelcomePageSliderState extends State<WelcomePageSlider> {
   @override
   Widget build(BuildContext context) {
     List<String> titles = [
-      translation(context).welcomePageFirstSlideText,
-      translation(context).welcomePageSecondSlideText,
-      translation(context).welcomePageThirdSlideText
+      translation(context).discoverTheBestOfEachCity,
+      translation(context).createYourOwnAdventure,
+      translation(context).stayUpToDate
     ];
     return SizedBox(
       height: 465,

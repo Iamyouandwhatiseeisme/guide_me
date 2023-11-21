@@ -58,7 +58,7 @@ class CustomTextFormField extends StatelessWidget {
             borderRadius: BorderRadius.circular(radiusSize),
             borderSide: BorderSide.none,
           ),
-          hintText: AppLocalizations.of(context)!.searchFieldHintText,
+          hintText: AppLocalizations.of(context)!.searchForActivityLocationEtc,
           hintStyle: TextStyle(
               fontWeight: FontWeight.w400, fontSize: 16, color: textColor)),
     );

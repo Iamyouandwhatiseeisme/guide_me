@@ -29,7 +29,7 @@ class CollectionDialogUserInputReaderTextField extends StatelessWidget {
               fontSize: 14,
               fontWeight: FontWeight.w400,
               color: Colors.grey.withOpacity(0.8)),
-          hintText: AppLocalizations.of(context)!.enterNameOfCollection,
+          hintText: AppLocalizations.of(context)!.enterNameOfYourCollection,
           filled: true,
           fillColor: Colors.white,
           border: OutlineInputBorder(
