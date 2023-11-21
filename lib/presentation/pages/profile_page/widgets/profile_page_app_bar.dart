@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
+import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -35,8 +36,10 @@ class ProfilePageAppbar extends StatelessWidget {
 
               provider.logout();
               FirebaseAuth.instance.signOut();
-              Navigator.pushNamed(context, 'authPage');
-              Navigator.popUntil(context, ModalRoute.withName('authPage'));
+              Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  NavigatorClient.authPage,
+                  ModalRoute.withName(NavigatorClient.authPage));
             },
             child: Text(
               AppLocalizations.of(context)!.logout,

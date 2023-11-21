@@ -36,7 +36,7 @@ class _AuthPageTextFieldState extends State<AuthPageTextField> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.label == 'Password') {
+    if (widget.label == 'Password' || widget.label == 'პაროლი') {
       return passwordTextField();
     } else {
       return EmailTextField(controller: widget.controller, widget: widget);

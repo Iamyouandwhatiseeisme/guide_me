@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
 
 class CheckEmailVerificationCubit extends Cubit<bool> {
   CheckEmailVerificationCubit() : super(false);
@@ -30,6 +31,7 @@ class CheckEmailVerificationCubit extends Cubit<bool> {
       );
       timer = Timer.periodic(const Duration(seconds: 3), (timer) {
         checkEmailVerified(
+            context: context,
             isEmailVerified: isEmailVerified,
             isVerified: isVerified,
             timer: timer);
@@ -40,11 +42,19 @@ class CheckEmailVerificationCubit extends Cubit<bool> {
   void checkEmailVerified(
       {required bool isEmailVerified,
       required Function isVerified,
+      required BuildContext context,
       Timer? timer}) async {
     await FirebaseAuth.instance.currentUser!.reload();
+    User user = FirebaseAuth.instance.currentUser!;
 
-    if (isEmailVerified) timer?.cancel();
-    emit(true);
+    if (user.emailVerified) {
+      timer?.cancel();
+      emit(true);
+
+      if (context.mounted) {
+        Navigator.pushReplacementNamed(context, NavigatorClient.firstPage);
+      }
+    }
   }
 
   sendEmailVerification(
@@ -54,17 +64,19 @@ class CheckEmailVerificationCubit extends Cubit<bool> {
       required Function setStateCanResendFalse,
       required Function setStateCanResendTrue,
       Timer? timer}) async {
-    try {
-      final user = FirebaseAuth.instance.currentUser!;
-      await user.sendEmailVerification();
+    if (context.mounted) {
+      try {
+        final user = FirebaseAuth.instance.currentUser!;
+        await user.sendEmailVerification();
 
-      setStateCanResendFalse();
-      await Future.delayed(const Duration(seconds: 50));
-      setStateCanResendTrue();
-    } on Exception catch (e) {
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.toString())));
+        setStateCanResendFalse();
+        await Future.delayed(const Duration(seconds: 50));
+        setStateCanResendTrue();
+      } on Exception catch (e) {
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(e.toString())));
+      }
     }
   }
 }
