@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
 import 'package:guide_me/presentation/pages/first_page/first_page.dart';
 
@@ -22,14 +24,47 @@ class _VerifyEmailPage extends State<VerifyEmailPage> {
   @override
   void initState() {
     super.initState();
-    isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
+    BlocProvider.of<CheckEmailVerificationCubit>(context)
+        .emailVerificationChecker(
+            isEmailVerified: isEmailVerified,
+            timer: timer,
+            isVerified: isVerified,
+            context: context,
+            canResendEmail: canResendEmail,
+            setStateCanResendFalse: setStateCanResendFalse,
+            setStateCanResendTrue: setStateCanResendTrue);
+  }
 
-    if (!isEmailVerified) {
-      sendEmailVerification();
-      timer = Timer.periodic(const Duration(seconds: 3), (timer) {
-        checkEmailVerified();
-      });
-    }
+  // void _emailVerificationChecker() {
+  //   isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
+
+  //   if (!isEmailVerified) {
+  //     sendEmailVerification();
+  //     timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+  //       checkEmailVerified(
+  //           isEmailVerified: isEmailVerified,
+  //           isVerified: isVerified,
+  //           timer: timer);
+  //     });
+  //   }
+  // }
+
+  void isVerified() {
+    setState(() {
+      isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
+    });
+  }
+
+  void setStateCanResendTrue() {
+    setState(() {
+      canResendEmail = true;
+    });
+  }
+
+  void setStateCanResendFalse() {
+    setState(() {
+      canResendEmail = false;
+    });
   }
 
   @override
@@ -40,6 +75,8 @@ class _VerifyEmailPage extends State<VerifyEmailPage> {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<CheckEmailVerificationCubit>(context).checkEmailVerified(
+        isEmailVerified: isEmailVerified, isVerified: isVerified);
     //checks if email is verified, if verified, takes the user to firstpage, if not,
     // gives user a timer and an option to resend verification
     return isEmailVerified
@@ -80,41 +117,32 @@ class _VerifyEmailPage extends State<VerifyEmailPage> {
                         style: ElevatedButton.styleFrom(),
                         onPressed: () {
                           () {
-                            canResendEmail ? sendEmailVerification() : null;
+                            canResendEmail
+                                ? BlocProvider.of<CheckEmailVerificationCubit>(
+                                        context)
+                                    .sendEmailVerification(
+                                        context: context,
+                                        canResendEmail: canResendEmail,
+                                        isEmailVerified: isEmailVerified,
+                                        setStateCanResendFalse:
+                                            setStateCanResendFalse,
+                                        setStateCanResendTrue:
+                                            setStateCanResendTrue)
+                                : null;
                           };
                         },
-                        icon: const FaIcon(Icons.email_outlined),
-                        label: Text(translation(context).resendEmail))
+                        icon: FaIcon(Icons.email_outlined,
+                            color: canResendEmail ? Colors.black : Colors.grey),
+                        label: Text(
+                          translation(context).resendEmail,
+                          style: TextStyle(
+                              color:
+                                  canResendEmail ? Colors.black : Colors.grey),
+                        ))
                   ]),
                 )
               ]),
             ),
           );
-  }
-
-  sendEmailVerification() async {
-    try {
-      final user = FirebaseAuth.instance.currentUser!;
-      await user.sendEmailVerification();
-      setState(() {
-        canResendEmail = false;
-      });
-      await Future.delayed(const Duration(seconds: 50));
-      setState(() {
-        canResendEmail = true;
-      });
-    } on Exception catch (e) {
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.toString())));
-    }
-  }
-
-  void checkEmailVerified() async {
-    await FirebaseAuth.instance.currentUser!.reload();
-    setState(() {
-      isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
-    });
-    if (isEmailVerified) timer?.cancel();
   }
 }

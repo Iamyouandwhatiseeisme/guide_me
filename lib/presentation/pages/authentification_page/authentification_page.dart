@@ -23,7 +23,9 @@ class _AuthPageState extends State<AuthPage> {
       body: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
-            if (snapshot.hasData && snapshot.data != null) {
+            if (snapshot.hasData &&
+                snapshot.data != null &&
+                FirebaseAuth.instance.currentUser!.emailVerified == true) {
               //checks if there is an authenticated user, if there is, shows first page, else takes user to authentication page
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.of(context)

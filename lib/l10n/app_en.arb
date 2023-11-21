@@ -61,6 +61,7 @@
     "alreadyHaveAccount" : "Already have an account?",
     "login" : "Log in",
     "signUpWithMail" : "Sign up with E-Mail",
-    "signUpWithGoogle" : "Sign up with Google"
+    "signUpWithGoogle" : "Sign up with Google",
+    "noNameSpecifiedYet" : "No name specified yet"
 
     }

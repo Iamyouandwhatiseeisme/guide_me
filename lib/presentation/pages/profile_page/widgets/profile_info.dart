@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:guide_me/data/constants/language_constants.dart';
 
 class ProfileInfo extends StatelessWidget {
   const ProfileInfo({
@@ -19,7 +20,9 @@ class ProfileInfo extends StatelessWidget {
               width: 100,
               height: 100,
               decoration: const BoxDecoration(shape: BoxShape.circle),
-              child: ClipOval(child: Image.network(user.photoURL!))),
+              child: ClipOval(
+                  child: Image.network(user.photoURL ??
+                      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'))),
         ),
         const SizedBox(
           width: 12,
@@ -29,7 +32,7 @@ class ProfileInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              user.displayName!,
+              user.displayName ?? translation(context).noNameSpecifiedYet,
               style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w800,

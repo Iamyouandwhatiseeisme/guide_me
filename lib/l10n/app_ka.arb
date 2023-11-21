@@ -61,5 +61,7 @@
     "alreadyHaveAccount" : "უკვე გაქვთ ანგარიში?",
     "login" : "შესვლა",
     "signUpWithMail" : "მეილით რეგისტრაცია",
-    "signUpWithGoogle" : "გუგლით რეგისტრაცია"
+    "signUpWithGoogle" : "გუგლით რეგისტრაცია",
+    "noNameSpecifiedYet" : "სახელი ვერ მოიძებნა"
+
 }

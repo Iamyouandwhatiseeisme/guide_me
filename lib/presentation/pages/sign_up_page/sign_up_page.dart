@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/presentation/pages/pages.dart';
 
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
@@ -23,14 +25,17 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           //takes user to email verification page
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingAnimationScaffold();
           } else if (snapshot.hasData) {
-            return const VerifyEmailPage();
+            return BlocProvider(
+              create: (context) => CheckEmailVerificationCubit(),
+              child: const VerifyEmailPage(),
+            );
           } else if (snapshot.hasError) {
             return const Center(child: Text('Something Went Wrong'));
           } else {

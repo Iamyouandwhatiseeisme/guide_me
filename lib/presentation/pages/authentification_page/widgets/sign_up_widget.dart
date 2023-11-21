@@ -74,7 +74,7 @@ class _SignUpPageWidgetsState extends State<SignUpPageWidgets> {
                     controller: widget.passwordController,
                     label: translation(context).password,
                     hintText: translation(context).enterPassword),
-                GoogleSignUpButton(
+                SignUpWithButton(
                     formKey: widget.formKey,
                     emailController: widget.emailController,
                     passwordController: widget.passwordController,
@@ -83,7 +83,7 @@ class _SignUpPageWidgetsState extends State<SignUpPageWidgets> {
                       Icons.mail,
                       color: Colors.red,
                     )),
-                GoogleSignUpButton(
+                SignUpWithButton(
                   text: translation(context).signUpWithGoogle,
                   icon: const FaIcon(
                     FontAwesomeIcons.google,

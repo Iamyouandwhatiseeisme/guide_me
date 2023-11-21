@@ -5,8 +5,8 @@ import 'package:guide_me/data/data.dart';
 import 'package:guide_me/main.dart';
 import 'package:provider/provider.dart';
 
-class GoogleSignUpButton extends StatelessWidget {
-  const GoogleSignUpButton({
+class SignUpWithButton extends StatelessWidget {
+  const SignUpWithButton({
     super.key,
     required this.text,
     required this.icon,
