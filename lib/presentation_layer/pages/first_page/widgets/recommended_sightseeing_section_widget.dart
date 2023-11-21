@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:guide_me/business_layer/cubit/recommended_places_sightseeings_dart_state.dart';
-import 'package:guide_me/presentation_layer/widgets/first_page_widgets/first_page_content.dart';
-import 'package:guide_me/presentation_layer/widgets/first_page_widgets/sortable_list_view_card_builder.dart';
+import 'package:guide_me/presentation_layer/pages/first_page/widgets/first_page_content.dart';
+import 'package:guide_me/presentation_layer/pages/first_page/widgets/sortable_list_view_card_builder.dart';
 
-import '../../../business_layer/cubits.dart';
-import '../buttons/sorter_radio_button_widget.dart';
+import '../../../../business_layer/cubits.dart';
+import '../../../widgets/buttons/sorter_radio_button_widget.dart';
 
 class RecommendedSightseeingsSectiogWidget extends StatelessWidget {
   const RecommendedSightseeingsSectiogWidget({

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/data_layer/constants/language_constants.dart';
 
-import '../presentation_layer_widgets.dart';
+import '../../../widgets/presentation_layer_widgets.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({

@@ -7,7 +7,7 @@ import 'package:guide_me/business_layer/cubit/fetch_searched_items_cubit.dart';
 import 'package:guide_me/data_layer/models/nearby_places_model.dart';
 
 import 'package:guide_me/main.dart';
-import 'package:guide_me/presentation_layer/widgets/first_page_widgets/custom_bottom_navigatio_bar_widget.dart';
+import 'package:guide_me/presentation_layer/pages/first_page/widgets/custom_bottom_navigatio_bar_widget.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class FirstPageContent extends StatefulWidget {

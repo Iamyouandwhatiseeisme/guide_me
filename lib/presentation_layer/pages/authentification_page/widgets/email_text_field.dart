@@ -1,6 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:guide_me/presentation_layer/widgets/authentification_page_widgets/auth_page_text_field_widget.dart';
+import 'package:guide_me/presentation_layer/pages/authentification_page/widgets/auth_page_text_field_widget.dart';
 
 class EmailTextField extends StatelessWidget {
   const EmailTextField({

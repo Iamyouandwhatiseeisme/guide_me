@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:guide_me/presentation_layer/pages/first_page.dart';
+import 'package:guide_me/presentation_layer/pages/first_page/first_page.dart';
 
 import '../../data_layer/constants/language_constants.dart';
 

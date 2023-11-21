@@ -9,7 +9,7 @@ import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
 import 'package:guide_me/presentation_layer/widgets/page_payloads/searches_page_payload.dart';
 
-import '../../../data_layer/models/nearby_places_model.dart';
+import '../../../../data_layer/models/nearby_places_model.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController searchController;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
-import '../../../data_layer/constants/language_constants.dart';
+import '../../../../data_layer/constants/language_constants.dart';
 
 class SignUpPageWidgets extends StatefulWidget {
   SignUpPageWidgets({

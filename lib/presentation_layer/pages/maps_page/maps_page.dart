@@ -10,7 +10,7 @@ import 'package:guide_me/business_layer/cubit/go_to_my_location_cubit_cubit.dart
 import 'package:guide_me/business_layer/cubit/is_exapnded_cubit.dart';
 import 'package:guide_me/business_layer/cubit/weather_cubit_cubit.dart';
 import 'package:guide_me/data_layer/data.dart';
-import 'package:guide_me/presentation_layer/widgets/first_page_widgets/custom_bottom_navigatio_bar_widget.dart';
+import 'package:guide_me/presentation_layer/pages/first_page/widgets/custom_bottom_navigatio_bar_widget.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
 class MapsPage extends StatefulWidget {

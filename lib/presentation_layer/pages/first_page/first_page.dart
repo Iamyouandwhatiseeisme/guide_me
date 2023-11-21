@@ -13,9 +13,9 @@ import 'package:guide_me/main.dart';
 
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
-import '../../business_layer/cubit/fetch_searched_items_cubit.dart';
-import '../../business_layer/cubit/recommended_places_cubit_dart_cubit.dart';
-import '../../data_layer/httpClients/google_api_client.dart';
+import '../../../business_layer/cubit/fetch_searched_items_cubit.dart';
+import '../../../business_layer/cubit/recommended_places_cubit_dart_cubit.dart';
+import '../../../data_layer/httpClients/google_api_client.dart';
 
 class FirstPage extends StatefulWidget {
   const FirstPage({

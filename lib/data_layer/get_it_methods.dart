@@ -3,7 +3,7 @@ import 'package:guide_me/data_layer/remoteDataBase/firebase_service.dart';
 import 'package:guide_me/data_layer/httpClients/google_api_client.dart';
 import 'package:guide_me/data_layer/httpClients/weather_api_client.dart';
 import 'package:guide_me/data_layer/localDataBase/local_data_base.dart';
-import 'package:guide_me/presentation_layer/widgets/first_page_widgets/custom_bottom_navigatio_bar_widget.dart';
+import 'package:guide_me/presentation_layer/pages/first_page/widgets/custom_bottom_navigatio_bar_widget.dart';
 import 'package:guide_me/presentation_layer/widgets/navigation/navigator_client.dart';
 
 import '../main.dart';

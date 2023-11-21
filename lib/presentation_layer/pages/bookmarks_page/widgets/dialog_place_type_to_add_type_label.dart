@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../data_layer/models/nearby_places_model.dart';
+import '../../../../data_layer/models/nearby_places_model.dart';
 
 class DialogPlaceToAddTypeLabel extends StatelessWidget {
   const DialogPlaceToAddTypeLabel({

@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/business_layer/cubits.dart';
 import 'package:guide_me/presentation_layer/widgets/presentation_layer_widgets.dart';
 
-import '../../../data_layer/models/nearby_places_model.dart';
+import '../../../../data_layer/models/nearby_places_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RecommendedSightseeingsWidget extends StatelessWidget {

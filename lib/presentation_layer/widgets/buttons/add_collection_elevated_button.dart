@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../data_layer/models/nearby_places_model.dart';
-import '../bookmarks_page_widgets/dialog_for_collection_adding.dart';
+import '../../pages/bookmarks_page/widgets/dialog_for_collection_adding.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddCollectionElevatedButton extends StatelessWidget {

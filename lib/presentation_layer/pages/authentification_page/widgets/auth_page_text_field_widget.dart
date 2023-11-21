@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../presentation_layer_widgets.dart';
+import '../../../widgets/presentation_layer_widgets.dart';
 
 class AuthPageTextField extends StatefulWidget {
   final String label;
