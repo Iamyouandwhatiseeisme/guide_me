@@ -35,12 +35,13 @@ class SignUpWithButton extends StatelessWidget {
             foregroundColor: Colors.black,
           ),
           onPressed: () {
-            if (text.contains('Google')) {
+            print('print: $text');
+            if (text.contains(translation(context).signUpWithGoogle)) {
               final provider =
                   Provider.of<GoogleSignInprovider>(context, listen: false);
 
               provider.googleLogin();
-            } else if (text.contains('E-Mail')) {
+            } else if (text.contains('მეილით')) {
               firebaseService.signUpWithEmail(
                   formKey: formKey,
                   emailController: emailController!,

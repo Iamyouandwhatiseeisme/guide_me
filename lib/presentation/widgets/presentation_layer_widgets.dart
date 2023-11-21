@@ -86,7 +86,7 @@ export '../pages/authentification_page/widgets/email_text_field.dart';
 export '../pages/authentification_page/widgets/auth_page_widget.dart';
 export '../pages/authentification_page/widgets/login_widget.dart';
 export '../pages/authentification_page/widgets/sign_up_or_log_in_text.dart';
-export 'package:guide_me/presentation/pages/authentification_page/widgets/google_sign_in_button.dart';
+export 'package:guide_me/presentation/pages/authentification_page/widgets/sign_up_with_button.dart';
 export 'package:guide_me/presentation/pages/authentification_page/widgets/login_page_widget.dart';
 export 'package:guide_me/presentation/pages/profile_page/widgets/password_text_form_field_for_password_change_dialog.dart';
 export '../pages/profile_page/widgets/update_password_button.dart';
