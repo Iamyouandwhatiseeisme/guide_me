@@ -13,11 +13,9 @@ class PlacePageAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).colorScheme.primary;
     return AppBar(actions: [
-      Icon(
+      const Icon(
         Icons.share_outlined,
-        color: primaryColor,
       ),
       const SizedBox(width: 24),
       Padding(
@@ -27,7 +25,6 @@ class PlacePageAppbar extends StatelessWidget {
                   Hive.box<NearbyPlacesModel>("FavoritedPlaces").listenable(),
               builder: (context, value, child) {
                 return FavoriteButton(
-                    color: primaryColor,
                     placeToDisplay: placeToDisplay,
                     box: Hive.box<NearbyPlacesModel>("FavoritedPlaces"));
               }))

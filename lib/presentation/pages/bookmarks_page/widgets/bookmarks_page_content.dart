@@ -13,9 +13,7 @@ class BookmarksPageContent extends StatelessWidget {
     required this.widget,
     required this.box,
     required this.distanceMap,
-    required this.deleteItem,
   });
-  final Function deleteItem;
   final List<NearbyPlacesModel> listOfFavorites;
   final BookmarksPage widget;
   final Box<NearbyPlacesModel> box;
@@ -23,21 +21,24 @@ class BookmarksPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BookmarksTabCubit, TabOption>(
-      builder: (context, tabOptionstate) {
-        bool isFavorites = tabOptionstate == TabOption.favorites;
-        return isFavorites
-            ? FavoritesPageContent(
-                tabOptionState: isFavorites,
-                onDelete: deleteItem,
-                listOfFavorites: listOfFavorites,
-                widget: widget,
-                box: box,
-                distanceMap: distanceMap)
-            : CollectionsTabPageContent(
-                isFavorites: isFavorites,
-                widget: widget,
-                distanceMap: distanceMap);
+    return BlocBuilder<BoxManagamentCubit, BoxManagamentState>(
+      builder: (context, state) {
+        return BlocBuilder<BookmarksTabCubit, TabOption>(
+          builder: (context, tabOptionstate) {
+            bool isFavorites = tabOptionstate == TabOption.favorites;
+            return isFavorites
+                ? FavoritesPageContent(
+                    tabOptionState: isFavorites,
+                    listOfFavorites: listOfFavorites,
+                    widget: widget,
+                    box: box,
+                    distanceMap: distanceMap)
+                : CollectionsTabPageContent(
+                    isFavorites: isFavorites,
+                    widget: widget,
+                    distanceMap: distanceMap);
+          },
+        );
       },
     );
   }

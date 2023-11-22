@@ -27,19 +27,6 @@ class _BookmarksPageState extends State<BookmarksPage> {
   bool isLoading = false;
   final bottomNavigationBar = sl.get<CustomBottomNavigationBar>();
 
-  void deleteItem(NearbyPlacesModel place,
-      List<NearbyPlacesModel> listOfFavorites, Box<NearbyPlacesModel> box) {
-    Hive.box<NearbyPlacesModel>('FavoritedPlaces').delete(place.hashCode);
-    listOfFavorites.clear();
-    listOfFavorites = box.toMap().values.toList();
-
-    refreshList();
-  }
-
-  void refreshList() {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     final box = Hive.box<NearbyPlacesModel>("FavoritedPlaces");
@@ -49,6 +36,9 @@ class _BookmarksPageState extends State<BookmarksPage> {
       providers: [
         BlocProvider(
           create: (context) => BookmarksTabCubit(),
+        ),
+        BlocProvider(
+          create: (context) => BoxManagamentCubit(listOfFavorites),
         ),
       ],
       child: Builder(builder: (context) {
@@ -65,18 +55,22 @@ class _BookmarksPageState extends State<BookmarksPage> {
               listOfDestinations: listOfFavorites,
             );
 
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const BookmarksPageTabOptionsButtons(),
-                BookmarksPageContent(
-                    deleteItem: deleteItem,
-                    listOfFavorites: listOfFavorites,
-                    widget: widget,
-                    box: box,
-                    distanceMap: distanceMap),
-                const BookmarksPageBottomLabelAndButtonBuilder()
-              ],
+            return BlocBuilder<BoxManagamentCubit, BoxManagamentState>(
+              builder: (context, state) {
+                final listTopass = state.listOfFavorites;
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const BookmarksPageTabOptionsButtons(),
+                    BookmarksPageContent(
+                        listOfFavorites: listTopass,
+                        widget: widget,
+                        box: box,
+                        distanceMap: distanceMap),
+                    const BookmarksPageBottomLabelAndButtonBuilder()
+                  ],
+                );
+              },
             );
           }),
         );

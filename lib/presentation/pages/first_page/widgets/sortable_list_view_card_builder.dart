@@ -91,7 +91,6 @@ class SortableListViewCardBuilder extends StatelessWidget {
                                                   .withAlpha(40),
                                             ),
                                             child: FavoriteButton(
-                                                color: const Color(0xffF3F0E6),
                                                 placeToDisplay:
                                                     sortedList[index],
                                                 box: box)))

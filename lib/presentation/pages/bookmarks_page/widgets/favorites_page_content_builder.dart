@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_me/bloc/cubit/box_managament_cubit.dart';
 import 'package:guide_me/data/data.dart';
 import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation/pages/bookmarks_page/bookmarks_page.dart';
@@ -11,7 +13,6 @@ class FavoritesPageContent extends StatefulWidget {
   const FavoritesPageContent({
     super.key,
     this.nameOfList,
-    required this.onDelete,
     required this.listOfFavorites,
     required this.widget,
     required this.box,
@@ -24,7 +25,6 @@ class FavoritesPageContent extends StatefulWidget {
   final BookmarksPage widget;
   final Box<dynamic> box;
   final Map<NearbyPlacesModel, double?> distanceMap;
-  final Function onDelete;
 
   @override
   State<FavoritesPageContent> createState() => _FavoritesPageContentState();
@@ -60,21 +60,40 @@ class _FavoritesPageContentState extends State<FavoritesPageContent> {
                         arguments: [placePagePayLoad],
                       );
                     },
-                    child: ValueListenableBuilder(
-                        valueListenable: widget.box.listenable(),
-                        builder: (context, box, child) {
-                          return BookmarksPageCardWidget(
-                            name: widget.nameOfList,
-                            tabOptionState: widget.tabOptionState,
-                            onDelete: () {
-                              widget.onDelete(widget.listOfFavorites[index],
-                                  widget.listOfFavorites, box);
-                            },
-                            distance: widget
-                                .distanceMap[widget.listOfFavorites[index]],
-                            place: widget.listOfFavorites[index],
-                          );
-                        }),
+                    child: BlocBuilder<BoxManagamentCubit, BoxManagamentState>(
+                      builder: (context, state) {
+                        return ValueListenableBuilder(
+                            valueListenable: widget.box.listenable(),
+                            builder: (context, box, child) {
+                              if (box is Box<NearbyPlacesModel>) {
+                                return BookmarksPageCardWidget(
+                                    name: widget.nameOfList,
+                                    tabOptionState: widget.tabOptionState,
+                                    onDelete: () {
+                                      BlocProvider.of<BoxManagamentCubit>(
+                                              context)
+                                          .deleteItem(
+                                              widget.listOfFavorites[index],
+                                              box);
+                                    },
+                                    distance: widget.distanceMap[
+                                        widget.listOfFavorites[index]],
+                                    place: state.listOfFavorites[index]
+                                    // place: widget.listOfFavorites[index],
+                                    );
+                              } else {
+                                return BookmarksPageCardWidget(
+                                  name: widget.nameOfList,
+                                  tabOptionState: widget.tabOptionState,
+                                  onDelete: () {},
+                                  distance: widget.distanceMap[
+                                      widget.listOfFavorites[index]],
+                                  place: widget.listOfFavorites[index],
+                                );
+                              }
+                            });
+                      },
+                    ),
                   ),
                 ),
               );

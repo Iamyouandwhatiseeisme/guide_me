@@ -4,11 +4,8 @@ import 'package:guide_me/main.dart';
 import 'package:hive/hive.dart';
 
 class FavoriteButton extends StatelessWidget {
-  final Color color;
-
   const FavoriteButton({
     super.key,
-    required this.color,
     required this.placeToDisplay,
     required this.box,
   });
@@ -25,10 +22,10 @@ class FavoriteButton extends StatelessWidget {
       },
       child: Center(
           child: Icon(
-              box.containsKey(placeToDisplay.hashCode)
-                  ? Icons.favorite
-                  : Icons.favorite_outline,
-              color: color)),
+        box.containsKey(placeToDisplay.hashCode)
+            ? Icons.favorite
+            : Icons.favorite_outline,
+      )),
     );
   }
 }

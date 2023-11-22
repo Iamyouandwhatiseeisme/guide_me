@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/data/data.dart';
 import 'package:guide_me/main.dart';
-import 'package:hive/hive.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddCollectionButton extends StatefulWidget {

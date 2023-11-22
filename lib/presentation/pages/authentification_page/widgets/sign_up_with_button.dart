@@ -35,7 +35,6 @@ class SignUpWithButton extends StatelessWidget {
             foregroundColor: Colors.black,
           ),
           onPressed: () {
-            print('print: $text');
             if (text.contains(translation(context).signUpWithGoogle)) {
               final provider =
                   Provider.of<GoogleSignInprovider>(context, listen: false);

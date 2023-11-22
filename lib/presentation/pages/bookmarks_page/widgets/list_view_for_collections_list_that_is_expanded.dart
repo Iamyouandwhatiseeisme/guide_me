@@ -31,7 +31,6 @@ class ListViewForCollectionsListThatIsExpanded extends StatelessWidget {
           FavoritesPageContent(
               nameOfList: listToPass[index].name,
               tabOptionState: isFavorites,
-              onDelete: () {},
               listOfFavorites: listToPass[index].items,
               widget: widget,
               box: box,
