@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:guide_me/data/data.dart';
 import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation/pages/first_page/widgets/custom_bottom_navigatio_bar_widget.dart';
@@ -45,7 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void updateUI() {
     setState(() {
-      // Update the UI as needed
+      print('set state called print');
     });
   }
 
@@ -68,41 +69,44 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: SingleChildScrollView(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: BorderRadius.circular(32)),
-              child: Center(
-                child: Text(
-                  AppLocalizations.of(context)!.profileInformation,
-                  style: const TextStyle(
-                    fontSize: 24,
+          child: BlocProvider(
+            create: (context) => ChangeNameCubit(),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    border: Border.all(),
+                    borderRadius: BorderRadius.circular(32)),
+                child: Center(
+                  child: Text(
+                    AppLocalizations.of(context)!.profileInformation,
+                    style: const TextStyle(
+                      fontSize: 24,
+                    ),
                   ),
                 ),
               ),
-            ),
-            ProfileInfo(user: user),
-            ListViewBuilderForProfilePage(
-              listOfSettings: listOfSettings,
-              listofIcons: listofIcons,
-              nameController: nameController,
-              user: user,
-              updateUI: updateUI,
-              passedControllerForOldPassword: passedControllerForOldPassword,
-              passedControllerForNewPassword: passedControllerForNewPassword,
-            ),
-            Divider(
-              color: Colors.grey.withOpacity(0.5),
-              height: 1,
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            //
-          ]),
+              ProfileInfo(),
+              ListViewBuilderForProfilePage(
+                listOfSettings: listOfSettings,
+                listofIcons: listofIcons,
+                nameController: nameController,
+                user: user,
+                updateUI: () => updateUI(),
+                passedControllerForOldPassword: passedControllerForOldPassword,
+                passedControllerForNewPassword: passedControllerForNewPassword,
+              ),
+              Divider(
+                color: Colors.grey.withOpacity(0.5),
+                height: 1,
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              //
+            ]),
+          ),
         ),
       ),
     );

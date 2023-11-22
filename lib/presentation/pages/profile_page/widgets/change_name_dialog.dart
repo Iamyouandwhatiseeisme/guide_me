@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:guide_me/bloc/cubits.dart';
 
 class DisplayNameDIalog extends StatelessWidget {
   final User user;
@@ -38,12 +40,13 @@ class DisplayNameDIalog extends StatelessWidget {
                   : null,
               onEditingComplete: () async {
                 await user.updateDisplayName(nameController.text);
+                print('print: should update');
                 updateUI();
                 nameController.clear();
                 if (context.mounted) Navigator.of(context).pop();
               },
               onChanged: (text) {
-                updateUI;
+                updateUI();
               },
               controller: nameController,
               decoration: InputDecoration(

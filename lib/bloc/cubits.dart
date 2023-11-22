@@ -26,3 +26,4 @@ export 'cubit/sing_in_with_email_cubit.dart';
 export 'cubit/check_email_verification_cubit.dart';
 export 'cubit/update_password_cubit.dart';
 export 'cubit/box_managament_cubit.dart';
+export 'cubit/change_name_cubit.dart';

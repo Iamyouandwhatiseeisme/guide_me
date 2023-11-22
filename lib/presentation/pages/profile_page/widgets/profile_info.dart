@@ -5,13 +5,12 @@ import 'package:guide_me/data/constants/language_constants.dart';
 class ProfileInfo extends StatelessWidget {
   const ProfileInfo({
     super.key,
-    required this.user,
   });
-
-  final User user;
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
+
     return Row(
       children: [
         Padding(
