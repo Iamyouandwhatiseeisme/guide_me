@@ -64,16 +64,16 @@ class CheckEmailVerificationCubit extends Cubit<bool> {
       required Function setStateCanResendFalse,
       required Function setStateCanResendTrue,
       Timer? timer}) async {
-    if (context.mounted) {
-      try {
-        final user = FirebaseAuth.instance.currentUser!;
-        await user.sendEmailVerification();
+    try {
+      final user = FirebaseAuth.instance.currentUser!;
+      await user.sendEmailVerification();
 
-        setStateCanResendFalse();
-        await Future.delayed(const Duration(seconds: 50));
-        setStateCanResendTrue();
-      } on Exception catch (e) {
-        // ignore: use_build_context_synchronously
+      setStateCanResendFalse();
+      await Future.delayed(const Duration(seconds: 50));
+      setStateCanResendTrue();
+    } on FirebaseAuthException catch (e) {
+      // ignore: use_build_context_synchronously
+      if (context.mounted) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(e.toString())));
       }
