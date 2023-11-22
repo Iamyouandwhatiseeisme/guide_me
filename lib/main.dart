@@ -24,7 +24,7 @@ Future<void> main() async {
   await dotenv.load(fileName: ".env");
   setUp();
   sl<FirebaseService>().initFirebase();
-  sl<LocalDataBase>().initLocalDataBase();
+  sl<LocalDataSource>().initLocalDataBase();
   runApp(const MyApp());
 }
 

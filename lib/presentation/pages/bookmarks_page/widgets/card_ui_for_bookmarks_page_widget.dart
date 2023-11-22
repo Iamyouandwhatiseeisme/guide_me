@@ -29,7 +29,7 @@ class CardUiForBookmarksPage extends CardUi {
     String type = '';
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
-    final localDatabase = sl.get<LocalDataBase>();
+    final localDatabase = sl.get<LocalDataSource>();
 
     return GestureDetector(
       onLongPress: () => showDIalogWindow(

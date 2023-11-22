@@ -10,7 +10,7 @@ void setUp() {
   sl.registerSingleton<CustomBottomNavigationBar>(
       const CustomBottomNavigationBar());
   sl.registerSingleton<FirebaseService>(FirebaseService());
-  sl.registerSingleton<LocalDataBase>(LocalDataBase());
+  sl.registerSingleton<LocalDataSource>(LocalDataSource());
   sl.registerSingleton<GoogleApiClient>(GoogleApiClient());
   sl.registerSingleton<WeatherApiClient>(WeatherApiClient());
 }

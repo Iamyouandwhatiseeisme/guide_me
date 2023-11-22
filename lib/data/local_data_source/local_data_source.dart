@@ -2,7 +2,7 @@ import 'package:guide_me/data/data.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
 
-class LocalDataBase {
+class LocalDataSource {
   Future<void> initLocalDataBase() async {
     await Hive.initFlutter();
     Hive.registerAdapter(NearbyPlacesModelAdapter());
@@ -33,4 +33,26 @@ class LocalDataBase {
       await box.put(item.hashCode, item);
     }
   }
+
+  void addToCollection({
+    required String nameOfCollection,
+    required List<NearbyPlacesModel> listToCreate,
+  }) {
+    Hive.box<CollectionModel>("CollectionLists").put(
+      nameOfCollection,
+      CollectionModel(name: nameOfCollection, items: listToCreate),
+    );
+  }
+
+  // void deleteItem(
+  //     {required NearbyPlacesModel place,
+  //     required List<NearbyPlacesModel> listOfFavorites,
+  //     required Box<NearbyPlacesModel> box,
+  //     required Function refreshList}) {
+  //   Hive.box<NearbyPlacesModel>('FavoritedPlaces').delete(place.hashCode);
+  //   listOfFavorites.clear();
+  //   listOfFavorites = box.toMap().values.toList();
+
+  //   refreshList();
+  // }
 }

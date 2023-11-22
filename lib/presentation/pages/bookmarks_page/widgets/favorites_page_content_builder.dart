@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/data/data.dart';
+import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation/pages/bookmarks_page/bookmarks_page.dart';
 import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
 
@@ -30,6 +31,7 @@ class FavoritesPageContent extends StatefulWidget {
 }
 
 class _FavoritesPageContentState extends State<FavoritesPageContent> {
+  final deleteItem = sl.get<LocalDataSource>();
   @override
   Widget build(BuildContext context) {
     return Builder(

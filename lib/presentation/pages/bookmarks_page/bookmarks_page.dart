@@ -27,10 +27,8 @@ class _BookmarksPageState extends State<BookmarksPage> {
   bool isLoading = false;
   final bottomNavigationBar = sl.get<CustomBottomNavigationBar>();
 
-  void deleteItem(
-      {required NearbyPlacesModel place,
-      required List<NearbyPlacesModel> listOfFavorites,
-      required Box<NearbyPlacesModel> box}) {
+  void deleteItem(NearbyPlacesModel place,
+      List<NearbyPlacesModel> listOfFavorites, Box<NearbyPlacesModel> box) {
     Hive.box<NearbyPlacesModel>('FavoritedPlaces').delete(place.hashCode);
     listOfFavorites.clear();
     listOfFavorites = box.toMap().values.toList();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/data/data.dart';
+import 'package:guide_me/main.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -23,15 +24,14 @@ class _AddCollectionButtonState extends State<AddCollectionButton> {
     return ValueListenableBuilder<TextEditingValue>(
         valueListenable: widget._textController,
         builder: (context, value, child) {
+          final localDataSource = sl.get<LocalDataSource>();
           return ElevatedButton.icon(
             onPressed: widget._textController.text.isNotEmpty
                 ? () {
                     String nameOfCollection = widget._textController.text;
-                    Hive.box<CollectionModel>("CollectionLists").put(
-                      nameOfCollection,
-                      CollectionModel(
-                          name: nameOfCollection, items: widget.listToCreate),
-                    );
+                    localDataSource.addToCollection(
+                        nameOfCollection: nameOfCollection,
+                        listToCreate: widget.listToCreate);
                     widget._textController.clear();
                     Navigator.pop(context);
                   }
