@@ -34,25 +34,19 @@ class LocalDataSource {
     }
   }
 
-  void addToCollection({
-    required String nameOfCollection,
-    required List<NearbyPlacesModel> listToCreate,
-  }) {
-    Hive.box<CollectionModel>("CollectionLists").put(
-      nameOfCollection,
-      CollectionModel(name: nameOfCollection, items: listToCreate),
-    );
-  }
-
-  // void deleteItem(
-  //     {required NearbyPlacesModel place,
-  //     required List<NearbyPlacesModel> listOfFavorites,
-  //     required Box<NearbyPlacesModel> box,
-  //     required Function refreshList}) {
-  //   Hive.box<NearbyPlacesModel>('FavoritedPlaces').delete(place.hashCode);
-  //   listOfFavorites.clear();
-  //   listOfFavorites = box.toMap().values.toList();
-
-  //   refreshList();
+  // void addToCollection({
+  //   required String nameOfCollection,
+  //   required List<NearbyPlacesModel> listToCreate,
+  // }) {
+  //   Hive.box<CollectionModel>("CollectionLists").put(
+  //     nameOfCollection,
+  //     CollectionModel(name: nameOfCollection, items: listToCreate),
+  //   );
   // }
+
+  void addToCollectionList(
+      {required String name, required List<NearbyPlacesModel> items}) {
+    Hive.box<CollectionModel>("CollectionLists")
+        .put(name, CollectionModel(name: name, items: items));
+  }
 }

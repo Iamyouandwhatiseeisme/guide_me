@@ -3,6 +3,8 @@ import 'package:guide_me/data/data.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../main.dart';
+
 class CollectionDialogUserInputReaderTextField extends StatelessWidget {
   const CollectionDialogUserInputReaderTextField({
     super.key,
@@ -14,11 +16,12 @@ class CollectionDialogUserInputReaderTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localDataSource = sl.get<LocalDataSource>();
     return TextFormField(
       onFieldSubmitted: (String value) {
         String nameOfCollection = _textController.text;
-        Hive.box<CollectionModel>("CollectionLists").put(nameOfCollection,
-            CollectionModel(name: nameOfCollection, items: listToCreate));
+        localDataSource.addToCollectionList(
+            name: nameOfCollection, items: listToCreate);
         _textController.clear();
         Navigator.pop(context);
       },

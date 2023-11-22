@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import '../../../../data/data.dart';
+import '../../../../main.dart';
 
 class ListViewBuilderForCollectionsLists extends StatefulWidget {
   const ListViewBuilderForCollectionsLists({
@@ -25,6 +26,8 @@ class _ListViewBuilderForCollectionsListsState
     extends State<ListViewBuilderForCollectionsLists> {
   @override
   Widget build(BuildContext context) {
+    final localDataSource = sl.get<LocalDataSource>();
+    print('print: building collections');
     return SizedBox(
       height: 300,
       child: Padding(
@@ -74,14 +77,10 @@ class _ListViewBuilderForCollectionsListsState
                                 .contains(widget.placeToAdd)) {
                               widget.listOfCollections[index].items
                                   .add(widget.placeToAdd);
-
-                              Hive.box<CollectionModel>("CollectionLists").put(
-                                  widget.listOfCollections[index].name,
-                                  CollectionModel(
-                                      name:
-                                          widget.listOfCollections[index].name,
-                                      items: widget
-                                          .listOfCollections[index].items));
+                              print('print: collection added');
+                              localDataSource.addToCollectionList(
+                                  name: widget.listOfCollections[index].name,
+                                  items: widget.listOfCollections[index].items);
                             } else {
                               ScaffoldMessenger.of(context).clearSnackBars();
                               ScaffoldMessenger.of(context)
@@ -90,7 +89,6 @@ class _ListViewBuilderForCollectionsListsState
                           },
                           child: const Icon(
                             Icons.add,
-                            color: Colors.white,
                           ),
                         )
                       ],
