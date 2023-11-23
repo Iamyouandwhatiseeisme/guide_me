@@ -27,8 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final passedControllerForNewPassword = TextEditingController();
   final passedControllerForOldPassword = TextEditingController();
   final bottomNavigationBar = sl.get<CustomBottomNavigationBar>();
-  final user = FirebaseAuth.instance.currentUser!;
-
+  User user = FirebaseAuth.instance.currentUser!;
   final List<FaIcon> listofIcons = [
     const FaIcon(FontAwesomeIcons.pen),
     const FaIcon(FontAwesomeIcons.key),
@@ -46,7 +45,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void updateUI() {
     setState(() {
-      print('set state called print');
+      print('print: updating ui');
+      user = FirebaseAuth.instance.currentUser!;
     });
   }
 
@@ -87,13 +87,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-              ProfileInfo(),
+              ProfileInfo(user: user),
               ListViewBuilderForProfilePage(
                 listOfSettings: listOfSettings,
                 listofIcons: listofIcons,
                 nameController: nameController,
                 user: user,
-                updateUI: () => updateUI(),
+                updateUI: updateUI,
                 passedControllerForOldPassword: passedControllerForOldPassword,
                 passedControllerForNewPassword: passedControllerForNewPassword,
               ),

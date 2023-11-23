@@ -28,7 +28,6 @@ class _AddCollectionButtonState extends State<AddCollectionButton> {
           return ElevatedButton.icon(
             onPressed: widget._textController.text.isNotEmpty
                 ? () {
-                    print('print adding to collection');
                     String nameOfCollection = widget._textController.text;
                     localDataSource.addToCollectionList(
                         name: nameOfCollection, items: widget.listToCreate);

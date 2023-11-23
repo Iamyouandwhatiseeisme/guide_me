@@ -27,7 +27,6 @@ class _ListViewBuilderForCollectionsListsState
   @override
   Widget build(BuildContext context) {
     final localDataSource = sl.get<LocalDataSource>();
-    print('print: building collections');
     return SizedBox(
       height: 300,
       child: Padding(
@@ -77,7 +76,6 @@ class _ListViewBuilderForCollectionsListsState
                                 .contains(widget.placeToAdd)) {
                               widget.listOfCollections[index].items
                                   .add(widget.placeToAdd);
-                              print('print: collection added');
                               localDataSource.addToCollectionList(
                                   name: widget.listOfCollections[index].name,
                                   items: widget.listOfCollections[index].items);

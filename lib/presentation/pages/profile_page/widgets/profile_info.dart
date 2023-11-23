@@ -1,15 +1,25 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 import 'package:guide_me/data/constants/language_constants.dart';
 
-class ProfileInfo extends StatelessWidget {
+class ProfileInfo extends StatefulWidget {
+  final User user;
   const ProfileInfo({
-    super.key,
-  });
+    Key? key,
+    required this.user,
+  }) : super(key: key);
 
   @override
+  State<ProfileInfo> createState() => _ProfileInfoState();
+}
+
+class _ProfileInfoState extends State<ProfileInfo> {
+  @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
+    // final user = FirebaseAuth.instance.currentUser!;
+    // print('print ${user.displayName}');
 
     return Row(
       children: [
@@ -20,7 +30,7 @@ class ProfileInfo extends StatelessWidget {
               height: 100,
               decoration: const BoxDecoration(shape: BoxShape.circle),
               child: ClipOval(
-                  child: Image.network(user.photoURL ??
+                  child: Image.network(widget.user.photoURL ??
                       'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'))),
         ),
         const SizedBox(
@@ -31,14 +41,15 @@ class ProfileInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              user.displayName ?? translation(context).noNameSpecifiedYet,
+              widget.user.displayName ??
+                  translation(context).noNameSpecifiedYet,
               style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w800,
                   letterSpacing: 0.15),
             ),
             Text(
-              user.email!,
+              widget.user.email!,
               style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 16,

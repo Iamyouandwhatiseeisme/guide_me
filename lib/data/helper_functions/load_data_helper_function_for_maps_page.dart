@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
 

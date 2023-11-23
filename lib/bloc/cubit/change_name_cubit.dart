@@ -7,7 +7,6 @@ class ChangeNameCubit extends Cubit<String> {
   ChangeNameCubit() : super((''));
 
   void changeName(String name) {
-    print(name);
     emit(name);
   }
 }
