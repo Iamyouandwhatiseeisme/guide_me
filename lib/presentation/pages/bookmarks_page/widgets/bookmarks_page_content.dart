@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_me/bloc/cubit/fetched_place_details_formatter_cubit.dart';
 import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
 import 'package:guide_me/presentation/pages/pages.dart';
@@ -21,25 +22,28 @@ class BookmarksPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BoxManagamentCubit, BoxManagamentState>(
-      builder: (context, state) {
-        return BlocBuilder<BookmarksTabCubit, TabOption>(
-          builder: (context, tabOptionstate) {
-            bool isFavorites = tabOptionstate == TabOption.favorites;
-            return isFavorites
-                ? FavoritesPageContent(
-                    tabOptionState: isFavorites,
-                    listOfFavorites: listOfFavorites,
-                    widget: widget,
-                    box: box,
-                    distanceMap: distanceMap)
-                : CollectionsTabPageContent(
-                    isFavorites: isFavorites,
-                    widget: widget,
-                    distanceMap: distanceMap);
-          },
-        );
-      },
+    return BlocProvider(
+      create: (context) => FetchedPlaceDetailsFormatterCubit(),
+      child: BlocBuilder<BoxManagamentCubit, BoxManagamentState>(
+        builder: (context, state) {
+          return BlocBuilder<BookmarksTabCubit, TabOption>(
+            builder: (context, tabOptionstate) {
+              bool isFavorites = tabOptionstate == TabOption.favorites;
+              return isFavorites
+                  ? FavoritesPageContent(
+                      tabOptionState: isFavorites,
+                      listOfFavorites: listOfFavorites,
+                      widget: widget,
+                      box: box,
+                      distanceMap: distanceMap)
+                  : CollectionsTabPageContent(
+                      isFavorites: isFavorites,
+                      widget: widget,
+                      distanceMap: distanceMap);
+            },
+          );
+        },
+      ),
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_me/bloc/cubit/fetched_place_details_formatter_cubit.dart';
 
 import 'package:guide_me/data/data.dart';
 import 'package:guide_me/main.dart';
@@ -30,6 +32,8 @@ class CardUiForBookmarksPage extends CardUi {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
     final localDatabase = sl.get<LocalDataSource>();
+    final fetchedPlaceDetailsFormatterCubit =
+        BlocProvider.of<FetchedPlaceDetailsFormatterCubit>(context);
 
     return GestureDetector(
       onLongPress: () => showDIalogWindow(
@@ -124,15 +128,9 @@ class CardUiForBookmarksPage extends CardUi {
                         clipBehavior: Clip.antiAlias,
                         children: [
                           ...List.generate(place.types.length, (index) {
-                            if (index < place.types.length - 1) {
-                              type =
-                                  "${place.types[index].toString()[0].toUpperCase()}${place.types[index].toString().substring(1)}, ";
-                              type = swapUnderScoreWithSpace(type);
-                            } else {
-                              type =
-                                  "${place.types.last.toString()[0].toUpperCase()}${place.types.last.toString().substring(1)}";
-                              type = swapUnderScoreWithSpace(type);
-                            }
+                            type = fetchedPlaceDetailsFormatterCubit
+                                .createListOfTypes(
+                                    index: index, type: type, place: place);
                             return Text(
                               type,
                               softWrap: true,

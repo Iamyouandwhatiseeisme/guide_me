@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_me/bloc/cubit/fetched_place_details_formatter_cubit.dart';
 import 'package:guide_me/data/data.dart';
 
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
@@ -21,7 +23,8 @@ class CardUi extends StatelessWidget {
     String userRatingTotal = place.userRatingsTotal.toString();
     String transformedUserRatingTotal =
         '${userRatingTotal.substring(0, 1)},${userRatingTotal.substring(1)}';
-
+    final FetchedPlaceDetailsFormatterCubit fetchedPlaceDetailsFormatterCubit =
+        BlocProvider.of<FetchedPlaceDetailsFormatterCubit>(context);
     String type = '';
 
     return Container(
@@ -56,15 +59,8 @@ class CardUi extends StatelessWidget {
             Wrap(
               children: [
                 ...List.generate(place.types.length, (index) {
-                  if (index < place.types.length - 1) {
-                    type =
-                        "${place.types[index].toString()[0].toUpperCase()}${place.types[index].toString().substring(1)}, ";
-                    type = swapUnderScoreWithSpace(type);
-                  } else {
-                    type =
-                        "${place.types.last.toString()[0].toUpperCase()}${place.types.last.toString().substring(1)}";
-                    type = swapUnderScoreWithSpace(type);
-                  }
+                  type = fetchedPlaceDetailsFormatterCubit.createListOfTypes(
+                      index: index, type: type, place: place);
                   return Text(
                     type,
                     maxLines: 2,

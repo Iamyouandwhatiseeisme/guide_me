@@ -1,7 +1,5 @@
 export 'http_clients/geocoding_util.dart';
 export 'enums/sorting_option.dart';
-export 'helper_functions/types_polishing_method_for_strings.dart';
-export 'helper_functions/correct_format_adress_method.dart';
 export 'models/google_maps_page_category_item.dart';
 export 'models/user_location_class.dart';
 export 'helper_functions/requiest_write_permission_function.dart';
