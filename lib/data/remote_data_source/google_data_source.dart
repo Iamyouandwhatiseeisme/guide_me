@@ -13,7 +13,7 @@ import 'package:http/http.dart' as http;
 // this client is responsible for all the operations connected with google_places_api and google_maps api, has methods associated with
 // data from those clients
 
-class GoogleApiClient {
+class GoogleDataSource {
   String apiKey = dotenv.env['GOOGLE_API_KEY']!;
   Future<List<String>> fetChPhotosHelper(
       {required List<String> listOfPhotos, required String placeId}) async {
@@ -318,7 +318,7 @@ class GoogleApiClient {
       categoryTypesFetcherCubit.fetchDataForCategories(
           listOfPlaces: listOfPlaces,
           category: category,
-          googleApiClient: sl<GoogleApiClient>());
+          googleApiClient: sl<GoogleDataSource>());
       cachedData[category] = listOfPlaces;
     }
     if (cachedData[category]!.isNotEmpty) {
@@ -384,7 +384,7 @@ class GoogleApiClient {
       await categoryTypesFetcherCubit.fetchDataForCategories(
           listOfPlaces: listOfPlaces,
           category: category,
-          googleApiClient: sl<GoogleApiClient>());
+          googleApiClient: sl<GoogleDataSource>());
       sortingCubit.createDistanceMap(
         distanceMap: distanceMap,
         listOfDestinations: listOfPlaces,

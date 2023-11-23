@@ -43,7 +43,7 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
                 sortingCubit: sortingCubit,
                 sorterToggleButtonCubit: sorterToggleButtonCubit);
             Navigator.pushNamed(context, NavigatorClient.seeAllPage,
-                arguments: [seeAllPagePayload]);
+                arguments: seeAllPagePayload);
           },
           child: Text(AppLocalizations.of(context)!.seeAll,
               style: TextStyle(

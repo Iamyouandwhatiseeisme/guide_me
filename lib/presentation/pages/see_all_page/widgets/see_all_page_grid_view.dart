@@ -35,7 +35,7 @@ class SeeAllPageGridView extends StatelessWidget {
                 Navigator.pushNamed(
                   context,
                   NavigatorClient.placePage,
-                  arguments: [placePagePayLoad],
+                  arguments: placePagePayLoad,
                 );
               },
               child: SightseeingsPlaceCard(

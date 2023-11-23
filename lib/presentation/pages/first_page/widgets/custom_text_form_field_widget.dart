@@ -24,7 +24,7 @@ class CustomTextFormField extends StatelessWidget {
   }) : super(key: key);
 
   final Color color;
-  final googleApiClient = sl<GoogleApiClient>();
+  final googleApiClient = sl<GoogleDataSource>();
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class CustomTextFormField extends StatelessWidget {
             fetchSearchedItemsCubit: fetchSearchedItemsCubit!,
             userLocation: userLocation);
         Navigator.pushNamed(context, NavigatorClient.searchesPage,
-            arguments: [searchesPagePayload]);
+            arguments: searchesPagePayload);
       },
       controller: searchController,
       textAlign: TextAlign.start,

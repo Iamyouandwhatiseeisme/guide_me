@@ -1,4 +1,4 @@
-export 'http_clients/geocoding_util.dart';
+export 'remote_data_source/geocoding_util.dart';
 export 'enums/sorting_option.dart';
 export 'models/google_maps_page_category_item.dart';
 export 'models/user_location_class.dart';
@@ -7,8 +7,8 @@ export 'models/place_details_model.dart';
 export 'get_it_methods.dart';
 export 'local_data_source/local_data_source.dart';
 export 'remote_data_source/firebase_service.dart';
-export 'http_clients/weather_api_client.dart';
-export 'http_clients/google_api_client.dart';
+export 'remote_data_source/weather_data_source.dart';
+export 'remote_data_source/google_data_source.dart';
 export 'models/opening_hours.dart';
 export 'models/nearby_places_model.dart';
 export 'models/collection_model.dart';

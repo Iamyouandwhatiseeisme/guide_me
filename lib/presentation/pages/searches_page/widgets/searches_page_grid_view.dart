@@ -32,7 +32,7 @@ class SearchPageGridView extends StatelessWidget {
                 Navigator.pushNamed(
                   context,
                   NavigatorClient.placePage,
-                  arguments: [placePagePayload],
+                  arguments: placePagePayload,
                 );
               },
               child: SightseeingsPlaceCard(

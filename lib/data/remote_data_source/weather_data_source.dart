@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:guide_me/data/data.dart';
 import 'package:http/http.dart' as http;
 
-class WeatherApiClient {
+class WeatherDataSource {
   Future<WeatherModel> fetchTemperature(
       {required double lat, required double lon}) async {
     final url = Uri.parse(
@@ -16,10 +16,10 @@ class WeatherApiClient {
           final jsonData = jsonDecode(response.body);
 
           final currentWeatherData = jsonData['current_weather'];
-          final temperature = currentWeatherData['temperature'].toString();
-          final windSpeed = currentWeatherData['windspeed'].toString();
-
-          return WeatherModel(temperature: temperature, windSpeed: windSpeed);
+          // final temperature = currentWeatherData['temperature'].toString();
+          // final windSpeed = currentWeatherData['windspeed'].toString();
+          WeatherModel.fromJson(currentWeatherData);
+          return WeatherModel.fromJson(currentWeatherData);
         }
       } on Exception catch (e) {
         throw Exception(e);

@@ -1,19 +1,21 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:guide_me/data/data.dart';
+import 'package:guide_me/main.dart';
 
 part 'photos_by_place_id_fetcher_state.dart';
 
 class PhotosByPlaceIdFetcherCubit extends Cubit<PhotosByPlaceIdFetcherState> {
   PhotosByPlaceIdFetcherCubit() : super(PhotosByPlaceIdFetcherInitial());
   bool photosFetched = false;
-  void fetchPhotos(
-      {required String placeId,
-      required GoogleApiClient googleApiClient}) async {
+  final googleDataSource = sl.get<GoogleDataSource>();
+  void fetchPhotos({
+    required String placeId,
+  }) async {
     try {
       if (!photosFetched) {
         emit(PhotosByPlaceIdFetcherLoading());
-        final fetchedPhotosByPlaceId = await googleApiClient.fetChPhotosHelper(
+        final fetchedPhotosByPlaceId = await googleDataSource.fetChPhotosHelper(
           listOfPhotos: [],
           placeId: placeId,
         );

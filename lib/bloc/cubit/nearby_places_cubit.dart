@@ -8,7 +8,7 @@ class NearbyPlacesCubit extends Cubit<NearbyPlacesState> {
   bool nearbyPlacesFetched = false;
   void fetchNearbyPlaces(
       {required List<NearbyPlacesModel> listOfNearbyPlaces,
-      required GoogleApiClient googleApiClient}) async {
+      required GoogleDataSource googleApiClient}) async {
     try {
       emit(NearbyPlacesLoading());
       final listOfPlaces = await googleApiClient.fetchData(

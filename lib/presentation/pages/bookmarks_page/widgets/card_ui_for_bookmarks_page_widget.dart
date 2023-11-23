@@ -53,7 +53,7 @@ class CardUiForBookmarksPage extends CardUi {
       onTap: () {
         final placePagePayload = PlacePagePayLoad(model: place);
         Navigator.pushNamed(context, NavigatorClient.placePage,
-            arguments: [placePagePayload]);
+            arguments: placePagePayload);
       },
       child: Container(
         padding: const EdgeInsets.all(8),

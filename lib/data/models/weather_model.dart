@@ -6,6 +6,7 @@ class WeatherModel {
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
     return WeatherModel(
-        temperature: json['temperature'], windSpeed: json['wind_speed']);
+        temperature: json['temperature'].toString(),
+        windSpeed: json['wind_speed'].toString());
   }
 }

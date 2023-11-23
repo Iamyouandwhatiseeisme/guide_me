@@ -8,7 +8,7 @@ class NearbySightSeeingCubit extends Cubit<NearbySightseeingsState> {
   NearbySightSeeingCubit() : super(NearbySightseeingsInitial());
   void fetchNearbySightseeings(
       {required List<NearbyPlacesModel> listOfNearbySightseeings,
-      required GoogleApiClient googleApiClient}) async {
+      required GoogleDataSource googleApiClient}) async {
     try {
       emit(NearbySightseeingsLoading());
       final listOfSightseeings = await googleApiClient.fetchSightseeingData(

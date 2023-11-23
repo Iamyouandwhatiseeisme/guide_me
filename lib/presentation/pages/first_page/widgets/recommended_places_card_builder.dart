@@ -37,7 +37,7 @@ class RecommenPlacesCardBuilder extends StatelessWidget {
                       final placePagePayLoad =
                           PlacePagePayLoad(model: listOfNearbyPlaces[index]);
                       Navigator.pushNamed(context, NavigatorClient.placePage,
-                          arguments: [placePagePayLoad]);
+                          arguments: placePagePayLoad);
                     },
                     child: PlaceCard(
                       place: listOfNearbyPlaces[index],

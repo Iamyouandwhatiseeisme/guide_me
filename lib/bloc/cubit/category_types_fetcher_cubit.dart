@@ -9,7 +9,7 @@ class CategoryTypesFetcherCubit extends Cubit<CategoryTypesFetcherState> {
   Future<void> fetchDataForCategories(
       {required List<NearbyPlacesModel> listOfPlaces,
       required String category,
-      required GoogleApiClient googleApiClient}) async {
+      required GoogleDataSource googleApiClient}) async {
     if (listOfPlaces.isEmpty) {
       try {
         emit(CategoryTypesFetcherLoading());

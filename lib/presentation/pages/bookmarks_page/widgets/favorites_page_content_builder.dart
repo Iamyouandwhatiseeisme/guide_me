@@ -57,7 +57,7 @@ class _FavoritesPageContentState extends State<FavoritesPageContent> {
                       Navigator.pushNamed(
                         context,
                         NavigatorClient.placePage,
-                        arguments: [placePagePayLoad],
+                        arguments: placePagePayLoad,
                       );
                     },
                     child: BlocBuilder<BoxManagamentCubit, BoxManagamentState>(

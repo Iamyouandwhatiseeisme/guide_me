@@ -11,8 +11,8 @@ void setUp() {
       const CustomBottomNavigationBar());
   sl.registerSingleton<FirebaseService>(FirebaseService());
   sl.registerSingleton<LocalDataSource>(LocalDataSource());
-  sl.registerSingleton<GoogleApiClient>(GoogleApiClient());
-  sl.registerSingleton<WeatherApiClient>(WeatherApiClient());
+  sl.registerSingleton<GoogleDataSource>(GoogleDataSource());
+  sl.registerSingleton<WeatherDataSource>(WeatherDataSource());
 }
 
 void registerLocationSingleton(

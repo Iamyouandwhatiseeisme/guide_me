@@ -25,11 +25,10 @@ class PlacePage extends StatefulWidget {
 }
 
 class _PlacepageState extends State<PlacePage> {
+  // final googleApiClient = sl<GoogleDataSource>();
   bool placeStatusFetched = false;
   bool photosFetched = false;
-  // String? adress = '';
   String? number = '';
-  // Map<String, String?> openningHours = {};
   PlaceDetails? placeDetails;
   String apiKey = dotenv.env['GOOGLE_API_KEY']!;
   @override
@@ -37,10 +36,9 @@ class _PlacepageState extends State<PlacePage> {
     final String open = AppLocalizations.of(context)!.openNow;
     final String closed = AppLocalizations.of(context)!.closed;
     final String noInfo = AppLocalizations.of(context)!.noInformation;
-    final googleApiClient = sl<GoogleApiClient>();
-    final passedPayLoad =
-        ModalRoute.of(context)!.settings.arguments as List<dynamic>;
-    final placePagePayLoad = passedPayLoad[0] as PlacePagePayLoad;
+    final placePagePayLoad =
+        ModalRoute.of(context)!.settings.arguments as PlacePagePayLoad;
+
     final passedModel = placePagePayLoad.model;
 
     String userRatingTotal = passedModel.userRatingsTotal.toString();
@@ -68,7 +66,8 @@ class _PlacepageState extends State<PlacePage> {
           final photosByPlaceIdFetchedCubit =
               context.read<PhotosByPlaceIdFetcherCubit>();
           photosByPlaceIdFetchedCubit.fetchPhotos(
-              placeId: passedModel.placeId, googleApiClient: googleApiClient);
+            placeId: passedModel.placeId,
+          );
         }
         if (photosState is PhotosByPlaceIdFetcherLoaded) {
           return BlocBuilder<FetchPhoneNumberAndAdressCubit,
@@ -77,7 +76,8 @@ class _PlacepageState extends State<PlacePage> {
             final numberAndAdressFetcherCubit =
                 context.read<FetchPhoneNumberAndAdressCubit>();
             numberAndAdressFetcherCubit.fetchMoreDetails(
-                placeId: passedModel.placeId, googleApiClient: googleApiClient);
+              placeId: passedModel.placeId,
+            );
 
             if (numberAndAdressState is FetchPhoneNumberAndAdressLoaded) {
               placeDetails = numberAndAdressState.placeDetails;

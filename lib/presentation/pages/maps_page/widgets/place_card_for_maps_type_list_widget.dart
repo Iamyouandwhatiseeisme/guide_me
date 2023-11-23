@@ -27,7 +27,7 @@ class PlaceCardForMapsTypeListWidget extends StatelessWidget {
       onTap: () {
         final placePagePayload = PlacePagePayLoad(model: placeToDisplay);
         Navigator.pushNamed(context, NavigatorClient.placePage,
-            arguments: [placePagePayload]);
+            arguments: placePagePayload);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

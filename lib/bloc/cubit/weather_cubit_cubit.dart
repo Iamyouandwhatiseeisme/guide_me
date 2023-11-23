@@ -9,7 +9,7 @@ class WeatherCubit extends Cubit<WeatherState> {
   Future<void> fetchWeather(
       {required double latitude,
       required double longitude,
-      required WeatherApiClient weatherApiClient}) async {
+      required WeatherDataSource weatherApiClient}) async {
     if (state.temperature == null) {
       try {
         final weather = await weatherApiClient.fetchTemperature(

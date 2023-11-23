@@ -96,7 +96,7 @@ class ADialogWithInterfaceListCategories
                                   context);
                           final sortingCubit =
                               BlocProvider.of<SortingCubit>(context);
-                          sl.get<GoogleApiClient>().createMap(
+                          sl.get<GoogleDataSource>().createMap(
                               cachedData: cachedData,
                               category: category,
                               categoryTypesFetcherCubit:

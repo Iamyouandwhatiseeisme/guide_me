@@ -28,9 +28,8 @@ class _SearchesPageState extends State<SearchesPage> {
 
   @override
   Widget build(BuildContext context) {
-    final passedPayload =
-        ModalRoute.of(context)!.settings.arguments as List<dynamic>;
-    final searchesPagePayload = passedPayload[0] as SearchesPagePayload;
+    final searchesPagePayload =
+        ModalRoute.of(context)!.settings.arguments as SearchesPagePayload;
     listTobuild = searchesPagePayload.listToBuild;
     fetchSearchedItemsCubit = searchesPagePayload.fetchSearchedItemsCubit;
 

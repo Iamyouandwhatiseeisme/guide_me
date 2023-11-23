@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_me/bloc/cubit/fetched_place_details_formatter_cubit.dart';
 import 'package:guide_me/bloc/cubits.dart';
 
 import 'package:guide_me/data/data.dart';
@@ -27,9 +28,8 @@ class _SeeAllPageState extends State<SeeAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    final passedPayLoad =
-        ModalRoute.of(context)!.settings.arguments as List<dynamic>;
-    final seeAllPagePayload = passedPayLoad[0] as SeeAllPagePayload;
+    final seeAllPagePayload =
+        ModalRoute.of(context)!.settings.arguments as SeeAllPagePayload;
     listTobuild = seeAllPagePayload.listToBuild;
 
     final userLocation = seeAllPagePayload.userLocation;
@@ -44,6 +44,7 @@ class _SeeAllPageState extends State<SeeAllPage> {
         BlocProvider.value(
           value: sorterToggleButtonCubit!,
         ),
+        BlocProvider(create: (context) => FetchedPlaceDetailsFormatterCubit())
       ],
       child: Builder(builder: (context) {
         return BlocBuilder<SortingCubit, SortingState>(

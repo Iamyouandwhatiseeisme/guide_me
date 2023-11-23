@@ -84,7 +84,7 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
                   final categoryTypesFetcherCubit =
                       BlocProvider.of<CategoryTypesFetcherCubit>(context);
                   final sortingCubit = BlocProvider.of<SortingCubit>(context);
-                  sl.get<GoogleApiClient>().createList(
+                  sl.get<GoogleDataSource>().createList(
                       sortingCubit: sortingCubit,
                       distanceMap: distanceMap,
                       category: category,

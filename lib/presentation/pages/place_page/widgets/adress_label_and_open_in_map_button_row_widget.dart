@@ -25,12 +25,15 @@ class AdressLabelAndOpenInMapButtonRowWIdget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            adress!,
-            style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                overflow: TextOverflow.ellipsis),
+          SizedBox(
+            width: 200,
+            child: Text(
+              adress!,
+              style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  overflow: TextOverflow.ellipsis),
+            ),
           ),
           BlocBuilder<OpenLocationOnMapCubit, bool>(
             builder: (context, state) {

@@ -7,7 +7,7 @@ class WhatToEatCubit extends Cubit<WhatToEatState> {
   WhatToEatCubit() : super(WhatToEatInitial());
   void fetchPlacesForWhatToEat(
       {required List<NearbyPlacesModel> listOfpLacesForWhatToEat,
-      required GoogleApiClient googleApiClient}) async {
+      required GoogleDataSource googleApiClient}) async {
     try {
       emit(WhatToEatLoading());
       final listOfSightseeings = await googleApiClient.fetchPlacesForFoodData(

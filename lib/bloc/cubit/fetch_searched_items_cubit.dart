@@ -9,7 +9,7 @@ class FetchSearchedItemsCubit extends Cubit<FetchSearchedItemsState> {
   Future<void> searchListFetcher(
       {required String nameOfPlace,
       required List<NearbyPlacesModel> listOfSearched,
-      required GoogleApiClient googleApiClient}) async {
+      required GoogleDataSource googleApiClient}) async {
     try {
       emit(FetchSearchedItemsLoading());
       final listOfFetchedSearches = await googleApiClient.fetchForSearchList(

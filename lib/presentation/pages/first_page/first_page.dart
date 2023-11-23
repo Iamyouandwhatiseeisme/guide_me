@@ -19,7 +19,7 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
-  final googleApiClient = sl<GoogleApiClient>();
+  final googleApiClient = sl<GoogleDataSource>();
 
   List<NearbyPlacesModel> listOfNearbyPlaces = [];
   List<NearbyPlacesModel> listOfSightseeingPlaces = [];

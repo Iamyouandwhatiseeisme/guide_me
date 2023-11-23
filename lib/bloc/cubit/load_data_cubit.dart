@@ -49,7 +49,7 @@ class LoadDataCubit extends Cubit<LoadDataState> {
 
         longitude: lon,
 
-        weatherApiClient: sl.get<WeatherApiClient>());
+        weatherApiClient: sl.get<WeatherDataSource>());
 
 
     googleMapLocationCompleter.complete('Completed');
