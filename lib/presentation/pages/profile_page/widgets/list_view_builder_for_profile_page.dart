@@ -55,11 +55,13 @@ class _ListViewBuilderForProfilePageState
     passedControllerForOldPassword.clear();
     passedControllerForNewPassword.clear();
 
-    textFieldForNewPassword(context, user, updateUI);
+    textFieldForNewPassword(context: context, user: user, updateUI: updateUI);
   }
 
   Future<dynamic> textFieldForNewPassword(
-      BuildContext context, User user, Function updateUI) {
+      {required BuildContext context,
+      required User user,
+      required Function updateUI}) {
     var auth = FirebaseAuth.instance;
     var currentUser = auth.currentUser;
     return showDialog(

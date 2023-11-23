@@ -327,21 +327,21 @@ class GoogleApiClient {
   }
 
   void createLists(
-      {required List<MapItem> mapItemListForRowOne,
-      required List<MapItem> mapItemListForRowTwo,
+      {required List<GoogleMapsPageCategoryItem> mapItemListForRowOne,
+      required List<GoogleMapsPageCategoryItem> mapItemListForRowTwo,
       required List<String> categoryList}) {
     categoryList.add('grocery');
     categoryList.add('mall');
     categoryList.add('hospital');
     categoryList.add('park');
-    mapItemListForRowOne.add(MapItem(
+    mapItemListForRowOne.add(GoogleMapsPageCategoryItem(
         icon: const Icon(
           Icons.fort_outlined,
           color: Color(0xffF4C871),
         ),
         color: const Color(0xffF4C871),
         textLabel: 'sights'));
-    mapItemListForRowOne.add(MapItem(
+    mapItemListForRowOne.add(GoogleMapsPageCategoryItem(
         icon: const Icon(
           Icons.hotel,
           color: Color(
@@ -352,21 +352,21 @@ class GoogleApiClient {
           0xffA3C3DB,
         ),
         textLabel: 'hotels'));
-    mapItemListForRowOne.add(MapItem(
+    mapItemListForRowOne.add(GoogleMapsPageCategoryItem(
         icon: const Icon(
           Icons.nightlife,
           color: Color(0xffC75E6B),
         ),
         color: const Color(0xffC75E6B),
         textLabel: 'nightLife'));
-    mapItemListForRowTwo.add(MapItem(
+    mapItemListForRowTwo.add(GoogleMapsPageCategoryItem(
         icon: const Icon(
           Icons.restaurant,
           color: Color(0xffC2807E),
         ),
         color: const Color(0xffC2807E),
         textLabel: 'restaurants'));
-    mapItemListForRowTwo.add(MapItem(
+    mapItemListForRowTwo.add(GoogleMapsPageCategoryItem(
         icon: Image.asset('assets/images/Other.png',
             color: const Color(0xffF3F0E6)),
         color: const Color(0xffF3F0E6),
@@ -376,6 +376,7 @@ class GoogleApiClient {
   Future<void> createList(
       {required Map<NearbyPlacesModel, double?> distanceMap,
       required String category,
+      required SortingCubit sortingCubit,
       required CategoryTypesFetcherCubit categoryTypesFetcherCubit,
       required List<NearbyPlacesModel> listOfPlaces,
       required Completer<String> listLoaderController}) async {
@@ -384,7 +385,7 @@ class GoogleApiClient {
           listOfPlaces: listOfPlaces,
           category: category,
           googleApiClient: sl<GoogleApiClient>());
-      createDistanceMap(
+      sortingCubit.createDistanceMap(
         distanceMap: distanceMap,
         listOfDestinations: listOfPlaces,
       );
@@ -392,7 +393,7 @@ class GoogleApiClient {
     }
     if (listOfPlaces.isNotEmpty) {
       listLoaderController.complete('Completed');
-      createDistanceMap(
+      sortingCubit.createDistanceMap(
         distanceMap: distanceMap,
         listOfDestinations: listOfPlaces,
       );

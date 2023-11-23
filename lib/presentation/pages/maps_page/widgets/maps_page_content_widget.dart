@@ -28,8 +28,8 @@ class MapsPageContent extends StatefulWidget {
 }
 
 class _MapsPageContentState extends State<MapsPageContent> {
-  List<MapItem> mapItemListForRowOne = [];
-  List<MapItem> mapItemListForRowTwo = [];
+  List<GoogleMapsPageCategoryItem> mapItemListForRowOne = [];
+  List<GoogleMapsPageCategoryItem> mapItemListForRowTwo = [];
   List<String> listOfCategories = [];
   @override
   void initState() {

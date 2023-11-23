@@ -24,14 +24,14 @@ class WhatToEatWidget extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => SightseeingSortingCubit(),
+          create: (context) => SortingCubit(),
         ),
         BlocProvider(
           create: (context) => SorterToggleButtonCubit(),
         ),
       ],
       child: Builder(builder: (context) {
-        final sortingCubit = BlocProvider.of<SightseeingSortingCubit>(context);
+        final sortingCubit = BlocProvider.of<SortingCubit>(context);
         final sorterToggleButtonCubit =
             BlocProvider.of<SorterToggleButtonCubit>(context);
         return BlocBuilder<SorterToggleButtonCubit, SortertoggleButtonState>(

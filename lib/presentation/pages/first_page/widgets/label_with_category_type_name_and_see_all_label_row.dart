@@ -12,7 +12,7 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
   final List<NearbyPlacesModel> listToBuild;
 
   final String textToDisplay;
-  final SightseeingSortingCubit sortingCubit; // Accept the sorting cubit
+  final SortingCubit sortingCubit; // Accept the sorting cubit
   final SorterToggleButtonCubit sorterToggleButtonCubit;
 
   final Color colorOfLabel; // Accept the sorter toggle button cubit

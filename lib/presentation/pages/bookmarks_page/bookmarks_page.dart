@@ -38,10 +38,14 @@ class _BookmarksPageState extends State<BookmarksPage> {
           create: (context) => BookmarksTabCubit(),
         ),
         BlocProvider(
+          create: (context) => SortingCubit(),
+        ),
+        BlocProvider(
           create: (context) => BoxManagamentCubit(listOfFavorites),
         ),
       ],
       child: Builder(builder: (context) {
+        final sortingCubit = BlocProvider.of<SortingCubit>(context);
         return Scaffold(
           bottomNavigationBar: bottomNavigationBar,
           backgroundColor: Theme.of(context).colorScheme.background,
@@ -50,7 +54,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
             child: BookmarkPageAppbar(),
           ),
           body: Builder(builder: (context) {
-            createDistanceMap(
+            sortingCubit.createDistanceMap(
               distanceMap: distanceMap,
               listOfDestinations: listOfFavorites,
             );

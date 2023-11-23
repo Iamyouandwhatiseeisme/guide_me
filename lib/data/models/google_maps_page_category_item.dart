@@ -1,11 +1,11 @@
 import 'package:flutter/widgets.dart';
 
-class MapItem {
+class GoogleMapsPageCategoryItem {
   final dynamic icon;
   final Color color;
   final String textLabel;
 
-  MapItem({
+  GoogleMapsPageCategoryItem({
     required this.icon,
     required this.color,
     required this.textLabel,

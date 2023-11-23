@@ -4,7 +4,7 @@ import 'package:guide_me/data/data.dart';
 class SeeAllPagePayload {
   final List<NearbyPlacesModel> listToBuild;
   final UserLocation userLocation;
-  final SightseeingSortingCubit sortingCubit;
+  final SortingCubit sortingCubit;
   final SorterToggleButtonCubit sorterToggleButtonCubit;
 
   SeeAllPagePayload(

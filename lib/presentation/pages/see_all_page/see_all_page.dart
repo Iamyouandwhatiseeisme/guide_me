@@ -19,7 +19,7 @@ class SeeAllPage extends StatefulWidget {
 class _SeeAllPageState extends State<SeeAllPage> {
   List<NearbyPlacesModel>? listTobuild;
 
-  SightseeingSortingCubit? sightseeingSortingCubit;
+  SortingCubit? sightseeingSortingCubit;
   SorterToggleButtonCubit? sorterToggleButtonCubit;
   SorterRadioButtonWidget? sorterRadioButtonWidget;
 
@@ -46,7 +46,7 @@ class _SeeAllPageState extends State<SeeAllPage> {
         ),
       ],
       child: Builder(builder: (context) {
-        return BlocBuilder<SightseeingSortingCubit, SightseeingSortingState>(
+        return BlocBuilder<SortingCubit, SortingState>(
           builder: (context, sortedListState) {
             return BlocBuilder<SorterToggleButtonCubit,
                 SortertoggleButtonState>(builder: (context, sorterState) {

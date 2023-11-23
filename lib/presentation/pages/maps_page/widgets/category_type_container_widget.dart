@@ -31,7 +31,7 @@ class CategoryTypeContainer extends StatelessWidget {
               color: isSelected
                   ? const Color(0xff292F32)
                   : const Color(0xffF3F0E6),
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: FontWeight.w400),
         ),
       ),

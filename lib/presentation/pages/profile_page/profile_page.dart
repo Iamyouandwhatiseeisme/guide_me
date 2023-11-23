@@ -45,7 +45,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void updateUI() {
     setState(() {
-      print('print: updating ui');
       user = FirebaseAuth.instance.currentUser!;
     });
   }

@@ -25,13 +25,13 @@ class SortableListViewCardBuilder extends StatelessWidget {
     List<NearbyPlacesModel> sortedList = List.from(listOfPassedPlaces);
     Map<NearbyPlacesModel, double?> distanceMap = {};
     final UserLocation userLocation = sl.get<UserLocation>();
-    return BlocBuilder<SightseeingSortingCubit, SightseeingSortingState>(
+    return BlocBuilder<SortingCubit, SortingState>(
       builder: (context, sightseeingSortingState) {
         return Builder(builder: (context) {
           return BlocBuilder<SorterToggleButtonCubit, SortertoggleButtonState>(
               builder: (context, state) {
             final sightseeingSortingCubit =
-                BlocProvider.of<SightseeingSortingCubit>(context);
+                BlocProvider.of<SortingCubit>(context);
             sightseeingSortingCubit.sortList(
                 unsortedList: sortedList,
                 sortingOption: state.value,

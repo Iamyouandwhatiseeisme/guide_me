@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:guide_me/bloc/cubit/load_data_cubit.dart';
 import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/main.dart';
 
@@ -50,12 +51,15 @@ class _MapsPageState extends State<MapsPage> {
           BlocProvider(
             create: (context) => LocationCubit(),
           ),
-          BlocProvider(create: (context) => IsExapndedCubit())
+          BlocProvider(create: (context) => IsExapndedCubit()),
+          BlocProvider(
+            create: (context) => LoadDataCubit(),
+          )
         ],
         child: BlocBuilder<WeatherCubit, WeatherState>(
             builder: (context, weatherState) {
           final weatherCubit = BlocProvider.of<WeatherCubit>(context);
-          loadData(
+          BlocProvider.of<LoadDataCubit>(context).loadData(
               weatherCubit: weatherCubit,
               lat: userLocation.userLat,
               lon: userLocation.userLon,

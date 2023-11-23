@@ -25,7 +25,7 @@ class RecommendedSightseeingsSectiogWidget extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => SightseeingSortingCubit(),
+          create: (context) => SortingCubit(),
         ),
         BlocProvider(
           create: (context) => SorterToggleButtonCubit(),

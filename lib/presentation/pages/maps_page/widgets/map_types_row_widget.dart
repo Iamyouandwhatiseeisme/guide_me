@@ -8,7 +8,7 @@ import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
 class MapsTypesRowWidget extends StatelessWidget {
   final double screenHeight;
-  final List<MapItem> mapItemList;
+  final List<GoogleMapsPageCategoryItem> mapItemList;
   final List<String>? listOfCategories;
 
   const MapsTypesRowWidget({

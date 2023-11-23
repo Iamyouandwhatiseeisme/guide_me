@@ -1,17 +1,17 @@
 part of 'sightseeing_sorting_cubit.dart';
 
-sealed class SightseeingSortingState extends Equatable {
-  const SightseeingSortingState();
+sealed class SortingState extends Equatable {
+  const SortingState();
 
   @override
   List<Object> get props => [];
 }
 
-final class SightseeingSortingInitial extends SightseeingSortingState {}
+final class SortingInitial extends SortingState {}
 
-class SightseeingsortingLoading extends SightseeingSortingState {}
+class SortingLoading extends SortingState {}
 
-class SightseeingsortingLoaded extends SightseeingSortingState {
+class SortingLoaded extends SortingState {
   final List<NearbyPlacesModel> sortedList;
-  const SightseeingsortingLoaded(this.sortedList);
+  const SortingLoaded(this.sortedList);
 }

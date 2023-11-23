@@ -23,9 +23,9 @@ class IfMenuExpanded extends StatelessWidget {
 
   final List<String> listOfCategories;
 
-  final List<MapItem> mapItemListForRowOne;
+  final List<GoogleMapsPageCategoryItem> mapItemListForRowOne;
   final double screenWidth;
-  final List<MapItem> mapItemListForRowTwo;
+  final List<GoogleMapsPageCategoryItem> mapItemListForRowTwo;
 
   @override
   Widget build(BuildContext context) {

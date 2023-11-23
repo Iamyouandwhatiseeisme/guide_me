@@ -35,6 +35,9 @@ class ADialogWithInterfaceListCategories
         BlocProvider(
           create: (context) => CategoryTypesFetcherCubit(),
         ),
+        BlocProvider(
+          create: (context) => SortingCubit(),
+        ),
       ],
       child: Dialog(
         insetPadding: const EdgeInsets.all(0),
@@ -91,6 +94,8 @@ class ADialogWithInterfaceListCategories
                           final categoryTypesFetcherCubit =
                               BlocProvider.of<CategoryTypesFetcherCubit>(
                                   context);
+                          final sortingCubit =
+                              BlocProvider.of<SortingCubit>(context);
                           sl.get<GoogleApiClient>().createMap(
                               cachedData: cachedData,
                               category: category,
@@ -98,7 +103,7 @@ class ADialogWithInterfaceListCategories
                                   categoryTypesFetcherCubit,
                               listOfPlaces: listOfPlaces,
                               mapLoaderController: mapLoadedController);
-                          createDistanceMap(
+                          sortingCubit.createDistanceMap(
                             distanceMap: distanceMap,
                             listOfDestinations: cachedData[category]!,
                           );

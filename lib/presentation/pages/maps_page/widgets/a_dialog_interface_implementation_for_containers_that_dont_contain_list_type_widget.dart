@@ -25,8 +25,15 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
     List<NearbyPlacesModel> listOfPlaces = [];
     Map<NearbyPlacesModel, double?> distanceMap = {};
 
-    return BlocProvider(
-        create: (context) => CategoryTypesFetcherCubit(),
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => CategoryTypesFetcherCubit(),
+          ),
+          BlocProvider(
+            create: (context) => SortingCubit(),
+          ),
+        ],
         child: Dialog(
           insetPadding: const EdgeInsets.all(0),
           child: Container(
@@ -76,7 +83,9 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
                   String category = textLabel;
                   final categoryTypesFetcherCubit =
                       BlocProvider.of<CategoryTypesFetcherCubit>(context);
+                  final sortingCubit = BlocProvider.of<SortingCubit>(context);
                   sl.get<GoogleApiClient>().createList(
+                      sortingCubit: sortingCubit,
                       distanceMap: distanceMap,
                       category: category,
                       categoryTypesFetcherCubit: categoryTypesFetcherCubit,

@@ -38,18 +38,18 @@ class _SearchesPageState extends State<SearchesPage> {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => SightseeingSortingCubit()),
+        BlocProvider(create: (context) => SortingCubit()),
         BlocProvider(create: (context) => SorterToggleButtonCubit()),
         BlocProvider.value(
           value: fetchSearchedItemsCubit!,
         ),
       ],
-      child: BlocBuilder<SightseeingSortingCubit, SightseeingSortingState>(
+      child: BlocBuilder<SortingCubit, SortingState>(
         builder: (context, sightSeeingSorterstate) {
           return BlocBuilder<SorterToggleButtonCubit, SortertoggleButtonState>(
             builder: (context, sorterState) {
               return Builder(builder: (context) {
-                BlocProvider.of<SightseeingSortingCubit>(context).sortList(
+                BlocProvider.of<SortingCubit>(context).sortList(
                     unsortedList: listTobuild!,
                     sortingOption: sorterState.value,
                     userLocation: userLocation,
@@ -58,7 +58,7 @@ class _SearchesPageState extends State<SearchesPage> {
                 return BlocBuilder<FetchSearchedItemsCubit,
                     FetchSearchedItemsState>(builder: (context, state) {
                   if (state is FetchSearchedItemsLoaded) {
-                    if (sightSeeingSorterstate is SightseeingsortingLoaded) {
+                    if (sightSeeingSorterstate is SortingLoaded) {
                       return Builder(builder: (context) {
                         return Scaffold(
                             backgroundColor:
