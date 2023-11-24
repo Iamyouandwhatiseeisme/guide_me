@@ -5,8 +5,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:guide_me/bloc/cubits.dart';
 
-import 'package:guide_me/main.dart';
-
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -26,9 +24,7 @@ class PlacePage extends StatefulWidget {
 
 class _PlacepageState extends State<PlacePage> {
   // final googleApiClient = sl<GoogleDataSource>();
-  bool placeStatusFetched = false;
-  bool photosFetched = false;
-  String? number = '';
+
   PlaceDetails? placeDetails;
   String apiKey = dotenv.env['GOOGLE_API_KEY']!;
   @override
@@ -55,71 +51,107 @@ class _PlacepageState extends State<PlacePage> {
         BlocProvider(create: (context) => FetchPhoneNumberAndAdressCubit()),
         BlocProvider(create: (context) => MakeACallCubit()),
         BlocProvider(create: (context) => OpenLocationOnMapCubit()),
+        BlocProvider(create: (context) => PlacePageContentDataCheckerCubit()),
         BlocProvider(
             create: (context) =>
                 PlaceOpenStatuslabelCubit(open, closed, noInfo))
       ],
-      child:
-          BlocBuilder<PhotosByPlaceIdFetcherCubit, PhotosByPlaceIdFetcherState>(
-              builder: (context, photosState) {
-        if (!photosFetched) {
-          final photosByPlaceIdFetchedCubit =
-              context.read<PhotosByPlaceIdFetcherCubit>();
-          photosByPlaceIdFetchedCubit.fetchPhotos(
-            placeId: passedModel.placeId,
-          );
-        }
-        if (photosState is PhotosByPlaceIdFetcherLoaded) {
-          return BlocBuilder<FetchPhoneNumberAndAdressCubit,
-                  FetchPhoneNumberAndAdressState>(
-              builder: (context, numberAndAdressState) {
-            final numberAndAdressFetcherCubit =
-                context.read<FetchPhoneNumberAndAdressCubit>();
-            numberAndAdressFetcherCubit.fetchMoreDetails(
-              placeId: passedModel.placeId,
-            );
-
-            if (numberAndAdressState is FetchPhoneNumberAndAdressLoaded) {
-              placeDetails = numberAndAdressState.placeDetails;
-              return Scaffold(
-                  appBar: PreferredSize(
-                      preferredSize: const Size.fromHeight(48),
-                      child: PlacePageAppbar(
-                        placeToDisplay: passedModel,
-                      )),
-                  backgroundColor: Theme.of(context).colorScheme.background,
-                  body: PlacePageContet(
-                    placeDetails: placeDetails!,
-                    passedPlace: passedModel,
-                    userRatingTotal: userRatingTotal,
-                    transformedUserRatingTotal: transformedUserRatingTotal,
-                    typesInString: typesInString,
-                  ));
-            }
-            return BlocBuilder<PlaceOpenStatuslabelCubit,
-                PlaceOpenStatusLabelState>(
-              builder: (context, placeOpenStatusstate) {
-                if (placeOpenStatusstate is PlaceOpenStatusInitial &&
-                    !placeStatusFetched) {
+      child: Builder(
+        builder: (context) {
+          return MultiBlocListener(
+            listeners: [
+              BlocListener<PhotosByPlaceIdFetcherCubit,
+                  PhotosByPlaceIdFetcherState>(
+                listener: (context, state) {
+                  if (state is PhotosByPlaceIdFetcherReadyToFetch) {
+                    final photosByPlaceIdFetchedCubit =
+                        context.read<PhotosByPlaceIdFetcherCubit>();
+                    photosByPlaceIdFetchedCubit.fetchPhotos(
+                      placeId: passedModel.placeId,
+                    );
+                    BlocProvider.of<PlacePageContentDataCheckerCubit>(context)
+                        .placePageLoading();
+                  } else if (state is PhotosByPlaceIdFetcherLoaded) {
+                    final numberAndAdressFetcherCubit =
+                        context.read<FetchPhoneNumberAndAdressCubit>();
+                    numberAndAdressFetcherCubit.fetchMoreDetails(
+                        placeId: passedModel.placeId);
+                  } else if (state is PhotosByPlaceIdFetcherError) {
+                    BlocProvider.of<PlacePageContentDataCheckerCubit>(context)
+                        .placePageError(state.errorMessage);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(state.errorMessage),
+                      ),
+                    );
+                  }
+                },
+              ),
+              BlocListener<FetchPhoneNumberAndAdressCubit,
+                  FetchPhoneNumberAndAdressState>(listener: (context, state) {
+                if (state is FetchPhoneNumberAndAdressLoaded) {
+                  placeDetails = state.placeDetails;
+                  BlocProvider.of<PlaceOpenStatuslabelCubit>(context)
+                      .initalize();
+                }
+              }),
+              BlocListener<PlaceOpenStatuslabelCubit,
+                  PlaceOpenStatusLabelState>(listener: (context, state) {
+                if (state is PlaceOpenStatusReadyToFetch) {
                   final placeOpenStatusCubit =
                       context.read<PlaceOpenStatuslabelCubit>();
 
                   placeOpenStatusCubit.updateOpenStatus(passedModel.openNow);
-
-                  placeStatusFetched = true;
+                  BlocProvider.of<PlacePageContentDataCheckerCubit>(context)
+                      .placePageReady();
                 }
-                return const LoadingAnimationScaffold();
-              },
-            );
-          });
-        } else if (photosState is PhotosByPlaceIdFetcherLoading) {
-          return const LoadingAnimationScaffold();
-        } else if (photosState is PhotosByPlaceIdFetcherInitial) {
-          return const LoadingAnimationScaffold();
-        } else {
-          return const Text('NO PHOTOS');
-        }
-      }),
+              }),
+            ],
+            child: Scaffold(
+              appBar: PreferredSize(
+                preferredSize: const Size.fromHeight(48),
+                child: PlacePageAppbar(
+                  placeToDisplay: passedModel,
+                ),
+              ),
+              body: Builder(
+                builder: (context) {
+                  BlocProvider.of<PhotosByPlaceIdFetcherCubit>(context)
+                      .initialize();
+                  return BlocBuilder<PlacePageContentDataCheckerCubit,
+                      PlacePageContentDataCheckerState>(
+                    builder: (context, state) {
+                      if (state is PlacePageContentDataCheckerLoaded) {
+                        return PlacePageContent(
+                          placeDetails: placeDetails!,
+                          passedPlace: passedModel,
+                          userRatingTotal: userRatingTotal,
+                          transformedUserRatingTotal:
+                              transformedUserRatingTotal,
+                          typesInString: typesInString,
+                        );
+                      } else if (state is PlacePageContentDataCheckerLoading) {
+                        return const LoadingAnimationScaffold();
+                      } else if (state is PlacePageContentDataCheckerError) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.errorMessage),
+                          ),
+                        );
+                        return Scaffold(
+                          body: Center(child: Text(state.errorMessage)),
+                        );
+                      } else {
+                        return const LoadingAnimationScaffold();
+                      }
+                    },
+                  );
+                },
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

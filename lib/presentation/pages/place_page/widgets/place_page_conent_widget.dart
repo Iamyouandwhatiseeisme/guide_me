@@ -7,8 +7,8 @@ import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
-class PlacePageContet extends StatelessWidget {
-  const PlacePageContet({
+class PlacePageContent extends StatelessWidget {
+  const PlacePageContent({
     Key? key,
     required this.passedPlace,
     required this.userRatingTotal,

@@ -10,6 +10,10 @@ class PlaceOpenStatuslabelCubit extends Cubit<PlaceOpenStatusLabelState> {
   final String closed;
   final String noInfo;
 
+  void initalize() {
+    emit(PlaceOpenStatusReadyToFetch());
+  }
+
   void updateOpenStatus(bool? isOpenNow) {
     if (isOpenNow == true) {
       emit(OpenNowState(openNow));

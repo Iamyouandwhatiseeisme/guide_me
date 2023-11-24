@@ -9,6 +9,10 @@ class PhotosByPlaceIdFetcherCubit extends Cubit<PhotosByPlaceIdFetcherState> {
   PhotosByPlaceIdFetcherCubit() : super(PhotosByPlaceIdFetcherInitial());
   bool photosFetched = false;
   final googleDataSource = sl.get<GoogleDataSource>();
+  void initialize() {
+    emit(PhotosByPlaceIdFetcherReadyToFetch());
+  }
+
   void fetchPhotos({
     required String placeId,
   }) async {

@@ -10,6 +10,8 @@ sealed class PhotosByPlaceIdFetcherState extends Equatable {
 
 class PhotosByPlaceIdFetcherInitial extends PhotosByPlaceIdFetcherState {}
 
+class PhotosByPlaceIdFetcherReadyToFetch extends PhotosByPlaceIdFetcherState {}
+
 class PhotosByPlaceIdFetcherLoading extends PhotosByPlaceIdFetcherState {}
 
 class PhotosByPlaceIdFetcherLoaded extends PhotosByPlaceIdFetcherState {

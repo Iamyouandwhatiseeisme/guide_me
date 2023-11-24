@@ -10,6 +10,8 @@ sealed class PlaceOpenStatusLabelState extends Equatable {
 
 final class PlaceOpenStatusInitial extends PlaceOpenStatusLabelState {}
 
+final class PlaceOpenStatusReadyToFetch extends PlaceOpenStatusLabelState {}
+
 // Define individual states as subclasses of the abstract class
 class OpenNowState extends PlaceOpenStatusLabelState {
   final String openStatus;
