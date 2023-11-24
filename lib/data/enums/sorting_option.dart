@@ -1,1 +1,1 @@
-enum SortingOption { budgetFriendly, highestRated, closestToYou }
+enum SortingOption { byRating, byDistance }

@@ -1,10 +1,12 @@
 import 'package:bloc/bloc.dart';
+import 'package:guide_me/data/data.dart';
 
 part 'sorter_togge_button_state.dart';
 
-class SorterToggleButtonCubit extends Cubit<SortertoggleButtonState> {
-  SorterToggleButtonCubit() : super(SortertoggleButtonState(value: 0));
-  void selectRadioButton(int currentValue) {
-    emit(SortertoggleButtonState(value: currentValue));
+class SorterToggleButtonCubit extends Cubit<SorterToggleButtonState> {
+  SorterToggleButtonCubit() : super(SorterToggleButtonState(sorterState: null));
+
+  void selectRadioButton(SortingOption sortingOption) {
+    emit(SorterToggleButtonState(sorterState: sortingOption));
   }
 }

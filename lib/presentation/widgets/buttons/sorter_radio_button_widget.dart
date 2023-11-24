@@ -5,10 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/bloc/cubits.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:guide_me/data/data.dart';
 
 // ignore: must_be_immutable
 class SorterRadioButtonWidget extends StatelessWidget {
-  SortertoggleButtonState state;
+  SorterToggleButtonState state;
 
   SorterRadioButtonWidget({
     Key? key,
@@ -19,9 +20,9 @@ class SorterRadioButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).colorScheme.primary;
 
-    return BlocBuilder<SorterToggleButtonCubit, SortertoggleButtonState>(
+    return BlocBuilder<SorterToggleButtonCubit, SorterToggleButtonState>(
         builder: (context, state) {
-      if (state.value == 0) {
+      if (state.sorterState == SortingOption.byRating) {
         return SizedBox(
             height: 32,
             width: 390,
@@ -32,7 +33,7 @@ class SorterRadioButtonWidget extends StatelessWidget {
                   child: GestureDetector(
                       onTap: () {
                         BlocProvider.of<SorterToggleButtonCubit>(context)
-                            .selectRadioButton(0);
+                            .selectRadioButton(SortingOption.byRating);
                       },
                       child: Container(
                           width: 110,
@@ -50,13 +51,13 @@ class SorterRadioButtonWidget extends StatelessWidget {
                   child: GestureDetector(
                       onTap: () {
                         BlocProvider.of<SorterToggleButtonCubit>(context)
-                            .selectRadioButton(1);
+                            .selectRadioButton(SortingOption.byDistance);
                       },
                       child: Text(AppLocalizations.of(context)!.closestToYou)),
                 ),
               ],
             ));
-      } else if (state.value == 1) {
+      } else if (state.sorterState == SortingOption.byDistance) {
         return SizedBox(
             height: 32,
             width: 390,
@@ -66,7 +67,7 @@ class SorterRadioButtonWidget extends StatelessWidget {
                   child: GestureDetector(
                       onTap: () {
                         BlocProvider.of<SorterToggleButtonCubit>(context)
-                            .selectRadioButton(0);
+                            .selectRadioButton(SortingOption.byRating);
                       },
                       child: Text(
                         AppLocalizations.of(context)!.highestRated,
@@ -76,7 +77,7 @@ class SorterRadioButtonWidget extends StatelessWidget {
                 child: GestureDetector(
                     onTap: () {
                       BlocProvider.of<SorterToggleButtonCubit>(context)
-                          .selectRadioButton(1);
+                          .selectRadioButton(SortingOption.byDistance);
                     },
                     child: Container(
                         width: 110,
@@ -91,7 +92,11 @@ class SorterRadioButtonWidget extends StatelessWidget {
               ),
             ]));
       } else {
-        return const SizedBox();
+        return Container(
+          height: 200,
+          width: 200,
+          color: Colors.black,
+        );
       }
     });
   }

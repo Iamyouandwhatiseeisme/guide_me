@@ -12,13 +12,13 @@ class SortingCubit extends Cubit<SortingState> {
   SortingCubit() : super(SortingInitial());
   void sortList(
       {required List<NearbyPlacesModel> unsortedList,
-      required int sortingOption,
+      required SortingOption sortingOption,
       required UserLocation userLocation,
       required Map<NearbyPlacesModel, double?> distanceMap}) {
     List<NearbyPlacesModel> sortedList = [];
     emit(SortingLoading());
     switch (sortingOption) {
-      case 0:
+      case SortingOption.byRating:
         unsortedList.sort((a, b) {
           final aRating = a.rating ?? 0;
           final bRating = b.rating ?? 0;
@@ -31,7 +31,7 @@ class SortingCubit extends Cubit<SortingState> {
         });
         sortedList = unsortedList;
         break;
-      case 1:
+      case SortingOption.byDistance:
         unsortedList.sort((a, b) {
           final aDistance = calculateDistance(
             startLat: a.lat,
@@ -60,6 +60,7 @@ class SortingCubit extends Cubit<SortingState> {
       distanceMap: distanceMap,
       listOfDestinations: sortedList,
     );
+
     emit(SortingLoaded(sortedList));
   }
 

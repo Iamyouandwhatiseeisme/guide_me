@@ -6,9 +6,11 @@ class SeeAllPagePayload {
   final UserLocation userLocation;
   final SortingCubit sortingCubit;
   final SorterToggleButtonCubit sorterToggleButtonCubit;
+  final Map<NearbyPlacesModel, double?> distanceMap;
 
   SeeAllPagePayload(
-      {required this.listToBuild,
+      {required this.distanceMap,
+      required this.listToBuild,
       required this.userLocation,
       required this.sortingCubit,
       required this.sorterToggleButtonCubit});

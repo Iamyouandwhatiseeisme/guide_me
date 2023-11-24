@@ -45,6 +45,6 @@ class NavigatorClient {
     bookmarksPage: (context) => const BookmarksPage(),
     forgotPassword: (context) => const ForgotPasswordPage(),
     profilePage: (context) => const ProfilePage(),
-    searchesPage: (context) => const SearchesPage()
+    // searchesPage: (context) => const SearchesPage()
   };
 }

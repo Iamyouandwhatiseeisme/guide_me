@@ -31,7 +31,6 @@ export '../pages/place_page/widgets/adress_label_and_open_in_map_button_row_widg
 export '../pages/place_page/widgets/place_page_conent_widget.dart';
 export '../pages/place_page/widgets/open_hours_info_widget.dart';
 export '../pages/place_page/widgets/open_status_label_widget.dart';
-export '../pages/first_page/widgets/recommended_sightseeing_section_widget.dart';
 export '../pages/first_page/widgets/label_with_category_type_name_and_see_all_label_row.dart';
 export '../pages/first_page/widgets/recommended_sightseeing_widget.dart';
 export '../pages/maps_page/widgets/maps_page_app_bar.widget.dart';

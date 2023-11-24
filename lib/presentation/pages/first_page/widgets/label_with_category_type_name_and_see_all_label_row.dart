@@ -14,7 +14,7 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
   final String textToDisplay;
   final SortingCubit sortingCubit; // Accept the sorting cubit
   final SorterToggleButtonCubit sorterToggleButtonCubit;
-
+  final Map<NearbyPlacesModel, double?> distanceMap;
   final Color colorOfLabel; // Accept the sorter toggle button cubit
 
   const LabelWIthCaregoryTypeNameAndSeeAllRow({
@@ -24,6 +24,7 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
     required this.sortingCubit,
     required this.sorterToggleButtonCubit,
     required this.colorOfLabel,
+    required this.distanceMap,
   }) : super(key: key);
 
   @override
@@ -38,6 +39,7 @@ class LabelWIthCaregoryTypeNameAndSeeAllRow extends StatelessWidget {
           onTap: () {
             final UserLocation userLocation = sl.get<UserLocation>();
             final seeAllPagePayload = SeeAllPagePayload(
+                distanceMap: distanceMap,
                 listToBuild: listToBuild,
                 userLocation: userLocation,
                 sortingCubit: sortingCubit,

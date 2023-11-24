@@ -35,6 +35,7 @@ class _SeeAllPageState extends State<SeeAllPage> {
     final userLocation = seeAllPagePayload.userLocation;
     sightseeingSortingCubit = seeAllPagePayload.sortingCubit;
     sorterToggleButtonCubit = seeAllPagePayload.sorterToggleButtonCubit;
+    distanceMap = seeAllPagePayload.distanceMap;
 
     return MultiBlocProvider(
       providers: [
@@ -46,34 +47,56 @@ class _SeeAllPageState extends State<SeeAllPage> {
         ),
         BlocProvider(create: (context) => FetchedPlaceDetailsFormatterCubit())
       ],
-      child: Builder(builder: (context) {
-        return BlocBuilder<SortingCubit, SortingState>(
-          builder: (context, sortedListState) {
-            return BlocBuilder<SorterToggleButtonCubit,
-                SortertoggleButtonState>(builder: (context, sorterState) {
-              sightseeingSortingCubit!.sortList(
-                  unsortedList: listTobuild!,
-                  sortingOption: sorterState.value,
-                  userLocation: userLocation,
-                  distanceMap: distanceMap);
-
-              return Scaffold(
-                  backgroundColor: Theme.of(context).colorScheme.background,
-                  appBar: AppBar(),
-                  body: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Column(
-                      children: [
-                        SorterRadioButtonWidget(state: sorterState),
-                        SeeAllPageGridView(
-                            listTobuild: listTobuild, distanceMap: distanceMap),
-                      ],
-                    ),
-                  ));
-            });
-          },
-        );
-      }),
+      child: Builder(
+        builder: (context) {
+          return MultiBlocListener(
+            listeners: [
+              BlocListener<SorterToggleButtonCubit, SorterToggleButtonState>(
+                listener: (context, sortingState) {
+                  if (sortingState.sorterState == SortingOption.byRating) {
+                    sightseeingSortingCubit!.sortList(
+                        unsortedList: listTobuild!,
+                        sortingOption: sortingState.sorterState!,
+                        userLocation: userLocation,
+                        distanceMap: distanceMap);
+                  }
+                  if (sortingState.sorterState == SortingOption.byDistance) {
+                    sightseeingSortingCubit!.sortList(
+                        unsortedList: listTobuild!,
+                        sortingOption: sortingState.sorterState!,
+                        userLocation: userLocation,
+                        distanceMap: distanceMap);
+                  }
+                },
+              ),
+            ],
+            child: BlocBuilder<SortingCubit, SortingState>(
+              builder: (context, state) {
+                return Scaffold(
+                    backgroundColor: Theme.of(context).colorScheme.background,
+                    appBar: AppBar(),
+                    body: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Column(
+                        children: [
+                          BlocBuilder<SorterToggleButtonCubit,
+                              SorterToggleButtonState>(
+                            builder: (context, sortingState) {
+                              return SorterRadioButtonWidget(
+                                  state: sortingState);
+                            },
+                          ),
+                          SeeAllPageGridView(
+                              listTobuild: listTobuild,
+                              distanceMap: distanceMap),
+                        ],
+                      ),
+                    ));
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -48,6 +48,10 @@ class _FirstPageState extends State<FirstPage> {
             geoLocatorCubit.getLocation();
 
             if (locationState is LocationLoaded) {
+              final userLocation = UserLocation(
+                  userLat: locationState.position.latitude,
+                  userLon: locationState.position.longitude);
+              registerLocationSingleton(userLocation);
               _initalizeFirstPageData(locationState, context);
               return BlocBuilder<NearbySightSeeingCubit,
                   NearbySightseeingsState>(
@@ -64,10 +68,18 @@ class _FirstPageState extends State<FirstPage> {
                             body: Center(child: Text(state.errorMessage)),
                           );
                         } else {
-                          return FirstPageContent(
-                            listOfNearbyPlaces: listOfNearbyPlaces,
-                            listOfSightseeings: listOfSightseeingPlaces,
-                            listOfPlacesForFood: listPlacesForFood,
+                          return BlocBuilder<WhatToEatCubit, WhatToEatState>(
+                            builder: (context, state) {
+                              if (state is! WhatToEatLoaded) {
+                                return const LoadingAnimationScaffold();
+                              } else {
+                                return FirstPageContent(
+                                  listOfNearbyPlaces: listOfNearbyPlaces,
+                                  listOfSightseeings: listOfSightseeingPlaces,
+                                  listOfPlacesForFood: listPlacesForFood,
+                                );
+                              }
+                            },
                           );
                         }
                       },

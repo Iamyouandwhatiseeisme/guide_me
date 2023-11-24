@@ -70,6 +70,9 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               create: (context) => BottomNavigationBarCubit(),
             ),
+            BlocProvider(
+              create: (context) => GeolocatorCubit(),
+            ),
           ],
           child: ChangeNotifierProvider<ThemeProvider>(
             create: (BuildContext context) => ThemeProvider(),

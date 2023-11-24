@@ -8,60 +8,73 @@ import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
 
 import 'package:guide_me/main.dart';
-import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
-
-import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class SortableListViewCardBuilder extends StatelessWidget {
+import '../../../widgets/navigation/navigator_client.dart';
+import '../../../widgets/presentation_layer_widgets.dart';
+
+class SortableListViewCardBuilder extends StatefulWidget {
   final List<NearbyPlacesModel> listOfPassedPlaces;
+  final Map<NearbyPlacesModel, double?> distanceMap;
 
   const SortableListViewCardBuilder({
     Key? key,
     required this.listOfPassedPlaces,
+    required this.distanceMap,
   }) : super(key: key);
 
   @override
+  State<SortableListViewCardBuilder> createState() =>
+      _SortableListViewCardBuilderState();
+}
+
+class _SortableListViewCardBuilderState
+    extends State<SortableListViewCardBuilder> {
+  @override
   Widget build(BuildContext context) {
-    List<NearbyPlacesModel> sortedList = List.from(listOfPassedPlaces);
-    Map<NearbyPlacesModel, double?> distanceMap = {};
+    final sortingCubit = BlocProvider.of<SortingCubit>(context);
+
     final UserLocation userLocation = sl.get<UserLocation>();
+    final box = Hive.box<NearbyPlacesModel>('FavoritedPlaces');
     return BlocProvider(
       create: (context) => FetchedPlaceDetailsFormatterCubit(),
-      child: BlocBuilder<SortingCubit, SortingState>(
-        builder: (context, sightseeingSortingState) {
-          return Builder(builder: (context) {
-            return BlocBuilder<SorterToggleButtonCubit,
-                SortertoggleButtonState>(builder: (context, state) {
-              final sightseeingSortingCubit =
-                  BlocProvider.of<SortingCubit>(context);
-              sightseeingSortingCubit.sortList(
-                  unsortedList: sortedList,
-                  sortingOption: state.value,
-                  userLocation: userLocation,
-                  distanceMap: distanceMap);
-              final box = Hive.box<NearbyPlacesModel>('FavoritedPlaces');
-              // Now, build the UI using the sorted list
-              return Container(
-                width: 430,
-                height: 300,
-                color: Theme.of(context).colorScheme.primary,
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: SizedBox(
-                    height: 300,
-                    child: ValueListenableBuilder(
-                        valueListenable: box.listenable(),
-                        builder: (context, value, child) {
-                          return ListView.builder(
+      child: BlocListener<SorterToggleButtonCubit, SorterToggleButtonState>(
+          listener: (context, sortingState) {
+        if (sortingState.sorterState == SortingOption.byRating) {
+          sortingCubit.sortList(
+              unsortedList: widget.listOfPassedPlaces,
+              sortingOption: sortingState.sorterState!,
+              userLocation: userLocation,
+              distanceMap: widget.distanceMap);
+        }
+        if (sortingState.sorterState == SortingOption.byDistance) {
+          sortingCubit.sortList(
+              unsortedList: widget.listOfPassedPlaces,
+              sortingOption: sortingState.sorterState!,
+              userLocation: userLocation,
+              distanceMap: widget.distanceMap);
+        }
+      }, child: Builder(builder: (context) {
+        return BlocBuilder<SortingCubit, SortingState>(
+          builder: (context, state) {
+            return Container(
+              width: 430,
+              height: 300,
+              color: Theme.of(context).colorScheme.primary,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: SizedBox(
+                  height: 300,
+                  child: ValueListenableBuilder(
+                      valueListenable: box.listenable(),
+                      builder: (context, value, child) {
+                        return ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: sortedList.length,
+                            itemCount: widget.listOfPassedPlaces.length,
                             itemBuilder: (context, index) {
                               return Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 20,
-                                  top: 10,
-                                ),
+                                padding:
+                                    const EdgeInsets.only(left: 20, top: 10),
                                 child: Container(
                                   color: Theme.of(context).colorScheme.primary,
                                   height: 280,
@@ -69,7 +82,8 @@ class SortableListViewCardBuilder extends StatelessWidget {
                                   child: GestureDetector(
                                     onTap: () {
                                       final placePagePayLoad = PlacePagePayLoad(
-                                          model: sortedList[index]);
+                                          model:
+                                              widget.listOfPassedPlaces[index]);
                                       Navigator.pushNamed(
                                         context,
                                         NavigatorClient.placePage,
@@ -78,9 +92,9 @@ class SortableListViewCardBuilder extends StatelessWidget {
                                     },
                                     child: Stack(children: [
                                       SightseeingsPlaceCard(
-                                        distance:
-                                            distanceMap[sortedList[index]],
-                                        place: sortedList[index],
+                                        distance: widget.distanceMap[
+                                            widget.listOfPassedPlaces[index]],
+                                        place: widget.listOfPassedPlaces[index],
                                       ),
                                       Positioned(
                                           top: 10,
@@ -96,22 +110,21 @@ class SortableListViewCardBuilder extends StatelessWidget {
                                               ),
                                               child: FavoriteButton(
                                                   placeToDisplay:
-                                                      sortedList[index],
+                                                      widget.listOfPassedPlaces[
+                                                          index],
                                                   box: box)))
                                     ]),
                                   ),
                                 ),
                               );
-                            },
-                          );
-                        }),
-                  ),
+                            });
+                      }),
                 ),
-              );
-            });
-          });
-        },
-      ),
+              ),
+            );
+          },
+        );
+      })),
     );
   }
 }
