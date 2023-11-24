@@ -7,8 +7,6 @@ import 'package:guide_me/data/data.dart';
 import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 class RecommendedSightseeingsWidget extends StatefulWidget {
   final Color colorOfLabel;
   const RecommendedSightseeingsWidget({
@@ -16,9 +14,11 @@ class RecommendedSightseeingsWidget extends StatefulWidget {
     required this.widget,
     required this.listToBuild,
     required this.colorOfLabel,
+    required this.label,
   }) : super(key: key);
 
   final FirstPageContent widget;
+  final String label;
   final List<NearbyPlacesModel> listToBuild;
 
   @override
@@ -37,10 +37,16 @@ class _RecommendedSightseeingsWidgetState
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => SortingCubit(),
+          create: (context) => SortingCubit()
+            ..sortList(
+                unsortedList: widget.listToBuild,
+                sortingOption: SortingOption.byRating,
+                userLocation: userLocation,
+                distanceMap: distanceMap),
         ),
         BlocProvider(
-          create: (context) => SorterToggleButtonCubit(),
+          create: (context) => SorterToggleButtonCubit()
+            ..selectRadioButton(SortingOption.byRating),
         ),
       ],
       child: Builder(builder: (context) {
@@ -67,11 +73,6 @@ class _RecommendedSightseeingsWidgetState
           },
           child: BlocBuilder<SorterToggleButtonCubit, SorterToggleButtonState>(
             builder: (context, state) {
-              if (isFetched == false) {
-                sorterToggleButtonCubit
-                    .selectRadioButton(SortingOption.byRating);
-                isFetched = true;
-              }
               return Column(
                 children: [
                   LabelWIthCaregoryTypeNameAndSeeAllRow(
@@ -80,7 +81,7 @@ class _RecommendedSightseeingsWidgetState
                       sortingCubit: sortingCubit,
                       sorterToggleButtonCubit: sorterToggleButtonCubit,
                       listToBuild: widget.listToBuild,
-                      textToDisplay: AppLocalizations.of(context)!.whatToVisit),
+                      textToDisplay: widget.label),
                   const SizedBox(
                     height: 12,
                   ),

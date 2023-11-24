@@ -8,6 +8,8 @@ import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation/pages/first_page/widgets/custom_bottom_navigatio_bar_widget.dart';
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../data/data.dart';
 
 class FirstPageContent extends StatefulWidget {
@@ -70,17 +72,18 @@ class _FirstPageContentState extends State<FirstPageContent> {
                     height: 48,
                   ),
                   RecommendedSightseeingsWidget(
-                    colorOfLabel: secondaryColor,
-                    listToBuild: widget.listOfSightseeings,
-                    widget: widget,
-                  ),
+                      colorOfLabel: secondaryColor,
+                      listToBuild: widget.listOfSightseeings,
+                      widget: widget,
+                      label: translation(context).whatToVisit),
                   const SizedBox(
                     height: 25,
                   ),
-                  WhatToEatWidget(
-                      colorOfLabel: secondaryColor,
+                  RecommendedSightseeingsWidget(
+                      widget: widget,
                       listToBuild: widget.listOfPlacesForFood,
-                      widget: widget)
+                      colorOfLabel: secondaryColor,
+                      label: translation(context).whatToEat)
                 ],
               );
             },

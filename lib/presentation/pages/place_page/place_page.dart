@@ -23,8 +23,6 @@ class PlacePage extends StatefulWidget {
 }
 
 class _PlacepageState extends State<PlacePage> {
-  // final googleApiClient = sl<GoogleDataSource>();
-
   PlaceDetails? placeDetails;
   String apiKey = dotenv.env['GOOGLE_API_KEY']!;
   @override
@@ -46,9 +44,13 @@ class _PlacepageState extends State<PlacePage> {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => PhotosByPlaceIdFetcherCubit()),
+        BlocProvider(
+            create: (context) => PhotosByPlaceIdFetcherCubit()
+              ..fetchPhotos(placeId: passedModel.placeId)),
         BlocProvider(create: (context) => WriteAReviewCubit()),
-        BlocProvider(create: (context) => FetchPhoneNumberAndAdressCubit()),
+        BlocProvider(
+            create: (context) => FetchPhoneNumberAndAdressCubit()
+              ..fetchMoreDetails(placeId: passedModel.placeId)),
         BlocProvider(create: (context) => MakeACallCubit()),
         BlocProvider(create: (context) => OpenLocationOnMapCubit()),
         BlocProvider(create: (context) => PlacePageContentDataCheckerCubit()),
@@ -60,48 +62,14 @@ class _PlacepageState extends State<PlacePage> {
         builder: (context) {
           return MultiBlocListener(
             listeners: [
-              BlocListener<PhotosByPlaceIdFetcherCubit,
-                  PhotosByPlaceIdFetcherState>(
-                listener: (context, state) {
-                  if (state is PhotosByPlaceIdFetcherReadyToFetch) {
-                    final photosByPlaceIdFetchedCubit =
-                        context.read<PhotosByPlaceIdFetcherCubit>();
-                    photosByPlaceIdFetchedCubit.fetchPhotos(
-                      placeId: passedModel.placeId,
-                    );
-                    BlocProvider.of<PlacePageContentDataCheckerCubit>(context)
-                        .placePageLoading();
-                  } else if (state is PhotosByPlaceIdFetcherLoaded) {
-                    final numberAndAdressFetcherCubit =
-                        context.read<FetchPhoneNumberAndAdressCubit>();
-                    numberAndAdressFetcherCubit.fetchMoreDetails(
-                        placeId: passedModel.placeId);
-                  } else if (state is PhotosByPlaceIdFetcherError) {
-                    BlocProvider.of<PlacePageContentDataCheckerCubit>(context)
-                        .placePageError(state.errorMessage);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(state.errorMessage),
-                      ),
-                    );
-                  }
-                },
-              ),
               BlocListener<FetchPhoneNumberAndAdressCubit,
                   FetchPhoneNumberAndAdressState>(listener: (context, state) {
                 if (state is FetchPhoneNumberAndAdressLoaded) {
-                  placeDetails = state.placeDetails;
                   BlocProvider.of<PlaceOpenStatuslabelCubit>(context)
                       .initalize();
-                }
-              }),
-              BlocListener<PlaceOpenStatuslabelCubit,
-                  PlaceOpenStatusLabelState>(listener: (context, state) {
-                if (state is PlaceOpenStatusReadyToFetch) {
-                  final placeOpenStatusCubit =
-                      context.read<PlaceOpenStatuslabelCubit>();
-
-                  placeOpenStatusCubit.updateOpenStatus(passedModel.openNow);
+                  placeDetails = state.placeDetails;
+                  BlocProvider.of<PlaceOpenStatuslabelCubit>(context)
+                      .updateOpenStatus(passedModel.openNow);
                   BlocProvider.of<PlacePageContentDataCheckerCubit>(context)
                       .placePageReady();
                 }
@@ -116,8 +84,6 @@ class _PlacepageState extends State<PlacePage> {
               ),
               body: Builder(
                 builder: (context) {
-                  BlocProvider.of<PhotosByPlaceIdFetcherCubit>(context)
-                      .initialize();
                   return BlocBuilder<PlacePageContentDataCheckerCubit,
                       PlacePageContentDataCheckerState>(
                     builder: (context, state) {

@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 
 import 'package:geolocator/geolocator.dart';
+import 'package:guide_me/data/data.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 part 'geolocator_state.dart';
@@ -14,8 +15,9 @@ class GeolocatorCubit extends Cubit<LocationState> {
 
   bool locationLoaded = false;
 
-  Future getLocation() async {
+  Future registerLocation() async {
     PermissionStatus status = await Permission.location.request();
+    UserLocation userLocation;
 
     if (status.isGranted) {
       // Permission granted, proceed to get location
@@ -25,6 +27,9 @@ class GeolocatorCubit extends Cubit<LocationState> {
           Position position = await Geolocator.getCurrentPosition(
               desiredAccuracy: LocationAccuracy.high);
 
+          userLocation = UserLocation(
+              userLat: position.latitude, userLon: position.longitude);
+          registerLocationSingleton(userLocation);
           emit(LocationLoaded(position));
           locationLoaded = true;
         }

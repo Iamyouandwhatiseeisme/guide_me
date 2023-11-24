@@ -26,7 +26,7 @@ class PlacePageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PlaceOpenStatuslabelCubit, PlaceOpenStatusLabelState>(
       builder: (context, openStatusstate) {
-        String openStatus = openStatusstate.props[0].toString();
+        // String openStatus = openStatusstate.props[0].toString();
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -43,7 +43,7 @@ class PlacePageContent extends StatelessWidget {
                 typesInString: typesInString, number: placeDetails.number),
             AdressLabelAndOpenInMapButtonRowWIdget(
                 adress: placeDetails.adress, passedPlace: passedPlace),
-            OpenStatusLabelWidget(openStatus: openStatus),
+            OpenStatusLabelWidget(openStatus: openStatusstate.props[0]),
             OpenHoursInfoWidget(openningHours: {
               'open_hour': placeDetails.openHour,
               'close_hour': placeDetails.closeHour

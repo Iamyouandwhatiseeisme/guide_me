@@ -25,7 +25,6 @@ export '../pages/place_page/widgets/transformed_user_rating_widget.dart';
 export '../pages/place_page/widgets/write_a_review_button_widget.dart';
 export '../pages/place_page/widgets/rating_and_review_row_widget.dart';
 export '../pages/place_page/widgets/place_page_app_bar_widget.dart';
-export '../pages/first_page/widgets/what_to_eat_widget.dart';
 export '../pages/place_page/widgets/types_label_and_make_a_call_button_widget.dart';
 export '../pages/place_page/widgets/adress_label_and_open_in_map_button_row_widget.dart';
 export '../pages/place_page/widgets/place_page_conent_widget.dart';

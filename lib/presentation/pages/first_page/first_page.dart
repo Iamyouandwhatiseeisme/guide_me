@@ -24,35 +24,44 @@ class _FirstPageState extends State<FirstPage> {
   List<NearbyPlacesModel> listOfNearbyPlaces = [];
   List<NearbyPlacesModel> listOfSightseeingPlaces = [];
   List<NearbyPlacesModel> listPlacesForFood = [];
+  late UserLocation userLocation;
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => NearbyPlacesCubit(),
+          create: (context) => NearbyPlacesCubit()
+            ..fetchNearbyPlaces(
+                listOfNearbyPlaces: listOfNearbyPlaces,
+                googleApiClient: googleApiClient),
         ),
         BlocProvider(
-          create: (context) => NearbySightSeeingCubit(),
+          create: (context) => NearbySightSeeingCubit()
+            ..fetchNearbySightseeings(
+                listOfNearbySightseeings: listOfSightseeingPlaces,
+                googleApiClient: googleApiClient),
         ),
         BlocProvider(
-          create: (context) => WhatToEatCubit(),
+          create: (context) => WhatToEatCubit()
+            ..fetchPlacesForWhatToEat(
+                listOfPlacesForFood: listPlacesForFood,
+                googleApiClient: googleApiClient),
         ),
         BlocProvider(create: (context) => FetchSearchedItemsCubit()),
-        BlocProvider(create: (context) => GeolocatorCubit())
       ],
       child: BlocBuilder<GeolocatorCubit, LocationState>(
         builder: (context, locationState) {
           return Builder(builder: (context) {
-            final geoLocatorCubit = context.read<GeolocatorCubit>();
-            geoLocatorCubit.getLocation();
+            // final geoLocatorCubit = context.read<GeolocatorCubit>();
+            // geoLocatorCubit.getLocation();
 
             if (locationState is LocationLoaded) {
-              final userLocation = UserLocation(
-                  userLat: locationState.position.latitude,
-                  userLon: locationState.position.longitude);
-              registerLocationSingleton(userLocation);
-              _initalizeFirstPageData(locationState, context);
+              // final userLocation = UserLocation(
+              //     userLat: locationState.position.latitude,
+              //     userLon: locationState.position.longitude);
+              // registerLocationSingleton(userLocation);
+
               return BlocBuilder<NearbySightSeeingCubit,
                   NearbySightseeingsState>(
                 builder: (context, state) {
@@ -99,33 +108,5 @@ class _FirstPageState extends State<FirstPage> {
         },
       ),
     );
-  }
-
-  void _initalizeFirstPageData(
-      LocationLoaded locationState, BuildContext context) {
-    final userLocation = UserLocation(
-        userLat: locationState.position.latitude,
-        userLon: locationState.position.longitude);
-    registerLocationSingleton(userLocation);
-
-    final nearbyPlacesCubit = context.read<NearbyPlacesCubit>();
-    if (listOfNearbyPlaces.isEmpty) {
-      nearbyPlacesCubit.fetchNearbyPlaces(
-          listOfNearbyPlaces: listOfNearbyPlaces,
-          googleApiClient: googleApiClient);
-    }
-
-    final nearbySightSeeingCubit = context.read<NearbySightSeeingCubit>();
-    if (listOfSightseeingPlaces.isEmpty) {
-      nearbySightSeeingCubit.fetchNearbySightseeings(
-          listOfNearbySightseeings: listOfSightseeingPlaces,
-          googleApiClient: googleApiClient);
-    }
-    final whatToEatCubit = context.read<WhatToEatCubit>();
-    if (listPlacesForFood.isEmpty) {
-      whatToEatCubit.fetchPlacesForWhatToEat(
-          listOfpLacesForWhatToEat: listPlacesForFood,
-          googleApiClient: googleApiClient);
-    }
   }
 }

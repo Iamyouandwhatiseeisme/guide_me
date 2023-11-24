@@ -5,7 +5,7 @@ sealed class PlaceOpenStatusLabelState extends Equatable {
   const PlaceOpenStatusLabelState();
 
   @override
-  List<Object> get props => [];
+  List<String> get props => [];
 }
 
 final class PlaceOpenStatusInitial extends PlaceOpenStatusLabelState {}
@@ -19,7 +19,7 @@ class OpenNowState extends PlaceOpenStatusLabelState {
   const OpenNowState(this.openStatus);
 
   @override
-  List<Object> get props => [openStatus];
+  List<String> get props => [openStatus];
 }
 
 class ClosedState extends PlaceOpenStatusLabelState {
@@ -27,7 +27,7 @@ class ClosedState extends PlaceOpenStatusLabelState {
 
   const ClosedState(this.openStatus);
   @override
-  List<Object> get props => [openStatus];
+  List<String> get props => [openStatus];
 }
 
 class ErrorState extends PlaceOpenStatusLabelState {
@@ -35,5 +35,5 @@ class ErrorState extends PlaceOpenStatusLabelState {
 
   const ErrorState(this.errorMessage);
   @override
-  List<Object> get props => [errorMessage];
+  List<String> get props => [errorMessage];
 }
