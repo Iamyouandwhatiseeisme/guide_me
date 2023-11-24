@@ -28,6 +28,7 @@ class WhatToEatWidget extends StatefulWidget {
 class _WhatToEatWidgetState extends State<WhatToEatWidget> {
   Map<NearbyPlacesModel, double?> distanceMap = {};
   final UserLocation userLocation = sl.get<UserLocation>();
+  bool isFetched = false;
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +67,10 @@ class _WhatToEatWidgetState extends State<WhatToEatWidget> {
               builder: (context, state) {
                 return BlocBuilder<SorterToggleButtonCubit,
                     SorterToggleButtonState>(builder: (context, state) {
-                  if (state.sorterState == null) {
+                  if (isFetched == false) {
                     sorterToggleButtonCubit
                         .selectRadioButton(SortingOption.byRating);
+                    isFetched = true;
                   }
 
                   return Column(

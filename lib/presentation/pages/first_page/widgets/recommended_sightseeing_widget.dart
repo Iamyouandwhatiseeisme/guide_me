@@ -30,6 +30,7 @@ class _RecommendedSightseeingsWidgetState
     extends State<RecommendedSightseeingsWidget> {
   final UserLocation userLocation = sl.get<UserLocation>();
   Map<NearbyPlacesModel, double?> distanceMap = {};
+  bool isFetched = false;
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +67,10 @@ class _RecommendedSightseeingsWidgetState
           },
           child: BlocBuilder<SorterToggleButtonCubit, SorterToggleButtonState>(
             builder: (context, state) {
-              if (state.sorterState == null) {
+              if (isFetched == false) {
                 sorterToggleButtonCubit
                     .selectRadioButton(SortingOption.byRating);
+                isFetched = true;
               }
               return Column(
                 children: [
