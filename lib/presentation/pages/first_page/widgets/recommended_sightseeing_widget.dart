@@ -30,7 +30,6 @@ class _RecommendedSightseeingsWidgetState
     extends State<RecommendedSightseeingsWidget> {
   final UserLocation userLocation = sl.get<UserLocation>();
   Map<NearbyPlacesModel, double?> distanceMap = {};
-  bool isFetched = false;
 
   @override
   Widget build(BuildContext context) {

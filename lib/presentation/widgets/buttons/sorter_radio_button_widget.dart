@@ -34,6 +34,7 @@ class SorterRadioButtonWidget extends StatelessWidget {
                       onTap: () {
                         BlocProvider.of<SorterToggleButtonCubit>(context)
                             .selectRadioButton(SortingOption.byRating);
+                        print('print selected by rating');
                       },
                       child: Container(
                           width: 110,
@@ -52,6 +53,7 @@ class SorterRadioButtonWidget extends StatelessWidget {
                       onTap: () {
                         BlocProvider.of<SorterToggleButtonCubit>(context)
                             .selectRadioButton(SortingOption.byDistance);
+                        print('print selected by distance');
                       },
                       child: Text(AppLocalizations.of(context)!.closestToYou)),
                 ),
@@ -68,6 +70,7 @@ class SorterRadioButtonWidget extends StatelessWidget {
                       onTap: () {
                         BlocProvider.of<SorterToggleButtonCubit>(context)
                             .selectRadioButton(SortingOption.byRating);
+                        print('print selected by rating');
                       },
                       child: Text(
                         AppLocalizations.of(context)!.highestRated,
@@ -78,6 +81,7 @@ class SorterRadioButtonWidget extends StatelessWidget {
                     onTap: () {
                       BlocProvider.of<SorterToggleButtonCubit>(context)
                           .selectRadioButton(SortingOption.byDistance);
+                      print('print selected by distance');
                     },
                     child: Container(
                         width: 110,

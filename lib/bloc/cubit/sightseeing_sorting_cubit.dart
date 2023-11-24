@@ -17,6 +17,7 @@ class SortingCubit extends Cubit<SortingState> {
       required Map<NearbyPlacesModel, double?> distanceMap}) {
     List<NearbyPlacesModel> sortedList = [];
     emit(SortingLoading());
+    print('print sorting $sortingOption');
     switch (sortingOption) {
       case SortingOption.byRating:
         unsortedList.sort((a, b) {
@@ -60,7 +61,7 @@ class SortingCubit extends Cubit<SortingState> {
       distanceMap: distanceMap,
       listOfDestinations: sortedList,
     );
-
+    print('print sorted ${sortedList.first.name}');
     emit(SortingLoaded(sortedList));
   }
 
