@@ -53,15 +53,7 @@ class _FirstPageState extends State<FirstPage> {
       child: BlocBuilder<GeolocatorCubit, LocationState>(
         builder: (context, locationState) {
           return Builder(builder: (context) {
-            // final geoLocatorCubit = context.read<GeolocatorCubit>();
-            // geoLocatorCubit.getLocation();
-
             if (locationState is LocationLoaded) {
-              // final userLocation = UserLocation(
-              //     userLat: locationState.position.latitude,
-              //     userLon: locationState.position.longitude);
-              // registerLocationSingleton(userLocation);
-
               return BlocBuilder<NearbySightSeeingCubit,
                   NearbySightseeingsState>(
                 builder: (context, state) {
