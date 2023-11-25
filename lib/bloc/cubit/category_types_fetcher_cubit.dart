@@ -20,7 +20,7 @@ class CategoryTypesFetcherCubit extends Cubit<CategoryTypesFetcherState> {
         if (isClosed) {
           return;
         }
-
+        listOfPlaces = listOfFetchedPlaces;
         emit(CategoryTypesFetcherLoaded(listOfFetchedPlaces));
       } catch (error) {
         // Handle the error here

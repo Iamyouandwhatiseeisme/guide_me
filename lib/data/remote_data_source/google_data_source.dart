@@ -306,26 +306,6 @@ class GoogleDataSource {
     }
   }
 
-  Future<void> createMap(
-      {required Map<String, List<NearbyPlacesModel>> cachedData,
-      required String category,
-      required CategoryTypesFetcherCubit categoryTypesFetcherCubit,
-      required List<NearbyPlacesModel> listOfPlaces,
-      required Completer<String> mapLoaderController}) async {
-    if (!cachedData.containsKey(
-      category,
-    )) {
-      categoryTypesFetcherCubit.fetchDataForCategories(
-          listOfPlaces: listOfPlaces,
-          category: category,
-          googleApiClient: sl<GoogleDataSource>());
-      cachedData[category] = listOfPlaces;
-    }
-    if (cachedData[category]!.isNotEmpty) {
-      mapLoaderController.complete('Completed');
-    }
-  }
-
   void createLists(
       {required List<GoogleMapsPageCategoryItem> mapItemListForRowOne,
       required List<GoogleMapsPageCategoryItem> mapItemListForRowTwo,

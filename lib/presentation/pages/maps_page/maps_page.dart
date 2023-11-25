@@ -53,18 +53,16 @@ class _MapsPageState extends State<MapsPage> {
           ),
           BlocProvider(create: (context) => IsExapndedCubit()),
           BlocProvider(
-            create: (context) => LoadDataCubit(),
+            create: (context) => LoadDataCubit()
+              ..loadData(
+                  weatherCubit: BlocProvider.of<WeatherCubit>(context),
+                  lat: userLocation.userLat,
+                  lon: userLocation.userLon,
+                  googleMapLocationCompleter: _googleMapLocationCompleter),
           )
         ],
-        child: BlocBuilder<WeatherCubit, WeatherState>(
-            builder: (context, weatherState) {
-          final weatherCubit = BlocProvider.of<WeatherCubit>(context);
-          BlocProvider.of<LoadDataCubit>(context).loadData(
-              weatherCubit: weatherCubit,
-              lat: userLocation.userLat,
-              lon: userLocation.userLon,
-              googleMapLocationCompleter: _googleMapLocationCompleter);
-
+        child: BlocBuilder<LoadDataCubit, LoadDataState>(
+            builder: (context, loadDataState) {
           return FutureBuilder(
               future: _googleMapLocationCompleter.future,
               builder: (context, snapshot) {
@@ -72,56 +70,63 @@ class _MapsPageState extends State<MapsPage> {
                   return const LoadingAnimationScaffold();
                 } else {
                   if (snapshot.hasData) {
-                    return Scaffold(
-                      backgroundColor: Theme.of(context).colorScheme.background,
-                      bottomNavigationBar: sl.get<CustomBottomNavigationBar>(),
-                      appBar: PreferredSize(
-                        preferredSize: const Size.fromHeight(48),
-                        child: MapsPageAppBarWidget(
-                          widget: widget,
-                          temperature: weatherState.temperature!,
-                        ),
-                      ),
-                      body: Stack(children: [
-                        BlocBuilder<LocationCubit, UserLocation>(
-                          builder: (context, userLocations) {
-                            return GoogleMap(
-                                zoomControlsEnabled: false,
-                                onMapCreated: (GoogleMapController controller) {
-                                  _controller = controller;
-                                  _googleMapControllerCompleter
-                                      .complete(_controller);
-                                },
-                                myLocationButtonEnabled: false,
-                                myLocationEnabled: true,
-                                mapType: MapType.terrain,
-                                initialCameraPosition: CameraPosition(
-                                    zoom: 18,
-                                    target: LatLng(userLocation.userLat,
-                                        userLocation.userLon)));
-                          },
-                        ),
-                        FutureBuilder(
-                            future: _googleMapControllerCompleter.future,
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.done) {
-                                if (snapshot.hasData) {
-                                  return MapsPageContent(
-                                      screenHeight: screenHeight,
-                                      controller: _controller!,
-                                      screenWidth: screenWidth);
-                                } else {
-                                  return const Text('No data');
-                                }
-                              } else if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const LoadingAnimationScaffold();
-                              } else {
-                                return const Text('Erro');
-                              }
-                            })
-                      ]),
+                    return BlocBuilder<WeatherCubit, WeatherState>(
+                      builder: (context, weatherState) {
+                        return Scaffold(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.background,
+                          bottomNavigationBar:
+                              sl.get<CustomBottomNavigationBar>(),
+                          appBar: PreferredSize(
+                            preferredSize: const Size.fromHeight(48),
+                            child: MapsPageAppBarWidget(
+                              widget: widget,
+                              temperature: weatherState.temperature!,
+                            ),
+                          ),
+                          body: Stack(children: [
+                            BlocBuilder<LocationCubit, UserLocation>(
+                              builder: (context, userLocations) {
+                                return GoogleMap(
+                                    zoomControlsEnabled: false,
+                                    onMapCreated:
+                                        (GoogleMapController controller) {
+                                      _controller = controller;
+                                      _googleMapControllerCompleter
+                                          .complete(_controller);
+                                    },
+                                    myLocationButtonEnabled: false,
+                                    myLocationEnabled: true,
+                                    mapType: MapType.terrain,
+                                    initialCameraPosition: CameraPosition(
+                                        zoom: 18,
+                                        target: LatLng(userLocation.userLat,
+                                            userLocation.userLon)));
+                              },
+                            ),
+                            FutureBuilder(
+                                future: _googleMapControllerCompleter.future,
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    if (snapshot.hasData) {
+                                      return MapsPageContent(
+                                          screenHeight: screenHeight,
+                                          controller: _controller!,
+                                          screenWidth: screenWidth);
+                                    } else {
+                                      return const Text('No data');
+                                    }
+                                  } else if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const LoadingAnimationScaffold();
+                                  } else {
+                                    return const Text('Erro');
+                                  }
+                                })
+                          ]),
+                        );
+                      },
                     );
                   } else {
                     return const Text('No data');

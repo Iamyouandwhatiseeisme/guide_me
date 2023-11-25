@@ -65,7 +65,6 @@ class _SearchesPageState extends State<SearchesPage> {
                     sortingOption: sortingState.sorterState!,
                     userLocation: userLocation,
                     distanceMap: distanceMap);
-                print(listTobuild!.first.name);
               }
               if (sortingState.sorterState == SortingOption.byDistance) {
                 sortingCubit.sortList(

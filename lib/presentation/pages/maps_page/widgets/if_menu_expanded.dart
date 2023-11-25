@@ -36,7 +36,7 @@ class IfMenuExpanded extends StatelessWidget {
           return BlocBuilder<IsExapndedCubit, bool>(
             builder: (context, state) {
               double topPosition =
-                  state == true ? screenHeight / 1.8 - 132 : screenHeight / 1.8;
+                  state == true ? screenHeight / 2.2 - 132 : screenHeight / 2.2;
               return Positioned(
                   top: topPosition,
                   left: 16,

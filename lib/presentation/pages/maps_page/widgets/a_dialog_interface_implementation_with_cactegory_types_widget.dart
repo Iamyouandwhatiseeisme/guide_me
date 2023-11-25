@@ -6,6 +6,7 @@ import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
 import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ADialogWithInterfaceListCategories
     extends BuildADialogOnMapsWindowWidget {
@@ -25,15 +26,21 @@ class ADialogWithInterfaceListCategories
     late Completer<String> mapLoadedController;
     final Map<String, List<NearbyPlacesModel>> cachedData = {};
     Map<NearbyPlacesModel, double?> distanceMap = {};
-
+    String category = listOfCategories[0];
     mapLoadedController = Completer<String>();
+    final dataSource = sl.get<GoogleDataSource>();
+    List<NearbyPlacesModel> listOfPlaces = [];
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => CategoryCubit(),
+          create: (context) => CategoryCubit()..updateCategory(category),
         ),
         BlocProvider(
-          create: (context) => CategoryTypesFetcherCubit(),
+          create: (context) => CategoryTypesFetcherCubit()
+            ..fetchDataForCategories(
+                listOfPlaces: listOfPlaces,
+                category: category,
+                googleApiClient: dataSource),
         ),
         BlocProvider(
           create: (context) => SortingCubit(),
@@ -83,39 +90,73 @@ class ADialogWithInterfaceListCategories
                 ),
                 const SizedBox(height: 36),
                 OtherCategoryTypesRowWidget(listOfCategories: listOfCategories),
-                BlocBuilder<CategoryTypesFetcherCubit,
-                    CategoryTypesFetcherState>(
-                  builder: (context, state) {
-                    List<NearbyPlacesModel> listOfPlaces = [];
-                    return BlocBuilder<CategoryCubit, CategoryCubitState>(
-                      builder: (context, state) {
-                        return Builder(builder: (BuildContext context) {
-                          String category = state.selectedCategory;
-                          final categoryTypesFetcherCubit =
-                              BlocProvider.of<CategoryTypesFetcherCubit>(
-                                  context);
-                          final sortingCubit =
-                              BlocProvider.of<SortingCubit>(context);
-                          sl.get<GoogleDataSource>().createMap(
-                              cachedData: cachedData,
-                              category: category,
-                              categoryTypesFetcherCubit:
-                                  categoryTypesFetcherCubit,
+                MultiBlocListener(
+                  listeners: [
+                    BlocListener<CategoryCubit, CategoryCubitState>(
+                      listener: (context, state) {
+                        final categoryTypesFetcherCubit =
+                            BlocProvider.of<CategoryTypesFetcherCubit>(context);
+
+                        if (state.wasChanged == true) {
+                          List<NearbyPlacesModel> listOfPlaces = [];
+                          category = state.selectedCategory;
+
+                          categoryTypesFetcherCubit.fetchDataForCategories(
                               listOfPlaces: listOfPlaces,
-                              mapLoaderController: mapLoadedController);
+                              category: category,
+                              googleApiClient: dataSource);
+
+                          mapLoadedController.complete('compelted');
+                        }
+                      },
+
+                      // )
+                    ),
+                    BlocListener<CategoryTypesFetcherCubit,
+                        CategoryTypesFetcherState>(
+                      listener: (context, fetcherState) {
+                        final sortingCubit =
+                            BlocProvider.of<SortingCubit>(context);
+                        if (fetcherState is CategoryTypesFetcherLoaded) {
+                          cachedData[category] = fetcherState.listOfPlaces;
+
                           sortingCubit.createDistanceMap(
                             distanceMap: distanceMap,
                             listOfDestinations: cachedData[category]!,
                           );
-
+                          mapLoadedController.complete('Completed');
+                        }
+                      },
+                    ),
+                  ],
+                  child: BlocBuilder<CategoryCubit, CategoryCubitState>(
+                      builder: (context, state) {
+                    return BlocBuilder<CategoryTypesFetcherCubit,
+                        CategoryTypesFetcherState>(
+                      builder: (context, state) {
+                        if (state is CategoryTypesFetcherLoaded &&
+                            mapLoadedController.isCompleted) {
                           return FutureBuilderForAlistInMapsPageTypeView(
                               distanceMap: distanceMap,
                               dataFetchController: mapLoadedController,
                               listOfPlaces: cachedData[category]!);
-                        });
+                        } else {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const SizedBox(
+                                height: 200,
+                              ),
+                              Center(
+                                child: LoadingAnimationWidget.inkDrop(
+                                    color: const Color(0xffC75E6B), size: 50),
+                              ),
+                            ],
+                          );
+                        }
                       },
                     );
-                  },
+                  }),
                 )
               ],
             ),
