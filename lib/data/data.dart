@@ -18,5 +18,5 @@ export 'provider/theme_provider.dart';
 export 'provider/google_sign_in.dart';
 export 'provider/on_pressed_funcntion_for_google_sign_in.dart';
 export 'models/language_model.dart';
-export 'get_localized_string_method.dart';
+export 'get_localized_string_for_dynamic_builder_method.dart';
 export 'enums/app_theme.dart';

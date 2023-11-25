@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../../../../data/get_localized_string_method.dart';
+import '../../../../data/get_localized_string_for_dynamic_builder_method.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CategoryTypeContainer extends StatelessWidget {

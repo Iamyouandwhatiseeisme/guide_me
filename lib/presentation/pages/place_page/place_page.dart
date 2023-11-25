@@ -6,7 +6,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:guide_me/bloc/cubits.dart';
 
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../data/data.dart';
@@ -25,11 +24,13 @@ class PlacePage extends StatefulWidget {
 class _PlacepageState extends State<PlacePage> {
   PlaceDetails? placeDetails;
   String apiKey = dotenv.env['GOOGLE_API_KEY']!;
+
   @override
   Widget build(BuildContext context) {
-    final String open = AppLocalizations.of(context)!.openNow;
-    final String closed = AppLocalizations.of(context)!.closed;
-    final String noInfo = AppLocalizations.of(context)!.noInformation;
+    // final String open = AppLocalizations.of(context)!.openNow;
+    // final String closed = AppLocalizations.of(context)!.closed;
+    // final String noInfo = AppLocalizations.of(context)!.noInformation;
+
     final placePagePayLoad =
         ModalRoute.of(context)!.settings.arguments as PlacePagePayLoad;
 
@@ -56,7 +57,7 @@ class _PlacepageState extends State<PlacePage> {
         BlocProvider(create: (context) => PlacePageContentDataCheckerCubit()),
         BlocProvider(
             create: (context) =>
-                PlaceOpenStatuslabelCubit(open, closed, noInfo))
+                PlaceOpenStatuslabelCubit(AppLocalizations.of(context)!))
       ],
       child: Builder(
         builder: (context) {
