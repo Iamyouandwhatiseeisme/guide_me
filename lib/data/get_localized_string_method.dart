@@ -1,34 +1,36 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-String getLocalizedString(String textLabel, BuildContext context) {
+String getLocalizedString(
+    {required String textLabel, required AppLocalizations localization}) {
   switch (textLabel) {
     case "grocery":
-      return AppLocalizations.of(context)!.grocery;
+      // return AppLocalizations.of(context)!.grocery;
+      return localization.grocery;
+
     case "mall":
-      return AppLocalizations.of(context)!.mall;
+      return localization.mall;
     case "hospital":
-      return AppLocalizations.of(context)!.hospital;
+      return localization.hospital;
     case "park":
-      return AppLocalizations.of(context)!.park;
+      return localization.park;
     case "sights":
-      return AppLocalizations.of(context)!.sights;
+      return localization.sights;
     case "hotels":
-      return AppLocalizations.of(context)!.hotels;
+      return localization.hotels;
     case "restaurants":
-      return AppLocalizations.of(context)!.restaurants;
+      return localization.restaurants;
     case "other":
-      return AppLocalizations.of(context)!.other;
+      return localization.other;
     case "nightLife":
-      return AppLocalizations.of(context)!.nightLife;
+      return localization.nightLife;
     case "editName":
-      return AppLocalizations.of(context)!.editName;
+      return localization.editName;
     case "changePassword":
-      return AppLocalizations.of(context)!.changePassword;
+      return localization.changePassword;
     case "paymentsNCards":
-      return AppLocalizations.of(context)!.paymentsNCards;
+      return localization.paymentsNCards;
     case "settings":
-      return AppLocalizations.of(context)!.settings;
+      return localization.settings;
   }
   return textLabel;
 }

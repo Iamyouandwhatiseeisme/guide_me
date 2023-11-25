@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
 
-import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
 class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {

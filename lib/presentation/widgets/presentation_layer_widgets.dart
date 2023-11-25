@@ -1,5 +1,4 @@
 export 'package:guide_me/presentation/pages/welcome_page/widgets/background_photo_and_title_widget.dart';
-export 'package:guide_me/presentation/pages/welcome_page/widgets/get_started_button_widget.dart';
 export 'package:guide_me/presentation/pages/authentification_page/widgets/forgot_password_label_widget.dart';
 export 'package:guide_me/presentation/pages/authentification_page/widgets/login_button_widget.dart';
 export 'package:guide_me/presentation/pages/authentification_page/widgets/dont_have_an_accout_sign_up_label_widget.dart';
@@ -72,7 +71,6 @@ export '../pages/bookmarks_page/widgets/name_label_for_cards_on_favorite_page.da
 export '../pages/bookmarks_page/widgets/dialog_place_type_to_add_type_label.dart';
 export '../pages/bookmarks_page/widgets/place_to_add_to_collections_card_widget.dart';
 export '../pages/bookmarks_page/widgets/favorites_page_content_builder.dart';
-export '../pages/bookmarks_page/widgets/add_collection_elevated_button.dart';
 export '../pages/bookmarks_page/widgets/collections_lists_for_collections_page_when_not_expanded.dart';
 export '../pages/bookmarks_page/widgets/bookmarks_page_bottom_label_or_button_widget.dart';
 export '../pages/bookmarks_page/widgets/list_view_for_collections_list_that_is_expanded.dart';
@@ -110,3 +108,4 @@ export '../pages/profile_page/widgets/profile_page_app_bar.dart';
 export '../pages/see_all_page/widgets/see_all_page_grid_view.dart';
 export '../pages/welcome_page/widgets/slider_dots.dart';
 export '../pages/searches_page/widgets/searches_page_grid_view.dart';
+export 'buttons/red_button.dart';

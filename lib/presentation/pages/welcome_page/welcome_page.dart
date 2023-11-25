@@ -1,7 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:guide_me/data/constants/language_constants.dart';
 
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
+
+import '../../widgets/navigation/navigator_client.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({
@@ -21,19 +24,22 @@ class _MyHomePageState extends State<WelcomePage> {
         Image.asset('assets/images/Ellipse 12.png'),
         Center(
           child: Builder(builder: (context) {
-            return const Column(
+            return Column(
               children: <Widget>[
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
-                AnimationWidget(
+                const AnimationWidget(
                   animatedWidget: TranzitioningLogo(),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
-                WelcomePageSlider(),
-                GetStartedButton()
+                const WelcomePageSlider(),
+                RedButton(
+                    onPressed: () => Navigator.of(context)
+                        .pushReplacementNamed(NavigatorClient.authPage),
+                    label: translation(context).getStarted)
               ],
             );
           }),

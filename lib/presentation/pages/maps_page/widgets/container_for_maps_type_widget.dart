@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:guide_me/data/data.dart';
 
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
   final UserLocation? userLocation;
@@ -29,7 +30,8 @@ class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String localizedString = getLocalizedString(textLabel, context);
+    String localizedString = getLocalizedString(
+        textLabel: textLabel, localization: AppLocalizations.of(context)!);
     return GestureDetector(
       onTap: () {
         if (textLabel != 'other') {
