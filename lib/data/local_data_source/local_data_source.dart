@@ -34,16 +34,6 @@ class LocalDataSource {
     }
   }
 
-  // void addToCollection({
-  //   required String nameOfCollection,
-  //   required List<NearbyPlacesModel> listToCreate,
-  // }) {
-  //   Hive.box<CollectionModel>("CollectionLists").put(
-  //     nameOfCollection,
-  //     CollectionModel(name: nameOfCollection, items: listToCreate),
-  //   );
-  // }
-
   void addToCollectionList(
       {required String name, required List<NearbyPlacesModel> items}) {
     Hive.box<CollectionModel>("CollectionLists")

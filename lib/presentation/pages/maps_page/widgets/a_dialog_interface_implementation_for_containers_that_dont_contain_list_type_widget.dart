@@ -28,10 +28,16 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => CategoryTypesFetcherCubit(),
+            create: (context) => SortingCubit(),
           ),
           BlocProvider(
-            create: (context) => SortingCubit(),
+            create: (context) => CategoryTypesFetcherCubit()
+              ..createList(
+                  distanceMap: distanceMap,
+                  category: textLabel,
+                  sortingCubit: BlocProvider.of<SortingCubit>(context),
+                  listOfPlaces: listOfPlaces,
+                  listLoaderController: dataFetchController),
           ),
         ],
         child: Dialog(
@@ -80,17 +86,17 @@ class ADialogWithoutListOfCategories extends BuildADialogOnMapsWindowWidget {
                 ),
                 BlocBuilder<CategoryTypesFetcherCubit,
                     CategoryTypesFetcherState>(builder: (context, state) {
-                  String category = textLabel;
-                  final categoryTypesFetcherCubit =
-                      BlocProvider.of<CategoryTypesFetcherCubit>(context);
-                  final sortingCubit = BlocProvider.of<SortingCubit>(context);
-                  sl.get<GoogleDataSource>().createList(
-                      sortingCubit: sortingCubit,
-                      distanceMap: distanceMap,
-                      category: category,
-                      categoryTypesFetcherCubit: categoryTypesFetcherCubit,
-                      listOfPlaces: listOfPlaces,
-                      listLoaderController: dataFetchController);
+                  // String category = textLabel;
+                  // final categoryTypesFetcherCubit =
+                  //     BlocProvider.of<CategoryTypesFetcherCubit>(context);
+                  // final sortingCubit = BlocProvider.of<SortingCubit>(context);
+                  // sl.get<GoogleDataSource>().createList(
+                  //     sortingCubit: sortingCubit,
+                  //     distanceMap: distanceMap,
+                  //     category: category,
+                  //     categoryTypesFetcherCubit: categoryTypesFetcherCubit,
+                  //     listOfPlaces: listOfPlaces,
+                  //     listLoaderController: dataFetchController);
 
                   return FutureBuilderForAlistInMapsPageTypeView(
                       distanceMap: distanceMap,
