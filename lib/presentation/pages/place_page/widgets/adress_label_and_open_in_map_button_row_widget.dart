@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
+import 'package:guide_me/presentation/widgets/buttons/text_button.dart';
 
 import 'text_with_underline_grey_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -35,25 +36,13 @@ class AdressLabelAndOpenInMapButtonRowWIdget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis),
             ),
           ),
-          BlocBuilder<OpenLocationOnMapCubit, bool>(
-            builder: (context, state) {
-              return GestureDetector(
-                onTap: () {
-                  final openLocationCubit =
-                      context.read<OpenLocationOnMapCubit>();
-                  openLocationCubit.openInMap(
-                      name: passedPlace.name, adress: adress);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 20.0),
-                  child: TextWithUnderLine(
-                    textToDisplay: AppLocalizations.of(context)!.seeOnMap,
-                    color: const Color(0xff292F32).withOpacity(0.75),
-                  ),
-                ),
-              );
-            },
-          )
+          TextButton(
+              onTap: () {
+                context
+                    .read<OpenLocationOnMapCubit>()
+                    .openInMap(name: passedPlace.name, adress: adress);
+              },
+              label: AppLocalizations.of(context)!.seeOnMap)
         ],
       ),
     );

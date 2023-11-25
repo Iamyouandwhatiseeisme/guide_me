@@ -6,6 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:guide_me/bloc/cubits.dart';
 
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../data/data.dart';
@@ -27,9 +28,9 @@ class _PlacepageState extends State<PlacePage> {
 
   @override
   Widget build(BuildContext context) {
-    // final String open = AppLocalizations.of(context)!.openNow;
-    // final String closed = AppLocalizations.of(context)!.closed;
-    // final String noInfo = AppLocalizations.of(context)!.noInformation;
+    final String open = AppLocalizations.of(context)!.openNow;
+    final String closed = AppLocalizations.of(context)!.closed;
+    final String noInfo = AppLocalizations.of(context)!.noInformation;
 
     final placePagePayLoad =
         ModalRoute.of(context)!.settings.arguments as PlacePagePayLoad;
@@ -57,7 +58,7 @@ class _PlacepageState extends State<PlacePage> {
         BlocProvider(create: (context) => PlacePageContentDataCheckerCubit()),
         BlocProvider(
             create: (context) =>
-                PlaceOpenStatuslabelCubit(AppLocalizations.of(context)!))
+                PlaceOpenStatuslabelCubit(open, closed, noInfo))
       ],
       child: Builder(
         builder: (context) {

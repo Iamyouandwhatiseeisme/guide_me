@@ -1,18 +1,18 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/bloc/cubits.dart';
-import 'package:guide_me/data/data.dart';
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:guide_me/presentation/pages/place_page/widgets/text_with_underline_grey_widget.dart';
 
-class WriteAReviewButtonWidget extends StatelessWidget {
-  const WriteAReviewButtonWidget({
+class TextButton extends StatelessWidget {
+  const TextButton({
     super.key,
-    required this.passedPlace,
+    required this.onTap,
+    required this.label,
   });
+  final Function onTap;
 
-  final NearbyPlacesModel passedPlace;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +20,13 @@ class WriteAReviewButtonWidget extends StatelessWidget {
       builder: (context, reviewed) {
         return GestureDetector(
           onTap: () {
-            context
-                .read<WriteAReviewCubit>()
-                .openGoogleMapsReview(passedPlace.placeId);
+            onTap();
           },
           child: Padding(
             padding: const EdgeInsets.only(right: 20.0),
             child: TextWithUnderLine(
-              color: const Color(0xff292F32).withOpacity(0.75),
-              textToDisplay: AppLocalizations.of(context)!.writeAReview,
-            ),
+                color: const Color(0xff292F32).withOpacity(0.75),
+                textToDisplay: label),
           ),
         );
       },

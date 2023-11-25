@@ -22,21 +22,11 @@ class TypesLabelAndMakeACallButtonWidgetRow extends StatelessWidget {
     String formattedType = typesInString.replaceAll('_', ' ');
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       TypeLabelWidget(typesInString: formattedType),
-      BlocBuilder<MakeACallCubit, bool>(
-        builder: (context, callReview) {
-          return Padding(
-            padding: const EdgeInsets.only(right: 20.0),
-            child: GestureDetector(
-                onTap: () {
-                  context.read<MakeACallCubit>().makePhoneCall(number!);
-                },
-                child: TextWithUnderLine(
-                  textToDisplay: AppLocalizations.of(context)!.call,
-                  color: const Color(0xff292F32).withOpacity(0.75),
-                )),
-          );
-        },
-      )
+      TextButton(
+          onTap: () {
+            context.read<MakeACallCubit>().makePhoneCall(number!);
+          },
+          label: AppLocalizations.of(context)!.call)
     ]);
   }
 }
