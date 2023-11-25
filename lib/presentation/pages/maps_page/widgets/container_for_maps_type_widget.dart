@@ -30,7 +30,7 @@ class ContainerForTypesOfPlacesOnMapWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String localizedString = getLocalizedString(
+    String localizedString = getLocalizedStringForDynamicBuilder(
         textLabel: textLabel, localization: AppLocalizations.of(context)!);
     return GestureDetector(
       onTap: () {

@@ -16,7 +16,7 @@ class CategoryTypeContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String categoryType = getLocalizedString(
+    String categoryType = getLocalizedStringForDynamicBuilder(
       localization: AppLocalizations.of(context)!,
       textLabel: listOfCategories[index],
     );

@@ -51,12 +51,12 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final String editName = getLocalizedString(
+    final String editName = getLocalizedStringForDynamicBuilder(
         textLabel: 'editName', localization: AppLocalizations.of(context)!);
-    final String changePassword = getLocalizedString(
+    final String changePassword = getLocalizedStringForDynamicBuilder(
         textLabel: 'changePassword',
         localization: AppLocalizations.of(context)!);
-    final String settings = getLocalizedString(
+    final String settings = getLocalizedStringForDynamicBuilder(
         textLabel: 'settings', localization: AppLocalizations.of(context)!);
     final List<String> listOfSettings = [editName, changePassword, settings];
 

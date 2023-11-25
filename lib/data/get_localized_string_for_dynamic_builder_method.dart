@@ -1,6 +1,6 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-String getLocalizedString(
+String getLocalizedStringForDynamicBuilder(
     {required String textLabel, required AppLocalizations localization}) {
   switch (textLabel) {
     case "grocery":
