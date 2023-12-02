@@ -46,7 +46,6 @@ class SignUpWithButton extends StatelessWidget {
                   formKey: formKey,
                   emailController: emailController!,
                   passwordController: passwordController!);
-              Navigator.pushNamed(context, NavigatorClient.verifyEmailPage);
             }
           },
           label: Text(text)),

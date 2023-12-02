@@ -27,85 +27,82 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CheckEmailVerificationCubit(),
-      child: Scaffold(
-        backgroundColor: const Color(0xffA3C3DB),
-        body: Padding(
-          padding: const EdgeInsets.all(40),
-          child: Stack(children: <Widget>[
-            SingleChildScrollView(
-              child: Form(
-                key: formKey,
-                child: Column(children: <Widget>[
-                  const SizedBox(
-                    height: 40,
+    return Scaffold(
+      backgroundColor: const Color(0xffA3C3DB),
+      body: Padding(
+        padding: const EdgeInsets.all(40),
+        child: Stack(children: <Widget>[
+          SingleChildScrollView(
+            child: Form(
+              key: formKey,
+              child: Column(children: <Widget>[
+                const SizedBox(
+                  height: 40,
+                ),
+                Center(
+                  child: Image.asset(
+                    'assets/images/GuideMe (1) 3.png',
+                    height: 159.3,
+                    width: 200,
                   ),
-                  Center(
-                    child: Image.asset(
-                      'assets/images/GuideMe (1) 3.png',
-                      height: 159.3,
-                      width: 200,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Text(
-                    translation(context).welcomeToGuideMe,
-                    style: const TextStyle(
-                        fontFamily: 'paragraf',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.white),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Text(
-                    translation(context).chooseYourPrefferedWayOfAuthentication,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontFamily: 'paragraf',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white),
-                  ),
-                  AuthPageTextField(
-                    controller: _emailController,
-                    label: translation(context).email,
-                    hintText: 'Example@gmail.com',
-                  ),
-                  const SizedBox(height: 24),
-                  AuthPageTextField(
-                      controller: _passwordController,
-                      label: translation(context).password,
-                      hintText: translation(context).enterPassword),
-                  SignUpWithButton(
-                      formKey: formKey,
-                      emailController: _emailController,
-                      passwordController: _passwordController,
-                      text: translation(context).signUpWithMail,
-                      icon: const FaIcon(
-                        Icons.mail,
-                        color: Colors.red,
-                      )),
-                  SignUpWithButton(
-                    text: translation(context).signUpWithGoogle,
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Text(
+                  translation(context).welcomeToGuideMe,
+                  style: const TextStyle(
+                      fontFamily: 'paragraf',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Text(
+                  translation(context).chooseYourPrefferedWayOfAuthentication,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontFamily: 'paragraf',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
+                ),
+                AuthPageTextField(
+                  controller: _emailController,
+                  label: translation(context).email,
+                  hintText: 'Example@gmail.com',
+                ),
+                const SizedBox(height: 24),
+                AuthPageTextField(
+                    controller: _passwordController,
+                    label: translation(context).password,
+                    hintText: translation(context).enterPassword),
+                SignUpWithButton(
+                    formKey: formKey,
+                    emailController: _emailController,
+                    passwordController: _passwordController,
+                    text: translation(context).signUpWithMail,
                     icon: const FaIcon(
-                      FontAwesomeIcons.google,
+                      Icons.mail,
                       color: Colors.red,
-                    ),
+                    )),
+                SignUpWithButton(
+                  text: translation(context).signUpWithGoogle,
+                  icon: const FaIcon(
+                    FontAwesomeIcons.google,
+                    color: Colors.red,
                   ),
-                  TextForSignUpOrSignIn(
-                      shouldSignUp: false,
-                      textToDisplay: translation(context).alreadyHaveAccount,
-                      signUpOrSignIn: translation(context).login)
-                ]),
-              ),
-            )
-          ]),
-        ),
+                ),
+                TextForSignUpOrSignIn(
+                    shouldSignUp: false,
+                    textToDisplay: translation(context).alreadyHaveAccount,
+                    signUpOrSignIn: translation(context).login)
+              ]),
+            ),
+          )
+        ]),
       ),
     );
   }
