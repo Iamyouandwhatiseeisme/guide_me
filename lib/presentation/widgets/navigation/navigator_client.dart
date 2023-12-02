@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/bloc/cubits.dart';
+import 'package:guide_me/presentation/pages/authentification_page/widgets/login_widget.dart';
+import 'package:guide_me/presentation/pages/authentification_page/widgets/sign_up_widget.dart';
 import 'package:guide_me/presentation/pages/pages.dart';
 
 class NavigatorClient {
@@ -13,6 +15,9 @@ class NavigatorClient {
   static const String forgotPassword = 'forgotPassword';
   static const String profilePage = 'profilePage';
   static const String searchesPage = 'searchesPage';
+  static const String loginPage = 'loginPage';
+  static const String signUpPage = 'signUpPage';
+  static const String verifyEmailPage = 'verifyEmailPage';
   void pushPage(
       {required BottomNavigationBarCubit bottomNavigationCubit,
       required int index,
@@ -45,6 +50,9 @@ class NavigatorClient {
     bookmarksPage: (context) => const BookmarksPage(),
     forgotPassword: (context) => const ForgotPasswordPage(),
     profilePage: (context) => const ProfilePage(),
-    searchesPage: (context) => const SearchesPage()
+    searchesPage: (context) => const SearchesPage(),
+    loginPage: (context) => const LoginPage(),
+    signUpPage: (context) => const SignUpPage(),
+    verifyEmailPage: (context) => const VerifyEmailPage(),
   };
 }

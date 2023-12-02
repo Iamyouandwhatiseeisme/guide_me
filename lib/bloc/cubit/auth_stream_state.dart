@@ -8,3 +8,15 @@ sealed class AuthStreamState extends Equatable {
 }
 
 final class AuthStreamInitial extends AuthStreamState {}
+
+final class AuthStreamNoUser extends AuthStreamState {}
+
+final class AuthStreamNotVerified extends AuthStreamState {}
+
+final class AuthStreamVerified extends AuthStreamState {
+  final User user;
+
+  const AuthStreamVerified(this.user);
+  @override
+  List<Object> get props => [user];
+}

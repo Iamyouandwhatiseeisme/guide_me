@@ -16,19 +16,17 @@ class AuthStreamCubit extends Cubit<AuthStreamState> {
   late StreamSubscription<dynamic>? listener;
 
   void init() {
-    print(st);
     listener = st.listen((fireBaseuser) {
-      if (fireBaseuser == null) {
-        print('print null');
+      if (fireBaseuser!.email == null) {
+        emit(AuthStreamNoUser());
+      } else if (fireBaseuser.email != null) {
+        print('user not null');
+        emit(AuthStreamNotVerified());
+      } else if (fireBaseuser.emailVerified) {
+        emit(AuthStreamVerified(fireBaseuser));
+      } else {
+        print('state not cought');
       }
-      ;
-      if (!fireBaseuser!.emailVerified) {
-        print('needed verification');
-      }
-      print('print: $fireBaseuser');
-      // if (fireBaseuser!.emailVerified) {
-
-      //   emit(verified);
 
       // }
     });

@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:guide_me/data/data.dart';
 
 import 'package:guide_me/main.dart';
+import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
 import 'package:provider/provider.dart';
 
 class SignUpWithButton extends StatelessWidget {
@@ -40,11 +41,12 @@ class SignUpWithButton extends StatelessWidget {
                   Provider.of<GoogleSignInprovider>(context, listen: false);
 
               provider.googleLogin();
-            } else if (text.contains('მეილით')) {
+            } else if (text.contains('მეილით') || text.contains(('mail'))) {
               firebaseService.signUpWithEmail(
                   formKey: formKey,
                   emailController: emailController!,
                   passwordController: passwordController!);
+              Navigator.pushNamed(context, NavigatorClient.verifyEmailPage);
             }
           },
           label: Text(text)),

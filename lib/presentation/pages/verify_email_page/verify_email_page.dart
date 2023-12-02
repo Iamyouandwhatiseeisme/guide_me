@@ -7,6 +7,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
 
+import '../../widgets/navigation/navigator_client.dart';
+
 class VerifyEmailPage extends StatefulWidget {
   const VerifyEmailPage({
     super.key,
@@ -68,6 +70,15 @@ class _VerifyEmailPage extends State<VerifyEmailPage> {
     // gives user a timer and an option to resend verification
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xffA3C3DB),
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.pushReplacementNamed(
+                  context, NavigatorClient.loginPage);
+            },
+            child: const Icon(Icons.arrow_back)),
+      ),
       backgroundColor: const Color(0xffA3C3DB),
       body: Padding(
         padding: const EdgeInsets.all(40),

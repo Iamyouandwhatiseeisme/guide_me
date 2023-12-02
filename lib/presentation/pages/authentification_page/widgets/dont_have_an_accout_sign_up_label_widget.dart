@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:guide_me/data/constants/language_constants.dart';
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
+
+import '../../../widgets/navigation/navigator_client.dart';
 
 class TextForSignUpOrSignIn extends StatefulWidget {
   const TextForSignUpOrSignIn({
-    required this.onClick,
     super.key,
+    required this.shouldSignUp,
     required this.textToDisplay,
     required this.signUpOrSignIn,
   });
   final String textToDisplay;
   final String signUpOrSignIn;
-  final VoidCallback onClick;
+  final bool shouldSignUp;
 
   @override
   State<TextForSignUpOrSignIn> createState() => _TextForSignUpOrSignInState();
@@ -36,7 +39,11 @@ class _TextForSignUpOrSignInState extends State<TextForSignUpOrSignIn> {
             width: 5,
           ),
           ClickableRichText(
-            onClick: widget.onClick,
+            onClick: widget.shouldSignUp
+                ? () => Navigator.pushReplacementNamed(
+                    context, NavigatorClient.signUpPage)
+                : () => Navigator.pushReplacementNamed(
+                    context, NavigatorClient.loginPage),
             widget: widget,
             textToDisplay: widget.signUpOrSignIn,
           )
