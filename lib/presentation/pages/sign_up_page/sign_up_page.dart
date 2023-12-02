@@ -1,42 +1,107 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:guide_me/data/data.dart';
+import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
-// import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({
+    super.key,
+  });
 
-// class SignUpPage extends StatefulWidget {
-//   const SignUpPage({
-//     super.key,
-//   });
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
 
-//   @override
-//   State<SignUpPage> createState() => _SignUpPageState();
-// }
+class _SignUpPageState extends State<SignUpPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
-// class _SignUpPageState extends State<SignUpPage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     // return StreamBuilder<User?>(
-//     //   stream: FirebaseAuth.instance.authStateChanges(),
-//     //   builder: (context, snapshot) {
-//     //     //takes user to email verification page
-//     //     if (snapshot.connectionState == ConnectionState.waiting) {
-//     //       return const LoadingAnimationScaffold();
-//     //     } else if (snapshot.hasData) {
-//     //       print(snapshot.data);
-//     //       return BlocProvider(
-//     //         create: (context) => CheckEmailVerificationCubit(),
-//     //         child: const VerifyEmailPage(),
-//     //       );
-//     //     } else if (snapshot.hasError) {
-//     //       return const Center(child: Text('Something Went Wrong'));
-//     //     } else {
-//     //       print(snapshot.data);
-//     //       return SignUpPageWidgets(
-//     //           emailController: widget.emailController,
-//     //           passwordController: widget.passwordController,
-//     //           onClickedLogIn: widget.onClickedLogIn);
-//     //     }
-//     //   },
-//     // );
-//     return SignUpPageWidgets();
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xffA3C3DB),
+      body: Padding(
+        padding: const EdgeInsets.all(40),
+        child: Stack(children: <Widget>[
+          SingleChildScrollView(
+            child: Form(
+              key: formKey,
+              child: Column(children: <Widget>[
+                const SizedBox(
+                  height: 40,
+                ),
+                Center(
+                  child: Image.asset(
+                    'assets/images/GuideMe (1) 3.png',
+                    height: 159.3,
+                    width: 200,
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Text(
+                  translation(context).welcomeToGuideMe,
+                  style: const TextStyle(
+                      fontFamily: 'paragraf',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Text(
+                  translation(context).chooseYourPrefferedWayOfAuthentication,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontFamily: 'paragraf',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
+                ),
+                AuthPageTextField(
+                  controller: _emailController,
+                  label: translation(context).email,
+                  hintText: 'Example@gmail.com',
+                ),
+                const SizedBox(height: 24),
+                AuthPageTextField(
+                    controller: _passwordController,
+                    label: translation(context).password,
+                    hintText: translation(context).enterPassword),
+                SignUpWithButton(
+                    formKey: formKey,
+                    emailController: _emailController,
+                    passwordController: _passwordController,
+                    text: translation(context).signUpWithMail,
+                    icon: const FaIcon(
+                      Icons.mail,
+                      color: Colors.red,
+                    )),
+                SignUpWithButton(
+                  text: translation(context).signUpWithGoogle,
+                  icon: const FaIcon(
+                    FontAwesomeIcons.google,
+                    color: Colors.red,
+                  ),
+                ),
+                TextForSignUpOrSignIn(
+                    shouldSignUp: false,
+                    textToDisplay: translation(context).alreadyHaveAccount,
+                    signUpOrSignIn: translation(context).login)
+              ]),
+            ),
+          )
+        ]),
+      ),
+    );
+  }
+}

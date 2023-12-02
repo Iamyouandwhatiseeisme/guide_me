@@ -17,16 +17,13 @@ class AuthStreamCubit extends Cubit<AuthStreamState> {
 
   void init() {
     listener = st.listen((fireBaseuser) {
-      if (fireBaseuser!.email == null) {
+      if (fireBaseuser == null) {
         emit(AuthStreamNoUser());
-      } else if (fireBaseuser.email != null) {
-        print('user not null');
+      } else if (fireBaseuser.email != null && !fireBaseuser.emailVerified) {
         emit(AuthStreamNotVerified());
-      } else if (fireBaseuser.emailVerified) {
+      } else if (fireBaseuser.email != null && fireBaseuser.emailVerified) {
         emit(AuthStreamVerified(fireBaseuser));
-      } else {
-        print('state not cought');
-      }
+      } else {}
 
       // }
     });

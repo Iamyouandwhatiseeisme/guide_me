@@ -22,7 +22,6 @@ class SingInWithEmailCubit extends Cubit<SingInWithEmailState> {
           password: passwordController.text.trim());
       emit(SignInWithEmailSuccessfull());
     } on FirebaseAuthException catch (e) {
-      print(e);
       emit(SignInWithEmailError(e.message!));
     }
   }

@@ -7,8 +7,6 @@ import 'package:guide_me/presentation/pages/pages.dart';
 
 import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
 
-import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
-
 class AuthPage extends StatefulWidget {
   const AuthPage({
     super.key,
@@ -25,39 +23,19 @@ class _AuthPageState extends State<AuthPage> {
       create: (context) => CheckEmailVerificationCubit(),
       child: Scaffold(
           backgroundColor: Theme.of(context).primaryColor,
-          // body: StreamBuilder<User?>(
-          //     stream: FirebaseAuth.instance.authStateChanges(),
-          //     builder: (context, snapshot) {
-          //       print(snapshot.data);
-          //       if (snapshot.hasData &&
-          //           snapshot.data != null &&
-          //           FirebaseAuth.instance.currentUser!.emailVerified == true) {
-          //         //checks if there is an authenticated user, if there is, shows first page, else takes user to authentication page
-          //         WidgetsBinding.instance.addPostFrameCallback((_) {
-          //           Navigator.of(context)
-          //               .pushReplacementNamed(NavigatorClient.firstPage);
-          //         });
-
-          //         return const LoadingAnimationScaffold();
-          //       } else {
-          //         return const AuthPageContent();
-          //       }
-          //     }),
           body: BlocConsumer<AuthStreamCubit, AuthStreamState>(
               builder: (context, state) {
-            print(state);
-            if (state is AuthStreamNoUser || state is AuthStreamInitial) {
-              return const LoginPage();
-            } else if (state is AuthStreamNotVerified) {
-              print('must push verificaitonn');
+            if (state is AuthStreamNotVerified) {
               return const VerifyEmailPage();
             } else {
-              return const LoadingAnimationScaffold();
+              return const SignUpPage();
             }
           }, listener: (context, state) {
             if (state is AuthStreamVerified) {
-              Navigator.pushReplacementNamed(
-                  context, NavigatorClient.firstPage);
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                Navigator.of(context)
+                    .pushReplacementNamed(NavigatorClient.firstPage);
+              });
             }
           })),
     );

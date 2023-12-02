@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/bloc/cubits.dart';
-import 'package:guide_me/presentation/pages/authentification_page/widgets/sign_in_with_button_widget.dart';
+import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
 
 class LoginButtonWidget extends StatelessWidget {
   final TextEditingController emailController;
@@ -43,6 +43,8 @@ class LoginButtonWidget extends StatelessWidget {
                     formKey: formKey,
                     emailController: emailController,
                     passwordController: passwordController);
+                Navigator.pushReplacementNamed(
+                    context, NavigatorClient.authPage);
               },
               child: const Text(
                 'Login',

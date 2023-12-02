@@ -38,7 +38,7 @@ class _MyHomePageState extends State<WelcomePage> {
                 const WelcomePageSlider(),
                 RedButton(
                     onPressed: () => Navigator.of(context)
-                        .pushReplacementNamed(NavigatorClient.authPage),
+                        .pushReplacementNamed(NavigatorClient.loginPage),
                     label: translation(context).getStarted)
               ],
             );

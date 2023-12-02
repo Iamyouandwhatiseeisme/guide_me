@@ -38,8 +38,8 @@ class ProfilePageAppbar extends StatelessWidget {
               FirebaseAuth.instance.signOut();
               Navigator.pushNamedAndRemoveUntil(
                   context,
-                  NavigatorClient.authPage,
-                  ModalRoute.withName(NavigatorClient.authPage));
+                  NavigatorClient.loginPage,
+                  ModalRoute.withName(NavigatorClient.loginPage));
             },
             child: Text(
               AppLocalizations.of(context)!.logout,

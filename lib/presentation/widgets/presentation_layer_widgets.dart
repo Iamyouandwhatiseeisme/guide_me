@@ -75,10 +75,9 @@ export '../pages/bookmarks_page/widgets/bookmarks_page_bottom_label_or_button_wi
 export '../pages/bookmarks_page/widgets/list_view_for_collections_list_that_is_expanded.dart';
 export '../pages/bookmarks_page/widgets/collections_tab_page_contet.dart';
 export '../pages/bookmarks_page/widgets/bookmarks_page_content.dart';
-export '../pages/authentification_page/widgets/sign_up_widget.dart';
+export '../pages/sign_up_page/sign_up_page.dart';
 export '../pages/profile_page/profile_page.dart';
 export '../pages/authentification_page/widgets/email_text_field.dart';
-export '../pages/authentification_page/widgets/auth_page_widget.dart';
 export '../pages/authentification_page/widgets/login_widget.dart';
 export '../pages/authentification_page/widgets/sign_up_or_log_in_text.dart';
 export 'package:guide_me/presentation/pages/authentification_page/widgets/sign_up_with_button.dart';

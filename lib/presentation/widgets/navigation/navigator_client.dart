@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/presentation/pages/authentification_page/widgets/login_widget.dart';
-import 'package:guide_me/presentation/pages/authentification_page/widgets/sign_up_widget.dart';
 import 'package:guide_me/presentation/pages/pages.dart';
 
 class NavigatorClient {

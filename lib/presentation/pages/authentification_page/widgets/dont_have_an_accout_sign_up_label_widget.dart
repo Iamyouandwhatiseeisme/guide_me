@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:guide_me/data/constants/language_constants.dart';
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
 
 import '../../../widgets/navigation/navigator_client.dart';
