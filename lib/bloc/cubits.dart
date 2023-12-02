@@ -28,3 +28,4 @@ export 'cubit/update_password_cubit.dart';
 export 'cubit/box_managament_cubit.dart';
 export 'cubit/change_name_cubit.dart';
 export 'cubit/place_page_content_data_checker_cubit.dart';
+export 'cubit/auth_stream_cubit.dart';

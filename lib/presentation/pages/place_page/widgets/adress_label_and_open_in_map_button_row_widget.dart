@@ -4,7 +4,6 @@ import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
 import 'package:guide_me/presentation/widgets/buttons/text_button.dart';
 
-import 'text_with_underline_grey_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AdressLabelAndOpenInMapButtonRowWIdget extends StatelessWidget {

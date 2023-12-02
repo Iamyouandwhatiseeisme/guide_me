@@ -15,7 +15,7 @@ void setUp() {
   sl.registerSingleton<WeatherDataSource>(WeatherDataSource());
 }
 
-void registerLocationSingleton(
+void registerLocationSingleton<T>(
   UserLocation userLocation,
 ) {
   if (!sl.isRegistered<UserLocation>()) {

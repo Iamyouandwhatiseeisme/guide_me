@@ -23,6 +23,7 @@ class _AuthPageState extends State<AuthPage> {
       body: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
+            print(snapshot.data);
             if (snapshot.hasData &&
                 snapshot.data != null &&
                 FirebaseAuth.instance.currentUser!.emailVerified == true) {

@@ -73,6 +73,9 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               create: (context) => GeolocatorCubit()..registerLocation(),
             ),
+            BlocProvider(
+              create: (context) => AuthStreamCubit()..init(),
+            )
           ],
           child: ChangeNotifierProvider<ThemeProvider>(
             create: (BuildContext context) => ThemeProvider(),

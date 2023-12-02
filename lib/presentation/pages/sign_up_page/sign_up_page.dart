@@ -32,6 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingAnimationScaffold();
           } else if (snapshot.hasData) {
+            print(snapshot.data);
             return BlocProvider(
               create: (context) => CheckEmailVerificationCubit(),
               child: const VerifyEmailPage(),
@@ -39,6 +40,7 @@ class _SignUpPageState extends State<SignUpPage> {
           } else if (snapshot.hasError) {
             return const Center(child: Text('Something Went Wrong'));
           } else {
+            print(snapshot.data);
             return SignUpPageWidgets(
                 emailController: widget.emailController,
                 passwordController: widget.passwordController,
