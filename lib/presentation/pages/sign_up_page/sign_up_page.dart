@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:guide_me/data/data.dart';
+import 'package:guide_me/main.dart';
 import 'package:guide_me/presentation/widgets/presentation_layer_widgets.dart';
+import 'package:provider/provider.dart';
+
+import '../../widgets/navigation/navigator_client.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({
@@ -13,6 +17,8 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final firebaseService = sl.get<FirebaseService>();
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -78,6 +84,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     label: translation(context).password,
                     hintText: translation(context).enterPassword),
                 SignUpWithButton(
+                    onPressed: () {
+                      firebaseService.signUpWithEmail(
+                          formKey: formKey,
+                          emailController: _emailController,
+                          passwordController: _passwordController);
+                      Navigator.pushReplacementNamed(
+                          context, NavigatorClient.authPage);
+                    },
                     formKey: formKey,
                     emailController: _emailController,
                     passwordController: _passwordController,
@@ -87,6 +101,13 @@ class _SignUpPageState extends State<SignUpPage> {
                       color: Colors.red,
                     )),
                 SignUpWithButton(
+                  onPressed: () {
+                    final provider = Provider.of<GoogleSignInprovider>(context,
+                        listen: false);
+                    provider.googleLogin();
+                    Navigator.pushReplacementNamed(
+                        context, NavigatorClient.authPage);
+                  },
                   text: translation(context).signUpWithGoogle,
                   icon: const FaIcon(
                     FontAwesomeIcons.google,

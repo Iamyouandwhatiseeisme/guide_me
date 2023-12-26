@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/bloc/cubits.dart';
 import 'package:guide_me/data/data.dart';
 import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
@@ -36,6 +37,7 @@ class ProfilePageAppbar extends StatelessWidget {
 
               provider.logout();
               FirebaseAuth.instance.signOut();
+              BlocProvider.of<BottomNavigationBarCubit>(context).changeTab(0);
               Navigator.pushNamedAndRemoveUntil(
                   context,
                   NavigatorClient.loginPage,

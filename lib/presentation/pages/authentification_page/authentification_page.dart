@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_me/bloc/cubit/auth_stream_cubit.dart';
 import 'package:guide_me/bloc/cubit/check_email_verification_cubit.dart';
 import 'package:guide_me/presentation/pages/pages.dart';
+import 'package:guide_me/presentation/widgets/loading/loading_animation_scaffold.dart';
 
 import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
 
@@ -27,8 +28,11 @@ class _AuthPageState extends State<AuthPage> {
               builder: (context, state) {
             if (state is AuthStreamNotVerified) {
               return const VerifyEmailPage();
-            } else {
+            } else if (state is AuthStreamNoUser ||
+                state is AuthStreamInitial) {
               return const SignUpPage();
+            } else {
+              return const LoadingAnimationScaffold();
             }
           }, listener: (context, state) {
             if (state is AuthStreamVerified) {

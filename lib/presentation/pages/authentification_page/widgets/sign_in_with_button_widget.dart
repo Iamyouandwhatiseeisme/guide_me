@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:guide_me/data/data.dart';
+import 'package:guide_me/presentation/widgets/navigation/navigator_client.dart';
 import 'package:provider/provider.dart';
 
 class SignInWithButtonWIdget extends StatelessWidget {
@@ -30,6 +31,7 @@ class SignInWithButtonWIdget extends StatelessWidget {
                 Provider.of<GoogleSignInprovider>(context, listen: false);
 
             provider.googleLogin();
+            Navigator.pushReplacementNamed(context, NavigatorClient.authPage);
           }
         },
         child: Row(
